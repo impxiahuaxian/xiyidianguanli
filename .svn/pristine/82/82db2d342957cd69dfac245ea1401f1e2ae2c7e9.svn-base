@@ -1,0 +1,47 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.BrandsDao;
+import com.weiweiqin.model.Brands;
+import com.weiweiqin.vo.common.Page;
+@Repository
+public class BrandsDaoImpl extends GenericMybatisDao<Brands, Integer>
+		implements BrandsDao {
+
+	public Brands getByName(String name) {
+		return  (Brands)getSqlSession().selectOne("Brands_getByName",name);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Brands> getAll() {
+		return (List<Brands>)getSqlSession().selectList("Brands_getAll");
+	}
+	@SuppressWarnings("unchecked")
+	public List<Brands> pageListForHome(Page page) {
+		Map<String,Object>	conditions = new HashMap<String, Object>();
+		conditions.put("page", page);
+		return (List<Brands>)getSqlSession().selectList("Brands_pageListForHome",conditions);
+
+	}
+	public int getTotalCountForHome() {
+		return (Integer) getSqlSession().selectOne("Brands_totalCountForHome");
+	}
+	@SuppressWarnings("unchecked")
+	public List<Brands> getAllAddOn() {
+		return (List<Brands>)getSqlSession().selectList("Brands_getAllAddOn");
+	}
+	
+	/**
+	 * 通过文件名称获取图片
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Brands> getByPicName(String pic) {
+		return (List<Brands>) getSqlSession().selectList("Brands_getByPicName",pic);
+	}
+	
+	
+}

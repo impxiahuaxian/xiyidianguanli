@@ -1,0 +1,71 @@
+package com.weiweiqin.utils;
+
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
+public class SendMailUtil {
+
+	/**
+	 * 发送邮件接口
+	 * 
+	 * @param emailUrl
+	 *            发送邮件地址
+	 * @param emailTitle
+	 *            邮件标题
+	 * @param emailContent
+	 *            邮件内容
+	 */
+	public static void send(String emailUrl, String emailTitle,
+			String emailContent) {
+		SimpleEmail email = new SimpleEmail();
+		email.setTLS(true);
+		email.setHostName("smtp.163.com");
+		email.setAuthentication("pfwm315@163.com", "hello315"); // 用户名和密码
+
+		try {
+			// 发送方
+			email.setFrom("pfwm315@163.com", "洁衣库");
+
+			// 接收方
+			email.addTo(emailUrl);
+
+			// 标题
+			email.setSubject(emailTitle);
+			email.setCharset("GBK");
+			email.setMsg(emailContent); // 内容
+			// Multipart mul = new MimeMultipart();
+			// BodyPart mdp = new MimeBodyPart();
+			// mdp.setContent("<a href='#'>完成注册<a/>","text/html;charset=UTF-8");
+			// mul.addBodyPart(mdp);
+			// email.setContent(mul,"UTF-8");
+			email.send();
+
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		SimpleEmail email = new SimpleEmail();
+		email.setTLS(true);
+		email.setHostName("smtp.163.com");
+		email.setAuthentication("pfwm315@163.com", "hello315"); // 用户名和密码
+
+		try {
+			// 接收方
+			email.addTo("13666067037@163.com");
+			// 发送方
+			email.setFrom("pfwm315@163.com", "洁衣库");
+
+			// 标题
+			email.setSubject("【洁衣库】账户激活通知！");
+			email.setCharset("GBK");
+			email.setMsg("亲爱的13666067037用户\nbjksadfjk"); // 内容
+			email.send();
+
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,36 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.SizeDao;
+import com.weiweiqin.model.Size;
+import com.weiweiqin.service.SizeService;
+
+@Service
+public class SizeServiceImpl implements SizeService {
+	@Autowired
+	private SizeDao sizeDao;
+
+	public void save(Size size) {
+		sizeDao.insert(size);
+	}
+
+	public void del(int id) {
+		sizeDao.delete(id);
+	}
+
+	public SizeDao getsizeDao() {
+		return sizeDao;
+	}
+
+	public void setsizeDao(SizeDao sizeDao) {
+		this.sizeDao = sizeDao;
+	}
+
+	public List<Size> getByGoodsId(int goodsId) {
+		return sizeDao.getByGoodsId(goodsId);
+	}
+}

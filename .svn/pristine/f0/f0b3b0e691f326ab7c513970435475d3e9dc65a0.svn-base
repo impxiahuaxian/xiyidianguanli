@@ -1,0 +1,34 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.ColorSizeItemDao;
+import com.weiweiqin.model.ColorSizeItem;
+import com.weiweiqin.service.ColorSizeItemService;
+
+@Service
+public class ColorSizeItemServiceImpl implements ColorSizeItemService {
+	@Autowired
+	private ColorSizeItemDao colorSizeItemDao;
+
+	public void save(ColorSizeItem colorSizeItem) {
+		colorSizeItemDao.insert(colorSizeItem);
+	}
+
+	public void del(int id) {
+		colorSizeItemDao.delete(id);
+	}
+
+	public List<ColorSizeItem> getByColorId(int colorId) {
+		return colorSizeItemDao.getByColorId(colorId);
+	}
+
+	public List<ColorSizeItem> getBySizeId(int sizeId) {
+		return colorSizeItemDao.getBySizeId(sizeId);
+	}
+
+	 
+}

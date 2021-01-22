@@ -1,0 +1,70 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.SecCategoryDao;
+import com.weiweiqin.model.SecCategory;
+import com.weiweiqin.service.SecCategoryService;
+import com.weiweiqin.vo.common.Page;
+@Service
+public class SecCategoryServiceImpl implements SecCategoryService {
+
+	@Autowired
+	private SecCategoryDao secCategoryDao;
+
+
+	public void update(SecCategory category) {
+		secCategoryDao.update(category);
+
+	}
+
+	public SecCategory getByName(String name) {
+		return secCategoryDao.getByName(name);
+	}
+
+	public List<SecCategory> getAll() {
+		return secCategoryDao.getAll();
+	}
+
+	public void save(SecCategory category) {
+		secCategoryDao.insert(category);
+	}
+
+	public List<SecCategory> pageList(Page page,Map<String,Object> conditions) {
+		return secCategoryDao.pageList(page,conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return secCategoryDao.totalCount(conditions);
+	}
+
+	public void del(int id) {
+		secCategoryDao.delete(id);
+	}
+
+	public List<SecCategory> pageListForHome(Page page) {
+		
+		return secCategoryDao.pageListForHome(page);
+	}
+
+	public int getTotalCountForHome() {
+		return secCategoryDao.getTotalCountForHome();
+	}
+
+	public SecCategory get(int id) {
+		return secCategoryDao.get(id);
+	}
+
+	public List<SecCategory> getAllAddOn() {
+		return secCategoryDao.getAllAddOn();
+	}
+
+	public List<SecCategory> getByBigCategoryId(int bigCategoryId) {
+		return secCategoryDao.getByBigCategoryId(bigCategoryId);
+	}
+
+}

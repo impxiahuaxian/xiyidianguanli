@@ -1,0 +1,57 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.GoodsDao;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.GoodsPicItem;
+import com.weiweiqin.model.Pic;
+@Repository
+public class GoodsDaoImpl extends GenericMybatisDao<Goods, Integer>
+		implements GoodsDao {
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> getListByCategoryId(int categoryId) {
+		
+		return ( List<Goods>)getSqlSession().selectList("Goods_getByCategoryId",categoryId);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Pic> getPicListById(int id) {
+		return  ( List<Pic>)getSqlSession().selectList("Goods_getPicListById",id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Pic> getTitlePicListById(int id) {
+		return  ( List<Pic>)getSqlSession().selectList("Goods_getTiltePicListById",id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<GoodsPicItem> getPicItemListById(int id) {
+		return ( List<GoodsPicItem>)getSqlSession().selectList("Goods_getPicItemListById",id);
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> getAll() {
+		return ( List<Goods>)getSqlSession().selectList("Goods_getAll");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> getByPicName(String picName) {
+		return (List<Goods>) getSqlSession().selectList("Goods_getByPicName",picName);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> getListBySecCategoryId(int seCategoryId) {
+		return ( List<Goods>)getSqlSession().selectList("Goods_getBySecCategoryId",seCategoryId);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Goods> getZhuji(List<String> ids) {
+		return ( List<Goods>)getSqlSession().selectList("Goods_getZhuji",ids);
+	}
+	
+}

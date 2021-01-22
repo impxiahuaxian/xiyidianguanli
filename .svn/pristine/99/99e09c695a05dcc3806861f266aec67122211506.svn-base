@@ -1,0 +1,88 @@
+/*
+Uploadify
+Copyright (c) 2012 Reactive Apps, Ronnie Garcia
+Released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
+*/
+
+.uploadify {
+	position: relative;
+	margin-bottom: 1em;
+	display: inline;
+}
+.uploadify-button {
+	  display: inline-block;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px dashed transparent;
+  border-radius: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+          color: #ffb238;
+  
+  border-color: #ffb238;
+  background: #fff;
+}
+.uploadify:hover .uploadify-button{
+	color: #ffffff;
+  background-color: #ffb238;
+  border-color: #ffb238;
+}
+.uploadify-button.disabled,.uploadify:hover .uploadify-button.disabled{
+	background-color: #fff;
+	color: #999;
+	border-color:#ccc;
+	opacity:0.65;
+	pointer-events: none;
+	cursor: not-allowed !importaint;
+}
+
+.uploadify-queue {
+	margin-bottom: 1em;
+}
+.uploadify-queue-item {
+	position:fixed;
+	width:400px;
+	left:34%;
+	top:100px;
+	background-color: #dce8f5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font: 11px Verdana, Geneva, sans-serif;
+	margin-top: 5px;
+	/*max-width: 350px;*/
+	padding: 10px;
+}
+.uploadify-error {
+	background-color: #FDE5DD !important;
+}
+.uploadify-queue-item .cancel a {
+	background: url('../img/uploadify-cancel.png') 0 0 no-repeat;
+	float: right;
+	height:	16px;
+	text-indent: -9999px;
+	width: 16px;
+}
+.uploadify-queue-item.completed {
+	background-color: #E5E5E5;
+}
+.uploadify-progress {
+	background-color: #E5E5E5;
+	margin-top: 10px;
+	width: 100%;
+}
+.uploadify-progress-bar {
+	background-color: #0099FF;
+	height: 3px;
+	width: 1px;
+}

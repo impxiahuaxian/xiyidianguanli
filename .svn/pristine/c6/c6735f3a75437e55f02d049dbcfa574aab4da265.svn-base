@@ -1,0 +1,58 @@
+body {
+	TEXT-ALIGN: center
+}
+
+.validation_input{
+	
+}
+
+a{
+	color:#006699;
+	text-decoration:none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	color:#BC2A4D;
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+}
+
+.validation_input.validation-failed {
+    background: none repeat scroll 0 0 #FFB9B9;
+    border: 1px solid #FF0000;
+}
+
+table.admin tbody td {
+    border-top: 1px dashed #66CCCC;
+    padding: 5px 0;
+}
+
+table.didiao tbody td {
+    border-top: 1px dashed #DDDDDD;
+    padding: 5px 0;
+}
+
+
+table.admin tbody td.jiazhong {
+    border-top: 1px dashed #DDDDDD;
+    padding: 5px 0;
+}
+
+td.label{
+	border-bottom: 1px dashed #DDDDDD;
+    padding: 5px 0;
+}
+td {
+    font-size: 1em;
+}

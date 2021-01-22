@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.OrderMapper">
+	<resultMap type="com.weiweiqin.model.Order" id="orderResultMap">
+		<id property="id" column="id" />
+		<result property="customerId" column="customer_id" />
+		<result property="totalPrice" column="total_price" />
+		<result property="addDate" column="add_date" />
+	</resultMap>
+
+	<insert id="Order_insert" parameterType="com.weiweiqin.model.Order"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+         INSERT INTO t_order (memo,remark,state,addr,outerid,name,mobile,customer_id,total_price,add_date) values
+         (#{memo},#{remark},#{state},#{addr},#{outerid},#{name},#{mobile},#{customerId},#{totalPrice},#{addDate})
+       ]]> 
+	</insert>
+
+	<select id="Order_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+				<![CDATA[ 
+				select a.* from t_order a where 1 = 1
+				]]> 
+				
+				<if test="state != null">
+		        <![CDATA[ 
+		        	and a.state = #{state}
+		        ]]>
+		       </if>
+	         
+	           <if test="name != null">
+		        <![CDATA[ 
+		        	and a.name like  CONCAT('%','${name}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="mobile != null">
+		        <![CDATA[ 
+		        	and a.mobile like  CONCAT('%','${mobile}','%' )
+		        ]]>
+	         </if>
+	         
+             <if test="address != null">
+		        <![CDATA[ 
+		        	and a.address like  CONCAT('%','${address}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="startDate != null">
+		        <![CDATA[ 
+		        	and a.add_date between #{startDate} and #{endDate}
+		        ]]>
+	         </if>
+	         
+	          <![CDATA[ 
+	          order by a.add_date desc
+	         	limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+	
+	<select id="Order_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+		<![CDATA[ 
+		select a.* from t_order a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+
+	<select id="Order_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(a.id) from t_order a where 1 = 1
+	        ]]>
+	        
+	        <if test="state != null">
+		        <![CDATA[ 
+		        	and a.state = #{state}
+		        ]]>
+		       </if>
+		       
+	         
+	           <if test="name != null">
+		        <![CDATA[ 
+		        	and a.name like  CONCAT('%','${name}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="mobile != null">
+		        <![CDATA[ 
+		        	and a.mobile like  CONCAT('%','${mobile}','%' )
+		        ]]>
+	         </if>
+	         
+             <if test="address != null">
+		        <![CDATA[ 
+		        	and a.address like  CONCAT('%','${address}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="startDate != null">
+		        <![CDATA[ 
+		        	and a.update_date between #{startDate} and #{endDate}
+		        ]]>
+	         </if>
+	</select>
+
+	<update id="Order_update" parameterType="com.weiweiqin.model.Order"> 
+	<![CDATA[ 
+		update t_order set memo = #{memo}, remark = #{remark}, state = #{state}, addr = #{addr},name = #{name},mobile = #{mobile},outerid = #{outerid}, customer_id = #{customerId}, total_price = #{totalPrice} , add_date = #{addDate} where id = #{id}
+	        ]]>
+	</update> 
+	
+	<delete id="Order_delete"  parameterType="Integer">
+		delete from t_order  where id = #{primaryKey}
+	</delete> 
+
+</mapper>
+

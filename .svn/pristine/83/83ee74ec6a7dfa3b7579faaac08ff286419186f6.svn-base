@@ -1,0 +1,318 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+<%@ include file="./common/top.jsp"%>
+
+<div class="container">
+	<form class="form-inline" id="search_form" role="form" style="margin-bottom:20px;">
+	  <div class="form-group">
+	    <label class="sr-only" for="exampleInputEmail2"></label>
+	    <select id="category_search_id" class="form-control" name="categoryId">
+				<option value="">所有</option>
+		</select>
+	  </div>
+	  
+	  <div class="form-group">
+	    <label class="sr-only" for=""></label>
+	    <input type="text" class="form-control" name="title" id="title_search_id" placeholder="商品标题"/>
+	  </div>
+	  
+	  <div class="form-group">
+		    <label class="sr-only" for=""></label>
+  		      <select name="grade" class="form-control" placeholder="产品状态">
+  		      	<option value="">所有</option>
+  		      	<option value="0">普通产品</option>
+		      		<option value="1">精品推荐</option>
+		      		<option value="2">限时特卖</option>
+		      		<option value="3">新品上市</option>
+ 				    <option value="4">做多购买</option>
+ 				    <option value="5">做多收藏</option>
+ 				    <option value="6">做多好评</option>
+ 				    <option value="7">最美设计</option>
+ 				    <option value="8">聚光灯图片墙</option>
+		      		<option value="9">	历史Top5</option>
+		      		<option value="10">更多推荐</option>
+  		      </select>
+	  </div>
+	  
+	  <button type="button"  id="search_id" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>搜索</button>
+	</form>		
+			
+				
+	<a href="${ctx }/admin/addGoods.jsp"  class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>新增</a>
+	
+	<div style="margin-top:20px;margin-bottom:20px;">
+		<table id="goods_table">
+	
+		</table>
+	
+	</div>
+	</div>
+	<script>
+		$(function(){
+			
+			if("${user.status}" == 1){
+				$(".nav-li").each(function(){
+					$(this).show();
+				});
+				
+			}
+			$(".nav-li").each(function(){
+				
+				$(this).click(function(){
+					$(".active").removeClass("active");
+					$(this).addClass("active");
+				});
+			});
+			//退出系统
+			$('#a_logout').click(
+				function(){
+					if(!confirm("确定要退出系统!")){
+						return;
+					}
+					jQuery.ajax({
+						type : 'Get',
+						contentType : 'application/json',
+						url : '../login/logout.do',
+						dataType : 'json',
+						success : function(obj) {
+							if (obj.result)
+								location.href = "./login.html";
+						},
+						error : function(data) {
+							
+						}
+					});
+				}		
+			);
+		});
+	</script>
+	
+	<script>
+		$(function() {
+			var grid = new jWei.Datagrid({
+				renderTo : $("#goods_table"),
+				tabWidth:"",
+				fieldset:false,
+				legendTitle:"商品列表",
+				url : "../goods/pageList.do",
+				colModels : [ 
+				
+				{
+					name : "updateDate",
+					displayName : "最后更新时间",
+				}, 
+				{
+					name : "goods_title",
+					displayName : "标题",
+					handler:function(v,data,td,tr){
+						td.html('<a target="_blank" href="../detailGoods/'+data.goods.id+'">'+v+'</a>');
+					}
+				},
+				
+				{
+					name : "titlePicName",
+					displayName : "封面图",
+					handler:function(v,data,td,tr){
+						var html = '<img id="pic_id" src="../upload/downloadCompress.do?fileName='+v+'" style="width: 60px;height: 60px;" />';
+						td.html(html);
+					}
+				},
+				
+				{
+					name:"goods_id",
+					displayName : "操作",
+					handler:function(v,data,td,tr){
+						var mark = data.goods.mark;
+						var str ="下架";
+						if(mark == -1){
+							str = '<span style="color:red;">上架</span>';
+						}
+						 
+						var html = '<input type="text" id="order_id" style="width:40px;" value="'+data.goods.orderKey+'" style="margin-right:3px;"/>'+
+							'<a id="top_id" href="#" class="sort" data-id="'+v+'" title="保存排序" style="margin-right:3px;">保存排序</a>'+
+							'<a id="" href="./commentList.jsp?id='+v+'" data-id="'+v+'" title="评论" style="margin-right:3px;" target="_blank">评论('+data.commentCount+')</a>'+
+							'<a id="edit_id" href="./editGoods.jsp?id='+data.goods.id+'" data-id="'+v+'" title="编辑" target="_blank" style="margin-right:3px;"><span class="glyphicon glyphicon-edit"></span>编辑</a>'+
+							'<a id="copy_id" href="#" class="copy"  data-id="'+v+'" title="复制" target="_blank" style="margin-right:3px;">复制</a>'+ 
+							'<a id="del_id" href="#" class="del" data-id="'+data.goods.id+'" title="删除"><span class="glyphicon glyphicon-trash"></span></a>'+
+							'<a id="" href="#" class="off" data-id="'+data.goods.id+'">'+str+'</a>';
+						td.html(html);
+					}
+				}
+				
+				]
+			});
+			
+			$("#search_id").click(function(){
+				grid.search("search_form");
+				return false;
+			});
+		 
+			$('#title_search_id').bind('keypress',function(event){
+	            if(event.keyCode == "13")    
+	            {
+	            	$("#search_id").trigger("click");
+	            	return false;
+	            }
+	        });
+			 
+			$("#search_id").click(function(){
+				grid.search("search_form_id");
+			});
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../category/getAll.do',
+				data : {
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						var categoryList = data.obj;
+						if(categoryList){
+							for(var i = 0 ;i<categoryList.length;i++){
+								var category = categoryList[i];
+								if(category)
+									$("#category_search_id").append("<option value="+category.id+">"+category.name+"</option>");
+							}
+						}
+						
+					} else {
+						alert('数据库异常,查询数据失败');
+					}
+				},
+				error : function(data) {
+					
+				}
+			});
+			
+			
+		});
+
+		$("#goods_table").on("click",".sort",function(){
+			
+			var id = $(this).data("id");
+			var order = $(this).parent().find("#order_id").val();
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../goods/sort.do',
+				data : {
+					id : id,
+					order:order
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						window.top.jWei.Tips.success("排序成功！");
+						grid.reload();
+					} else {
+						window.top.jWei.Tips.success(data.errorMsg);
+					}
+				},
+				error : function(data) {
+					
+				}
+			});
+			return false;
+		});
+		
+		
+		$("#goods_table").on("click",".del",function(){
+				if (!confirm("确定要彻底删除该商品！")) {
+					return;
+				}
+				var delObj = $(this);
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : '../goods/del.do',
+					data : {
+						id : delObj.data("id")
+					},
+					dataType : 'json',
+					success : function(data) {
+						if (data.result) {
+							window.top.jWei.Tips.success("删除数据成功");
+							window.location.reload(true);
+						} else {
+							window.top.jWei.Tips.success(data.errorMsg);
+						}
+					},
+					error : function(data) {
+						
+					}
+				});
+				
+				
+		});
+		
+		
+		$("#goods_table").on("click",".copy",function(){
+			if (!confirm("确定要复制该商品，商品颜色尺码和评论信息不进行复制！")) {
+				return false;
+			}
+			var id = $(this).data("id");
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../goods/copy.do',
+				data : {
+					id : id
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						window.top.jWei.Tips.success("操作成功！");
+						window.location.reload(true);
+					} else {
+						window.top.jWei.Tips.success(data.errorMsg);
+					}
+				},
+				error : function(data) {
+					
+				}
+				
+			});
+			return false;
+		});
+		$("#goods_table").on("click",".off",function(){
+			if (!confirm("确定要下架该商品！")) {
+				return;
+			}
+			var that = $(this);
+			var htm = $(this).html();
+			
+			var delObj = $(this);
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../goods/offShelf.do',
+				data : {
+					id : delObj.data("id")
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						window.top.jWei.Tips.success("操作成功");
+						if(htm == '下架'){
+							that.html('<span style="color:red;">上架</span>');
+						}else{
+							that.html('下架');
+						}
+						//grid.reload();
+						//window.location.reload(true);
+					} else {
+						window.top.jWei.Tips.success(data.errorMsg);
+					}
+				},
+				error : function(data) {
+					
+				}
+			});
+		});
+
+	</script>
+</body>
+</html>

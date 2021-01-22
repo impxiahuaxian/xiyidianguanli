@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.CityMapper">
+	<resultMap type="com.weiweiqin.model.City" id="cityResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="code" column="code" />
+		<result property="provincecode" column="provincecode" />
+	</resultMap>
+
+	<select id="City_getByProvincecode" resultType="com.weiweiqin.model.City"
+		resultMap="cityResultMap"> 
+		<![CDATA[ 
+			select a.* from city a where a.provincecode = #{provincecode}
+	        ]]>
+	</select>
+	
+</mapper>
+

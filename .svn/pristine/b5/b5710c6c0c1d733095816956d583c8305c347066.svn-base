@@ -1,0 +1,11 @@
+package com.weiweiqin.service;
+
+import com.weiweiqin.model.GoodsPicItem;
+
+public interface GoodsPicItemService {
+
+	void save(GoodsPicItem goodsPicItem);
+
+	void del(int id);
+
+}

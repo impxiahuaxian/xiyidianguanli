@@ -1,0 +1,44 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.SecCategoryDao;
+import com.weiweiqin.model.SecCategory;
+import com.weiweiqin.vo.common.Page;
+@Repository
+public class SecCategoryDaoImpl extends GenericMybatisDao<SecCategory, Integer>
+		implements SecCategoryDao {
+
+	public SecCategory getByName(String name) {
+		return  (SecCategory)getSqlSession().selectOne("SecCategory_getByName",name);
+	}
+	@SuppressWarnings("unchecked")
+	public List<SecCategory> getAll() {
+		return (List<SecCategory>)getSqlSession().selectList("SecCategory_getAll");
+	}
+	@SuppressWarnings("unchecked")
+	public List<SecCategory> pageListForHome(Page page) {
+		Map<String,Object>	conditions = new HashMap<String, Object>();
+		conditions.put("page", page);
+		return (List<SecCategory>)getSqlSession().selectList("SecCategory_pageListForHome",conditions);
+
+	}
+	public int getTotalCountForHome() {
+		return (Integer) getSqlSession().selectOne("SecCategory_totalCountForHome");
+	}
+	@SuppressWarnings("unchecked")
+	public List<SecCategory> getAllAddOn() {
+		return (List<SecCategory>)getSqlSession().selectList("SecCategory_getAllAddOn");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SecCategory> getByBigCategoryId(int bigCategoryId) {
+		return (List<SecCategory>)getSqlSession().selectList("SecCategory_getByBigCategoryId",bigCategoryId);
+	}
+	
+	
+}

@@ -1,0 +1,39 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.model.SecCategory;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class CategoryMenuVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+	
+	private Category category;
+	
+	private List<SecCategory> secCategoryList;
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<SecCategory> getSecCategoryList() {
+		return secCategoryList;
+	}
+
+	public void setSecCategoryList(List<SecCategory> secCategoryList) {
+		this.secCategoryList = secCategoryList;
+	}
+	 
+}

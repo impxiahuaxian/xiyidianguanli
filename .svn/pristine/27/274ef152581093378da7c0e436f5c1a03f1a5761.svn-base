@@ -1,0 +1,51 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class  Announcement implements Serializable {
+
+	private static final long serialVersionUID = -7970848646314840509L;
+	
+	private int id;
+	
+	private String content;
+	
+	private int isShow =0;
+	
+	private Date updateDate = new Date();
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public int getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(int isShow) {
+		this.isShow = isShow;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	
+}

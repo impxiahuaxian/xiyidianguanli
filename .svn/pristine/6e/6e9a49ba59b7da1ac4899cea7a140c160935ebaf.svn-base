@@ -1,0 +1,20 @@
+package com.weiweiqin.service;
+
+
+import java.util.List;
+
+import com.weiweiqin.model.Pic;
+
+public interface PicService {
+	
+	void  update(Pic pic);
+	
+	void save(Pic pic);
+	
+	void del(int id);
+	
+	List<Pic> getAll();
+	
+	List<Pic> getByName(String name);
+	
+}

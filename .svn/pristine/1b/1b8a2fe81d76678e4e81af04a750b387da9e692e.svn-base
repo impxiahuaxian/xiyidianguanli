@@ -1,0 +1,159 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class GoodsQueryVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+	
+	private int currPage;
+	
+	private Integer categoryId;
+	
+	private Integer type;
+	
+	private Integer brandsId;
+	
+	private Integer isLunbo;
+	
+	private Integer lipin;
+	
+	private Integer secCategory;
+	
+	/**
+	 * 1:最新案例，2：经典案例，3：最受欢迎案例 4：常用案例
+	 */
+	private Integer grade;
+	
+	private String title;
+	
+	private Integer pageSize;
+	
+	/**
+	 * 排序字段，时间、价格、销量
+	 */
+	private String sortType;
+	
+	/**
+	 * 是否是升序还是降序
+	 */
+	private String sortStates;
+	
+	
+	public int getCurrPage() {
+		return currPage;
+	}
+
+	public void setCurrPage(int currPage) {
+		this.currPage = currPage;
+	}
+
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("currPage=");
+		sb.append(currPage);
+		sb.append(":title=");
+		sb.append(title);
+		sb.append(":categoryId=");
+		sb.append(categoryId);
+		return sb.toString();
+	}
+
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Integer getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Integer grade) {
+		this.grade = grade;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public Integer getBrandsId() {
+		return brandsId;
+	}
+
+	public void setBrandsId(Integer brandsId) {
+		this.brandsId = brandsId;
+	}
+
+	public String getSortType() {
+		return sortType;
+	}
+
+	public void setSortType(String sortType) {
+		this.sortType = sortType;
+	}
+
+	public String getSortStates() {
+		return sortStates;
+	}
+
+	public void setSortStates(String sortStates) {
+		this.sortStates = sortStates;
+	}
+
+	public Integer getIsLunbo() {
+		return isLunbo;
+	}
+
+	public void setIsLunbo(Integer isLunbo) {
+		this.isLunbo = isLunbo;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getLipin() {
+		return lipin;
+	}
+
+	public void setLipin(Integer lipin) {
+		this.lipin = lipin;
+	}
+
+	public Integer getSecCategory() {
+		return secCategory;
+	}
+
+	public void setSecCategory(Integer secCategory) {
+		this.secCategory = secCategory;
+	}
+
+}

@@ -1,0 +1,162 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<c:set var="ctx"><%=request.getContextPath()%></c:set>
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>好字通特效练字套装正式版</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+<script charset="utf-8" src="cxzxcheckform.js" ></script>
+<script charset="utf-8" src="PCASClass.js" ></script>
+	<script charset="utf-8" src="zepto/zepto.js"></script>
+	<script charset="utf-8" src="zepto/event.js"></script>
+	<script charset="utf-8" src="zepto/ajax.js"></script>
+	<script charset="utf-8" src="zepto/fx.js"></script>
+	<script charset="utf-8" src="zepto/fx_methods.js"></script>
+	<script charset="utf-8" src="zepto/form.js"></script>
+<link href="wfstyle.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+    /**
+      ********************************************************************
+      ******────────────────────────────******
+      ****** 好字通特效练字套装 ******
+      ******────────────────────────────******
+      ******************************************************************** 
+      */
+    #wforder{width:100%;background:#EBF7FF;}
+    .wftitle,.wfsubbox input{background:#09F;}
+</style>
+</head>
+
+<body marginwidth="0" marginheight="0">
+<div id="wforder">
+    <div class="wfwarp">
+        <form id="fonmcxzx" name="fonmcxzx" style="overflow: hidden;">
+        <div class="wftitle">在线快速订购</div> 
+        <div class="wfbdbox">
+            <label class="wfbdxxcp"><em>*</em>产品套餐</label>
+            <div class="wfdxboxcp red">
+                <input name="type" type="radio" id="a1" onclick="pricea()" value="0" checked="" alt="385"><label for="a1">《好字通特效练字套装》/298元（货到付款）</label><br>
+          </div>
+        </div>
+        <div class="wfbdbox">
+            <label class="wfbdxx"><em>*</em>数量</label>
+            <div class="wftextbox2">
+                <input name="num" type="text" value="1">套
+            </div>
+        </div>        
+        <div class="wfbdbox">
+            <label class="wfbdxx"><em>*</em>收货姓名</label>
+            <div class="wftextbox">
+                <input type="text" name="name">
+            </div>
+        </div>
+        <div class="wfbdbox">
+            <label class="wfbdxx"><em>*</em>手机号码</label>
+            <div class="wftextbox">
+                <input type="text" name="mobile">
+            </div>
+        </div>
+        <div class="wfbdbox">
+            <label class="wfbdxx"><em>*</em>所在地区</label>
+            <div class="wfxlbox">
+                <select name="province" class="wfdqxl"><option value="">*** 请选择省份 ***</option><option value="北京市">北京市</option><option value="天津市">天津市</option><option value="河北省">河北省</option><option value="山西省">山西省</option><option value="内蒙古自治区">内蒙古自治区</option><option value="辽宁省">辽宁省</option><option value="吉林省">吉林省</option><option value="黑龙江省">黑龙江省</option><option value="上海市">上海市</option><option value="江苏省">江苏省</option><option value="浙江省">浙江省</option><option value="安徽省">安徽省</option><option value="福建省">福建省</option><option value="江西省">江西省</option><option value="山东省">山东省</option><option value="河南省">河南省</option><option value="湖北省">湖北省</option><option value="湖南省">湖南省</option><option value="广东省">广东省</option><option value="广西壮族自治区">广西壮族自治区</option><option value="海南省">海南省</option><option value="重庆市">重庆市</option><option value="四川省">四川省</option><option value="贵州省">贵州省</option><option value="云南省">云南省</option><option value="西藏自治区">西藏自治区</option><option value="陕西省">陕西省</option><option value="甘肃省">甘肃省</option><option value="青海省">青海省</option><option value="宁夏回族自治区">宁夏回族自治区</option><option value="新疆维吾尔自治区">新疆维吾尔自治区</option><option value="香港特别行政区">香港特别行政区</option><option value="澳门特别行政区">澳门特别行政区</option><option value="台湾省">台湾省</option><option value="其它">其它</option></select><select name="city" class="wfdqxl"><option value="">*** 请选择城市 ***</option></select><select name="area" class="wfdqxl"><option value="">*** 请选择地区 ***</option></select>
+            </div>
+        </div>
+        <div class="wfbdbox">
+            <label class="wfbdxx"><em>*</em>详细地址</label>
+            <div class="wftextbox">
+                <input type="text" name="street">
+            </div>
+        </div>
+        <div class="wfbdbox">
+            <label class="wfbdxx"><em>*</em>选择快递</label>
+            <div class="wfdxbox">
+				<input type="radio" name="zf" id="b2" value="SF" checked="checked"><label for="b2">顺丰快递</label>
+            </div>
+        </div>
+        <div class="wfbdbox">
+            <label class="wfbdxx">留言</label>
+            <div class="wftext2box">
+                <textarea name="remark" placeholder="其它请留言" class="guest kdb"></textarea>
+            </div>
+        </div>
+       
+        <div class="wfsubbox">
+            	<input type="button" id="add_order_id" name="wfsubmit" value="立即提交订单" style="margin-left:50px;">
+	        </div>
+        </form>
+        
+        <div id="wffahuo"><p><span>[最新购买]：</span>赵**（139****1955）在5分钟前订购了《好字通特效练字套装》 <font color="#FF0000">√</font></p><p><span>[最新购买]：</span>刘**（180****6999）在2分钟前订购了《好字通特效练字套装》 <font color="#FF0000">√</font></p></div>
+        
+         <table border="0" align="left" cellpadding="0" cellspacing="0" style="BACKGROUND-IMAGE: url(dingdan/Dept_Order_Pay_02.png); MARGIN: 200px auto auto; WIDTH: 100%; BACKGROUND-REPEAT: repeat-x; HEIGHT: 130px">
+			  <tbody>
+			  <tr>
+			    <td height="136" style="WIDTH: 4px"><img src="dingdan/Dept_Order_Pay_01.png" width="4" height="195"> </td>
+			    <td>
+				      <table width="100%" align="center" style="MARGIN: auto;">
+					        <tbody>
+						        <tr>
+						          <td width="" height="109" align="center"><img src="dingdan/Dept_Order_Pay_06.png"> </td>
+						          <td width="" style="FONT-SIZE: 16px; font-family:'微软雅黑';" align="left"><span style="color:#DB4D0F">尊敬的</span>&nbsp;&nbsp;客户，您好！您的订单已经提交成功，我们的工作人员会尽快为您处理的，谢谢您的支持！</td>
+						         </tr>
+						        <tr>
+							          <td height="52" align="center">&nbsp;</td>
+							          <td style="FONT-SIZE: 16px; font-family:'微软雅黑';" align="center">
+							            <a href="javascript:history.go(-1)">点击返回</a>
+							          </td>
+						         </tr>
+					        </tbody>
+				       </table>
+			      </td>
+			      <td style="WIDTH: 5px"><img src="dingdan/Dept_Order_Pay_04.png" width="4" height="195"> 
+			  </td>
+			  </tr>
+			  
+			 </tbody>
+  
+  	</table>
+       <div style="clear:both;"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="wffh.js"></script>
+ 
+<script language="javascript" defer="">new PCAS("province","city","area");</script>
+
+<script>
+	$(function(){
+		$("#add_order_id").click(function(){
+			if(!cxzxcheckform()){
+				return false;
+			}
+			var data = $("#fonmcxzx").serialize();
+			$.ajax({
+				type : "POST",    
+				url : '../order/add.do',
+				data : data,
+				dataType:"json",
+				async:false, 
+				success : function(json) {
+					if(json.result){
+						window.location.href = "${ctx}/success";
+					}else{
+						alert("提交订单失败...");
+					}
+				},
+				error:function(){
+					alert("服务器异常！");
+				}
+			});
+			return false;
+		});
+	});
+</script>
+
+</body></html>

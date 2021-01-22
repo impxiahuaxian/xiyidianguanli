@@ -1,0 +1,36 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.FeedbackDao;
+import com.weiweiqin.model.Feedback;
+import com.weiweiqin.service.FeedbackService;
+import com.weiweiqin.vo.common.Page;
+@Service
+public class FeedbackServiceImpl implements FeedbackService {
+	@Autowired
+	private FeedbackDao feedbackDao;
+
+	public List<Feedback> pageList(Page page, Map<String, Object> conditions) {
+		return feedbackDao.pageList(page, conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return feedbackDao.totalCount(conditions);
+	}
+
+	public void save(Feedback feedback) {
+		feedbackDao.insert(feedback);
+	}
+
+	public Feedback get(int id) {
+		return feedbackDao.get(id);
+	}
+
+
+
+}

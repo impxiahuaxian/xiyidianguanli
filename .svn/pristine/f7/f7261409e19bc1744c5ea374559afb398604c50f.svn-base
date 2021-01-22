@@ -1,0 +1,17 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Order;
+
+public interface OrderDao extends GenericDao<Order, Integer> {
+
+	List<Order> getOrderListByGoodsId(int goodsId);
+	
+	Order getByOuterid(String outerid); 
+	
+	List<Order> export(Map<String, Object> conditions);
+	
+	int getWaitPayTotalCount(Map<String,Object> conditions);
+}

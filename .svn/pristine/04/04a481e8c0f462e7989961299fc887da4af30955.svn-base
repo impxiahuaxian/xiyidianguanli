@@ -1,0 +1,96 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Comment implements Serializable {
+
+	private static final long serialVersionUID = -7970848646314840509L;
+
+	private int id;
+	
+	private String content;
+	
+	private Date updateDate;
+	
+	private int grade;
+	
+	private String username;
+	
+	private int orderId;
+	
+	private int status;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("id=");
+		sb.append(id);
+		sb.append(":content=");
+		sb.append(content);
+		sb.append(":updateDate=");
+		sb.append(updateDate);
+		sb.append(":grade=");
+		sb.append(grade);
+		sb.append(":username=");
+		sb.append(username);
+		sb.append(":orderId=");
+		sb.append(orderId);
+		return sb.toString();
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+}

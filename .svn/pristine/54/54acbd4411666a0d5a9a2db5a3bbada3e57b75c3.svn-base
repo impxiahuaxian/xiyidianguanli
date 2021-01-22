@@ -1,0 +1,304 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./header.jsp" %>
+<head>
+	 <style>
+	 	#category_id,#brands_id{
+			margin-top: 20px;
+		}
+		
+		#category_id  dt,
+		#category_id dd,
+		#brands_id dt,
+		#brands_id dd{
+			float: left;
+			height:16px;
+			margin-top:10px;
+		}
+		
+		#category_id  dt,
+		#brands_id dt{
+			line-height:20px;
+			margin-right:10px;
+			font-weight: bold;
+		}
+		
+		#category_id a,
+		#brands_id a{
+			color:#666;
+			font-size:12px;
+			line-height: 16px;
+			margin-right:10px;
+			display: block;
+			padding:2px 2px;
+			text-decoration: none;
+		}
+		#category_id .current,
+		#brands_id .current{
+			background-color: #65c178;
+			color:#fff;
+		}
+	 </style>
+</head>
+
+<body>
+	<tags:top/>
+
+    <div class="container">
+    	
+		<!-- begin category -->
+		<div class="clearfix" style="margin-bottom:20px;">
+			<dl id="category_id" class="clearfix">
+				<dt >品类</dt>
+				<dd><a href="#" id="no_limit"  class="current" data-categoryId="0">不限</a></dd>
+			</dl>
+			
+		</div>
+		<!-- end category -->
+		
+		<div style="margin-bottom:5px;" class="clearfix row">
+			<div class="btn-group col-md-8" style="float:left;margin-top:20px;">
+			  <button type="button" class="btn btn-default filter date-sort" data-sort-type="date" data-states="desc">最新  <span style="font-size: 12px;" class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default filter sale-sort" data-sort-type="sale" data-type="2" data-states="desc">销量 <span style="font-size: 12px;" class="glyphicon glyphicon-arrow-down"></span></button>
+			  <button type="button" class="btn btn-default filter price-sort" data-sort-type="price" data-states="desc">价格 <span style="font-size: 12px;" class="glyphicon glyphicon-arrow-down"></span></button>
+			</div>
+			
+			<div id="pager" class="col-md-4" align="right"></div>
+		</div>
+			
+	    <div class="row" id="goods_new_div">
+	    		<!-- col1 -->
+			    <div class="col-sm-4 col-md-4" id="col_id0">
+					    	
+		  		</div>
+		  		
+		  		<!-- col2 -->
+		  		<div class="col-sm-4 col-md-4" id="col_id1">
+					    	
+		  		</div>
+		  		
+		  		<!-- col3 -->
+		  		<div class="col-sm-4 col-md-4" id="col_id2">
+					    	
+		  		</div>
+    </div>
+    <div id="pagebottom" align="right"></div>
+    
+	   <div id="brands_img_div" style="display: none;">
+			<h5 class="model-title" style="margin-bottom:0px;width:130px;">更多品牌推荐：</h5>
+		
+	   		<ul class="brands clearfix">
+	    		<li id="brands_img_model_id" style="display: none;">
+	    			<a href="#" target="_blank">
+		    			<img src="${ctx }/images/nike.jpg"/>
+		    			<div class="bg" ></div>
+	    			</a>
+	    		</li>
+	    	</ul>
+	    </div>
+    </div>
+    
+    <!-- begin model -->
+    <div class="thumbnail shopbox" id="goods_new_model" style="display: none;">
+      <div style="width:56px;height:24px;position: absolute;top: 0px;right:0px;background: url('${ctx}/images/hot.png') no-repeat;"></div>
+     	  <a href="#" class="img-a" target="_blank"><img alt="" src="${ctx }/images/loading.gif"></a>
+      
+      <div class="caption">
+        <a href="#" target="_blank" class="title-a" style="text-decoration: none;"><h6 class="title ellipsis" style="color:#666;"></h6></a>
+        
+        <p class="content" style="margin:0px;">
+        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;"></strong>
+        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;"></span>
+        	<span style="background: #65c178;color:#FFF;font-size:14px;">货到付款</span>
+        </p>
+        
+        <div align="" style="margin-bottom:5px;">
+        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;"></span>人已经购买</span>
+        </div>
+        <p align=""><a href="#" target="_blank" class="btn btn-buy btn-block" role="button">立即抢购</a></p>
+      </div>
+      
+  	</div>
+  	<!-- end model -->
+	
+	<tags:bottom/>
+	<script>
+		$(function(){
+			
+			$("#search_form_id").show();	
+			var col = 3;
+			if(!jWei.util.isMobile()){
+				$("#safe_desc").show();
+			}
+		 
+			//排序类型
+			window.sortType = "";
+			//升序还是降序
+			window.sortStates = "";
+			
+			//默认分类为不限
+			if("${param.category}"){
+				window.categoryId = "${param.category}";
+				if(window.categoryId != 0){
+					$("#no_limit").removeClass("current");
+				}
+			}else{
+				window.categoryId = 0;
+			}
+			
+			
+			
+			//回调函数  
+			var PageClick = function(pageclickednumber) {
+				init(pageclickednumber);
+				$("html,body").animate({scrollTop:$("#pager").offset().top-1},10);//1000是ms,也可以用slow代替
+			};
+			
+			var init = function(currPage){
+				//分页清空数据
+				for(var z =0;z<4;z++){
+					$("#col_id"+z).html("");
+				}
+				
+				//获取商品信息
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize=48&currPage="+currPage+"&categoryId="+window.categoryId,
+					cache:true,
+					async:false,
+					data : {
+						title:$(".search-input").val(),
+						sortType:sortType,
+						sortStates:sortStates
+					},
+					dataType : 'json',
+					success:function(dataObj){
+						$("#pager").pager({
+							pagenumber : currPage,
+							pagecount : dataObj.obj.totalPage,
+							buttonClickCallback : PageClick
+						});
+			        	var list = dataObj.obj.goodsList;
+			        	
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var model = $("#goods_new_model").clone();
+			        		model.attr("id","");
+			        		var goods = list[i];
+			        		var price = goods.price;
+			            	$("#col_id"+i%col).append(model);
+			            	model.find("img").attr("data-url","${ctx}/upload/download.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+			            	model.find(".img-a").attr("href","${ctx}/detailGoods/"+goods.id);
+	            			model.find(".title-a").attr("href","${ctx}/detailGoods/"+goods.id);
+			            	model.find(".title").html(goods.title);
+			            	model.find(".btn").attr("href","${ctx}/detailGoods/"+goods.id);
+			            	model.find(".buy-num").html(goods.buyNum);
+			            	model.find(".nowprice").html("￥"+goods.nowPrice);
+			            	model.find(".oldprice").html("￥"+price);
+			            	model.show();
+			        	}
+			        	$(".thumbnail img").scrollLoading();
+			        	$("#pagebottom").html($("#pager").clone(true)).find("#pager").removeClass("col-md-4");
+					}
+				});
+			};
+			
+			if("${param.cur}"){
+				init("${param.cur}");
+			}else{
+				init(1);
+			}
+			
+			//获取上架分类
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '${ctx}/category/getAlllAddOn.do',
+				cache:true,
+				async:false,
+				data : {
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						var categoryList = data.obj;
+						if(categoryList){
+							var html = "";
+							for(var i = 0 ;i<categoryList.length;i++){
+								var category = categoryList[i];
+								if(category)
+									var dd = '<dd><a href="#" data-categoryId="'+category.id+'" id="a_id">'+category.name+'</a></dd>';
+									if(category.id == window.categoryId){
+										dd = '<dd><a href="#" class="current" data-categoryId="'+category.id+'" id="a_id">'+category.name+'</a></dd>';
+									} 
+									html = html+dd;
+							}
+							$("#category_id").append(html);
+							$("#category_id").find("[id='a_id']").click(function(){
+								window.categoryId = $(this).attr("data-categoryId");
+								init(1);
+								$("#category_id").find(".current").each(function(){
+									$(this).removeClass("current");
+								});
+								$(this).addClass("current");
+								return false;
+							});
+						}
+						
+					} else {
+						//alert('数据库异常,查询数据失败');
+					}
+				},
+				error : function(data) {
+				}
+			});	
+			
+			
+			
+			//绑定分类不限按钮
+			$("#no_limit").click(function(){
+				window.categoryId = 0;
+				init(1);
+				$("#category_id").find(".current").each(function(){
+					$(this).removeClass("current");
+				});
+				$(this).addClass("current");
+				return false;
+			});
+			
+			
+			//绑定搜索按钮
+			$(".wg_btn_search").click(function(){
+				window.categoryId = 0;
+				window.brandsId = 0;
+				init(1);
+			});
+			
+			//绑定搜索回车事件
+			 $(".search-input").bind('keypress',function(event){
+		            if(event.keyCode == "13")    
+		            {
+		            	$(".wg_btn_search").trigger("click");
+		            	return false;
+		            }
+			 });
+			
+			//绑定排序事件
+				$(".filter").each(function(){
+					$(this).click(function(){
+						window.sortType = $(this).data("sortType");
+						window.sortStates = $(this).data("states");
+						init(1);
+						//改变排序状态
+						if(window.sortStates == "desc"){
+							$(this).data("states","asc");
+						}else{
+							$(this).data("states","desc");
+						}
+						return false;
+					});
+				});
+		});
+	</script>
+	
+</body>

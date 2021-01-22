@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!-- saved from url=(0107)http://mp.weixin.qq.com/s?__biz=MzA3NzE3NjY5NA==&mid=203121789&idx=1&sn=ffcddd9f157fa2028d5a074ffb85cd83#rd -->
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">         
+
+<script type="text/javascript">
+    var sampling = Math.random() < 0.001;
+    var page_begintime = (+new Date());
+    (sampling) && ((new Image()).src = "http://isdspeed.qq.com/cgi-bin/r.cgi?flag1=7839&flag2=7&flag3=8&15=1000&r=" + Math.random());
+
+    var biz = "MzA3NzE3NjY5NA==";
+    var sn = "ffcddd9f157fa2028d5a074ffb85cd83";
+    var mid = "203121789" || "";
+    var idx = "1" || "" ;
+    
+    //辟谣需求
+    var is_rumor = ""*1;
+    var norumor = ""*1;
+    if (!!is_rumor&&!norumor){
+      if (!document.referrer || document.referrer.indexOf("mp.weixin.qq.com/mp/rumor") == -1){
+        location.href = "http://mp.weixin.qq.com/mp/rumor?action=info&__biz=" + biz + "&mid=" + mid + "&idx=" + idx + "&sn=" + sn + "#wechat_redirect";
+      }
+    }
+</script>        
+
+<link rel="dns-prefetch" href="http://res.wx.qq.com/"><link rel="dns-prefetch" href="http://mmbiz.qpic.cn/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/favicon22c41b.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script type="text/javascript">
+    var uin = "";
+    var key = "";
+    var pass_ticket = "";
+
+String.prototype.html= function(encode) {
+    var replace =["&#39;", "'", "&quot;", '"', "&nbsp;", " ", "&gt;", ">", "&lt;", "<", "&amp;", "&", "&yen;", "¥"];
+    //console.log(replace);
+    if(encode){
+        replace.reverse();
+    }
+    for (var i=0,str=this;i< replace.length;i+= 2){
+         str=str.replace(new RegExp(replace[i],'g'),replace[i+1]);
+    }
+    
+    return str;
+};
+pass_ticket = encodeURIComponent(pass_ticket.html(false).html(false).replace(/\s/g,"+"));
+</script>  
+      <title>智宝堂</title>    
+          <link rel="stylesheet" type="text/css" href="page_mp_article_improve23b1e9.css">
+          <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/page_mp_article_improve_pc23b0e8.css"><![endif]-->
+          
+          <script type="text/javascript">
+    document.domain = "qq.com";
+</script>   
+ <script src="report_and_source23a582.js" type="text/javascript" async=""></script><script src="index23cca7.js" type="text/javascript" async=""></script><link rel="stylesheet" type="text/css" href="not_in_mm23b0e8.css"></head>    <body id="activity-detail" class="zh_CN not_in_mm" ontouchstart="" marginwidth="0" marginheight="0">            <script type="text/javascript">
+        var write_sceen_time = (+new Date());
+        (sampling) && ((new Image()).src = "http://isdspeed.qq.com/cgi-bin/r.cgi?flag1=7839&flag2=7&flag3=8&16=1000&r=" + Math.random());
+    </script> 
+    
+           <div id="js_cmt_more" class="discuss_container access" style="display:none;">     
+           
+              <div class="discuss_container_inner">            <h2 class="rich_media_title" id="activity-name">好字通特效练字套装官网</h2>         
+                <div class="discuss_list_wrp">               
+                 <div class="rich_tips with_line title_tips discuss_title_line">            
+                         <span class="tips">精选评论</span>                </div>      
+                                   <p class="tips_global tc title_bottom_tips" id="js_cmt_nofans3" style="display:none;">关注该公众号可参与评论</p>                <p class="discuss_icon_tips title_bottom_tips tr" id="js_cmt_addbtn3" style="display:none"><a href="http://mp.weixin.qq.com/s?__biz=MzA3NzE3NjY5NA==&mid=203121789&idx=1&sn=ffcddd9f157fa2028d5a074ffb85cd83#comment">写评论<img class="icon_edit" src="icon_edit23b1e9.png" alt=""></a></p>                <ul class="discuss_list" id="js_cmt_morelist"></ul>            </div>            <div class="rich_tips tips_global loading_tips" id="js_cmt_more_loading">                <img src="icon_loading_white22c04a.gif" class="rich_icon icon_loading_white" alt="">                <span class="tips">加载中</span>            </div>            <div class="rich_tips with_line tips_global" id="js_cmt_more_end" style="display:none">                <span class="tips">以上评论由公众帐号筛选后显示</span>            </div>        </div>    </div>        <div id="js_cmt_mine" class="discuss_container editing access" style="display:none;">        <div class="discuss_container_inner">            <h2 class="rich_media_title" id="activity-name">好字通特效练字套装官网</h2>            <div class="frm_textarea_box_wrp">                <span class="frm_textarea_box">                    <textarea id="js_cmt_input" class="frm_textarea" placeholder="评论将由公众帐号筛选后显示，对所有人可见。"></textarea>                </span>            </div>            <div class="discuss_btn_wrp"><a id="js_cmt_submit" class="btn btn_primary btn_discuss btn_disabled" href="javascript:;">提交</a></div>            <div class="discuss_list_wrp" style="display:none">                <div class="rich_tips with_line title_tips discuss_title_line">                    <span class="tips">我的评论</span>                </div>                <ul class="discuss_list" id="js_cmt_mylist"></ul>            </div>            <div class="wx_poptips" id="js_cmt_toast" style="display:none;">                <img alt="" class="icon_toast" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGoAAABqCAYAAABUIcSXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3NpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMTUxMzkxZS1jYWVhLTRmZTMtYTY2NS0xNTRkNDJiOGQyMWIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTA3QzM2RTg3N0UwMTFFNEIzQURGMTQzNzQzMDAxQTUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTA3QzM2RTc3N0UwMTFFNEIzQURGMTQzNzQzMDAxQTUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NWMyOGVjZTMtNzllZS00ODlhLWIxZTYtYzNmM2RjNzg2YjI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIxNTEzOTFlLWNhZWEtNGZlMy1hNjY1LTE1NGQ0MmI4ZDIxYiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pmvxj1gAAAVrSURBVHja7J15rF1TFMbXk74q1ZKHGlMkJVIhIgg1FH+YEpEQJCKmGBpThRoSs5jVVNrSQUvEEENIhGiiNf9BiERICCFIRbUiDa2qvudbOetF3Tzv7XWGffa55/uS7593977n3vO7e5+199p7v56BgQGh0tcmvAUERREUQVEERREUQVEERREUQVEERREUQVEERREUQVEERREUQVEERVAUQVEERVAUQbVYk+HdvZVG8b5F0xj4RvhouB+eCy8KrdzDJc1RtAX8ILxvx98V1GyCSkN98Cx4z/95/Wn4fj6j6tUEeN4wkFSnw1MJqj5NhBfAuwaUHREUg4lqNMmePVsHll/HFhVfe1t3FwpJI8DXCCquDrCWNN4B6Tb4M3Z98aTPmTvh0YHl18PXw29yZiKejoPvcUD6E74yFBJbVDk6Bb7K8aP/Hb4c/tRzEYIqprPhSxzlf4Uvhb/0Xoig8qnHAJ3lqPMzfDH8XZ4LEpRf2sVdA5/sqPO9Qfop70UJyn+/boaPddT5yrq7VUUvTIVJI7q74MMddXR8NB1eXcYvhBpZm0s2w72/o86HFoKvLau/pYaXzjLMdUJ6y0LwtWV9CIIaXtvA8+G9HHV03u5q+K+yH47U0NoRngPv7KjzHDwTLj0bS1BDazfJJlcnOOostC6ysnCT+q80G/sIvFVgeW09D8FPVT0uoP7VfvAD8NjA8pqmuAN+OcYAjso0RbIZ8DGB5TVNcRO8JMaHY9SXSdfa3eeANJimWBLrA7JFiZwIXye+NMUV8CcxP2SRFjXefok7NRjSGZJlWUPvw2/wtNiQirSoXWyMsR28wR7AzzYM0oXw+Y7yK+CLJGeaoqjyrJSdZJD6Ov4+z5y6NJc0Az7NUecHydIUy+v60KNyQHoM3nKI1y7YCFiq0i7uBvgER52vDdKqWn9djhY1Dn4G3n6Ecqm2rF74dvgoR53S0hQxW9RJAZAGW5bSn58QJA27dQ7uIEedjywEX5NKVxCqsY6y+qA+LxFI4+yZ6oH0trWkNan80jygtIUsc5SflgAsDXgehfdx1KkkTRE76tN+Xue2jnTU0Ru1oIbvpt30bBtKhOp5yaaRkts0lic8V1i6dPcIRx2d/l8Y8XtNNEg7OOo8bl1kmmOKnDsO88CaYzejau0hWZqiL7C83oCH4SeTHvwV2BqqsHRVztSEYOmWF80NeXZT6Hd4KflResE9vCnBOlCyGfDNAstHTVPUDWoQ1t3iW+9WNizvlhfd4aerXd+ThqiMfNR6+9LvOOro5OY5JX2H4+F7HZD+kGzlamMgldWiirQsjcwWFbjmqZJteekJLK9pisvgL6RhKvuciZiwzrWWGapfrPy30kBVcSBIrw0aD3PU0XB6cehntq7rTMf7/2iQlktDVdXJLXlg6VjmiYBn6rWSTRCH6hvJ0hQrpcGq8oidsmHpTP8t8DGO9/vcWt9qabiqPgup1yKyQwvC2tSefZ73SSpNkUJ4PlLorlHZ+446nc8f3fIyywlJhwrTuwVSjBa1ccvSxN0hjjoK5xVrYZMd9V6XbFfgBukixTwGLg8sDam3dZR/wZ6L/dJlin1en8LS+bgpFbz3Ygvzu1J1HKxYNqxGpCmaCEo12rrBorD6LRp8UbpcdR5VWhTW35KlKd6QFqjuM2XzwlpnMxTvSkuUwuG/Xlg6NtPjbT6WFimF/VG6LEvXgn8QGDjMbBukVECFwhpoS+CQatfX2Q1q6H7wENHdrfCr0lKleEB9JyxNneus+VJpsVL9TwI6W65LovWIGl3KtVJaLv7LBwYTFEERFEVQFEERFEVQFEERFEVQFEERFEVQFEERFEVQFEERFFWq/hFgADUMN4RzT6/OAAAAAElFTkSuQmCC">                <p class="toast_content">已评论</p>            </div>        </div>    </div>    <div id="js_article" class="rich_media">                <div id="js_top_ad_area" class="top_banner">         </div>                        <div class="rich_media_inner">            <div id="page-content">                <div id="img-content" class="rich_media_area_primary">                    <h2 class="rich_media_title" id="activity-name">                        好字通特效练字套装官网                     </h2>                    <div class="rich_media_meta_list">                                                <em id="post-date" class="rich_media_meta rich_media_meta_text">2015-01-31</em>                                                <em class="rich_media_meta rich_media_meta_text">好字通官网</em>                                                <a class="rich_media_meta rich_media_meta_link rich_media_meta_nickname" href="javascript:void(0);" id="post-user">智宝堂</a>                        <span class="rich_media_meta rich_media_meta_text rich_media_meta_nickname">智宝堂</span>                        <div id="js_profile_qrcode" class="profile_container" style="display: none;">                            <div class="profile_inner" style="padding-left:44px;">                                <strong class="profile_nickname">智宝堂</strong>                                      <p class="profile_meta">                                <label class="profile_meta_label">QQ号</label>                                <span class="profile_meta_value">3238528572</span>                                </p>                                <p class="profile_meta">                                <label class="profile_meta_label">功能介绍</label>                                <span class="profile_meta_value">深圳市智宝堂给您最前沿的学习资讯及最好的学习方法。</span>                                </p>                                                            </div>                            <span class="profile_arrow_wrp" id="js_profile_arrow_wrp">                                <i class="profile_arrow arrow_out"></i>                                <i class="profile_arrow arrow_in"></i>                            </span>                        </div>                    </div>                                                                                                                                                                <div class="rich_media_content" id="js_content"><p><img data-s="300,640" data-type="jpeg" src="./001.png" data-ratio="0.6633333333333333" data-w="300" style="width: auto !important; visibility: visible !important; height: auto !important;"></p><p><img src="002.png" width="320" style="margin: 0px; padding: 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801058" data-type="jpeg" data-ratio="0.146875" data-w="320"><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);"></span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none;">　　俗语说：字如其人。<br style="margin: 0px; padding: 0px; list-style: none;">　　众所周知，一手好字，可以给人留下终身好印象。当今社会中，钢笔书法的重要性显而易见，</span>无论是签合同签协议、考职称等等，一手好字绝对能给人非常好的印象！</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><br></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;">众所周知，</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;">学生写一手好字，会得老师喜 爱,</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;"><strong style="margin: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: normal;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;">成人写一手好字，会被上级器重。</span> <br style="margin: 0px; padding: 0px; list-style: none;"></span></strong></span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><strong style="margin: 0px; padding: 0px; list-style: none;">写一手好字，可以给人好的印象，</strong></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><strong style="margin: 0px; padding: 0px; list-style: none;">改变仕途，平步青云， 改变人的一生！</strong></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><strong style="margin: 0px; padding: 0px; list-style: none;">在我的见识中,因为一手好字改变命运的 <br style="margin: 0px; padding: 0px; list-style: none;"></strong></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><strong style="margin: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: normal;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;">例子比比皆是！</span> </span><br style="margin: 0px; padding: 0px; list-style: none;"></strong></p><p class="tit" style="padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; font-weight: bold; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;"><em style="margin: 0px; padding: 0px; list-style: none;">但另一个问题是</em></p><p><span style="margin: 0px; padding: 0px; list-style: none;"></span><span style="">　　现在教育行政部门和学校普遍</span><span style="color: rgb(255, 0, 0);">不重视学生写字</span><span style="">。以前学校普遍还开有写字和书法课，每周一次，现在随着英语、电脑等课程的增加，<span style="color: rgb(255, 0, 0);">写字课名存实亡</span>，课时被挤占， 只在课表上显示，实际不上。</span><br style=""><span style="">　　电脑的普及代替了部分手写，一些家长觉得将来都用电脑，字写得好不好不要紧。其实<span style="color: rgb(255, 0, 0);">写不好字直接影响学习效率和考试成绩</span>，小考、中考、和高考是<span style="color: rgb(255, 0, 0);">要吃亏</span><span style="color: rgb(255, 0, 0);">的</span>。</span><br style="margin: 0px; padding: 0px; max-width: 100%; color: rgb(62, 62, 62); background-color: rgb(255, 255, 255); list-style: none; line-height: 14.66px; font-family: 宋体; font-size: 14px; white-space: normal; box-sizing: border-box !important; word-wrap: break-word !important;"><span style="">　　还有新一代教师的写字水平普遍不好。教师都写不好字，<span style="margin: 0px; padding: 0px; max-width: 100%; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">学生怎么能写好字呢</span>。</span></p><p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">写不好字的十大后果：</p><p>1、作业被老师撕掉，要求重写。 <br style="margin: 0px; padding: 0px; list-style: none;">2、影响小考、中考、高考成绩，特别是作文的成绩。 <br style="margin: 0px; padding: 0px; list-style: none;">3、写字又慢又难看，影响学习效率。别人一小时能完成的作业，你要用两小时。<br style="margin: 0px; padding: 0px; list-style: none;">4、降低你在同学、老师和领导心目中的地位，被别人瞧不起。 <br style="margin: 0px; padding: 0px; list-style: none;">5、用一手难看的字写情书，不容易找到对象。<br style="margin: 0px; padding: 0px; list-style: none;">6、遇到招聘单位需要手写简历时，无从下手。<br style="margin: 0px; padding: 0px; list-style: none;">7、影响到将来做教师、医生、会计、文秘等职业。<br style="margin: 0px; padding: 0px; list-style: none;">8、影响自己的升迁。同等条件下，你写一笔烂字，肯定落选。<br style="margin: 0px; padding: 0px; list-style: none;">9、当了领导后，到基层视察遇到题词手发抖，很尴尬。<br style="margin: 0px; padding: 0px; list-style: none;">10、缺乏自信心。<br style="margin: 0px; padding: 0px; list-style: none;"><span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;"><br style="margin: 0px; padding: 0px; list-style: none;"></span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><br></p><p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;"><span style="margin: 0px; padding: 0px; list-style: none;">那有没快速有效的练字方法呢</span>？</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">　　 练字可以培养品格，让人养成耐心、稳重的心理素质。</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">很多人都梦想<span style="margin: 0px; padding: 0px; list-style: none; color: red;">练出一手好字</span>，却反反复复练了很多年都没有成功。 <br style="margin: 0px; padding: 0px; list-style: none;"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">现在，一种可以让你<span style="margin: 0px; padding: 0px; list-style: none; color: red;">少走98%的弯路</span>的方法诞生了，无论您的基础如何，是学生 还是成年人，或者您自认为没有写字的天赋，或者您对成功缺乏信心，</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">　　但只要您每天练习十几个字，<span style="margin: 0px; padding: 0px; list-style: none; color: red;">每次练习十几分钟</span>，数周便会奇迹般的克服手不从 心、笔不随意、结构松散、字迹歪斜等的毛病。如果勤练习， <span style="margin: 0px; padding: 0px; list-style: none; color: red;">几周以后您就会写出一手好字</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><br></p><p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">我们该如何练好字呢：</p><p>　　目前市面上的传统练字字帖，初学者不好掌握，只能垫纸临摹，不耐用学习效果比较差。"好字通特效练字套装"是运用著名的巴浦洛夫"条件反射"原 理，集成近年来多种练字工具之长，研制而成的一种新型、快速练字工具，具有"学字"、"练字"、"纠字"多种功能，它采用独有的凹槽式练字模板,摒弃了传 统字帖的平板模式,每张字帖都采用了凹槽设计,线条流畅、做工精细,让练习者在书写的过程中避免了临摹平板字帖时的随心所欲,规范了笔画,快速提高书写水 平。强化矫正和诱导并用，如同书法家手把手教您，大大提高练习速度。运用"硬笔练大字"这一最新科研成果，锻炼手指的灵活性，迅速掌握字体的结构、提高写 字的能力。<br style="margin: 0px; padding: 0px; list-style: none;"></p><p class="tit" style="padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; font-weight: bold; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;"><em style="margin: 0px; padding: 0px; list-style: none;">好字通练字套装包含哪些内容？</em></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">　　材质说明：环保PVC塑料，无毒无味，</p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">　　使用中字迹会自动消失可以反复使用。 <br style="margin: 0px; padding: 0px; list-style: none;"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">　　产品内含12种神奇的练字产品东西，分别有12张万能练字板(单张规格：17.8*12.2cm是正反2面的，共24面包含数字、拼音、笔画、偏旁部首、楷书、行 书)、1支神奇折不断铅笔、2瓶魔幻专用墨水、1支专用魔法笔、1张万用无墨水写字布、1支湖州练字毛笔、1张教学光盘、2个矫正握笔器、1个书法学习U盘、1盒写不断铅笔笔芯、说明书、精美礼盒袋！ <br style="margin: 0px; padding: 0px; list-style: none;"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><img src="./003.png" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801059" data-type="jpeg" data-ratio="0.671875" data-w="320" src="0(1)"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">点击观看产品介绍视频（请在wifi环境观看）</p>
+              
+              
+<p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">
+
+<iframe class="video_iframe" style="z-index: 1; width: 344px !important; height: 258px !important; overflow: hidden;" height="258" width="344" frameborder="0" src="http://v.qq.com/iframe/player.html?vid=p01443t182f&amp;width=500&amp;height=375&amp;auto=0" allowfullscreen="" src="http://v.qq.com/iframe/player.html?vid=p01443t182f&width=320&auto=0" scrolling="no"></iframe><br></p>
+    
+    <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><br style="margin: 0px; padding: 0px; list-style: none;"><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">14张/正反面28面</span> </p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><img src="./004.png" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801060" data-type="jpeg" data-ratio="0.684375" data-w="320" src="0(2)"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">使用方法：</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><img src="./005.png" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801061" data-type="jpeg" data-ratio="0.65" data-w="320" src="0(3)"><br style="margin: 0px; padding: 0px; list-style: none;">　　用水擦笔直接在练字板上书写，无需垫纸，先写5-10分钟大字充分活动手腕。再写20分钟小字仔细体会，每字连写3遍，牢固手的触觉定位。先练10天楷书 再练10天行楷，每天20-30分钟，练满三周会比现在有所进步。<br style="margin: 0px; padding: 0px; list-style: none;"><br style="margin: 0px; padding: 0px; list-style: none;"><img src="./0.gif" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801062" data-type="gif" data-ratio="0.66875" data-w="320" src="0(4)"><br style="margin: 0px; padding: 0px; list-style: none;">　　写完后墨迹用水轻轻冲洗瞬间变干净，可反复使用长达十年以上，无需浪费纸，不累眼睛，不受场地限制，比临摹传统字帖跟环保，跟经济实用，练字效果更好。<br style="margin: 0px; padding: 0px; list-style: none;"></p><p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">这一套价格是多少呢？</p><p><span style="margin: 0px; padding: 0px; list-style: none; color: red;">练字可以培养品格，让人养成耐心、稳重的心理素质，改变一生！</span><br style="margin: 0px; padding: 0px; list-style: none; color: red;"><span style="margin: 0px; padding: 0px; list-style: none; color: red;">那么这套能够改变很多孩子命运的教材到底多少钱呢？</span><br style="margin: 0px; padding: 0px; list-style: none;"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;"><strong style="margin: 0px; padding: 0px; list-style: none;"><strong class="font16" style="margin: 0px; padding: 0px; list-style: none; font-size: 16px; color: red;">2015年本月市场优惠价仅为600元！！！<br style="margin: 0px; padding: 0px; list-style: none;">今天特价，免快递费 仅需298元！！！</strong></strong></p><p class="font16" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; font-size: 16px; color: red;"><strong style="margin: 0px; padding: 0px; list-style: none;">孩子童年只有一次，永远不可能重来！家长一次决定，影响的却是孩子的一辈子！</strong></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">孩子是我们这辈子最大的投资！最重要的事业！<br style="margin: 0px; padding: 0px; list-style: none;">今天，您只需要投资<strong class="red" style="margin: 0px; padding: 0px; list-style: none; color: red;">298</strong>元，<br style="margin: 0px; padding: 0px; list-style: none;">就可以得到价值<span style="margin: 0px; padding: 0px; list-style: none; font-weight: bold;">800</span><strong class="red" style="margin: 0px; padding: 0px; list-style: none; color: red;">元</strong>的 练字套装！<br style="margin: 0px; padding: 0px; list-style: none;">仅用相当于一顿饭 ，一瓶酒，一条烟，一件衣服的投资，练一手好字，改变一生！<br style="margin: 0px; padding: 0px; list-style: none;"><br style="margin: 0px; padding: 0px; list-style: none;"></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; line-height: 1.75em;"><span style="font-size: 18px; color: rgb(255, 0, 0);"><strong style="">写好</strong></span><span style="color: rgb(255, 0, 0); font-size: 18px;"><strong style="">字</strong><strong style="">=</strong></span><span style="font-size: 18px; color: rgb(227, 108, 9);"><strong style="">受老师同学关注<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>受老师同学表杨<strong style="margin: 0px; padding: 0px; max-width: 100%; line-height: 24px; box-sizing: border-box !important; word-wrap: break-word !important;"> <span style="font-size: 18px; color: rgb(255, 0, 0);">+ </span></strong>受老师同学认同<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子更爱学习<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子有好成绩<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子好士途<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子好人生<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>父母更安心！<span style="font-size: 18px; color: rgb(255, 0, 0);">值与不值，你说了算！</span></strong></span><span style="font-size: 20px;"><strong style=""></strong><strong style=""></strong></span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; line-height: 1.75em;"><span style="font-size: 18px;"><strong style=""><br></strong></span></p><p><img src="./006.png" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801063" data-type="jpeg" data-ratio="0.509375" data-w="320" src="0(5)"></p><p class="font14 center" style="text-align: center;">正品保证｜全国包邮｜货到付款</p><p class="font14 center" style="text-align: center;">免费咨询电话：13799150182</p><p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 20px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">加QQ订购享受教育咨讯</span></p><p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 24px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">QQ号：3238528572</span></p><p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 14px; color: rgb(127, 127, 127); box-sizing: border-box !important; word-wrap: break-word !important;">（长按QQ号可复制）</span></p><h2 class="tit" style="margin: 5px 0px; padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">用过的人怎么说?</h2><p><img src="./007.jpg" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801064" data-type="gif" data-ratio="0.534375" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZ92UfuaVJGzo8SXBibfOzHO2gMMtkjYCN7Vyka8q5ORIaJInasuzRZCg/0" file_id="202980553" format="gif" src="0(6)"><img src="./008.jpg" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801065" data-type="gif" data-ratio="0.58125" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZaJA2ppibPabGTUjibvPZVOXzhhS6yYMYyw9X0rbBYobibJxLvxDoB6eibA/0" file_id="202980558" format="gif" src="0(7)"></p><p><img src="./009.jpg" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801066" data-type="gif" data-ratio="0.659375" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZV5hgViaxSP26V9RS6FYu8bsUeprlsKibWtbyfYPsWaa5ZY8ouhplOTrA/0" file_id="202980673" format="gif" src="0(8)"><img src="./010.jpg" width="320" style="margin: 0px; padding: 0px; list-style: none; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801067" data-type="jpeg" data-ratio="0.4625" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZ481xla4E6RhKmw81gagzpclLQPGcYgn7gsSmlcnUD6J5rfDucHazew/0" file_id="202980576" format="jpeg" data-s="300,640" src="640(1)"></p><h2 class="tit" style="margin: 5px 0px; padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); font-family: 宋体; white-space: normal; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">疑难解答？</h2><p><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">全套一共有多少个字？</span><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;"></span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;">全套练字板共一千多字，字虽不多但包含了汉字所有的常用结构，可以一通百通。并不是字多的字帖才是好字帖，普通的纸质字帖字是很多，但是效果依然不 明显。</p><p><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; font-family: 宋体; font-size: 14px;">只用三周真的能把字练好吗？</span><br style="margin: 0px; padding: 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;"><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);">再好的工具也得靠使用，只要您按正确的方法每天坚持练20-30分钟，三周后肯定会比现在又很大进步。</span><br style="margin: 0px; padding: 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;"><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; font-family: 宋体; font-size: 14px;">你们的字体是印刷体吗？</span><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);"></span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;">字体是国家标准版楷书、行楷，标准的好处在于谁都能练，适用于任何想练字的人群。先练标准，再培养自己的风格，大师的字并不适合每一个人哦。</p><p class="th" style="margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;"><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">产品坏了怎么办？</span></p><p><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);">我们的产品不合格率只有千分之三，所以您无需担心。如果您收到的产品有任何质量问题，可以直接寄回给我们，免费为您更换新的。如果您在使用中出现非人为的 损坏，我们提供一年的免费换新服务。</span><br style="margin: 0px; padding: 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;"></p><p class="font14 center" style="text-align: center;">正品保证｜全国包邮｜货到付款</p><p class="font14 center" style="text-align: center;">免费咨询电话：13799150182</p><p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 24px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;"><span style="color: rgb(255, 0, 0); font-size: 20px; text-align: center;">加QQ订购享受教育咨讯</span></span></p><p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 24px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">
+    QQ号：3238528572</span></p><p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 14px; color: rgb(127, 127, 127); box-sizing: border-box !important; word-wrap: break-word !important;">（长按QQ号可复制）</span></p><p class="font14 center" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; text-align: center;"><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p></div>     
+                   <script type="text/javascript">
+                        var first_sceen__time = (+new Date());
+                    </script>                                        <link rel="stylesheet" type="text/css" href="page_mp_article_improve_combo23b1e9.css">                                                                                                                        <div class="rich_media_tool" id="js_toobar">                                                <div id="js_read_area" class="media_tool_meta tips_global meta_primary" style="display:none;">阅读 <span id="readNum"></span></div>                        <span style="display:none;" class="media_tool_meta meta_primary tips_global meta_praise" id="like">                            <i class="icon_praise_gray"></i><span class="praise_num" id="likeNum"></span>                        </span>                        <a id="js_report_article" style="display:none;" class="media_tool_meta tips_global meta_extra" href="javascript:void(0);">举报</a>                    </div>                </div>                <div class="rich_media_area_extra">                                        <div class="mpda_bottom_container" id="js_bottom_ad_area"></div>                                        <div id="js_iframetest" style="display:none;"></div>                                                        </div>                           </div>            
+<!--                     <div id="js_pc_qr_code" class="qr_code_pc_outer" style="display: none;">    -->
+                    
+<!--                                  <div class="qr_code_pc_inner">                 -->
+<!--                                      <div class="qr_code_pc">            -->
+<!--                                                   <img id="js_pc_qr_code_img" class="qr_code_pc_img" src="qrcode">     -->
+<!--                                                                       <p>微信扫一扫<br>关注该公众号</p>        -->
+<!--                                                                                    </div>         -->
+<!--                                                                                            </div>   -->
+<!--                                                                                                      </div>  -->
+                                                                                                            </div>
+                                                                                                                </div>  
+                                                                                                                              <script>window.moon_map = {"a/gotoappdetail.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/a/gotoappdetail236317.js","a/ios.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/a/ios236317.js","a/android.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/a/android22772d.js","a/profile.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/a/profile224ef3.js","biz_common/utils/report.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/utils/report224ef3.js","biz_common/utils/cookie.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/utils/cookie224ef3.js","appmsg/comment.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/comment23ad25.js","appmsg/like.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/like2340dc.js","appmsg/a.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/a238f07.js","biz_common/tmpl.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/tmpl224ef3.js","biz_common/ui/imgonepx.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/ui/imgonepx224ef3.js","biz_common/dom/attr.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/dom/attr22f190.js","biz_wap/utils/ajax.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/ajax22589f.js","biz_common/utils/string/html.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/utils/string/html224ef3.js","appmsg/report.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/report23c757.js","biz_common/dom/class.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/dom/class236751.js","appmsg/report_and_source.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/report_and_source23a582.js","appmsg/page_pos.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/page_pos23c757.js","appmsg/cdn_speed_report.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_speed_report224ef3.js","appmsg/iframe.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/iframe238f79.js","appmsg/review_image.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/review_image2420fd.js","appmsg/outer_link.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/outer_link224ef3.js","biz_wap/jsapi/core.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/jsapi/core22589f.js","biz_wap/utils/mmversion.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/utils/mmversion224ef3.js","biz_common/dom/event.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/dom/event23c291.js","appmsg/async.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/async23b263.js","biz_wap/ui/lazyload_img.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_wap/ui/lazyload_img23354e.js","biz_common/log/jserr.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/log/jserr22589f.js","appmsg/share.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/share23c757.js","appmsg/cdn_img_lib.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/cdn_img_lib23c757.js","biz_common/utils/url/parse.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/biz_common/utils/url/parse238f07.js","appmsg/index.js":"http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/appmsg/index23cca7.js"};</script><script type="text/javascript" src="moon230eaa.js"></script>    <script id="t_cmt" type="text/html"> 
+        <li class="discuss_item">
+            <# if(is_elected == 1){ #>
+            <div class="discuss_opr">
+                <span class="media_tool_meta tips_global meta_praise js_comment_praise <# if(like_status == 1){ #>praised<# } #>" data-status="<#=like_status#>" data-content-id='<#=content_id#>'>
+                    <i class="icon_praise_gray"></i>
+                    <span class="praise_num"><# if(like_num_format !== 0){ #><#=like_num_format#> <# } #></span>
+                </span>
+            </div>
+            <# } #>
+            <div class="user_info">
+                <strong class="nickname"><#=nick_name#><# if(is_from_friend == 1){ #>(朋友)<# } #></strong>
+                <img class="avatar" src="<#=logo_url#>">
+            </div>
+            <div class="discuss_message">
+                <span class="discuss_status"><#=status#></span>
+                <#=content#>
+            </div>
+            <p class="discuss_extra_info">
+                <#=time#>               
+            </p>
+            <# if(reply && reply.reply_list && reply.reply_list.length > 0){ #>
+                <div class="reply_result">
+                    <div class="nickname">作者回复</div>
+                    <div class="discuss_message"><#=reply.reply_list[0].content#></div>
+                    <p class="discuss_extra_info"><#=reply.reply_list[0].time#></p>
+                </div>
+            <# } #>
+                
+        </li>
+    </script>  <script id="t_ad" type="text/html">
+    <div class="rich_media_extra" id="gdt_area">
+        <# if(pos_type==0){ #>
+        <div class="rich_tips with_line title_tips">
+            <span class="tips">推广</span>
+        </div>
+        <# } #>
+        <div class="js_ad_link extra_link" data-type="<#=type#>" data-url="<#=url#>" data-rl="<#=rl#>"  data-aid="<#=aid#>" data-pt="<#=pt#>" data-tid="<#=traceid#>" data-gid="<#=group_id#>" data-apurl="<#=apurl#>">
+            <# if(pt==1){ #>
+            <#=hint_txt#>
+            <img class="icon_arrow_gray" src="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/icon_arrow_gray1ef6d4.png">
+            <img class="icon_loading_white icon_after" style="display:none;" id="loading_<#=traceid#>" src="http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/images/icon/common/icon_loading_white22c04a.gif">
+            <# }else if(pt==2){ #>
+            <img class="appmsg_banner" src="<#=image_url#>">
+            <# }else if(pt==7){ #>
+            
+            <div class="preview_group preview_card">
+                <div class="preview_group_inner card_inner">
+                    <div class="preview_group_info">
+                        <strong class="preview_group_title2"><#=hint_txt#></strong>
+                        <div class="preview_group_desc"><#=ad_desc#></div>
+                        <img src="<#=image_url#>" alt="" class="preview_card_avatar">
+                    </div>
+                </div>
+            </div>
+            <# }else if(pt==100){ #>
+            <div class="preview_group">
+                <div class="preview_group_inner">
+                    <div class="preview_group_info append_btn">
+                        <strong class="preview_group_title"><#=biz_info.nick_name#></strong>
+                        <div class="preview_group_desc"><#=hint_txt#></div>
+                        <# if(!!biz_info.head_img){ #>
+                        <img src="<#=biz_info.head_img#>" alt="" class="preview_group_avatar br_radius">
+                        <# }else{ #>
+                        <img class="preview_group_avatar br_radius" src="http://mmbiz.qpic.cn/mmbiz/a5icZrUmbV8p5jb6RZ8aYfjfS2AVle8URwBt8QIu6XbGewB9wiaWYWkPwq4R7pfdsFibuLkic16UcxDSNYtB8HnC1Q/0" alt="<#=biz_info.nick_name#>">
+                        <# } #>                                 
+                    </div>
+                    <div class="preview_group_opr">
+                        <a id="js_view_profile_<#=pos_type#>" <# if(biz_info.is_subscribed == 0){ #>style="display:none"<# } #> class="btn btn_inline btn_primary btn_line js_ad_btn" href="javascript:void(0);">查看</a>
+                        <a id="js_add_contact_<#=pos_type#>" data-url="<#=url#>" data-type="<#=type#>" data-tid="<#=traceid#>" data-rl="<#=rl#>" <# if(biz_info.is_subscribed ==1){ #>style="display:none"<# } #> class="btn btn_inline btn_line  btn_primary js_ad_btn" href="javascript:void(0);">关注</a>
+                    </div>
+                </div>
+            </div>
+            <# }else if(pt==102){ #>
+            <div class="preview_group">
+                <div class="preview_group_inner">
+                    <div class="preview_group_info append_btn">
+                        <strong class="preview_group_title"><#=app_info.app_name#></strong>
+                        <div class="preview_group_desc"><#=hint_txt#></div>
+                        <img src="<#=app_info.icon_url#>" alt="" class="preview_group_avatar br_radius">
+                    </div>
+                    <div class="preview_group_opr">
+                        <a id="js_app_action_<#=pos_type#>" class="btn btn_inline btn_primary js_ad_btn btn_download" href="javascript:void(0);">下载</a>
+                    </div>
+                </div>
+            </div>
+            <# }else if(pt==101){ #>
+            <div class="preview_group preview_card">
+                <div class="preview_group_inner card_inner">                            
+                    <div class="preview_group_info append_btn">
+                        <strong class="preview_group_title"><#=app_info.app_name#></strong>
+                        <div class="preview_group_desc"><#=hint_txt#></div>
+                        <img src="<#=app_info.icon_url#>" alt="" class="preview_card_avatar">                               
+                    </div>
+                    <div class="preview_group_opr">
+                        <a href="javascript:void(0);" id="js_app_action_<#=pos_type#>" class="btn btn_inline btn_primary js_ad_btn">下载</a>
+                    </div>
+                </div>                        
+            </div>
+            <# }else if(pt==103||pt==104){ #>
+            <div class="preview_group obvious_app">
+                <div class="preview_group_inner">
+                    <div class="pic_app">
+                        <img src="<#=image_url#>" alt="">
+                    </div>
+                    <div class="info_app">
+                        <p class="name_app"><#=app_info.app_name#></p>
+                        <# if(pt==103){ #>
+                        <p class="profile_app"><span class="fun_exp"><#=app_info._category#></span><em>|</em><span class="compacity"><#=app_info._app_size#></span></p>
+                        <# } else if(pt==104){ #>
+                        <p class="profile_app"><span class="fun_exp"><#=app_info._app_size#></span><em>|</em><span class="compacity"><#=app_info._down_count#></span></p>
+                        <# } #>
+                        <div class="dm_app">
+                            <a href="javascript:void(0);" id="js_appdetail_action_<#=pos_type#>" class="ad_btn btn_download js_ad_btn">下载</a>
+                            <p class="extra_info">来自<# if(pt==103){ #>Appstore<# }else{ #>腾讯应用宝<# } #></p>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+            <# } #>
+        </div>
+    </div>
+  </script>  <script type="text/javascript">
+      var not_in_mm_css = "http://res.wx.qq.com/mmbizwap/zh_CN/htmledition/style/page/appmsg/not_in_mm23b0e8.css";
+      var tid = "";
+      var aid = "";
+      var appuin = "MzA3NzE3NjY5NA==";
+
+      var source = "";
+      var scene = 75;
+      
+      var itemidx = "";
+      var nickname = "智宝堂";
+      var ct = "1422674227";
+      var user_name = "gh_8ac04afbbdd5";
+      var fakeid   = "";
+      var version   = "";
+      var is_limit_user   = "0";
+      var msg_title = "好字通特效练字套装官网";
+      var msg_desc = "智宝堂俗语说：字如其人。众所周知，一手好字，可以给人留下终身好印象。当今社会中，钢笔书法的重要性显而易见，无";
+      var msg_cdn_url = "http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BDGc5GHG0x0ic5nqIPUUgcibX9oAyTyKr1KmlYwPkuCo4UanGDdNPDK9ic1177FAFqXg52ahTboEfxQ/0";
+      var msg_link = "http://mp.weixin.qq.com/s?__biz=MzA3NzE3NjY5NA==&amp;mid=203121789&amp;idx=1&amp;sn=ffcddd9f157fa2028d5a074ffb85cd83#rd";
+      var user_uin = "0"*1;
+      var msg_source_url = '';
+      var networkType;
+      var appmsgid = '' || '203121789';
+      var comment_id = "0" * 1;
+      var svr_time = "1425522845" * 1;
+      var comment_enabled = "" * 1;
+      var is_need_reward = "0" * 1;
+      var is_https_res = ("" * 1) && (location.protocol == "https:");
+
+      var devicetype = "";
+
+            seajs.use("appmsg/index.js");
+  </script>    </body></html>

@@ -1,0 +1,32 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.OrderDao;
+import com.weiweiqin.model.Order;
+@Repository
+public class OrderDaoImpl extends GenericMybatisDao<Order, Integer>
+		implements OrderDao {
+
+	@SuppressWarnings("unchecked")
+	public List<Order> getOrderListByGoodsId(int goodsId) {
+		return  ( List<Order>)getSqlSession().selectList("Order_getOrderListByGoodsId",goodsId);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Order> export(Map<String, Object> conditions) {
+		return (List<Order>) getSqlSession().selectList("Order_export", conditions);
+	}
+
+	public Order getByOuterid(String outerid) {
+		return (Order) getSqlSession().selectOne("Order_getByOuterid", outerid);
+	}
+	
+	public int getWaitPayTotalCount(Map<String,Object> conditions) {
+		return (Integer) getSqlSession().selectOne("Order_waitPayTotalCount",conditions);
+	}
+
+}

@@ -1,0 +1,769 @@
+package com.weiweiqin.controller.common;
+
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.model.Color;
+import com.weiweiqin.model.ColorSizeItem;
+import com.weiweiqin.model.Comment;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.Pic;
+import com.weiweiqin.model.Size;
+import com.weiweiqin.service.ColorService;
+import com.weiweiqin.service.CommentService;
+import com.weiweiqin.service.GoodsService;
+import com.weiweiqin.service.SizeService;
+import com.weiweiqin.vo.common.GoodsQueryVO;
+import com.weiweiqin.vo.common.GoodsTabVO;
+import com.weiweiqin.vo.common.GoodsVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("/goods")
+public class GoodsController {
+
+	private static final Logger logger = LoggerFactory.getLogger(GoodsController.class);
+
+	@Autowired
+	private GoodsService goodsService;
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private ColorService colorService;
+	
+	@Autowired
+	private SizeService sizeService;
+
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String add(GoodsVO goodsVO) {
+		logger.info("Enter method add...,goodsVO="+goodsVO);
+		Result result = new Result();
+		try {
+			if(!StringUtils.isEmpty(goodsVO.getExpiredDate())){
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date parse = sdf.parse(goodsVO.getExpiredDate());
+				Goods goods = goodsVO.getGoods();
+				goods.setExpiredDate(parse);
+			}
+			goodsService.addGoods(goodsVO);
+		}
+			catch(ParseException  e){
+				logger.error("解析时间失败...",e);
+				result.setResult(false);
+				result.setErrorMsg("解析时间失败...");
+				return result.toJson();
+		} catch (Exception e) {
+			logger.error("保存商品信息异常...",e);
+			result.setResult(false);
+			result.setErrorMsg("保存商品信息异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String edit(GoodsVO goodsVO) {
+		logger.info("Enter method edit...,goodsVO="+goodsVO);
+		Result result = new Result();
+		try {
+			if(!StringUtils.isEmpty(goodsVO.getExpiredDate())){
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date parse = sdf.parse(goodsVO.getExpiredDate());
+				Goods goods = goodsVO.getGoods();
+				goods.setExpiredDate(parse);
+			}
+			goodsService.editGoods(goodsVO);
+		}
+		catch(ParseException  e){
+			logger.error("解析时间失败...",e);
+			result.setResult(false);
+			result.setErrorMsg("解析时间失败...");
+			return result.toJson();
+		
+		} catch (Exception e) {
+			logger.error("修改商品信息失败...",e);
+			result.setResult(false);
+			result.setErrorMsg("修改商品信息失败...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/del.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String del(int id)  {
+		Result result = new Result();
+		try {
+			goodsService.del(id);
+		} catch (Exception e) {
+			logger.error("删除商品信息失败...");
+			result.setResult(false);
+			result.setErrorMsg("删除商品信息失败...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/addColor.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String addColor(Color color){
+		Result result = new Result();
+		try {
+			colorService.save(color);
+		} catch (Exception e) {
+			logger.error("新增颜色失败...",e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		result.setObj(color);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/addSize.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String addSize(Size size){
+		Result result = new Result();
+		try {
+			sizeService.save(size);
+		} catch (Exception e) {
+			logger.error("新增尺码失败...",e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		result.setObj(size);
+		return result.toJson();
+	}
+	
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(GoodsQueryVO goodsQueryVO,HttpServletRequest req){
+		Result result = new Result();
+		
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		Page page = new Page();
+		page.setCurrPage(goodsQueryVO.getCurrPage());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		if(!StringUtils.isEmpty(goodsQueryVO.getTitle())){
+			conditions.put("title", goodsQueryVO.getTitle());
+		}
+		if(null != goodsQueryVO.getCategoryId()){
+			conditions.put("categoryId", goodsQueryVO.getCategoryId());
+		}
+		
+		if(null != goodsQueryVO.getGrade()){
+			conditions.put("grade", goodsQueryVO.getGrade());
+		}
+		
+		List<Goods> goodsList = goodsService.pageList(page, conditions);
+		List<GoodsTabVO> voList = new ArrayList<GoodsTabVO>();
+		if(null != goodsList && !goodsList.isEmpty()){
+			for (Goods goods : goodsList) {
+				List<Comment> commentList = commentService.getByGoodsId(goods.getId());
+				List<Pic> titlePicList = goodsService.getTitlePicListById(goods.getId());
+				
+				int count = 0;
+				if(null != commentList){
+					count = commentList.size();
+				}
+				GoodsTabVO goodsTabVO = new GoodsTabVO();
+				goodsTabVO.setGoods(goods);
+				//获取第一张封面图片
+				if(!titlePicList.isEmpty()){
+					Pic pic = titlePicList.get(0);
+					goodsTabVO.setTitlePicName(pic.getName());
+				}
+				goodsTabVO.setCommentCount(count);
+				goodsTabVO.setUpdateDate(sdf.format(goods.getUpdateDate()));
+				voList.add(goodsTabVO);
+			}
+			
+		}
+		int totalCount = goodsService.totalCount(conditions);
+		page.setTotalCount(totalCount);
+		Map<String,Object> mp = new HashMap<String,Object>();
+		mp.put("totalCount",page.getTotalCount());
+		mp.put("list", voList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	
+	@RequestMapping(value = "/getZhuji.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getZhuji(String ids,HttpServletRequest req){
+		logger.info("Enter method home...");
+		Result result = new Result();
+		List<String> idList = new ArrayList<String>();
+		if(null !=ids && ids.length()>0){
+			String[] split = ids.split(",");
+			Collections.addAll(idList, split);
+		}
+		try {
+			List<Goods> list = goodsService.getZhuji(idList);
+			result.setObj(list);
+		} catch (Exception e) {
+			logger.error("数据库异常", e);
+			result.setErrorMsg("数据库异常");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 根据grade查询goods
+	 * 
+	 * @param goodsQueryVO
+	 * @return
+	 */
+	@RequestMapping(value = "/goodsListByGrade.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String goodsListByGrade(GoodsQueryVO goodsQueryVO) {
+		logger.info("Enter method home...");
+		Result result = new Result();
+		Page page = new Page();
+		if (goodsQueryVO.getPageSize() != null) {
+			page.setPageSize(goodsQueryVO.getPageSize());
+		}
+		page.setCurrPage(goodsQueryVO.getCurrPage());
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		
+		/**
+		 * 是否是礼品
+		 */
+		if (goodsQueryVO.getLipin() != null) {
+			conditions.put("lipin", goodsQueryVO.getLipin());
+		}
+		
+		if (goodsQueryVO.getIsLunbo() != null) {
+			conditions.put("isLunbo", goodsQueryVO.getIsLunbo());
+		}
+		
+		if (goodsQueryVO.getGrade() != null && goodsQueryVO.getGrade() != -1) {
+			conditions.put("grade", goodsQueryVO.getGrade());
+		}
+		
+		
+		if (goodsQueryVO.getType() != null && goodsQueryVO.getType() != -1) {
+			conditions.put("type", goodsQueryVO.getType());
+		}
+		
+		if (goodsQueryVO.getSecCategory()!= null && goodsQueryVO.getSecCategory() != -1) {
+			conditions.put("secCategory", goodsQueryVO.getSecCategory());
+		}
+
+
+		if (null != goodsQueryVO.getBrandsId()
+				&& goodsQueryVO.getBrandsId() != 0) {
+			conditions.put("brandsId", goodsQueryVO.getBrandsId());
+		}
+
+		if (!StringUtils.isEmpty(goodsQueryVO.getTitle())) {
+			conditions.put("title", goodsQueryVO.getTitle());
+		}
+		
+		conditions.put("mark",0);
+		
+		String sortType = goodsQueryVO.getSortType();
+		String sortStates = goodsQueryVO.getSortStates();
+		if(!StringUtils.isEmpty(sortType) && !StringUtils.isEmpty(sortStates)){
+			if("date".equals(sortType)){
+				conditions.put("orderBy","a.update_date "+sortStates+" ");
+			}else if("price".equals(sortType)){
+				conditions.put("orderBy","a.now_price "+sortStates+" ");
+			}else if("sale".equals(sortType)){
+				conditions.put("orderBy","a.buy_num "+sortStates+" ");
+			}
+		}
+
+		List<Goods> goodsList = null;
+		int totalCount;
+		try {
+			goodsList = goodsService.pageList(page, conditions);
+			totalCount = goodsService.totalCount(conditions);
+		} catch (Exception e) {
+			logger.error("数据库异常", e);
+			result.setErrorMsg("数据库异常");
+			result.setResult(false);
+			return result.toJson();
+		}
+		page.setTotalCount(totalCount);
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalPage", page.getTotalPage());
+		mp.put("goodsList", goodsList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 获取最多评论、最多收藏、最多购买、最美设计
+	 * 
+	 * @param goodsQueryVO
+	 * @return
+	 */
+	@RequestMapping(value = "/goodsListMost.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String goodsListMost(GoodsQueryVO goodsQueryVO) {
+		logger.info("Enter method home...");
+		Result result = new Result();
+		Page page = new Page();
+		Map<String, Object> mp = new HashMap<String, Object>();
+		if (goodsQueryVO.getPageSize() != null) {
+			page.setPageSize(goodsQueryVO.getPageSize());
+		}
+		page.setCurrPage(goodsQueryVO.getCurrPage());
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put("mark",0);
+		List<Goods> goodsList = null;
+		try {
+			conditions.put("moreType",1);
+			goodsList = goodsService.pageList(page, conditions);
+			mp.put("mostBuyList", goodsList);
+			conditions.put("moreType",2);
+			goodsList = goodsService.pageList(page, conditions);
+			mp.put("mostCollectList", goodsList);
+			conditions.put("moreType",3);
+			goodsList = goodsService.pageList(page, conditions);
+			mp.put("mostCommentList", goodsList);
+			conditions.put("moreType",4);
+			goodsList = goodsService.pageList(page, conditions);
+			mp.put("mostDesignList", goodsList);
+		} catch (Exception e) {
+			logger.error("数据库异常", e);
+			result.setErrorMsg("数据库异常");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 根据grade查询goods
+	 * @param goodsQueryVO
+	 * @return
+	 */
+	@RequestMapping(value = "/hotList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String hotList(GoodsQueryVO goodsQueryVO) {
+		logger.info("Enter method home...");
+		Result result = new Result();
+		Page page = new Page();
+		if(goodsQueryVO.getPageSize() != null){
+			page.setPageSize(goodsQueryVO.getPageSize());
+		}
+		page.setCurrPage(goodsQueryVO.getCurrPage());
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		if(goodsQueryVO.getGrade() != null){
+			conditions.put("grade",goodsQueryVO.getGrade());
+		}
+		
+		if(null != goodsQueryVO.getCategoryId() && goodsQueryVO.getCategoryId() != 0){
+			conditions.put("categoryId", goodsQueryVO.getCategoryId());
+		}
+		
+		conditions.put("mark",0);
+		
+		List<Goods> goodsList = null;
+		List<Integer> commentList = null;
+		int totalCount;
+		try {
+			goodsList = goodsService.pageList(page, conditions);
+			commentList = new ArrayList<Integer>();
+			Map<String, Object> cond = new HashMap<String, Object>();
+			if(goodsList.size()>0){
+				for (Goods goods : goodsList) {
+					cond.put("goodsId", goods.getId());
+					int count = commentService.totalCount(cond);
+					commentList.add(count);
+				}
+			}
+			totalCount = goodsService.totalCount(conditions);
+		} catch (Exception e) {
+			logger.error("数据库异常",e);
+			result.setErrorMsg("数据库异常");
+			result.setResult(false);
+			return result.toJson();
+		}
+		page.setTotalCount(totalCount);
+		Map<String,Object> mp = new HashMap<String,Object>();
+		mp.put("totalPage",page.getTotalPage());
+		mp.put("goodsList", goodsList);
+		mp.put("commentList", commentList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String get(int id)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		Goods goods = null;
+		List<Pic> picList = null;
+		List<Pic> titlePicList = null;
+		Category category = null;
+		List<Color> colorList = null;
+		List<Size> sizeList = null;
+		try {
+			goods = goodsService.get(id);
+			picList = goodsService.getPicListById(id);
+			titlePicList = goodsService.getTitlePicListById(id);
+			category = goodsService.getCategoryById(id);
+			colorList = goodsService.getColorListById(id);
+			sizeList = goodsService.getSizeListById(id);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		Map<String,Object> data = new HashMap<String, Object>();
+		data.put("goods",goods);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			String format = sdf.format(goods.getEndDate());
+			data.put("endDate", format);
+			if(null != goods.getExpiredDate()){
+				String format2 = sdf.format(goods.getExpiredDate());
+				data.put("expiredDate", format2);
+			}
+		} catch (Exception e) {
+			logger.error("格式化时间错误,",e);
+		}
+		data.put("picList",picList);
+		data.put("titlePicList",titlePicList);
+		data.put("category",category);
+		data.put("colorList", colorList);
+		data.put("sizeList", sizeList);
+		result.setObj(data);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/copy.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String copy(int id,HttpServletRequest req) {
+		Result result = new Result();
+		
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		 try {
+			goodsService.copy(id);
+		} catch (Exception e) {
+			logger.error("复制商品失败...",e);
+			result.setResult(false);
+			result.setErrorMsg("复制商品失败...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	
+	
+	@RequestMapping(value = "/top.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String top(int id,HttpServletRequest req){
+		logger.info("Enter method top...,id="+id);
+		Result result = new Result();
+		
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		
+		Goods goods = null;
+		try {
+			goods = goodsService.get(id);
+			goods.setTopDate(new Date());
+			goodsService.update(goods);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/sort.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String sort(int id,int order,HttpServletRequest req){
+		logger.info("Enter method sort...,order="+order);
+		Result result = new Result();
+		
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		
+		Goods goods = null;
+		try {
+			goods = goodsService.get(id);
+			goods.setOrderKey(order);
+			goodsService.update(goods);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/offShelf.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String offShelf(int id,HttpServletRequest req){
+		logger.info("Enter method offShelf...,id="+id);
+		Result result = new Result();
+		
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		
+		Goods goods = null;
+		try {
+			goods = goodsService.get(id);
+			if(goods.getMark() ==0){
+				goods.setMark(-1);
+			}else{
+				goods.setMark(0);
+			}
+			goodsService.update(goods);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/picList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String picList(int id)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		List<Pic> picList = null;
+		try {
+			picList = goodsService.getPicListById(id);
+		} catch (Exception e) {
+			logger.error("数据库异常,",e);
+			result.setErrorMsg("数据库异常");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(picList);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 获取商品尺码和颜色，用于编辑商品颜色尺码对应关系
+	 * 
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/getColorAndSize.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String getColorAndSize(int id) throws UnsupportedEncodingException {
+		Result result = new Result();
+		List<Color> colorList = null;
+		List<Size> sizeList = null;
+		try {
+			colorList = goodsService.getColorListById(id);
+			sizeList = goodsService.getSizeListById(id);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("colorList", colorList);
+		data.put("sizeList", sizeList);
+		result.setObj(data);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	/**
+	 * 通过颜色id获取商品颜色尺码对应信息
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/getColorSizeItemListByColorId.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String getColorSizeItemListByColorId(int colorId)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		List<ColorSizeItem> colorSizeItemList = null;
+		try {
+			colorSizeItemList = goodsService.getColorSizeItemByColorId(colorId);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(colorSizeItemList);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 通过尺码id获取商品颜色尺码对应信息
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/getColorSizeItemListBySizeId.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String getColorSizeItemListBySizeId(int sizeId)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		List<ColorSizeItem> colorSizeItemList = null;
+		try {
+			colorSizeItemList = goodsService.getColorSizeItemBySizeId(sizeId);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(colorSizeItemList);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	/**
+	 * 保存颜色尺码对应关系
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/addColorSizeItem.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String addColorSizeItem(int colorId,int[] sizeId)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		try {
+			goodsService.addColorSizeItems(colorId,sizeId);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 保存颜色尺码对应关系
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/updateColorPic.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String updateColorPic(int colorId,String pic)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		try {
+			Color color = colorService.get(colorId);
+			if(null != color){
+				color.setPic(pic);
+				colorService.update(color);
+			}else{
+				result.setErrorMsg("数据库不存在该颜色...");
+				result.setResult(false);
+				return result.toJson();
+			}
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	 
+}

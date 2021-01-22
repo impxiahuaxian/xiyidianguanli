@@ -1,0 +1,82 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<%@ include file="./common/header.jsp"%>
+<style type="text/css">
+		PRE {
+			padding-top: 0px;
+			padding-bottom: 0px;
+			padding-left: 60px;
+			padding-right: 10px;
+			border-right: #cccccc 1px dashed;
+			border-bottom: #cccccc 1px dashed;
+			border-top: #cccccc 1px dashed;
+			border-left-width: 0px;
+			background:#fafafa url(images/codebg.jpg) repeat-y fixed 0 0;
+			color: #4d87ce;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id="mainContainer" style="Margin-Right: auto; Margin-Left: auto;"
+		align="center">
+		<form id="modify_password_form_id" style="margin-top: 15px;">
+			<table>
+				<tr>
+					<td width="80px" > <label class="control-label" >原密码</label></td>
+					<td><input name="oldPassword"  type="password" class=" required" /></td>
+				</tr>
+	
+				<tr>
+					<td width="80px" > <label class="control-label" >新密码</label></td>
+					<td><input name="newPassword"  type="password" id="new_password_id" class=" required" /></td>
+				</tr>
+	
+				<tr>
+					<td width="80px" > <label class="control-label" >确认新密码</label></td>
+					<td><input name="confirmNewPassword" type="password" class=" required equals-new_password_id" /></td>
+				</tr>
+	
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="button" value="修改" id="modify_btn_id" class="btn"
+						style="margin-top: 15px" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script>
+		$(function(){
+			var valid = new jValidation.Validation('modify_password_form_id',{immediate:true},{onSubmit:false});	
+			$('#modify_btn_id').click(
+					function(){
+						var result = valid.validate();
+						if(!result){
+							return;
+						}
+						var formData = $('#modify_password_form_id').serialize();
+						jQuery.ajax( {
+							type : 'POST',
+							url : '../login/modifyPassword.do',
+							dataType : 'json',
+							data : formData,
+							success : function(obj) {
+								if(obj.result){
+									alert("修改密码成功");
+									window.parent.location = './login.jsp';
+								}else{
+									alert(obj.errorMsg);
+								}
+							},
+							error : function() {
+								alert('error');
+							}
+						});
+					}		
+				);
+		});
+	</script>
+</body>
+</html>

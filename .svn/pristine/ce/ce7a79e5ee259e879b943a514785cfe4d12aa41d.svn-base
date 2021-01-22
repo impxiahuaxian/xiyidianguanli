@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.SizeMapper">
+	<resultMap type="com.weiweiqin.model.Size" id="sizeResultMap">
+		<id property="id" column="id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="size" column="size" />
+	</resultMap>
+	
+	<insert id="Size_insert" parameterType="com.weiweiqin.model.Size"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO goods_size (goods_id,size) values
+		          (#{goodsId},#{size})
+		        ]]>
+	</insert>
+	
+	<select id="Size_getByGoodsId" parameterType="map"
+		resultType="com.weiweiqin.model.Size" resultMap="sizeResultMap"> 
+		<![CDATA[ 
+			select a.* from goods_size  a where a.goods_id = #{goodsId}  
+	        ]]>
+	</select>
+
+	<select id="Size_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Size" resultMap="sizeResultMap"> 
+		<![CDATA[ 
+		select a.* from goods_size a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<delete id="Size_delete"  parameterType="Integer">
+		delete from goods_size  where id = #{primaryKey}
+	</delete>
+	
+</mapper>
+

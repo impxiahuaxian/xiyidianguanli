@@ -1,0 +1,20 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Comment;
+import com.weiweiqin.vo.common.Page;
+
+
+public interface CommentDao extends GenericDao<Comment,Integer>{
+	
+	List<Comment> getByGoodsId(int goodsId);
+	
+	List<Comment> selectAll();
+	
+	List<Comment> pageListForExprot(Page page, Map<String, Object> conditions);
+
+	int totalCountForExprot(Map<String,Object> condtions);
+		
+}

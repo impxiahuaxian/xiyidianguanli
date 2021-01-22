@@ -1,0 +1,36 @@
+package com.weiweiqin.service;
+
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.vo.common.Page;
+
+public interface CategoryService {
+	
+	void  update(Category category);
+	
+	Category getByName(String name);
+	
+	List<Category> getAll();
+	
+	List<Category> pageList(Page page,Map<String,Object> conditions);
+	
+	int totalCount(Map<String, Object> conditions);
+	
+	void save(Category category);
+	
+	void del(int id);
+	
+	 List<Category> pageListForHome(Page page);
+	
+	int getTotalCountForHome();
+	
+	Category get(int id);
+	
+	List<Category> getAllAddOn();
+	
+	List<Category> getByType(int type);
+	
+}

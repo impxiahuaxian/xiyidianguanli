@@ -1,0 +1,148 @@
+package com.weiweiqin.controller.back;
+
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Order;
+import com.weiweiqin.service.OrderService;
+import com.weiweiqin.vo.common.OrderVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("admin/order")
+public class OrderController {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(OrderController.class);
+	@Autowired
+	private OrderService orderService;
+	
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String add(OrderVO orderVO) {
+		logger.info("Enter method add...,orderVO="+orderVO);
+		Result result = new Result();
+		Order order = orderVO.getOrder();
+		try {
+			order.setAddDate(new Date());
+			orderService.save(order, orderVO.getDetailList());
+		} catch (Exception e) {
+			logger.error("保存衣服信息异常...",e);
+			result.setResult(false);
+			result.setErrorMsg("保存衣服信息异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(OrderVO orderVO) {
+		logger.info("Enter method edit...,orderVO="+orderVO);
+		Result result = new Result();
+		try {
+			Order order = orderVO.getOrder();
+			order.setAddDate(new Date());
+			orderService.update(order);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String get(int id) {
+		Result result = new Result();
+		try {
+			Order order = orderService.get(id);
+			result.setObj(order);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/del.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String del(int id) {
+		logger.info("Enter method del...,id="+id);
+		Result result = new Result();
+		try {
+			orderService.del(id);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(int currPage, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			Page page = new Page();
+			page.setCurrPage(currPage);
+			List<Order> orderList = orderService.pageList(page, null);
+			List<OrderVO> list = new ArrayList<OrderVO>();
+			if (null != orderList && !orderList.isEmpty()) {
+
+				for (Order order : orderList) {
+					OrderVO vo = new OrderVO();
+					vo.setOrder(order);
+					vo.setAddDate(sdf.format(order.getAddDate()));
+					list.add(vo);
+				}
+			}
+			int totalCount = orderService.totalCount(null);
+			Map<String, Object> mp = new HashMap<String, Object>();
+			mp.put("list", list);
+			mp.put("totalCount", totalCount);
+			result.setObj(mp);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);	
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+}

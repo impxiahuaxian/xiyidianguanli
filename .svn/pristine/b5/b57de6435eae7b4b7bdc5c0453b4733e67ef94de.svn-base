@@ -1,0 +1,105 @@
+package com.weiweiqin.controller.home;
+
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Feedback;
+import com.weiweiqin.service.FeedbackService;
+import com.weiweiqin.vo.common.FeedbackTabVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("/feedback")
+public class FeedbackController {
+
+	@Autowired
+	private FeedbackService feedbackService;
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(FeedbackController.class);
+
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String add(Feedback feedback) {
+		logger.info("Enter method add...,feedback="+feedback);
+		Result result = new Result();
+		try {
+			feedbackService.save(feedback);
+		} catch (Exception e) {
+			logger.error("保存意见反馈异常...",e);
+			result.setResult(false);
+			result.setErrorMsg("保存意见反馈异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(int currPage){
+		Result result = new Result();
+		Page page = new Page();
+		page.setCurrPage(currPage);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		List<Feedback> feedbackList = feedbackService.pageList(page, conditions);
+		List<FeedbackTabVO> voList = new ArrayList<FeedbackTabVO>();
+		for (Feedback feedback : feedbackList) {
+			FeedbackTabVO vo = new FeedbackTabVO();
+			vo.setFeedback(feedback);
+			String format = sdf.format(feedback.getAddDate());
+			vo.setAddDate(format);
+			voList.add(vo);
+		}
+		int totalCount = feedbackService.totalCount(conditions);
+		page.setTotalCount(totalCount);
+		Map<String,Object> mp = new HashMap<String,Object>();
+		mp.put("totalCount",page.getTotalCount());
+		mp.put("list", voList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String get(int id)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		Feedback feedback = null;
+		FeedbackTabVO vo = new FeedbackTabVO();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			 feedback = feedbackService.get(id);
+			 vo.setFeedback(feedback);
+			 String format = sdf.format(feedback.getAddDate());
+			 vo.setAddDate(format);
+			
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(vo);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+}

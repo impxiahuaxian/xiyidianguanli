@@ -1,0 +1,28 @@
+package com.weiweiqin.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.GoodsCommentItemDao;
+import com.weiweiqin.model.GoodsCommentItem;
+import com.weiweiqin.service.GoodsCommentItemService;
+
+@Service
+public class GoodsCommentItemServiceImpl implements GoodsCommentItemService {
+	@Autowired
+	private GoodsCommentItemDao goodsCommentItemDao;
+
+	public void save(GoodsCommentItem goodsCommentItem) {
+		goodsCommentItemDao.insert(goodsCommentItem);
+
+	}
+
+	public void del(int id) {
+		goodsCommentItemDao.delete(id);
+	}
+
+	public GoodsCommentItem getByCommentId(int commentId) {
+		return goodsCommentItemDao.getByCommentId(commentId);
+	}
+
+}

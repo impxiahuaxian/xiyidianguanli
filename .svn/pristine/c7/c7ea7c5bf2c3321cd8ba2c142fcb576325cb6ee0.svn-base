@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+<%@ include file="./common/top.jsp"%>
+	<div id="mainContainer" class="container">
+		
+		<a href="${ctx }/comment/addUpdateDate1.do" target="_blank" class="btn btn-primary add1"><span class="glyphicon glyphicon-plus"></span>所有评论时间递增一天</a>
+		<a href="${ctx }/comment/subUpdateDate1.do" target="_blank" class="btn btn-primary sub1"><span class="glyphicon glyphicon-minus"></span>所有评论时间递减一天</a>
+		<div style="margin-top:20px;">
+			<table id="comment_table">
+		
+			</table>
+		
+		</div>
+	</div>
+
+	<script>
+		
+		$(function() {
+			var goodsId =$.request.queryString["id"];
+			
+			var grid = new jWei.Datagrid({
+				renderTo : $("#comment_table"),
+				tabWidth:"",
+				fieldset:false,
+				legendTitle:"",
+				url : "../comment/auditPageList.do",
+				colModels : [ 
+				
+				{
+					name : "updateDate",
+					displayName : "最后更新时间",
+				}, 
+				{
+					name : "comment_username",
+					displayName : "用户名称",
+				},
+				
+				{
+					name : "comment_grade",
+					displayName : "等级"
+					
+				},
+				
+				{
+					name : "comment_content",
+					displayName : "内容"
+					
+				},
+				
+				{
+					name:"comment_id",
+					displayName : "操作",
+					handler:function(v,data,td,tr){
+						var html = '<a class="pass" id="edit_id" href="#" data-id="'+v+'" title="通过" style="margin-right:3px;color:green;">审核通过</a>'+ 
+							'<a id="del_id" href="#" class="not-pass" data-id="'+v+'" title="不通过" style="color:red;">审核不通过</a>';
+						td.html(html);
+						td.find(".pass").unbind("click").click(function(){
+							var id = $(this).data("id");
+							jQuery.ajax({
+	          					type : 'Get',
+	          					contentType : 'application/json',
+	          					url : '../comment/auditPass.do',
+	          					data : {
+	          						id : id
+	          					},
+	          					dataType : 'json',
+	          					success : function(data) {
+	          						if (data.result) {
+	        							window.location.href="./auditCommentList.jsp";
+	          						}else{
+	          							alert(data.errorMsg);
+	          						}
+	          					},
+	          					error:function(data){
+	          						;
+	          					}
+							});
+							
+						});
+						
+						td.find(".not-pass").unbind("click").click(function(){
+							var id = $(this).data("id");
+							jQuery.ajax({
+	          					type : 'Get',
+	          					contentType : 'application/json',
+	          					url : '../comment/auditNotPass.do',
+	          					data : {
+	          						id : id
+	          					},
+	          					dataType : 'json',
+	          					success : function(data) {
+	          						if (data.result) {
+	        							window.location.href="./auditCommentList.jsp";
+	          						}else{
+	          							alert(data.errorMsg);
+	          						}
+	          					},
+	          					error:function(data){
+	          						;
+	          					}
+							});
+							
+						});
+					}
+				}
+				
+				]
+			});
+			
+			$("#add_comment_id").attr("href","./addComment.jsp?goodsId="+goodsId);
+			
+			$(".add1").click(function(){
+				if(!confirm("确定要递增所有评论日期！")){
+					return false;
+				}
+				return true;
+			});
+			
+			$(".sub1").click(function(){
+				if(!confirm("确定要递减所有评论日期！")){
+					return false;
+				}
+				return true;
+			});
+			
+		});
+		
+	</script>
+
+</body>
+</html>

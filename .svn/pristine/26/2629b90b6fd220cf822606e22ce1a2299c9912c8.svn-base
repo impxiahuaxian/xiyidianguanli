@@ -1,0 +1,31 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.OrderGoodsItemDao;
+import com.weiweiqin.model.OrderGoodsItem;
+import com.weiweiqin.service.OrderGoodsItemService;
+
+@Service
+public class OrderGoodsItemServiceImpl implements OrderGoodsItemService {
+	@Autowired
+	private OrderGoodsItemDao orderGoodsItemDao;
+
+	public List<OrderGoodsItem> getOrderGoodsItemListByOrderId(int orderId) {
+		
+		return orderGoodsItemDao.getOrderGoodsItemListByOrderId(orderId);
+	}
+
+	public void save(OrderGoodsItem orderGoodsItem) {
+		orderGoodsItemDao.insert(orderGoodsItem);
+		
+	}
+
+	public void del(int id) {
+		orderGoodsItemDao.delete(id);
+	}
+
+}

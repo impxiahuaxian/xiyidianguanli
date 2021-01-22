@@ -1,0 +1,338 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class Order implements Serializable {
+
+	private static final long serialVersionUID = -7970848646314840509L;
+
+	/**
+	 * 自动生成主键
+	 */
+	private int id;
+	
+	/**
+	 * 外部订单号
+	 */
+	private String outerid;
+	
+	/**
+	 * 用户id
+	 */
+	private Integer customerId;
+
+	/**
+	 * 收人人
+	 */
+	private String name;
+
+	/**
+	 * 手机号码
+	 */
+	private String mobile;
+
+	/**
+	 * 地址
+	 */
+	private String addr;
+
+	/**
+	 * 邮编：已失效
+	 */
+	private String zip = "123456";
+	
+	/**
+	 * 付款状态
+	 */
+	private int payStatus;
+
+	/**
+	 * 附言
+	 */
+	private String remark;
+
+	/**
+	 * 0:未处理，1：已处理，2：已发货，3：待确认，4：已取消，5：换货,6:已经处理1,7：已录入
+	 */
+	private int status;
+
+	/**
+	 * 是否失效
+	 */
+	private int mark;
+	
+	/**
+	 * 订单总额
+	 */
+	private BigDecimal totalPrice;
+
+	/**
+	 * 下单时间
+	 */
+	private Date updateDate = new Date();
+
+	/**
+	 * 备忘信息
+	 */
+	private String memo = "";
+	
+	/**
+	 * 支付宝交易单号
+	 */
+	private String tradeNo;
+	
+	/**
+	 * 快递单号
+	 */
+	private String expressNo;
+	
+	/**
+	 * 快递公司名称
+	 */
+	private String expressName;
+	
+	/**
+	 * 邮寄类型，默认快递
+	 * 三个值可选：1：POST（平邮）、0：EXPRESS（快递）、2：EMS（EMS）
+	 */
+	private int expressType = 0;
+	
+	/**
+	 * 默认货到付款
+	 */
+	private int payType = 0;
+	
+	private int isComment = 0;
+	
+	/**
+	 * 支付宝交易状态,初始值等待买家付款
+	 */
+	private String tradeStatus = "WAIT_BUYER_PAY";
+	
+	/**
+	 * 用户IP信息
+	 */
+	private String ip;
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getAddr() {
+		return addr;
+	}
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	 
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getMark() {
+		return mark;
+	}
+
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+
+	public int getPayStatus() {
+		return payStatus;
+	}
+
+	public void setPayStatus(int payStatus) {
+		this.payStatus = payStatus;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public String getOuterid() {
+		return outerid;
+	}
+
+	public void setOuterid(String outerid) {
+		this.outerid = outerid;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+	
+	
+
+	public int getPayType() {
+		return payType;
+	}
+
+	public void setPayType(int payType) {
+		this.payType = payType;
+	}
+
+	public String getTradeNo() {
+		return tradeNo;
+	}
+
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
+	}
+
+	public String getExpressNo() {
+		return expressNo;
+	}
+
+	public void setExpressNo(String expressNo) {
+		this.expressNo = expressNo;
+	}
+
+	public String getExpressName() {
+		return expressName;
+	}
+
+	public void setExpressName(String expressName) {
+		this.expressName = expressName;
+	}
+
+	public int getExpressType() {
+		return expressType;
+	}
+
+	public void setExpressType(int expressType) {
+		this.expressType = expressType;
+	}
+
+	public String getTradeStatus() {
+		return tradeStatus;
+	}
+
+	public void setTradeStatus(String tradeStatus) {
+		this.tradeStatus = tradeStatus;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("id=");
+		sb.append(id);
+		sb.append("outerid=");
+		sb.append(outerid);
+		sb.append("customerId=");
+		sb.append(customerId);
+		sb.append(":name=");
+		sb.append(name);
+		sb.append(":mobile=");
+		sb.append(mobile);
+		sb.append(":addr=");
+		sb.append(addr);
+		sb.append(":remark=");
+		sb.append(remark);
+		sb.append(":status=");
+		sb.append(status);
+		sb.append(":mark=");
+		sb.append(mark);
+		sb.append(":updateDate=");
+		sb.append(updateDate);
+		sb.append(":memo=");
+		sb.append(memo);
+		sb.append(":tradeNo=");
+		sb.append(tradeNo);
+		sb.append(":expressNo=");
+		sb.append(expressNo);
+		sb.append(":expressName=");
+		sb.append(expressName);
+		sb.append(":expressType=");
+		sb.append(expressType);
+		sb.append(":tradeStatus=");
+		sb.append(tradeStatus);
+		sb.append(":isComment=");
+		sb.append(isComment);
+		return sb.toString();
+	}
+
+	public int getIsComment() {
+		return isComment;
+	}
+
+	public void setIsComment(int isComment) {
+		this.isComment = isComment;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+}

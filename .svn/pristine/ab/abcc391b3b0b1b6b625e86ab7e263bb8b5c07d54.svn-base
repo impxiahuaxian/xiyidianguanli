@@ -1,0 +1,43 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.AnnouncementDao;
+import com.weiweiqin.model.Announcement;
+import com.weiweiqin.service.AnnouncementService;
+import com.weiweiqin.vo.common.Page;
+@Service
+public class AnnouncementServiceImpl implements AnnouncementService {
+	@Autowired
+	private AnnouncementDao announcementDao;
+
+	public List<Announcement> pageList(Page page, Map<String, Object> conditions) {
+		return announcementDao.pageList(page, conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return announcementDao.totalCount(conditions);
+	}
+
+	public void save(Announcement announcement) {
+		announcementDao.insert(announcement);
+		
+	}
+
+	public void update(Announcement announcement) {
+		announcementDao.update(announcement);
+		
+	}
+
+	public Announcement get(int id) {
+		return announcementDao.get(id);
+	}
+
+	
+
+
+}

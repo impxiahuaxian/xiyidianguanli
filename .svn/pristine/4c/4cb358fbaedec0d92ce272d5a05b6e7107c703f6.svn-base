@@ -1,0 +1,429 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./header.jsp" %>
+
+<head>
+	<style>
+		.goods-area{
+			display: none;
+		}
+	</style>
+	
+</head>
+
+<body class="grayback">
+	<tags:top/>
+	
+
+	
+	<div class="bs-example">
+      <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-captions" data-slide-to="1" class=""></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="item active">
+          	<a href="${ctx}/detailGoods/233" target="_blank"><img data-src="holder.js/900x500/auto/#777:#777" alt="900x500" src="${ctx}/images/1.jpg"></a>
+            <div class="carousel-caption">
+              <h3 style="color:#F97;"></h3>
+              <p></p>
+            </div>
+          </div>
+<!--           <div class="item"> -->
+<%--             <img data-src="holder.js/900x500/auto/#666:#666" alt="900x500" src="${ctx}/images/2.jpg"> --%>
+<!--           </div> -->
+          <div class="item">
+          	<a href="${ctx}/dress/#连衣裙专场" target="_blank"><img data-src="holder.js/900x500/auto/#555:#5555" alt="900x500" src="${ctx}/images/3.jpg"></a>
+          </div>
+        </div>
+         <a class="left carousel-control" href="#carousel-example-captions" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-captions" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="container">
+		
+		
+		<!-- begin 人气单品专区 -->
+		
+		<div>
+			<div style="color:#666;font-weight: bold;margin-top:20px;border-bottom:1px solid #ccc;">
+	  			<div style="height:38px;width:200px;background: url('${ctx}/images/yzd-title.png');"><span style="height:0px;font-size:0px;">人气单品</span></div>
+			</div>
+				
+		    <div class="row goods-layout" id="hot_div" style="margin-top:10px;">
+		    		<!-- col1 -->
+				    <div class="col-sm-3 col-md-3 col0" id="col_id0">
+						    	
+			  		</div>
+			  		
+			  		<!-- col2 -->
+			  		<div class="col-sm-3 col-md-3 col1" id="col_id1">
+						    	
+			  		</div>
+			  		
+			  		<!-- col3 -->
+			  		<div class="col-sm-3 col-md-3 col2" id="col_id2">
+						    	
+			  		</div>
+			  		
+			  		<!-- col4 -->
+			  		<div class="col-sm-3 col-md-3 col3" id="col_id3">
+						    	
+			  		</div>
+			</div>
+		</div>
+			
+		<!-- end 人气单品专区 -->
+		
+		<!-- begin 连衣裙专场 -->
+		<div class="goods-area">
+			<div style="color:#666;font-weight: bold;margin-top:20px;border-bottom:1px solid #ccc;">
+	  			<div style="height:38px;width:200px;background: url('${ctx}/images/yzd-title.png') 0px -40px;"><span style="height:0px;font-size:0px;">连衣裙专场</span></div>
+			</div>
+			
+			<div class="row goods-layout" id="dress_div" style="margin-top:10px;">
+		    		<!-- col1 -->
+				    <div class="col-sm-3 col-md-3 col0" id="col_id0">
+						    	
+			  		</div>
+			  		
+			  		<!-- col2 -->
+			  		<div class="col-sm-3 col-md-3 col1" id="col_id1">
+						    	
+			  		</div>
+			  		
+			  		<!-- col3 -->
+			  		<div class="col-sm-3 col-md-3 col2" id="col_id2">
+						    	
+			  		</div>
+			  		
+			  		<!-- col4 -->
+			  		<div class="col-sm-3 col-md-3 col3" id="col_id3">
+						    	
+			  		</div>
+			</div>
+		
+		</div>
+		<!-- end 连衣裙专场 -->
+		
+		
+		
+		
+		
+		<!-- begin 气质衬衫-->
+		<div class="goods-area">
+			<div style="color:#666;font-weight: bold;margin-top:20px;border-bottom:1px solid #ccc;">
+	  			<div style="height:38px;width:200px;background: url('${ctx}/images/yzd-title.png') 0px -120px;"><span style="height:0px;font-size:0px;">气质衬衫</span></div>
+			</div>
+			
+			<div class="row goods-layout" id="shirt_div" style="margin-top:10px;">
+		    		<!-- col1 -->
+				    <div class="col-sm-3 col-md-3 col0" id="col_id0">
+						    	
+			  		</div>
+			  		
+			  		<!-- col2 -->
+			  		<div class="col-sm-3 col-md-3 col1" id="col_id1">
+						    	
+			  		</div>
+			  		
+			  		<!-- col3 -->
+			  		<div class="col-sm-3 col-md-3 col2" id="col_id2">
+						    	
+			  		</div>
+			  		
+			  		<!-- col4 -->
+			  		<div class="col-sm-3 col-md-3 col3" id="col_id3">
+						    	
+			  		</div>
+			</div>
+		</div>
+		
+		<!-- end 气质衬衫-->
+		
+		<!-- begin 春季外套 -->
+		<div class="goods-area">
+			<div style="color:#666;font-weight: bold;margin-top:20px;border-bottom:1px solid #ccc;">
+	  			<div style="height:38px;width:200px;background: url('${ctx}/images/yzd-title.png') 0px -80px;"><span style="height:0px;font-size:0px;">春季外套</span></div>
+			</div>
+			
+			<div class="row goods-layout" id="spring_coat_div" style="margin-top:10px;">
+		    		<!-- col1 -->
+				    <div class="col-sm-3 col-md-3 col0" id="col_id0">
+						    	
+			  		</div>
+			  		
+			  		<!-- col2 -->
+			  		<div class="col-sm-3 col-md-3 col1" id="col_id1">
+						    	
+			  		</div>
+			  		
+			  		<!-- col3 -->
+			  		<div class="col-sm-3 col-md-3 col2" id="col_id2">
+						    	
+			  		</div>
+			  		
+			  		<!-- col4 -->
+			  		<div class="col-sm-3 col-md-3 col3" id="col_id3">
+						    	
+			  		</div>
+			</div>
+		</div>
+		<!-- end 春季外套 -->
+		
+		
+		<!-- begin 时尚热裤-->
+		<div class="goods-area">
+			<div style="color:#666;font-weight: bold;margin-top:20px;border-bottom:1px solid #ccc;">
+	  			<div style="height:38px;width:200px;background: url('${ctx}/images/yzd-title.png') 0px -160px;"><span style="height:0px;font-size:0px;">时尚热裤</span></div>
+			</div>
+			
+			<div class="row goods-layout" id="trousers_div" style="margin-top:10px;">
+		    		<!-- col1 -->
+				    <div class="col-sm-3 col-md-3 col0" id="col_id0">
+						    	
+			  		</div>
+			  		
+			  		<!-- col2 -->
+			  		<div class="col-sm-3 col-md-3 col1" id="col_id1">
+						    	
+			  		</div>
+			  		
+			  		<!-- col3 -->
+			  		<div class="col-sm-3 col-md-3 col2" id="col_id2">
+						    	
+			  		</div>
+			  		
+			  		<!-- col4 -->
+			  		<div class="col-sm-3 col-md-3 col3" id="col_id3">
+						    	
+			  		</div>
+			</div>
+		</div>
+		<!-- end 时尚热裤-->
+    </div>
+    
+    <!-- begin model -->
+    <div class="thumbnail shopbox" id="goods_new_model" style="display: none;">
+      <div style="width:37px;height:24px;position: absolute;top: 0px;right:0px;background: url('${ctx}/images/hot.png') no-repeat;"></div>
+     	  <a href="#" class="img-a" target="_blank"><img alt="" src="${ctx }/images/loading.gif"></a>
+      
+      <div class="caption">
+        <a href="#" target="_blank" class="title-a" style="text-decoration: none;"><h6 class="title ellipsis" style="color:#666;"></h6></a>
+        
+        <p class="content" style="margin:0px;">
+        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;"></strong>
+        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;"></span>
+        	<span style="background: #36ab2a;color:#FFF;font-size:14px;">今日直降</span>
+        </p>
+        
+        <div align="" style="margin-bottom:5px;">
+        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;"></span>人已经购买</span>
+        </div>
+        <p align=""><a href="#" target="_blank" class="btn btn-buy btn-block" role="button">立即抢购</a></p>
+      </div>
+      
+  	</div>
+  	<!-- end model -->
+  	
+  	<!-- begin 非PC布局 -->
+  	
+  	<!-- col1 -->
+  		<div id="not_pc_div_model">
+ 				<div class="col-sm-4 col-md-4 col0" id="col_id0">
+					    	
+		  		</div>
+		  		
+		  		<!-- col2 -->
+		  		<div class="col-sm-4 col-md-4 col1" id="col_id1">
+					    	
+		  		</div>
+		  		
+		  		<!-- col3 -->
+		  		<div class="col-sm-4 col-md-4 col2" id="col_id2">
+					    	
+		  		</div>
+  		</div>
+		<!-- end 非PC布局 -->
+	
+	<tags:bottom/>
+	<script>
+		$(function(){
+				var col = 4;
+				var pageSize = 8;
+				//非PC布局设置
+				if(!jWei.util.isPC()){
+					col = 3;
+					pageSize = 6;
+					var layoutHtml = $("#not_pc_div_model").html();
+					$(".goods-layout").each(function(){
+						$(this).html(layoutHtml);
+					});
+				}
+				//获取人气单品
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize="+pageSize+"&grade=5&currPage=1&categoryId=0",
+					async:false,
+					dataType : 'json',
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var colDiv = $("#hot_div").find(".col"+i%col);
+								var model = $("#goods_new_model").clone();
+				        		model.attr("id","");
+				        		var goods = list[i];
+				        		var price = goods.price;
+								
+								model.find("img").attr("data-url","./upload/download.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+				            	model.find(".img-a").attr("href","${ctx}/detailGoods/"+goods.id);
+		            			model.find(".title-a").attr("href","${ctx}/detailGoods/"+goods.id);
+				            	model.find(".title").html(goods.title);
+				            	model.find(".btn").attr("href","${ctx}/detailGoods/"+goods.id);
+				            	model.find(".buy-num").html(goods.buyNum);
+				            	model.find(".nowprice").html("￥"+goods.nowPrice);
+				            	model.find(".oldprice").html("￥"+price);
+				            	model.show();
+				            	colDiv.append(model);
+			        	}
+			        	$(".thumbnail img").scrollLoading();
+					}
+				});
+				
+				//获取连衣裙专场
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize="+pageSize+"&grade=1&currPage=1&categoryId=0",
+					async:false,
+					dataType : 'json',
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var colDiv = $("#dress_div").find(".col"+i%col);
+								var model = $("#goods_new_model").clone();
+				        		model.attr("id","");
+				        		var goods = list[i];
+				        		var price = goods.price;
+								
+								model.find("img").attr("data-url","./upload/download.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+				            	model.find(".img-a").attr("href","./dress?current="+i+"#连衣裙专场");
+		            			model.find(".title-a").attr("href","./dress?current="+i+"#连衣裙专场");
+				            	model.find(".title").html(goods.title);
+				            	model.find(".btn").attr("href","./dress?current="+i+"#连衣裙专场");
+				            	model.find(".buy-num").html(goods.buyNum);
+				            	model.find(".nowprice").html("￥"+goods.nowPrice);
+				            	model.find(".oldprice").html("￥"+price);
+				            	model.show();
+				            	colDiv.append(model);
+			        	}
+			        	$("#dress_div").closest(".goods-area").show();
+			        	$(".thumbnail img").scrollLoading();
+					}
+				});
+				
+				//获取春季外套
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize="+pageSize+"&grade=3&currPage=1&categoryId=0",
+					async:false,
+					dataType : 'json',
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var colDiv = $("#spring_coat_div").find(".col"+i%col);
+								var model = $("#goods_new_model").clone();
+				        		model.attr("id","");
+				        		var goods = list[i];
+				        		var price = goods.price;
+								
+								model.find("img").attr("data-url","./upload/download.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+				            	model.find(".img-a").attr("href","./springCoat?current="+i+"#春季外套");
+		            			model.find(".title-a").attr("href","./springCoat?current="+i+"#春季外套");
+				            	model.find(".title").html(goods.title);
+				            	model.find(".btn").attr("href","./springCoat?current="+i+"#春季外套");
+				            	model.find(".buy-num").html(goods.buyNum);
+				            	model.find(".nowprice").html("￥"+goods.nowPrice);
+				            	model.find(".oldprice").html("￥"+price);
+				            	model.show();
+				            	colDiv.append(model);
+			        	}
+			        	$("#spring_coat_div").closest(".goods-area").show();
+			        	$(".thumbnail img").scrollLoading();
+					}
+				});
+				
+				//获取气质衬衫
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize="+pageSize+"&grade=2&currPage=1&categoryId=0",
+					async:false,
+					dataType : 'json',
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var colDiv = $("#shirt_div").find(".col"+i%col);
+								var model = $("#goods_new_model").clone();
+				        		model.attr("id","");
+				        		var goods = list[i];
+				        		var price = goods.price;
+								model.find("img").attr("data-url","./upload/download.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+				            	model.find(".img-a").attr("href","./shirt?current="+i+"#气质衬衫");
+		            			model.find(".title-a").attr("href","./shirt?current="+i+"#气质衬衫");
+				            	model.find(".title").html(goods.title);
+				            	model.find(".btn").attr("href","./shirt?current="+i+"#气质衬衫");
+				            	model.find(".buy-num").html(goods.buyNum);
+				            	model.find(".nowprice").html("￥"+goods.nowPrice);
+				            	model.find(".oldprice").html("￥"+price);
+				            	model.show();
+				            	colDiv.append(model);
+			        	}
+			        	$("#shirt_div").closest(".goods-area").show();
+			        	$(".thumbnail img").scrollLoading();
+					}
+				});
+				
+				//获取时尚热裤
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize="+pageSize+"&grade=4&currPage=1&categoryId=0",
+					async:false,
+					dataType : 'json',
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var colDiv = $("#trousers_div").find(".col"+i%col);
+								var model = $("#goods_new_model").clone();
+				        		model.attr("id","");
+				        		var goods = list[i];
+				        		var price = goods.price;
+								model.find("img").attr("data-url","./upload/download.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+				            	model.find(".img-a").attr("href","./fashionTrousers?current="+i+"#时尚热裤");
+		            			model.find(".title-a").attr("href","./fashionTrousers?current="+i+"#时尚热裤");
+				            	model.find(".title").html(goods.title);
+				            	model.find(".btn").attr("href","./fashionTrousers?current="+i+"#时尚热裤");
+				            	model.find(".buy-num").html(goods.buyNum);
+				            	model.find(".nowprice").html("￥"+goods.nowPrice);
+				            	model.find(".oldprice").html("￥"+price);
+				            	model.show();
+				            	colDiv.append(model);
+			        	}
+			        	$("#trousers_div").closest(".goods-area").show();
+			        	$(".thumbnail img").scrollLoading();
+					}
+				});
+			
+		});
+	</script>
+	
+</body>

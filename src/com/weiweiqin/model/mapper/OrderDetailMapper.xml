@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.OrderDetailMapper">
+	<resultMap type="com.weiweiqin.model.OrderDetail" id="orderlDetailResultMap">
+		<id property="id" column="id" />
+		<result property="orderId" column="order_id" />
+		<result property="clothesId" column="clothes_id" />
+	</resultMap>
+
+	<insert id="OrderDetail_insert" parameterType="com.weiweiqin.model.OrderDetail"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO order_detail (order_id,clothes_id,num) values
+		          (#{orderId},#{clothesId},#{num})
+		        ]]> 
+	</insert>
+
+	
+	<select id="OrderDetail_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.OrderDetail" resultMap="orderlDetailResultMap"> 
+		<![CDATA[ 
+		select a.* from order_detail a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+
+	<update id="OrderDetail_update" parameterType="com.weiweiqin.model.OrderDetail"> 
+	<![CDATA[ 
+		update order_detail set order_id = #{orderId}, clothes_id = #{clothesId} , num = #{num} where id = #{id}
+	        ]]>
+	</update> 
+	
+	<delete id="OrderDetail_delete"  parameterType="Integer">
+		delete from order_detail  where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

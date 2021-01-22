@@ -1,0 +1,93 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<%@ include file="./common/header.jsp"%>
+    </head>
+    <body>
+		<div class="container">
+		
+			
+			<div class="content">
+				
+				<div id="rg-gallery" class="rg-gallery">
+					<div class="rg-thumbs">
+						<!-- Elastislide Carousel Thumbnail Viewer -->
+						<div class="es-carousel-wrapper">
+							<div class="es-nav">
+								<span class="es-nav-prev">Previous</span>
+								<span class="es-nav-next">Next</span>
+							</div>
+							<div class="es-carousel">
+								<ul id="ui_id">
+								</ul>
+							</div>
+						</div>
+						<!-- End Elastislide Carousel Thumbnail Viewer -->
+					</div><!-- rg-thumbs -->
+				</div><!-- rg-gallery -->
+
+
+			</div><!-- content -->
+		</div><!-- container -->
+		
+		<script>
+				$(function(){
+					var id = $.request.queryString["id"];
+					$.ajax({
+						type : 'Get',
+						contentType : 'application/json',
+						url : '../goods/picList.do',
+						data : {
+							id : id 
+						},
+						async  :false,
+						dataType : 'json',
+						success : function(data) {
+							if (data.result) {
+								var picList = data.obj;
+								for(var i = 0 ;i<picList.length;i++){
+									var name = picList[i].name;
+									var html = '<li><a href="#"><img width="65" height="65"  src="images/thumbs/1.jpg"  id="img_id" data-large="images/1.jpg" alt="image01" data-description="" /></a></li>';
+									$('#ui_id').append(html);
+									var size = $("#ui_id li").size();
+									var newLi =$($("#ui_id li")[size-1]);
+									newLi.find("#img_id").attr("src","../upload/downloadCompress.do?fileName="+name);
+									newLi.find("#img_id").attr("data-large","../upload/download.do?fileName="+name);
+								}
+								
+							} else {
+								alert('数据库异常,查询数据失败');
+							}
+						},
+						error : function(data) {
+							
+						}
+					});	
+				});
+			
+		</script>
+		<script type="text/javascript" src="../js/xiangce/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="../js/xiangce/jquery.easing.1.3.js"></script>
+		<script type="text/javascript" src="../js/xiangce/jquery.elastislide.js"></script>
+		<script type="text/javascript" src="../js/xiangce/gallery.js"></script>
+		<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">	
+			<div class="rg-image-wrapper">
+				{{if itemsCount > 1}}
+					<div class="rg-image-nav">
+						<a href="#" class="rg-image-nav-prev">Previous Image</a>
+						<a href="#" class="rg-image-nav-next">Next Image</a>
+					</div>
+				{{/if}}
+				<div class="rg-image"></div>
+				<div class="rg-loading"></div>
+				<div class="rg-caption-wrapper">
+					<div class="rg-caption" style="display:none;">
+						<p></p>
+					</div>
+				</div>
+			</div>
+		</script>
+		
+    </body>
+</html>

@@ -1,0 +1,159 @@
+package com.weiweiqin.controller.home;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Announcement;
+import com.weiweiqin.service.AnnouncementService;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("/announcement")
+public class AnnouncementController {
+
+	@Autowired
+	private AnnouncementService announcementService;
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(AnnouncementController.class);
+
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String add(Announcement announcement) {
+		logger.info("Enter method add...,announcement="+announcement);
+		Result result = new Result();
+		try {
+			announcementService.save(announcement);
+		} catch (Exception e) {
+			logger.error("保存公告异常...",e);
+			result.setResult(false);
+			result.setErrorMsg("保存公告异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(){
+		Result result = new Result();
+		Page page = new Page();
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		List<Announcement> announcementList = announcementService.pageList(page, conditions);
+		int totalCount = announcementService.totalCount(conditions);
+		page.setTotalCount(totalCount);
+		Map<String,Object> mp = new HashMap<String,Object>();
+		mp.put("totalCount",page.getTotalCount());
+		mp.put("list", announcementList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 首页获取公告内容
+	 * @return
+	 */
+	@RequestMapping(value = "/getAnnouncement.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getAnnouncement(){
+		Result result = new Result();
+		Page page = new Page();
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		List<Announcement> announcementList = announcementService.pageList(page, conditions);
+		if(null == announcementList || announcementList.isEmpty()){
+			result.setResult(false);
+			result.setErrorMsg("没有可以显示的公告");
+			return result.toJson();
+		}else{
+			Announcement announcement = announcementList.get(0);
+			result.setResult(true);
+			result.setObj(announcement);
+			return result.toJson();
+		}
+	}
+	
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String get(int id)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		Announcement announcement = null;
+		try {
+			 announcement = announcementService.get(id);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(announcement);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 显示或隐藏公告
+	 * @param id
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	@RequestMapping(value = "/setShow.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String setShow(int id)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		Announcement announcement = null;
+		try {
+			 announcement = announcementService.get(id);
+			 if(announcement.getIsShow() == 0){
+				 announcement.setIsShow(1);
+			 }else{
+				 announcement.setIsShow(0);
+			 }
+			 announcementService.update(announcement);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(announcement);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String eidt(Announcement announcement)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		try {
+			announcementService.update(announcement);
+		} catch (Exception e) {
+			logger.error("数据库异常...",e);
+			result.setErrorMsg("数据库异常...");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setObj(announcement);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+}

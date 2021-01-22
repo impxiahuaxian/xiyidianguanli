@@ -1,0 +1,53 @@
+package com.weiweiqin.vo.common;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.weiweiqin.model.Comment;
+
+public class CommentVO {
+	
+	private Comment comment;
+	
+	private List<Integer> goodsIds = new ArrayList<Integer>();
+	
+	private String updateDate;
+	
+	/**
+	 * 1为匿名评价，0为非匿名评价
+	 */
+	private int niming; 
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public List<Integer> getGoodsIds() {
+		return goodsIds;
+	}
+
+	public void setGoodsIds(List<Integer> goodsIds) {
+		this.goodsIds = goodsIds;
+	}
+
+	public int getNiming() {
+		return niming;
+	}
+
+	public void setNiming(int niming) {
+		this.niming = niming;
+	}
+
+}

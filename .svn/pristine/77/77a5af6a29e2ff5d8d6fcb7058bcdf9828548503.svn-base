@@ -1,0 +1,48 @@
+// JavaScript Document
+//专注高端竞价单页设计制作 QQ：418603063 
+
+function cxzxcheckform(){
+        if(document.fonmcxzx.name.value==''){
+            	alert('请填写收货人的姓名!!');
+            	document.fonmcxzx.name.focus();
+            	return false;
+        }
+	if (document.fonmcxzx.name.value.length < 2 )
+	{
+		alert("请填写您的真实姓名！");
+		document.fonmcxzx.name.focus();
+		return  false ;
+	}
+	
+	if(document.fonmcxzx.mobile.value==''){
+            	alert('请填写收货人的联系电话!!');
+            	document.fonmcxzx.mobile.focus();
+            	return false;
+        }
+        if(isNaN(document.fonmcxzx.mobile.value) || document.fonmcxzx.mobile.value.length < 11 ||document.fonmcxzx.mobile.value.length > 11){
+            	alert('手机号码有误，请正确填写收货人的联系电话!!');
+                document.fonmcxzx.mobile.focus();
+            	return false;
+        }
+      if(document.fonmcxzx.province.value==""){
+    	  alert("请填写省份！");
+    	  document.fonmcxzx.province.focus();
+    	  return false;
+    	  
+      }
+	if (document.fonmcxzx.street.value == "")
+	{
+		alert("收货地址不能为空！");
+		document.fonmcxzx.street.focus();
+		return  false ;
+	}
+	if (document.fonmcxzx.street.value.length < 6 ||document.fonmcxzx.street.value.length > 60)
+	{
+		alert("请填写正确的详细的收货地址！");
+		document.fonmcxzx.street.focus();
+		return  false ;
+	}
+
+        
+       return true;
+}

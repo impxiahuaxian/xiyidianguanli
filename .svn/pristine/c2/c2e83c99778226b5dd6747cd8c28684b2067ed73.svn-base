@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理</title>
+	<link href="../styles/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../styles/back/wei.css" rel="stylesheet" type="text/css" />
+	<script src="../js/jquery1.9.1.js" type="text/javascript"></script>
+	<script src="../js/wei.js" type="text/javascript"></script>
+</head>
+
+<style type="text/css">
+body {
+	background-image: url(../images/bg-n1.jpg);
+}
+</style>
+<body>
+	<div id="mainContainer" style="width: 1024px; Margin-Right: auto; Margin-Left: auto;" align="center">
+	
+		<div style="width:250px;margin-top:200px;">
+	            <div class="input-group">
+	              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+	              <input class="form-control" id="username" name="username" type="text" placeholder="账户"/>
+	            </div>
+	            </br>
+	            <div class="input-group">
+	            	<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+	              	<input class="form-control" name="password" id="password" type="password" placeholder="密码"/>
+	            </div>
+	            </br>
+	            <div class="input-group" style="margin-top:5px;width:250px"> 
+		             <input type="button" value="登录" class="btn btn-primary btn-block"  id="login_btn" style="border-radius:5px;"/>
+	            </div>
+	            
+	    </div>
+		
+		
+	</div>
+	
+	<script>
+		$(function() {
+			
+			var ie = !-[1,];  
+			if(ie){
+				forIE();
+			}
+			$('#username').focus();
+			
+			$('#username').blur(
+				function(){
+					$(this).removeClass("validation-failed");
+				}		
+			);
+			
+			$('#password').blur(
+					function(){
+						$(this).removeClass("validation-failed");
+					}		
+				);
+			$('#login_btn').click(function() {
+				if ($('#username').val() == '' || $('#username').val() == '账号') {
+					jWei.Tips.error("请输入用户名");
+					$('#username').addClass("validation-failed");
+					$('#username').focus();
+					return;
+				} else if ($('#password').val() == '') {
+					jWei.Tips.error("请输入密码");
+					$('#password').addClass("validation-failed");
+					$('#password').focus();
+					return;
+				}
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : '../login/login.do',
+					data : {
+						username : $('#username').val(),
+						password : $('#password').val()
+					},
+					dataType : 'json',
+					success : function(obj) {
+						if (!obj.result) {
+							jWei.Tips.error("用户名或密码错误");
+							$('#username').addClass("validation-failed");
+							$('#password').addClass("validation-failed");
+						} else {
+							location.href = "./orderList.jsp#orderManager";
+						}
+
+					},
+					error : function(data) {
+						
+					}
+				});
+			});
+
+			//回车事件
+			document.onkeydown = function(e) {
+				var ev = document.all ? window.event : e;
+				if (ev.keyCode == 13) {
+					$('#login_btn').click();
+				}
+			}
+
+		});
+
+		function forIE() {
+			var doc = document, inputs = doc.getElementsByTagName('input'), supportPlaceholder = 'placeholder' in doc
+					.createElement('input'), placeholder = function(input) {
+				var text = input.getAttribute('placeholder'), defaultValue = input.defaultValue;
+				if (defaultValue == '') {
+					input.value = text
+				}
+				input.onfocus = function() {
+					if (input.value === text) {
+						this.value = ''
+					}
+				};
+				input.onblur = function() {
+					if (input.value === '') {
+						this.value = text
+					}
+				}
+			};
+			if (!supportPlaceholder) {
+				for ( var i = 0, len = inputs.length; i < len; i++) {
+					var input = inputs[i], text = input
+							.getAttribute('placeholder');
+					if (input.type === 'text' && text) {
+						placeholder(input)
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

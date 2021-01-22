@@ -1,0 +1,70 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.CategoryDao;
+import com.weiweiqin.model.Category;
+import com.weiweiqin.service.CategoryService;
+import com.weiweiqin.vo.common.Page;
+@Service
+public class CategoryServiceImpl implements CategoryService {
+
+	@Autowired
+	private CategoryDao categoryDao;
+
+
+	public void update(Category category) {
+		categoryDao.update(category);
+
+	}
+
+	public Category getByName(String name) {
+		return categoryDao.getByName(name);
+	}
+
+	public List<Category> getAll() {
+		return categoryDao.getAll();
+	}
+
+	public void save(Category category) {
+		categoryDao.insert(category);
+	}
+
+	public List<Category> pageList(Page page,Map<String,Object> conditions) {
+		return categoryDao.pageList(page,conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return categoryDao.totalCount(conditions);
+	}
+
+	public void del(int id) {
+		categoryDao.delete(id);
+	}
+
+	public List<Category> pageListForHome(Page page) {
+		
+		return categoryDao.pageListForHome(page);
+	}
+
+	public int getTotalCountForHome() {
+		return categoryDao.getTotalCountForHome();
+	}
+
+	public Category get(int id) {
+		return categoryDao.get(id);
+	}
+
+	public List<Category> getAllAddOn() {
+		return categoryDao.getAllAddOn();
+	}
+
+	public List<Category> getByType(int type) {
+		return categoryDao.getByType(type);
+	}
+
+}

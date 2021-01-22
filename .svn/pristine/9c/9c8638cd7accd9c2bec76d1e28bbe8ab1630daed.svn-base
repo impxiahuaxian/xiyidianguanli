@@ -1,0 +1,148 @@
+package com.weiweiqin.controller.back;
+
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.User;
+import com.weiweiqin.service.UserService;
+import com.weiweiqin.vo.common.UserVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("admin/user")
+public class UserController {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(UserController.class);
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,RequestMethod.GET })
+	@ResponseBody
+	public String add(UserVO userVO) {
+		logger.info("Enter method add...,userVO="+userVO);
+		Result result = new Result();
+		User user = userVO.getUser();
+		try {
+			user.setAddDate(new Date());
+			userService.save(user);
+		} catch (Exception e) {
+			logger.error("保存衣服信息异常...",e);
+			result.setResult(false);
+			result.setErrorMsg("保存衣服信息异常...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(UserVO userVO) {
+		logger.info("Enter method edit...,userVO="+userVO);
+		Result result = new Result();
+		try {
+			User user = userVO.getUser();
+			user.setAddDate(new Date());
+			userService.update(user);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String get(int id) {
+		Result result = new Result();
+		try {
+			User user = userService.get(id);
+			result.setObj(user);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/del.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String del(int id) {
+		logger.info("Enter method del...,id="+id);
+		Result result = new Result();
+		try {
+			userService.del(id);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(int currPage, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			Page page = new Page();
+			page.setCurrPage(currPage);
+			List<User> userList = userService.pageList(page, null);
+			List<UserVO> list = new ArrayList<UserVO>();
+			if (null != userList && !userList.isEmpty()) {
+
+				for (User user : userList) {
+					UserVO vo = new UserVO();
+					vo.setUser(user);
+					vo.setAddDate(sdf.format(user.getAddDate()));
+					list.add(vo);
+				}
+			}
+			int totalCount = userService.totalCount(null);
+			Map<String, Object> mp = new HashMap<String, Object>();
+			mp.put("list", list);
+			mp.put("totalCount", totalCount);
+			result.setObj(mp);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);	
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+}

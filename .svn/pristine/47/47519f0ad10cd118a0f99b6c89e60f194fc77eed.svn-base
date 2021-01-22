@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.AnnouncementMapper">
+	<resultMap type="com.weiweiqin.model.Announcement" id="announcementResultMap">
+		<id property="id" column="id" />
+		<result property="isShow" column="is_show" />
+		<result property="content" column="content" />
+		<result property="updateDate" column="update_date" />
+	</resultMap>
+
+	<insert id="Announcement_insert" parameterType="com.weiweiqin.model.Announcement"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO announcement(content,is_show,update_date) values
+		          (#{content},#{isShow},#{updateDate})
+		        ]]>
+	</insert>
+	
+	<select id="Announcement_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Announcement" resultMap="announcementResultMap"> 
+		<![CDATA[ 
+		select a.* from announcement a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Announcement_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Announcement" resultMap="announcementResultMap"> 
+		<![CDATA[ 
+		select a.* from announcement a limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+
+
+	<select id="Announcement_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from announcement
+	        ]]>
+	</select>
+	
+	<update id="Announcement_update" parameterType="com.weiweiqin.model.Announcement"> 
+	<![CDATA[ 
+		update announcement set update_date = #{updateDate}, content = #{content}, is_show = #{isShow} where id = #{id}
+	        ]]>
+	</update>
+	
+
+
+
+
+</mapper>
+

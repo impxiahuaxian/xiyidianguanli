@@ -1,0 +1,22 @@
+package com.weiweiqin.service;
+
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Announcement;
+import com.weiweiqin.vo.common.Page;
+
+public interface AnnouncementService {
+	
+	List<Announcement> pageList(Page page,Map<String,Object> conditions);
+	
+	int totalCount(Map<String, Object> conditions);
+	
+	void save(Announcement announcement);
+	
+	void update(Announcement announcement);
+	
+	Announcement get(int id);
+	
+}

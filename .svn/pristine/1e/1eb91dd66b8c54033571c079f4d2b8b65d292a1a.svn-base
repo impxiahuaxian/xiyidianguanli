@@ -1,0 +1,306 @@
+package com.weiweiqin.controller.common;
+
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.SecCategory;
+import com.weiweiqin.service.CategoryService;
+import com.weiweiqin.service.GoodsService;
+import com.weiweiqin.service.SecCategoryService;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+import com.weiweiqin.vo.common.SecCategoryVO;
+
+@Controller
+@RequestMapping("/secCategory")
+public class SecCategoryController {
+
+	private static final Logger logger = LoggerFactory.getLogger(SecCategoryController.class);
+	
+	@Autowired
+	private SecCategoryService seCategoryService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private GoodsService goodsService;
+
+
+
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String add(SecCategory seCategory) {
+		logger.info("Enter method add...,seCategory="+seCategory);
+		Result result = new Result();
+		
+		seCategory.setUpdateDate(new Date());
+		try {
+			SecCategory isExist = seCategoryService.getByName(seCategory.getName());
+			if(null != isExist){
+				result.setResult(false);
+				result.setErrorMsg("已经存在该名称");
+				logger.info("已经存在该分类名称");
+				return result.toJson();
+			}
+			seCategoryService.save(seCategory);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/added.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String added(int id) {
+		Result result = new Result();
+		try {
+			SecCategory seCategory = seCategoryService.get(id);
+			if(seCategory.getAdded() == 0){
+				seCategory.setAdded(1);
+			}else{
+				seCategory.setAdded(0);
+			}
+			seCategory.setUpdateDate(new Date());
+			seCategoryService.update(seCategory);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/orderKey.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String orderKey(int id,int orderKey) {
+		Result result = new Result();
+		try {
+			SecCategory seCategory = seCategoryService.get(id);
+			seCategory.setOrderKey(orderKey);
+			seCategoryService.update(seCategory);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(SecCategory seCategory) {
+		Result result = new Result();
+		seCategory.setUpdateDate(new Date());
+		try {
+			seCategoryService.update(seCategory);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(int id) {
+		logger.info("Enter method edit...,id="+id);
+		Result result = new Result();
+		try {
+			SecCategory seCategory = seCategoryService.get(id);
+			result.setObj(seCategory);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/getAll.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getAll() {
+		Result result = new Result();
+		try {
+			List<SecCategory> seCategoryList = seCategoryService.getAll();
+			result.setObj(seCategoryList);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/getAlllAddOn.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getAllAddOn() {
+		Result result = new Result();
+		try {
+			List<SecCategory> seCategoryList = seCategoryService.getAllAddOn();
+			result.setObj(seCategoryList);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/getByBigCategoryId.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getByBigCategoryId(int bigCategoryId) {
+		Result result = new Result();
+		try {
+			List<SecCategory> seCategoryList = seCategoryService.getByBigCategoryId(bigCategoryId);
+			result.setObj(seCategoryList);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/del.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String del(int id) {
+		logger.info("Enter method del...,id="+id);
+		Result result = new Result();
+		try {
+			seCategoryService.del(id);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(int currPage, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			Page page = new Page();
+			page.setCurrPage(currPage);
+			List<SecCategory> seCategoryList = seCategoryService.pageList(page, null);
+
+			List<SecCategoryVO> list = new ArrayList<SecCategoryVO>();
+			if (null != seCategoryList && !seCategoryList.isEmpty()) {
+
+				for (SecCategory seCategory : seCategoryList) {
+					SecCategoryVO vo = new SecCategoryVO();
+					Category category = categoryService.get(seCategory.getBigCategoryId());
+					vo.setCategoryName(category.getName());
+					vo.setId(seCategory.getId());
+					vo.setName(seCategory.getName());
+					vo.setUpdateDate(sdf.format(seCategory.getUpdateDate()));
+					vo.setAdded(seCategory.getAdded());
+					vo.setOrderKey(seCategory.getOrderKey());
+					list.add(vo);
+				}
+			}
+			int totalCount = seCategoryService.totalCount(null);
+			Map<String, Object> mp = new HashMap<String, Object>();
+			mp.put("list", list);
+			mp.put("totalCount",totalCount);
+			result.setObj(mp);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/home.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageListFromHome(int currPage, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+		Result result = new Result();
+		try {
+			Page page = new Page();
+			page.setPageSize(3);
+			page.setCurrPage(currPage);
+			List<SecCategory> seCategoryList = seCategoryService.pageListForHome(page);
+			Map<String, List<Goods>> mp = new HashMap<String, List<Goods>>();
+			if (null != seCategoryList && !seCategoryList.isEmpty()) {
+				for (SecCategory seCategory : seCategoryList) {
+					List<Goods> goodsList = goodsService
+							.getListBySecCategoryId(seCategory.getId());
+					if (!goodsList.isEmpty()) {
+						mp.put(seCategory.getName(), goodsList);
+					}
+				}
+			}
+			int totalCount = seCategoryService.getTotalCountForHome();
+			page.setTotalCount(totalCount);
+			Map<String, Object> mps = new HashMap<String, Object>();
+			mps.put("seCategoryList", mp);
+			mps.put("totalPage", page.getTotalPage());
+			result.setObj(mps);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+}

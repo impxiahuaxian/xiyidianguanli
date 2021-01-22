@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.ClothesMapper">
+	<resultMap type="com.weiweiqin.model.Clothes" id="clothesResultMap">
+		<id property="id" column="id" />
+	</resultMap>
+
+	<insert id="Clothes_insert" parameterType="com.weiweiqin.model.Clothes"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO clothes (user_id,total_price,add_date) values
+		          (#{userId},#{totalPrice},#{addDate})
+		        ]]> 
+	</insert>
+
+	<select id="Clothes_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Clothes" resultMap="clothesResultMap"> 
+		<![CDATA[ 
+		select a.* from clothes a clothes by a.add_date desc limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+	
+	<select id="Clothes_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Clothes" resultMap="clothesResultMap"> 
+		<![CDATA[ 
+		select a.* from clothes a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+
+	<select id="Clothes_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from clothes
+	        ]]>
+	</select>
+
+	<update id="Clothes_update" parameterType="com.weiweiqin.model.Clothes"> 
+	<![CDATA[ 
+		update clothes set user_id = #{userId}, total_price = #{totalPrice} , add_date = #{addDate} where id = #{id}
+	        ]]>
+	</update> 
+	
+	<delete id="Clothes_delete"  parameterType="Integer">
+		delete from clothes  where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

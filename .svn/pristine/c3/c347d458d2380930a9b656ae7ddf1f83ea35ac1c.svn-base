@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.FeedbackMapper">
+	<resultMap type="com.weiweiqin.model.Feedback" id="feedbackResultMap">
+		<id property="id" column="id" />
+		<result property="addDate" column="add_date" />
+	</resultMap>
+
+	<insert id="Feedback_insert" parameterType="com.weiweiqin.model.Feedback"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO feedback(content,email,add_date) values
+		          (#{content},#{email},#{addDate})
+		        ]]>
+	</insert>
+	
+	<select id="Feedback_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Feedback" resultMap="feedbackResultMap"> 
+		<![CDATA[ 
+		select a.* from feedback a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Feedback_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Feedback" resultMap="feedbackResultMap"> 
+		<![CDATA[ 
+		select a.* from feedback a limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+
+
+	<select id="Feedback_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from feedback
+	        ]]>
+	</select>
+	
+
+
+
+
+</mapper>
+

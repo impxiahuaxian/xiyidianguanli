@@ -1,0 +1,74 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class CommentListVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+	
+	private int goodsId;
+	
+	private List<CommentVO> commentVOList;
+	
+	/**
+	 * 是否随机生成评论时间
+	 */
+	private String isRandomDate;
+	
+	/**
+	 * 随机时间起始日期
+	 */
+	private String startDate;
+	
+	/**
+	 * 随机时间截止日期
+	 */
+	private String endDate;
+
+	public int getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(int goodsId) {
+		this.goodsId = goodsId;
+	}
+
+	public List<CommentVO> getCommentVOList() {
+		return commentVOList;
+	}
+
+	public void setCommentVOList(List<CommentVO> commentVOList) {
+		this.commentVOList = commentVOList;
+	}
+
+	public String getIsRandomDate() {
+		return isRandomDate;
+	}
+
+	public void setIsRandomDate(String isRandomDate) {
+		this.isRandomDate = isRandomDate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+}

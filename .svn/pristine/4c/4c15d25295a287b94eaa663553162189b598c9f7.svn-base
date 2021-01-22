@@ -1,0 +1,10 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.VipTypeDao;
+import com.weiweiqin.model.VipType;
+@Repository
+public class VipTypeDaoImpl extends GenericMybatisDao<VipType, Integer>
+		implements VipTypeDao {
+}

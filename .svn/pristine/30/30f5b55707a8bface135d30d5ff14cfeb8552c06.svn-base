@@ -1,0 +1,27 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.PicDao;
+import com.weiweiqin.model.Pic;
+
+@Repository
+public class PicDaoImpl extends GenericMybatisDao<Pic, Integer> implements
+		PicDao {
+
+	@SuppressWarnings("unchecked")
+	public List<Pic> getAll() {
+		return (List<Pic>) getSqlSession().selectList("Pic_getAll");
+	}
+
+	/**
+	 * 通过文件名称获取图片
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Pic> getByName(String name) {
+		return (List<Pic>) getSqlSession().selectList("Pic_getByName",name);
+	}
+
+}

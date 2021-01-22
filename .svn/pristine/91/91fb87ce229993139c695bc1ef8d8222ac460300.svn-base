@@ -1,0 +1,19 @@
+package com.weiweiqin.service;
+
+import java.util.Map;
+
+import com.weiweiqin.model.IpLimit;
+
+public interface IpLimitService {
+	
+	void addIpLimit(IpLimit ipLimit);
+	
+	IpLimit get(int id);
+
+	int totalCount(Map<String, Object> conditions);
+	
+	void update(IpLimit ipLimit);
+	
+	IpLimit getByIpAndDate(Map<String,Object> conditions);
+	
+}

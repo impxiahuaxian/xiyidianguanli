@@ -1,0 +1,146 @@
+package com.weiweiqin.service.impl;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.OrderDao;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.IpLimit;
+import com.weiweiqin.model.Order;
+import com.weiweiqin.model.OrderGoodsItem;
+import com.weiweiqin.service.GoodsService;
+import com.weiweiqin.service.IpLimitService;
+import com.weiweiqin.service.OrderGoodsItemService;
+import com.weiweiqin.service.OrderService;
+import com.weiweiqin.vo.common.CartVO;
+import com.weiweiqin.vo.common.Page;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private GoodsService goodsService;
+	
+	@Autowired
+	private OrderGoodsItemService orderGoodsItemService;
+	
+	@Autowired
+	private IpLimitService ipLimitService;
+	
+	public void update(Order order) {
+		orderDao.update(order);
+	}
+
+	public Order get(int id) {
+		return orderDao.get(id);
+	}
+
+	public List<Order> pageList(Page page, Map<String, Object> conditions) {
+		return orderDao.pageList(page, conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return orderDao.totalCount(conditions);
+	}
+
+	public void save(Order order,List<CartVO> goodsList,Map<String,Object> conditions) {
+		order.setOuterid("E"+System.currentTimeMillis());
+		orderDao.insert(order);
+		int addNum = 0;
+		if(null != goodsList && !goodsList.isEmpty()){
+			for (CartVO cartVO : goodsList) {
+				if(null != cartVO){
+					//计算购买商品数量
+					addNum = addNum + cartVO.getNum();
+					int goodsId = cartVO.getGoodsId();
+					Goods goods = goodsService.get(goodsId);
+					goods.setBuyNum(goods.getBuyNum()+cartVO.getNum());
+					goodsService.update(goods);
+					OrderGoodsItem item = new OrderGoodsItem();
+					item.setGoodsId(goodsId);
+					item.setOrderId(order.getId());
+					item.setColor(cartVO.getColor());
+					item.setSize(cartVO.getSize());
+					item.setNum(cartVO.getNum());
+					item.setMark(0);
+					orderGoodsItemService.save(item);
+				}
+			}
+		}
+		
+		IpLimit ipLimit = ipLimitService.getByIpAndDate(conditions);
+		if(null == ipLimit){
+			IpLimit ipLim = new IpLimit();
+			ipLim.setIp(conditions.get("ip").toString());
+			ipLim.setAddDate(Date.valueOf(conditions.get("addDate").toString()));
+			ipLim.setNumber(addNum);
+			ipLimitService.addIpLimit(ipLim);
+		}else{
+			int number = ipLimit.getNumber();
+			number = number+addNum;
+			ipLimit.setNumber(number);
+			ipLimitService.update(ipLimit);
+		}
+		
+	}
+	
+	public List<Order> export(Map<String, Object> conditions){
+		return orderDao.export(conditions);
+	}
+
+	public void del(int id) {
+		orderDao.delete(id);
+		
+	}
+
+	public List<Order> getOrderListByGoodsId(int goodsId) {
+		return orderDao.getOrderListByGoodsId(goodsId);
+	}
+
+
+	public List<OrderGoodsItem> getOrderGoodsItemListById(int id) {
+		return orderGoodsItemService.getOrderGoodsItemListByOrderId(id);
+	}
+	
+	public List<CartVO> getCartVOList(int id){
+		List<OrderGoodsItem> itemList = getOrderGoodsItemListById(id);
+		List<CartVO> cartVOList = new ArrayList<CartVO>();
+		if(null != itemList && !itemList.isEmpty()){
+			for (OrderGoodsItem item : itemList) {
+				int goodsId = item.getGoodsId();
+				Goods goods = goodsService.get(goodsId);
+				CartVO vo = new CartVO();
+				vo.setGoods(goods);
+				vo.setColor(item.getColor());
+				vo.setSize(item.getSize());
+				vo.setNum(item.getNum());
+				cartVOList.add(vo);
+			}
+		}
+		return cartVOList;
+	}
+	
+
+	public Order getByOuterid(String outerid) {
+		return orderDao.getByOuterid(outerid);
+	}
+
+	public List<Goods> getGoodsListByOrderId(int orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public int getWaitPayTotalCount(Map<String,Object> conditions) {
+		return orderDao.getWaitPayTotalCount(conditions);
+	}
+
+
+}

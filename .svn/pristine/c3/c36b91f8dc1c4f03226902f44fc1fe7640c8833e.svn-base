@@ -1,0 +1,120 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 5947691543764682200L;
+
+	private int id;
+
+	private String name;
+
+	private String mobile;
+
+	private int level;
+
+	private int state;
+
+	private String address;
+
+	private String pic;
+
+	private int type;
+
+	private String pwd;
+
+	private double surplus;
+	
+	private Date addDate;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public double getSurplus() {
+		return surplus;
+	}
+
+	public void setSurplus(double surplus) {
+		this.surplus = surplus;
+	}
+
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
+
+}

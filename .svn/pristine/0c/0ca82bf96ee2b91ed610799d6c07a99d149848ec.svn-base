@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<head>
+	<script charset="utf-8" src="${ctx}/js/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="${ctx}/js/kindeditor/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="${ctx}/js/kindeditor/style/complex.js"></script> 
+</head>
+<body>
+<%@ include file="./common/top.jsp"%>
+	<div class="container">
+		
+		<form class="form-horizontal" role="form" id="category_form_id">
+		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">公告内容</label>
+		    <div class="col-xs-3">
+			  <textarea name="content" id="content_id" style="width:700px;height:200px;visibility:hidden;"></textarea>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label  class="col-sm-2 control-label">是否显示：</label>
+		    <div class="col-xs-3">
+		    
+		      <select name="isShow" class="form-control required">
+		      	<option value="0">隐藏</option>
+		      	<option value="1">显示</option>
+		      </select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+	    	  <button type="button" id="add_category_btn_id" class="btn btn-primary">保存</button>
+		      <a href="./announcementList.jsp" class="btn btn-default">取消</a>
+		    </div>
+  		  </div>
+  		</form>
+  		
+	</div>
+	<script>
+		
+		
+		$(function(){ 
+			var valid = new jValidation.Validation('category_form_id',{immediate:true},{onSubmit:false});
+			$('#add_category_btn_id').click(
+				function(){
+					var result = valid.validate();
+					if(!result){
+						return;
+					}
+					var content = editor.html();
+					$("#content_id").val(content);
+					var formData = $('#category_form_id').serialize();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../announcement/add.do',
+						dataType : 'json',
+						data : formData,
+						success : function(obj) {
+							if(obj.result){
+								window.top.jWei.Tips.success("保存数据成功");
+								location.href="./announcementList.jsp";
+							}else{
+								window.top.jWei.Tips.success(obj.errorMsg);
+							}
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+				}		
+			);
+		});
+		
+		
+	</script>
+</body>
+</html>

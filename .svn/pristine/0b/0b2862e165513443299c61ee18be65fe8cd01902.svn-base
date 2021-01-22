@@ -1,0 +1,823 @@
+package com.weiweiqin.controller.common;
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alipay.config.AlipayConfig;
+import com.alipay.util.AlipaySubmit;
+import com.weiweiqin.constants.Constants;
+import com.weiweiqin.model.Customer;
+import com.weiweiqin.model.CustomerAddr;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.IpLimit;
+import com.weiweiqin.model.Order;
+import com.weiweiqin.service.GoodsService;
+import com.weiweiqin.service.IpLimitService;
+import com.weiweiqin.service.OrderService;
+import com.weiweiqin.utils.Dom4jUtil;
+import com.weiweiqin.utils.ExcelUtil;
+import com.weiweiqin.utils.MobileFromUtil;
+import com.weiweiqin.utils.RandomValidateCode;
+import com.weiweiqin.vo.common.CartVO;
+import com.weiweiqin.vo.common.OrderQueryVO;
+import com.weiweiqin.vo.common.OrderTabVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+import com.weiweiqin.vo.common.ShipVO;
+
+@Controller
+@RequestMapping("/order")
+public class OrderController {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(OrderController.class);
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private GoodsService goodsService;
+
+	@Autowired
+	private IpLimitService ipLimitService;
+
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String add(Order order, HttpServletRequest request,
+			HttpSession session) {
+		logger.info("Enter method add....，order=" + order);
+		String ip = request.getRemoteAddr();
+		logger.info("ip=" + ip);
+		Result result = new Result();
+		
+		// 标记用户是否登录
+		boolean isLogined = false;
+
+		// 设置顾客信息
+		if (null != session.getAttribute("customer")) {
+			Customer customer = (Customer) session.getAttribute("customer");
+			order.setCustomerId(customer.getId());
+			isLogined = true;
+		}
+		
+		//没有登录客户地址从session中获取
+		if(!isLogined){
+			if (null != session.getAttribute("customerAddr")) {
+				CustomerAddr customerAddr = (CustomerAddr) session
+						.getAttribute("customerAddr");
+				order.setAddr(customerAddr.getProvince() + customerAddr.getCity()
+						+ customerAddr.getArea() + customerAddr.getAddress());
+				order.setMobile(customerAddr.getMobile());
+				order.setName(customerAddr.getName());
+			}else{
+				result.setResult(false);
+				result.setErrorMsg("您的网页已经过期，请刷新页面重新购买！");
+				return result.toJson();
+			}
+		}else{
+			if(StringUtils.isEmpty(order.getMobile())){
+				result.setResult(false);
+				result.setErrorMsg("您的网页信息已经过期，请刷新页面重新购买！");
+				return result.toJson();
+			}
+		}
+	
+		// 保存订单信息
+		try {
+			List<CartVO> goodsList = getCarts(session);
+
+			// 验证该IP今天购买的数量
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String date = sdf.format(new Date());
+			Map<String, Object> conditions = new HashMap<String, Object>();
+			conditions.put("ip", ip);
+			conditions.put("addDate", date);
+			IpLimit limit = ipLimitService.getByIpAndDate(conditions);
+			int addNum = 0;
+			//后台重新计算订单总价格
+			double totalPrice = 0;
+			if (null != goodsList) {
+				for (CartVO cartVO : goodsList) {
+					if (null != cartVO) {
+						totalPrice = totalPrice + cartVO.getGoods().getNowPrice()*cartVO.getNum();
+						addNum = addNum + cartVO.getNum();
+					}
+				}
+//				//支付宝付款减5元
+//				if (Constants.Order.PAY_ZHIFUBAO == order.getPayType()) {
+//					totalPrice = totalPrice -5;
+//				}
+				order.setTotalPrice(new BigDecimal(totalPrice));
+			}
+			if (isLogined) {
+				if (null != limit && (limit.getNumber() + addNum) > 5) {
+					result.setResult(false);
+					result.setErrorMsg("尊敬的用户，我们鞋城规定每人每天限购5件商品,如需帮助请联系我们的客服！");
+					return result.toJson();
+				}
+			} else {
+				if (null != limit && (limit.getNumber() + addNum) > 3) {
+					result.setResult(false);
+					result.setErrorMsg("尊敬的用户，我们鞋城规定未注册用户每人每天限购3件商品,注册登录后可以购买更多数量！");
+					return result.toJson();
+				}
+			}
+			if (null == goodsList || goodsList.isEmpty()) {
+				result.setResult(false);
+				result.setErrorMsg("您的购物车没有商品或商品已经过期，请刷新页面重新购买！");
+				return result.toJson();
+			}
+			//设置用户IP
+			order.setIp(ip);
+			orderService.save(order, goodsList, conditions);
+			// 清空购物车
+			session.setAttribute("carts", null);
+		} catch (Exception e) {
+			logger.error("保存订单失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("系统繁忙，请您稍后再试！");
+			return result.toJson();
+		}
+		// 采用支付宝担保交易付款
+		if (Constants.Order.PAY_ZHIFUBAO == order.getPayType()) {
+			return sendZhifubao(order, request);
+		}
+		result.setResult(true);
+		result.setObj(order);
+		return result.toJson();
+	}
+
+	/**
+	 * 支付宝付款则设置数据并跳转到付款页面
+	 * @param order
+	 * @param request
+	 * @return
+	 */
+	private String sendZhifubao(Order order, HttpServletRequest request) {
+
+		// 把请求参数打包成数组
+		Map<String, String> sParaTemp = new HashMap<String, String>();
+		sParaTemp.put("service", "create_partner_trade_by_buyer");
+		sParaTemp.put("partner", AlipayConfig.partner);
+		sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+		// 必填，不能修改
+		sParaTemp.put("payment_type", "1");
+
+		String contextPath = request.getContextPath();
+		String serverName = request.getServerName();
+		int serverPort = request.getServerPort();
+		String notifyUrl = request.getScheme() + "://" + serverName + ":"
+				+ serverPort + contextPath + "/order/notify/"
+				+ order.getOuterid();
+
+		String returnUrl = request.getScheme() + "://" + serverName + ":"
+				+ serverPort + contextPath + "/order/orderSuccess/"
+				+ order.getOuterid();
+		// 异步通知地址
+		sParaTemp.put("notify_url", notifyUrl);
+		// 返回地址
+		sParaTemp.put("return_url", returnUrl);
+		// 卖家支付宝账号
+		sParaTemp.put("seller_email", "izhudejia@163.com");
+		// 商户订单号
+		sParaTemp.put("out_trade_no", order.getOuterid());
+		// 订单名称
+		sParaTemp.put("subject", "竹的家");
+		// TODO测试阶段价格默认写死为1元
+		sParaTemp.put("price", String.valueOf(order.getTotalPrice()));
+		// 商品数量
+		sParaTemp.put("quantity", "1");
+		// 物流费用
+		sParaTemp.put("logistics_fee", "0.00");
+		// 必填，三个值可选：EXPRESS（快递）、POST（平邮）、EMS（EMS）
+		sParaTemp.put("logistics_type", "EXPRESS");
+		// 物流支付方式
+		// 必填，两个值可选：SELLER_PAY（卖家承担运费）、BUYER_PAY（买家承担运费）
+		sParaTemp.put("logistics_payment", "SELLER_PAY");
+		// 订单描述
+		sParaTemp.put("body", "");
+		// 商品展示地址
+		sParaTemp.put("show_url", "");
+		// 收货人姓名
+		sParaTemp.put("receive_name", order.getName());
+		// 收货人地址
+		sParaTemp.put("receive_address", order.getAddr());
+		// 收货人邮编
+		sParaTemp.put("receive_zip", "");
+		// 收货人电话
+		sParaTemp.put("receive_phone", "");
+		// 收货人手机号码
+		sParaTemp.put("receive_mobile", order.getMobile());
+
+		// 建立请求
+		String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+
+		return sHtmlText;
+	}
+
+	/**
+	 * 获取购买的商品信息
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<CartVO> getCarts(HttpSession session) {
+		Map<String, CartVO> carts = null;
+		List<CartVO> cartList = new ArrayList<CartVO>();
+		if (null != session.getAttribute("carts")) {
+			carts = (Map<String, CartVO>) session.getAttribute("carts");
+			Set<Entry<String, CartVO>> entrySet = carts.entrySet();
+			for (Entry<String, CartVO> entry : entrySet) {
+				CartVO vo = entry.getValue();
+				Goods goods = goodsService.get(vo.getGoodsId());
+				vo.setGoods(goods);
+				cartList.add(vo);
+			}
+		}
+		return cartList;
+	}
+
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(Order order) {
+		logger.info("Enter method edit....，order=" + order);
+		Result result = new Result();
+		// 获取下单时间
+		Order orderDa = orderService.get(order.getId());
+		order.setUpdateDate(orderDa.getUpdateDate());
+		orderService.update(order);
+		logger.info("End method edit....");
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/editForBack.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String editForBack(Order order, HttpServletRequest request,
+			HttpSession session) {
+		logger.info("Enter method add....，order=" + order);
+		logger.info("ip=" + request.getRemoteAddr());
+		Result result = new Result();
+		// 保存订单信息
+		try {
+			Order order2 = orderService.get(order.getId());
+			order2.setTotalPrice(order.getTotalPrice());
+			order2.setName(order.getName());
+			order2.setMobile(order.getMobile());
+			order2.setAddr(order.getAddr());
+			order2.setRemark(order.getRemark());
+			orderService.update(order2);
+		} catch (Exception e) {
+			logger.error("保存订单失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("系统繁忙，请您稍后再试！");
+			return result.toJson();
+		}
+
+		result.setResult(true);
+		result.setObj(order);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/memo.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String memo(int id, String memo, int status,HttpServletRequest req) {
+		logger.info("Enter method memo....，id=" + id + "memo=" + memo);
+		Result result = new Result();
+		HttpSession session = req.getSession();
+		String ip = req.getRemoteAddr();
+		logger.info("oper ip=" + ip);
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		
+		Order order = orderService.get(id);
+		if (null != order) {
+			order.setMemo(memo);
+			order.setStatus(status);
+			orderService.update(order);
+		} else {
+			result.setResult(false);
+			logger.info("不存在该订单");
+			result.setErrorMsg("不存在该订单");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/del.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String del(int id) {
+		logger.info("Enter method del....,id=" + id);
+		Result result = new Result();
+		Order order = orderService.get(id);
+		order.setMark(-1);
+		orderService.update(order);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String get(int id,HttpServletRequest req) {
+		logger.info("Enter method get....");
+		Result result = new Result();
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		Order order = orderService.get(id);
+		result.setObj(order);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/list.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(OrderQueryVO orderVO,String showMobileFrom,HttpServletRequest req) {
+		logger.info("Enter pageList ...,orderVO=" + orderVO);
+		
+		Result result = new Result();
+		
+		HttpSession session = req.getSession();
+		if (session == null || session.getAttribute("user") == null) {
+			result.setResult(false);
+			result.setErrorMsg("您访问的地址不存在！");
+			return result.toJson();
+		}
+		
+		Page page = new Page();
+		page.setCurrPage(orderVO.getCurrPage());
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put("status", orderVO.getStatus());
+		if (!StringUtils.isEmpty(orderVO.getTitle())) {
+			conditions.put("title", orderVO.getTitle().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getOuterid())) {
+			conditions.put("outerid", orderVO.getOuterid().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getName())) {
+			conditions.put("name", orderVO.getName().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getMemo())) {
+			conditions.put("memo", orderVO.getMemo().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getMobile())) {
+			conditions.put("mobile", orderVO.getMobile().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getAddr())) {
+			conditions.put("addr", orderVO.getAddr().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getStartDate())
+				&& !StringUtils.isEmpty(orderVO.getEndDate())) {
+			conditions.put("startDate", orderVO.getStartDate());
+			conditions.put("endDate", orderVO.getEndDate());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		List<Order> orderList = orderService.pageList(page, conditions);
+		List<OrderTabVO> orderVOList = new ArrayList<OrderTabVO>();
+
+		if (null != orderList) {
+			for (Order order : orderList) {
+				//如果是待处理订单,显示手机归属地
+				if(orderVO.getStatus() == 0 && !"noshow".equals(showMobileFrom)){
+					String mobile = order.getMobile();
+					try {
+						String mobileAddr = MobileFromUtil.getMobileFrom(mobile);
+						mobile = mobile + "("+mobileAddr+")";
+						order.setMobile(mobile);
+					} catch (Exception e) {
+						mobile = mobile + "(获取失败)";
+						order.setMobile(mobile);
+						logger.error("获取手机号码归属地异常。。。",e);
+					}
+				}
+				OrderTabVO vo = new OrderTabVO();
+				vo.setOrder(order);
+				List<CartVO> cartVOList = orderService.getCartVOList(order
+						.getId());
+				vo.setGoodsList(cartVOList);
+				Date updateDate = order.getUpdateDate();
+				String format = sdf.format(updateDate);
+				vo.setUpdateDate(format);
+				orderVOList.add(vo);
+			}
+		}
+		int totalCount = orderService.totalCount(conditions);
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalCount", totalCount);
+		mp.put("list", orderVOList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageListForCustomer.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String pageListForCustomer(OrderQueryVO orderVO, HttpSession session) {
+		logger.info("Enter pageList ...,orderVO=" + orderVO);
+		Result result = new Result();
+		Page page = new Page();
+
+		page.setCurrPage(orderVO.getCurrPage());
+		Map<String, Object> conditions = new HashMap<String, Object>();
+
+		// 如果用户登录了
+		if (null != session.getAttribute("customer")) {
+			Customer customer = (Customer) session.getAttribute("customer");
+			conditions.put("customerId", customer.getId());
+			// 用户未登录
+		} else {
+			conditions.put("customerId", "-1");
+		}
+		if (null != orderVO.getStatus()) {
+			conditions.put("status", orderVO.getStatus());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getTitle())) {
+			conditions.put("title", orderVO.getTitle().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getName())) {
+			conditions.put("name", orderVO.getName().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getMemo())) {
+			conditions.put("memo", orderVO.getMemo().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getMobile())) {
+			conditions.put("mobile", orderVO.getMobile().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getAddr())) {
+			conditions.put("addr", orderVO.getAddr().trim());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getStartDate())
+				&& !StringUtils.isEmpty(orderVO.getEndDate())) {
+			conditions.put("startDate", orderVO.getStartDate());
+			conditions.put("endDate", orderVO.getEndDate());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		List<Order> orderList = orderService.pageList(page, conditions);
+		List<OrderTabVO> orderVOList = new ArrayList<OrderTabVO>();
+
+		if (null != orderList) {
+			for (Order order : orderList) {
+				OrderTabVO vo = new OrderTabVO();
+				vo.setOrder(order);
+				List<CartVO> cartVOList = orderService.getCartVOList(order
+						.getId());
+				vo.setGoodsList(cartVOList);
+				Date updateDate = order.getUpdateDate();
+				String format = sdf.format(updateDate);
+				vo.setUpdateDate(format);
+				orderVOList.add(vo);
+			}
+		}
+		int totalCount = orderService.totalCount(conditions);
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalCount", totalCount);
+		mp.put("list", orderVOList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/export.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public void export(OrderQueryVO orderVO, HttpServletRequest request,
+			HttpServletResponse response) {
+		logger.info("Enter method export...,orderVO=" + orderVO);
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		if (!StringUtils.isEmpty(orderVO.getTitle())) {
+			conditions.put("title", orderVO.getTitle());
+		}
+		if (!StringUtils.isEmpty(orderVO.getName())) {
+			conditions.put("name", orderVO.getName());
+		}
+		if (!StringUtils.isEmpty(orderVO.getMobile())) {
+			conditions.put("mobile", orderVO.getMobile());
+		}
+		if (!StringUtils.isEmpty(orderVO.getAddr())) {
+			conditions.put("addr", orderVO.getAddr());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getMemo())) {
+			conditions.put("memo", orderVO.getMemo());
+		}
+
+		if (!StringUtils.isEmpty(orderVO.getStartDate())
+				&& !StringUtils.isEmpty(orderVO.getEndDate())) {
+			conditions.put("startDate", orderVO.getStartDate());
+			conditions.put("endDate", orderVO.getEndDate());
+		}
+
+		if (orderVO.getStatus() != -1) {
+			conditions.put("status", orderVO.getStatus());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		List<Order> orderList = orderService.export(conditions);
+		List<OrderTabVO> orderVOList = new ArrayList<OrderTabVO>();
+		if (null != orderList) {
+			for (Order order : orderList) {
+				OrderTabVO vo = new OrderTabVO();
+				vo.setOrder(order);
+				List<CartVO> cartVOList = orderService.getCartVOList(order
+						.getId());
+				vo.setGoodsList(cartVOList);
+				Date updateDate = order.getUpdateDate();
+				String format = sdf.format(updateDate);
+				vo.setUpdateDate(format);
+				orderVOList.add(vo);
+			}
+		}
+		ExcelUtil.exportByList(orderVOList, request, response);
+	}
+
+	@RequestMapping(value = "/genCode.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public void genValidateCode(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		response.setContentType("image/jpeg");// 设置相应类型,告诉浏览器输出的内容为图片
+		response.setHeader("Pragma", "No-cache");// 设置响应头信息，告诉浏览器不要缓存此内容
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expire", 0);
+		RandomValidateCode randomValidateCode = new RandomValidateCode();
+		try {
+			// 输出图片方法
+			randomValidateCode.getRandcode(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "/validateCode.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String validateCode(String code, HttpSession session) {
+		Result result = new Result();
+		Object codeObj = session.getAttribute("RANDOMVALIDATECODEKEY");
+		if (null != codeObj) {
+			if (code.equalsIgnoreCase(codeObj.toString())) {
+				result.setResult(true);
+				return result.toJson();
+			}
+		}
+
+		result.setResult(false);
+		result.setErrorMsg("验证码不正确！");
+		return result.toJson();
+
+	}
+
+	@RequestMapping(value = "/orderSuccess/{outerid}", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	public String orderSuccess(@PathVariable String outerid, String trade_no,
+			String trade_status, HttpServletRequest request) {
+		request.setAttribute("outerid", outerid);
+		Order order = orderService.getByOuterid(outerid);
+		if (null != order) {
+			order.setTradeNo(trade_no);
+			order.setTradeStatus(trade_status);
+			orderService.update(order);
+		}
+		return "orderSuccess";
+	}
+
+	@RequestMapping(value = "/notify/{outerid}", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String notify(@PathVariable String outerid, String trade_no,
+			String trade_status, HttpServletRequest request) {
+		request.setAttribute("outerid", outerid);
+		logger.info("Enter method notify,outerid=" + outerid + ",trade_no="
+				+ trade_no + ",trade_status=" + trade_status);
+		try {
+			Order order = orderService.getByOuterid(outerid);
+			if (null != order) {
+				order.setTradeNo(trade_no);
+				order.setTradeStatus(trade_status);
+				orderService.update(order);
+			}
+		} catch (Exception e) {
+			logger.error("更新订单付款状态失败...", e);
+			return "error";
+		}
+		return "success";
+	}
+
+	/**
+	 * 用于顾客下单在订单列表中付款操作
+	 * 
+	 * @param outerid
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/pay.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pay(String outerid, HttpServletRequest request) {
+		logger.info("Enter method pay....，outerid=" + outerid);
+		// 建立请求
+		String sHtmlText;
+		try {
+			Order order = orderService.getByOuterid(outerid);
+			// 把请求参数打包成数组
+			Map<String, String> sParaTemp = new HashMap<String, String>();
+			sParaTemp.put("service", "create_partner_trade_by_buyer");
+			sParaTemp.put("partner", AlipayConfig.partner);
+			sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+			// 必填，不能修改
+			sParaTemp.put("payment_type", "1");
+			String contextPath = request.getContextPath();
+			String serverName = request.getServerName();
+			int serverPort = request.getServerPort();
+			String notifyUrl = request.getScheme() + "://" + serverName + ":"
+					+ serverPort + contextPath + "/order/notify/"
+					+ order.getOuterid();
+
+			String returnUrl = request.getScheme() + "://" + serverName + ":"
+					+ serverPort + contextPath + "/order/orderSuccess/"
+					+ order.getOuterid();
+			// 异步通知地址
+			sParaTemp.put("notify_url", notifyUrl);
+			// 返回地址
+			sParaTemp.put("return_url", returnUrl);
+			// 卖家支付宝账号
+			sParaTemp.put("seller_email", "shanqun017582@163.com");
+			// 商户订单号
+			sParaTemp.put("out_trade_no", order.getOuterid());
+			// 订单名称
+			sParaTemp.put("subject", "竹的家");
+			sParaTemp.put("price", String.valueOf(order.getTotalPrice()));
+			// 商品数量
+			sParaTemp.put("quantity", "1");
+			// 物流费用
+			sParaTemp.put("logistics_fee", "0.00");
+			// 必填，三个值可选：EXPRESS（快递）、POST（平邮）、EMS（EMS）
+			sParaTemp.put("logistics_type", "EXPRESS");
+			// 物流支付方式
+			// 必填，两个值可选：SELLER_PAY（卖家承担运费）、BUYER_PAY（买家承担运费）
+			sParaTemp.put("logistics_payment", "SELLER_PAY");
+			// 订单描述
+			sParaTemp.put("body", "");
+			// 商品展示地址
+			sParaTemp.put("show_url", "");
+			// 收货人姓名
+			sParaTemp.put("receive_name", order.getName());
+			// 收货人地址
+			sParaTemp.put("receive_address", order.getAddr());
+			// 收货人邮编
+			sParaTemp.put("receive_zip", "");
+			// 收货人电话
+			sParaTemp.put("receive_phone", "");
+			// 收货人手机号码
+			sParaTemp.put("receive_mobile", order.getMobile());
+			sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+			return sHtmlText;
+		} catch (Exception e) {
+			logger.error("支付宝付款失败...", e);
+		}
+
+		return "调整到支付宝付款页面失败，请稍后再试！";
+
+	}
+
+	/**
+	 * 后台发货操作
+	 * 
+	 * @param outerid
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/ship.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String ship(ShipVO shipVO, int id, HttpServletRequest request) {
+
+		Result result = new Result();
+		try {
+			Order order = orderService.get(id);
+			if (null != order) {
+				order.setExpressName(shipVO.getExpressName());
+				order.setExpressNo(shipVO.getExpressNo());
+				order.setExpressType(shipVO.getExpressType());
+				order.setMemo(shipVO.getMemo());
+				if (Constants.Order.PAY_ZHIFUBAO == order.getPayType()) {
+					// 把请求参数打包成数组
+					Map<String, String> sParaTemp = new HashMap<String, String>();
+					sParaTemp.put("service", "send_goods_confirm_by_platform");
+					sParaTemp.put("partner", AlipayConfig.partner);
+					sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+					sParaTemp.put("trade_no", order.getTradeNo());
+					sParaTemp.put("logistics_name", order.getExpressName());
+					sParaTemp.put("invoice_no", order.getExpressNo());
+					sParaTemp.put("transport_type",
+							String.valueOf(order.getExpressType()));
+					// 建立请求
+					String sHtmlText = AlipaySubmit.buildRequest("", "",
+							sParaTemp);
+					logger.info(sHtmlText);
+					Map<String, String> resultMap = Dom4jUtil
+							.confirmShipResult(sHtmlText);
+					// 返回成功结果，更新订单状态和信息
+					if ("T".equals(resultMap.get("result"))) {
+						// 订单状态变成已发货
+						order.setTradeStatus("WAIT_BUYER_CONFIRM_GOODS");
+						// 2：已发货
+						order.setStatus(2);
+						// 发货成功后更新订单
+						orderService.update(order);
+					} else {
+						result.setResult(false);
+						result.setErrorMsg(resultMap.get("errorCode"));
+						return result.toJson();
+					}
+				} else {
+					// 2：已发货
+					order.setStatus(2);
+					// 发货成功后更新订单
+					orderService.update(order);
+				}
+
+			}
+		} catch (Exception e) {
+			logger.error("确认发货数据库异常......", e);
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/getWaitPayTotalCount.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getWaitPayTotalCount(HttpSession session) {
+		Result result = new Result();
+		//判断用户是否登录
+		Object obj = session.getAttribute("customer");
+		if(null == obj){
+			result.setResult(false);
+			result.setErrorMsg("用户未登录！");
+			return result.toJson();
+		}
+		try {
+			Customer cus = (Customer)obj;
+			Map<String,Object> contions = new HashMap<String, Object>();
+			contions.put("customerId",cus.getId());
+			int count = orderService.getWaitPayTotalCount(contions);
+			result.setObj(count);
+			result.setResult(true);
+		}catch(Exception e){
+			logger.error("数据库异常...,",e);
+			result.setResult(false);
+			result.setErrorMsg("操作失败！");
+			return result.toJson();
+		}
+		return result.toJson();
+	}
+
+}

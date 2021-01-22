@@ -1,0 +1,37 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+
+import com.weiweiqin.model.Feedback;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class FeedbackTabVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+
+	private Feedback feedback;
+
+	private String addDate;
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
+	}
+
+	public String getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(String addDate) {
+		this.addDate = addDate;
+	}
+
+}

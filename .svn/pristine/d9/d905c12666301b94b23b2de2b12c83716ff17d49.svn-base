@@ -1,0 +1,39 @@
+package com.weiweiqin.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.Order;
+import com.weiweiqin.model.OrderGoodsItem;
+import com.weiweiqin.vo.common.CartVO;
+import com.weiweiqin.vo.common.Page;
+
+public interface OrderService {
+
+	void update(Order order);
+
+	Order get(int id);
+
+	List<Order> pageList(Page page, Map<String, Object> conditions);
+
+	int totalCount(Map<String, Object> conditions);
+
+	void save(Order order, List<CartVO> goodsList,Map<String,Object> conditions);
+
+	void del(int id);
+
+	List<OrderGoodsItem> getOrderGoodsItemListById(int id);
+
+	List<CartVO> getCartVOList(int id);
+
+	List<Order> getOrderListByGoodsId(int goodsId);
+	
+	List<Goods> getGoodsListByOrderId(int orderId);
+
+	List<Order> export(Map<String, Object> conditions);
+	
+	Order getByOuterid(String outerid);
+	
+	int getWaitPayTotalCount(Map<String,Object> conditions);
+}

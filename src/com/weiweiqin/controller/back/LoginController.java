@@ -1,0 +1,107 @@
+package com.weiweiqin.controller.back;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Account;
+import com.weiweiqin.service.AccountService;
+import com.weiweiqin.utils.Md5Util;
+import com.weiweiqin.vo.common.ModifyPasswordVO;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("admin/login")
+public class LoginController {
+
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+
+	@Autowired
+	private AccountService accountService;
+
+	/**
+	 * 用户更新pushNumber
+	 * 
+	 * @param requestBody
+	 *            客户端传递过来的json字符串
+	 * @return jsonStr
+	 */
+	@RequestMapping(value = "/login.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String login(String username, String password,
+			HttpServletRequest request, HttpServletResponse response) {
+		logger.info("Enter method login...,username=" + username + ":password="
+				+ password);
+		Result result = new Result();
+
+		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+			result.setResult(false);
+			return result.toJson();
+		}
+		Account account = accountService.getByUsername(username);
+		String md5Pwd = Md5Util.getMD5ofStr(password);
+		logger.info("PWD After MD5:"+md5Pwd);
+		if (null != account && account.getPassword().equals(md5Pwd)) {
+			result.setResult(true);
+			// 设置session
+			request.getSession().setAttribute("user", account);
+			return result.toJson();
+		}
+		result.setResult(false);
+		return result.toJson();
+	}
+
+	/**
+	 * 注销系统
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET })
+	@ResponseBody
+	public String loginOut(HttpServletRequest request) {
+		request.getSession().removeAttribute("username");
+		Result result = new Result();
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	/**
+	 * 注销系统
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/modifyPassword.do", method = { RequestMethod.POST })
+	@ResponseBody
+	public String modifyPassword(ModifyPasswordVO modifyPasswordVO,
+			HttpServletRequest request) {
+		String username = null;
+		if (null != request.getSession().getAttribute("username")) {
+			username = request.getSession().getAttribute("username").toString();
+		}
+		Result result = new Result();
+		Account account = accountService.getByUsername(username);
+		if (null != account) {
+			if (!modifyPasswordVO.getOldPassword()
+					.equals(account.getPassword())) {
+				result.setResult(false);
+				result.setErrorMsg("原始密码不正确！");
+				return result.toJson();
+			}
+			account.setPassword(modifyPasswordVO.getNewPassword());
+			accountService.update(account);
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+}

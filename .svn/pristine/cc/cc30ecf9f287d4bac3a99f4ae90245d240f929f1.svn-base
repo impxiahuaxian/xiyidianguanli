@@ -1,0 +1,444 @@
+<%@tag pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx"><%=request.getContextPath()%></c:set>
+<style>
+	ul{
+		padding:0px;
+		margin:0px;
+	}
+
+    .container{
+    	width:1000px;
+    	padding:0px;
+    }
+
+    #logo{
+    	float: left;
+    }
+		
+	.top-nav{
+		height: 26px;
+		line-height: 26px;
+		background: #f5f5f5;
+		color:#777;
+	}
+		
+	.top-nav ul{
+		list-style: none;
+		float: right;
+		padding:0px;
+	}
+		
+	.top-nav ul li{
+		float: left;
+	}
+	
+	.top-nav ul li a{ 
+		color:#777;
+		text-decoration: none;
+		font-size:12px;
+		padding:0px 6px;
+		border-right:1px solid #777;
+	}
+		
+		.main-nav{
+			height: 49px;
+			line-height: 49px;
+			background: #efefef;
+		}
+		
+		.main-nav ul{
+			list-style: none;
+			padding:0px;
+		}
+		
+		.main-nav ul li{
+			float: left;
+			padding:0px 20px;
+			text-align: center;
+		}
+		
+		.main-nav ul li.active{
+			background: #2f9623;
+		}
+		
+		.main-nav ul li.category ,.main-nav ul li.category:hover{
+			color:#fff;
+			font-family: 'Microsoft Yahei';
+			background: #2f9623;
+			cursor: pointer;
+		}
+		
+		.main-nav ul li:hover{
+			background: #e5e6e6;
+			
+		}
+		
+		.main-nav ul li:hover a{
+			color: #ffb238;
+		}
+		.main-nav ul li a{
+			display: block;
+			color:#727171;
+			text-decoration: none;
+		}
+		
+.wwwcategoryList {
+		width: 260px;
+		overflow: hidden;
+		position: absolute;
+		left:0px;
+		z-index: 999;
+		background: #fff;
+		display: none;
+		border:2px solid #ffb238;
+}
+
+.wwwcategoryList dl {
+line-height: 16px;
+padding-top: 10px;
+border-top: 1px solid #c8c8c9;
+border-bottom: none;
+margin-top: 15px;
+position: relative;
+background: #fff;
+}
+
+.wwwcategoryList h3 {
+padding: 0px 3px;
+line-height: 20px;
+font-size: 14px;
+color: #ffb238;
+background: #ffffff;
+position: absolute;
+left: 35px;
+top: -10px;
+}
+
+.wwwcategoryList dl dt {
+padding: 10px 0px 0px 37px;
+font-size: 14px;
+font-family: "Microsoft Yahei";
+color: #A3A2A2;
+}
+
+.wwwcategoryList dl dd {
+padding: 5px 0px 10px 30px;
+border-bottom: 1px solid #c8c8c9;
+}
+
+.wwwcategoryList dl dd a.selectedtips:link, .wwwcategoryList dl dd a.selectedtips:visited, .categoryList dl dd a.selectedtips:hover, .categoryList dl dd a.selectedtips:active {
+background: #e5e6e6;
+color: #ffb238;
+}
+
+.wwwcategoryList dl dd a.selectedtips:link, .wwwcategoryList dl dd a.selectedtips:visited, .categoryList dl dd a.selectedtips:hover, .categoryList dl dd a.selectedtips:active {
+background: #e5e6e6;
+color: #ffb238;
+}
+
+.wwwcategoryList dl dd a:link, .wwwcategoryList dl dd a:visited {
+color: #727171;
+}
+
+.wwwcategoryList dl dd a:link, .wwwcategoryList dl dd a:visited {
+color: #727171;
+}
+
+.wwwcategoryList dl dd a {
+display: inline-block;
+padding: 0px 5px;
+line-height: 20px;
+font-size:12px;
+}
+
+dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, textarea, p, th, td {
+margin: 0;
+padding: 0;
+}
+
+.btn-yellow{
+	background: #ffb238;
+	color:#fff;
+	border-color:#ffb238;
+}
+</style>
+
+	<!-- begin顶部菜单 -->
+	<nav class="top-nav">
+         <div class="container">
+         	<div style="float:left;width:200px;">
+         		<a href="${ctx }/" style="color:#ffb238;text-decoration: none;">洁衣库</a>
+         	</div>
+         	<ul class="clearfix;">
+         		<c:choose>
+      	<c:when test="${not empty customer}">
+	 		<li class="dropdown menu">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			      ${customer.email } <span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li style="float: none;"><a style="border-right:0px;height:30px;line-height: 30px;display: block;" href="${ctx}/customer/customerManager">我的订单</a></li>
+			      <li style="float: none;"><a style="border-right:0px;height:30px;line-height: 30px;display: block;" href="#" id="logout_a">退出</a></li>
+			    </ul>
+			</li>	  
+      	</c:when>
+      	
+      	<c:otherwise>
+     		<li><a href="${ctx }/login">登录</a></li>
+         	<li><a href="${ctx }/register.html#注册">注册</a></li>
+	       
+      	</c:otherwise>
+      	
+      </c:choose>
+         	</ul>
+         </div>  
+    </nav>
+    <!-- end顶部菜单 -->
+	
+	
+	
+	
+	<!-- end主导航 -->
+	  
+	
+	 <!-- Modal -->
+<div class="modal fade" id="login_modal_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-top:100px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">您尚未登录
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="bs-example bs-example-tabs">
+				      <ul id="myTab" class="nav nav-tabs">
+				        <li class="active"><a href="#profile" data-toggle="tab">登录</a></li>
+				        <li class=""><a href="#dropdown1" data-toggle="tab">注册</a></li>
+				      </ul>
+				      <div id="myTabContent" class="tab-content">
+				        <div class="tab-pane fade active in" id="profile">
+				          	<form role="form" id="login_form" style="padding-top:20px;">
+							  <div class="form-group">
+							    <label for="exampleInputEmail1">邮箱地址：</label>
+							    <input type="text" name="email" class="form-control required useTitle validate-email" required-title="请输入用户名" id="email_login" placeholder="请输入邮箱">
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">密码：</label>
+							    <input type="password" name="password" class="form-control required useTitle min-length-6 max-length-16 ajax" maxlength="16" required-title="密码不能为空" min-length-title="密码由6到16位的字符组成" max-length-title="密码由6到16位的字符组成" id="password"/>
+							  </div>
+							   
+							  <button type="submit" id="login_btn" class="btn btn-buy  btn-block" style="height:38px;">登录</button>
+							  
+<!-- 							   <div style="margin-top:5px;font-size:12px;"> -->
+<%-- 							   		我不想登录<a style="color:#2DB8AD;" href="${ctx}/settlement">直接购买</a> --%>
+<!-- 							   </div> -->
+							</form>
+				        </div>
+				        <div class="tab-pane fade" id="dropdown1">
+				          <form role="form" id="register_form" style="padding-top:20px;">
+							  <div class="form-group">
+							    <label for="exampleInputEmail1">电子邮箱：</label> 
+							    <input type="text" name="email" class="form-control required useTitle validate-email ajax" required-title="请输入有效的电子邮箱" id="email_reg" placeholder="请输入电子邮箱作为账户名">
+							  </div>
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">密码：</label>
+							    <input type="password" name="password" class="form-control required useTitle min-length-6 max-length-16" maxlength="16" required-title="密码不能为空" min-length-title="密码由6到16位的字符组成" max-length-title="密码由6到16位的字符组成" id="reg_password"/>
+							  </div>
+							  
+							  <div class="form-group">
+							    <label for="exampleInputPassword1">确认密码：</label>
+							    <input type="password" name="confirmpassword" class="form-control required equals-reg_password useTitle min-length-6 max-length-16" maxlength="16" required-title="密码不能为空" min-length-title="密码由6到16位的字符组成" max-length-title="密码由6到16位的字符组成" id="confirmpassword"/>
+							  </div>
+							  
+							   <div class="checkbox">
+								    <label style="font-size:12px;">
+								      <input type="checkbox" id="agree_ment_id"> 我已阅读并同意《<a style="color:#ffb238;" href="${ctx }/agreement" target="_blank">洁衣库用户注册协议</a>》
+								    </label>
+							   </div>
+							  <button type="submit" id="register_btn" disabled="disabled" class="disabled btn btn-buy  btn-block" style="height:38px;">立即注册</button>
+							  
+<!-- 							   <div style="margin-top:5px;font-size:12px;"> -->
+<%-- 							   		我不想注册<a style="color:#2DB8AD;" href="${ctx}/settlement">直接购买</a> --%>
+<!-- 							   </div> -->
+							</form>
+				        </div>
+				      </div>
+			    </div>
+ 
+      </div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+  
+   
+  
+<script>
+	
+	//切换菜单样式
+	$(".menu").each(function(){
+		if($(this).data("url") == location.hash){
+			$(this).addClass("current");
+		}else{
+			$(this).removeClass("current");
+		}
+		if(!location.hash){
+			$(".home").addClass("current");
+		}
+	});
+	
+	 
+	
+	$("#logout_a").click(function(){
+		$.get("${ctx}/customer/logout.do",function(data){
+			window.location.href="${ctx}/";
+		});
+	});
+	
+ 	
+	 
+	
+	//立即登录click事件
+	$("#add_clothes_id").click(function(){
+		if("${customer}"){
+			window.location.href = "${ctx}/order";
+		}else{
+			$('#login_modal_id').modal();
+		}
+		return false;
+	});
+	//同意协议复选框绑定事件
+	$("#agree_ment_id").click(function(){
+		
+		if($(this).prop("checked")){
+			$("#register_btn").removeClass("disabled").prop("disabled",false);
+		}else{
+			$("#register_btn").addClass("disabled").prop("disabled",true);
+		}
+	});
+	
+
+	var validLogin = new jValidation.Validation('login_form', {
+		immediate : true,
+		onElementValidateForAjax : function(elm) {
+			if ($(elm).attr("id") == 'password') {
+				var password = $("#password").val();
+				var username = $("#email_login").val();
+				return validateUser(username,password);
+			}
+		}
+		
+	});
+	
+	var validReg = new jValidation.Validation('register_form', {
+		immediate : true,
+		onElementValidateForAjax : function(elm) {
+			if ($(elm).attr("id") == 'email_reg') {
+				var username = $(elm).val();
+				return validateUsername(username);
+			}
+		}
+	});
+	
+	function validateUser(username,password) {
+		var result = new jValidation.ajax.Result();
+		jQuery.ajax({
+			type : 'Get',
+			contentType : 'application/json',
+			url : '${ctx}/customer/validate.do',
+			dataType : 'json',
+			async : false,
+			data : {
+				username : username,
+				password:password
+			},
+			success : function(data) {
+				if (!data.result) {
+					result.setResult(false);
+					result.setErrorMsg(data.errorMsg);
+				} else {
+					result.setResult(true);
+				}
+			},
+			error : function(data) {
+				result.setResult(false);
+				result.setErrorMsg("服务器繁忙，请您稍后再试！");
+			}
+		});
+		return result;
+
+	}
+	
+	function validateUsername(username) {
+		var result = new jValidation.ajax.Result();
+		jQuery.ajax({
+			type : 'Get',
+			contentType : 'application/json',
+			url : '${ctx}/customer/validateUsername.do',
+			dataType : 'json',
+			async : false,
+			data : {
+				username : username
+			},
+			success : function(data) {
+				if (!data.result) {
+					result.setResult(false);
+					result.setErrorMsg(data.errorMsg);
+				} else {
+					result.setResult(true);
+				}
+			},
+			error : function(data) {
+				result.setResult(false);
+				result.setErrorMsg("服务器繁忙，请您稍后再试！");
+			}
+		});
+		return result;
+
+	}
+ 
+	
+	$("#login_btn").click(function(){
+		if(!validLogin.validate()){
+			return false;
+		} 
+		window.location.href = "${ctx}/order"; 
+		return false; 
+	});
+	
+	$("#register_btn").click(function(){
+		if(!validReg.validate()){
+			return false;
+		}
+		
+		var postData = $("#register_form").serialize();
+
+		$.ajax({
+			type : "POST",
+			url : "${ctx}/customer/add.do",
+			data : postData,
+			dataType : "json",
+			success : function(data) {
+				if (data.result) {
+					window.location.href = "${ctx}/login";
+				} else {
+					alert("系统繁忙，请您稍后再试！");
+					return false;
+				}
+			},
+			error : function(data) {
+				alert("系统繁忙，请您稍后再试！");
+				return false;
+			}
+		});
+		return false;
+	});
+	
+	
+	
+ 
+</script>
+
+<!-- <div style="margin-top:92px;"></div> -->

@@ -1,0 +1,11 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.ColorSizeItem;
+
+public interface ColorSizeItemDao extends GenericDao<ColorSizeItem, Integer> {
+	List<ColorSizeItem> getByColorId(int colorId);
+
+	List<ColorSizeItem> getBySizeId(int sizeId);
+}

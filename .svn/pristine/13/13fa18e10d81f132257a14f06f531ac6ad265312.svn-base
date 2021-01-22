@@ -1,0 +1,691 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./header.jsp" %>
+
+<head>
+	<style>
+		.pic-desc{
+    		display: block;
+    		position: relative;
+    		overflow: hidden;
+    	}
+    	
+    	.pic-desc .pic{
+    		width:1928px;
+    		margin-left:-964px;
+    		position: absolute;
+    		left: 50%;
+    	}
+    	
+    	.pic-desc .pic a{
+    		display: block;
+    	}
+    	
+    	.pic-desc img{
+    		display: block;
+    	}
+    	
+    	/* 本例子css */
+	.fullSlide{ width:100%;  position:relative;  height:500px; background:#000;  }
+	.fullSlide .bd{ margin:0 auto; position:relative; z-index:0; overflow:hidden;  }
+	.fullSlide .bd ul{ width:100% !important;  }
+	.fullSlide .bd li{ width:100% !important;  height:500px; overflow:hidden; text-align:center;  }
+	.fullSlide .bd li a{ display:block; height:500px; }
+
+	.fullSlide .hd{ width:100%;  position:absolute; z-index:1; bottom:0; left:0; height:30px; line-height:30px; }
+	.fullSlide .hd ul{ text-align:center; }
+	.fullSlide .hd ul li{ cursor:pointer; display:inline-block; *display:inline; zoom:1; width:42px; height:11px; margin:1px; overflow:hidden; background:#000;
+		filter:alpha(opacity=50);opacity:0.5;  line-height:999px; 
+	}
+	.fullSlide .hd ul .on{ background:#fff;  }
+
+	.fullSlide .prev,
+	.fullSlide .next{  display:block;  position:absolute; z-index:1; top:50%; margin-top:-30px; left:15%;  z-index:1; width:40px; height:60px; background:url(images/slider-arrow.png) -126px -137px #000 no-repeat;  cursor:pointer; filter:alpha(opacity=50);opacity:0.5; display:none;  }
+	.fullSlide .next{ left:auto; right:15%; background-position:-6px -137px; }
+	</style>
+	
+</head>
+
+<body class="">
+	
+	<tags:top/>
+	
+	<!-- begin全屏轮播图 -->
+	<div class="fullSlide">
+		
+		<div class="bd">
+			<ul>
+				<li _src="url(${ctx}/images/1.jpg)" style="background:#E2025E center 0 no-repeat;"><a target="_blank" href="${ctx }/detailGoods/1"></a></li>
+				<li _src="url(${ctx}/images/2.jpg)" style="background:#DED5A1 center 0 no-repeat;"><a target="_blank" href="${ctx }/detailGoods/2"></a></li>
+				<li _src="url(${ctx}/images/4.jpg)" style="background:#DED5A1 center 0 no-repeat;"><a target="_blank" href="${ctx }/detailGoods/2"></a></li>
+			</ul>
+		</div>
+
+		<div class="hd"><ul></ul></div>
+		<span class="prev"></span>
+		<span class="next"></span>
+	</div>
+	<!-- end轮播图 -->
+	
+	<style>
+		.main-c{
+			line-height: 34px;
+			border-bottom:1px solid #ccc;
+			margin-bottom:5px;
+			margin-top:15px;
+			height: 34px;
+			background: url(${ctx}/images/950.gif) no-repeat #787878;
+		}
+		
+		.main-c  .title{
+			color:#fff;
+			font-weight: bold;
+			padding-left:30px;
+		}
+		
+		.main-c  .more a{
+			color:#fff;
+			padding-right:15px;
+		}
+		
+		.foucebox {width:1000px;height:400px;background:#ccc;margin:0 auto;}
+	.foucebox .bd{position:relative;float:left;width:720px;height:400px;overflow:hidden;}
+	.foucebox .showDiv {position:relative;width:720px;height:400px;}
+	.foucebox .showDiv img {width:720px;height:400px;}
+	.foucebox .showDiv p { position:absolute;left:20px;bottom:0;padding-right:20px;color:#aaa;z-index:9; height:44px; }
+	.foucebox .showDiv h2 { position:absolute;left:20px; bottom:0; width:380px;height:34px;_background:none;_padding-left:0;font-size:24px;font-family:"Microsoft Yahei";line-height:34px;z-index:9;overflow:hidden;}
+	.foucebox .showDiv h2 a {color:#8ecf12;font-weight:normal;}
+	.foucebox .foucebox_bg {position:absolute;left:0;bottom:0;width:720px;height:107px;background:#000;filter:alpha(opacity=60);opacity:0.6;z-index:8;overflow:hidden;}
+
+	.foucebox .hd{width:244px; height:318px;float:right;}
+	.foucebox .hd ul li{width:114px; height:91px; float:left; margin:0 0 10px 4px; display:inline; position:relative;}
+	.foucebox .hd ul a {display:block;width:114px;height:91px;}
+	.foucebox .hd ul img{width:108px; height:84px; border:3px solid #2b2b2b;}
+	.foucebox .hd ul .txt_bg{width:108px; height:24px; position:absolute; left:0px; top:63px; background:url(images/bg_png.png) no-repeat; _background:none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, src="${ctx}/images/bg_png.png");}
+	.foucebox .hd ul .txt{width:103px; height:24px; line-height:24px; color:#fff; position:absolute; left:4px; bottom:4px; z-index:2; text-align:right; padding-right:5px;overflow:hidden;}
+	.foucebox .hd ul .mask{width:108px; height:85px; display:block; position:absolute; left:0px; bottom:6px; z-index:3; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#66000000', endColorstr='#66000000');background:rgba(0,0,0,0.4);}
+	.foucebox .hd ul a:hover .mask, .foucebox .hd ul .on .mask{display:none; position:relative;}
+	.foucebox .hd ul a:hover img, .foucebox .hd ul .on img{border-color:#70a20f;}
+	.foucebox .hd ul a:hover{color:#fff;}
+	.foucebox .hd ul a:hover .txt_bg {background:#70a20f;}
+	</style>
+
+   <!-- begin 商品区域 -->    
+   <div class="container clearfix">
+		<!-- begin热品推荐区域 -->
+		<div class="main-c">
+			<span class="title">精品推荐</span>
+			<span class="more" style="float: right;"><a href="#">查看更多</a></span>
+		</div>
+		
+		
+		<div class="foucebox" style="margin:0 auto">
+
+			<!-- 大图 -->
+			<div  class="bd">
+				<div  class="showDiv">
+					<a href="#"><img  src="${ctx}/images/1.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+				</div>
+
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/2.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+				</div>
+
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/3.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">桌子饭桌楠竹餐台</a></h2>
+						<p>简易方桌实木餐桌小户型桌子宜家现代方桌子饭桌楠竹餐台</p>
+					</div>
+				</div>
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/4.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+				</div>
+
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/1.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">桌子饭桌楠竹餐台</a></h2>
+						<p>简易方桌实木餐桌小户型桌子宜家现代方桌子饭桌楠竹餐台</p>
+					</div>
+				</div>
+
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/2.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+				</div>
+
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/3.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+				</div>
+
+				<div  class="showDiv" >
+					<a href="#"><img  src="${ctx}/images/4.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- 小图 -->
+			<div class="hd">
+				<ul>
+					 <li><a href="#"><img src="${ctx}/images/1.jpg"><span class="txt">精品书架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/2.jpg"><span class="txt">花架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/3.jpg"><span class="txt">迷你板凳</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/4.jpg"><span class="txt">多层鞋架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/1.jpg"><span class="txt">精品书架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/2.jpg"><span class="txt">花架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/3.jpg"><span class="txt">迷你板凳</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					 <li><a href="#"><img src="${ctx}/images/4.jpg"><span class="txt">多层鞋架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+					</ul>
+			</div>
+
+	</div>
+	<!-- end热品推荐区域 -->
+	<div class="main-c">
+			<span class="title">限时特卖</span>
+	</div>
+	<!-- begin 特价折扣区域 -->
+	<style>
+		.col-xs-6{
+			margin-top:15px;
+		}
+		.tm-shop-box{
+			position: relative;
+			border:3px solid #ccc;
+			padding:5px;
+		}
+		
+		.tm-shop-box:hover{
+			border:3px solid #36ab2a;
+		}
+		
+		.tm-shop-box .img-a img{
+			width:458px;
+			height:295px;
+		}
+		
+		.tm-shop-box .diyico {
+			display: block;
+			position: absolute;
+			top: 5px;
+			left:5px;
+			width: 54px;
+			height: 52px;
+			padding-bottom: 4px;
+			background-color: #36ab2a;
+			overflow: hidden;
+		}
+		
+		.tm-shop-box .diyico em {
+			float: left;
+			display: block;
+			width: 54px;
+			height: 52px;
+			line-height: 26px;
+			color: #FFF;
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			font-family: "\5fae\8f6f\96c5\9ed1";
+			overflow: hidden;
+			font-style:normal;
+			}
+	</style>
+	<div class="row">
+		<div class="col-xs-6">
+			<div class="tm-shop-box">
+				<i class="diyico"><em>特价促销</em></i>
+				<a class="img-a" href="#">
+					<img src="${ctx }/images/tm1.jpg"/>
+				</a>
+				<h5>楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子</h5>
+				<p class="content" style="margin:0px;">
+		        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;">￥100</strong>
+		        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;">￥100</span>
+		        </p>
+		        <div align="" style="margin-bottom:5px;">
+		        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;">20</span>人已经购买</span>
+		        	<a href="./detailGoods/5" target="_blank" class="btn btn-sec btn-lg" style="float: right;margin-top:-25px;" role="button">立即抢购</a>
+		        </div>
+		        
+			</div>
+		</div>
+		
+		<div class="col-xs-6">
+			<div class="tm-shop-box">
+				<i class="diyico"><em>特价促销</em></i>
+				<a class="img-a" href="#">
+					<img src="${ctx }/images/tm2.jpg"/>
+				</a>
+				<h5>楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子</h5>
+				<p class="content" style="margin:0px;">
+		        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;">￥100</strong>
+		        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;">￥100</span>
+		        </p>
+		        <div align="" style="margin-bottom:5px;">
+		        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;">20</span>人已经购买</span>
+		        	<a href="./detailGoods/5" target="_blank" class="btn btn-sec btn-lg" style="float: right;margin-top:-25px;" role="button">立即抢购</a>
+		        </div>
+		        
+			</div>
+		</div>
+		
+		<div class="col-xs-6">
+			<div class="tm-shop-box">
+				<i class="diyico"><em>特价促销</em></i>
+				<a class="img-a" href="#">
+					<img src="${ctx }/images/tm1.jpg"/>
+				</a>
+				<h5>楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子</h5>
+				<p class="content" style="margin:0px;">
+		        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;">￥100</strong>
+		        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;">￥100</span>
+		        </p>
+		        <div align="" style="margin-bottom:5px;">
+		        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;">20</span>人已经购买</span>
+		        	<a href="./detailGoods/5" target="_blank" class="btn btn-sec btn-lg" style="float: right;margin-top:-25px;" role="button">立即抢购</a>
+		        </div>
+		        
+			</div>
+		</div>
+		
+		<div class="col-xs-6">
+			<div class="tm-shop-box">
+				<i class="diyico"><em>特价促销</em></i>
+				<a class="img-a" href="#">
+					<img src="${ctx }/images/tm2.jpg"/>
+				</a>
+				<h5>楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子</h5>
+				<p class="content" style="margin:0px;">
+		        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;">￥100</strong>
+		        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;">￥100</span>
+		        </p>
+		        <div align="" style="margin-bottom:5px;">
+		        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;">20</span>人已经购买</span>
+		        	<a href="./detailGoods/5" target="_blank" class="btn btn-sec btn-lg" style="float: right;margin-top:-25px;" role="button">立即抢购</a>
+		        </div>
+		        
+			</div>
+		</div>
+	</div>
+	
+	<!-- end 特价折扣区域 -->
+	
+	<!-- begin 新款上市 -->
+	<style>
+		.new-shop-box{
+			height: 320px;
+			border:1px solid #ccc;
+			padding:4px;
+		}
+		
+		.new-shop-box:hover{
+			background: #65c178;
+		}
+		
+		.new-shop-box:hover .desc{
+			color:#fff;
+			font-family: "微软雅黑", "宋体";
+		}
+		
+		.new-shop-box .img{
+			width:219px;
+			height:219px;
+		}
+		
+		.new-shop-box  .price{
+			height: 50px;
+			line-height: 50px;
+			font-size:26px;
+			color:#F76120;
+			text-align: center;
+			font-family: "impact", "微软雅黑", "宋体";
+			font-weight: bold;
+			border-bottom:1px solid #65c178;
+			background: #fff;
+		}
+		
+		.new-shop-box .desc{
+			color:#777;
+			font-size:12px;
+			padding:5px;
+		}
+		
+		.newshop .col-xs-3{
+			margin-top:15px;
+		}
+	</style>
+	<div class="main-c">
+			<span class="title">新品上市</span>
+			<span class="more" style="float: right;"><a href="#">查看更多</a></span>
+	</div>
+	
+	<div class="row newshop">
+		 
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new1.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		 <div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new2.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new3.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new4.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new1.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new1.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new1.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-3">
+			<div class="new-shop-box">
+				<a href="#">
+					<img class="img" src="${ctx }/images/new1.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end 新款上市 -->
+	
+	<!-- begin 新款滚动 -->
+	<style>
+		.new-fullSlide{ min-width:1000px; position:relative;  height:330px; overflow:hidden; margin-top:5px; }
+	.new-fullSlide .bd{ position:relative; z-index:0;  }
+	.new-fullSlide .bd ul{ width:100% !important;  }
+	.new-fullSlide .bd li{ width:100% !important;  height:330px; overflow:hidden; text-align:center;  }
+	.new-fullSlide .bd li a{ display:block; height:330px; }
+
+	.new-fullSlide .hd{ width:1000px; left:50%; margin-left:-500px; bottom:15px; position:absolute; z-index:1; bottom:15px; overflow:hidden;  }
+	.new-fullSlide .hd ul{ float:left;  }
+	.new-fullSlide .hd ul li{ float:left; margin:0 5px; display:inline; cursor:pointer; }
+	.new-fullSlide .hd ul li img{ width:80px; line-height:41px; display:block; border:2px solid #fff; filter:alpha(opacity=50);opacity:0.5;  }
+	.new-fullSlide .hd ul .on img{ border-color:#000; filter:alpha(opacity=100);opacity:1;  }
+	</style>
+	
+	<div class="new-fullSlide" >
+		
+		<div class="bd">
+			<ul>
+				<li style="background:url(images/new-f1.jpg) center 0 no-repeat;"><a target="_blank" href="http://www.superslide2.com"></a></li>
+				<li style="background:url(images/new-f2.jpg) center 0 no-repeat;"><a target="_blank" href="http://www.superslide2.com"></a></li>
+				<li style="background:url(images/new-f3.jpg) center 0 no-repeat;"><a target="_blank" href="http://www.superslide2.com"></a></li>
+				<li style="background:url(images/new-f4.jpg) center 0 no-repeat;"><a target="_blank" href="http://www.superslide2.com"></a></li>
+			</ul>
+		</div>
+
+		<div class="hd">
+			<ul>
+				<li><img src="images/new-f1.jpg" /></li>
+				<li><img src="images/new-f2.jpg" /></li>
+				<li><img src="images/new-f3.jpg" /></li>
+				<li><img src="images/new-f4.jpg" /></li>
+			</ul>
+		</div>
+	</div>
+	<!-- end 新款滚动 -->
+	
+	<!-- begin类目 -->
+	<style>
+		/* 本例子css */
+		.hp-tab-newprd { width: 1000px; height: 370px; overflow: hidden; position: relative; background: #ccc url(images/bg-newprd.jpg) no-repeat 0 0 }
+		.hp-tab-newprd .j-sw-nav { padding-top: 1px; height: 26px; margin: 0 auto; overflow: hidden; position: relative }
+		.hp-tab-newprd .j-sw-nav li { float: left; margin-right: -20px }
+		.hp-tab-newprd .j-sw-nav li a { position: relative; display: block; width: 140px; height: 26px; line-height: 1.91; padding: 0 20px; text-align: center; text-transform: uppercase; background: url(images/bg-tag-off.png) no-repeat 0 0; color: #fefefe; font-weight: bold; word-wrap: break-word; overflow: hidden; outline: 0; cursor:pointer;  }
+		.newprd-s1, .newprd-s1 a { z-index: 20 }
+		.newprd-s2, .newprd-s2 a { z-index: 19 }
+		.newprd-s3, .newprd-s3 a { z-index: 18 }
+		.newprd-s4, .newprd-s4 a { z-index: 17 }
+		.newprd-s5, .newprd-s5 a { z-index: 16 }
+		.newprd-s6, .newprd-s6 a { z-index: 15 }
+		.newprd-s7, .newprd-s7 a { z-index: 14 }
+		.hp-tab-newprd .newprd-clip{ padding-left:25px;  }
+		.hp-tab-newprd .j-sw-nav .on { position: relative; z-index: 99 }
+		.hp-tab-newprd .j-sw-nav li a:hover, .hp-tab-newprd .j-sw-nav .on a { background-image: url(images/bg-tag-on.png); z-index: 99; color: #fefefe; text-decoration: none; cursor: pointer;  }
+		.hp-tab-newprd .j-sw-c ul{ zoom:1; overflow:hidden; width:940px;  }
+		.hp-tab-newprd .j-sw-c li { float: left; margin-top: 35px; margin-right: 6px; display:inline; }
+		.hp-tab-newprd .j-sw-c li img { width: 175px; height: 228px; padding: 2px; background-color: #fff; border: 1px solid #ccc }
+	</style>
+	
+	<div class="main-c">
+			<span class="title">人气排行榜</span>
+	</div>
+	<div class="hp-tab-newprd" style="margin:20px auto auto 0">
+		<ul class="j-sw-nav">
+		   <li class="newprd-s1"><a href="#" target="_blank">最多购买</a></li>
+		   <li class="newprd-s2"><a href="#" target="_blank">最多收藏</a></li>
+		   <li class="newprd-s3"><a href="#" target="_blank">最多好评</a></li>
+		   <li class="newprd-s4"><a href="#" target="_blank">最美设计</a></li>
+		</ul>
+		<div class="newprd-clip">
+			<div class="j-sw-c">
+					<ul>
+						<li><a href="#" target="_blank"><img src="images/c5.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c5.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c4.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c5.jpg" /></a></li>
+					</ul>
+					
+					<ul>
+						<li><a href="#" target="_blank"><img src="images/c4.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c3.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c4.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c5.jpg" /></a></li>
+					</ul>
+					
+					<ul>
+						<li><a href="#" target="_blank"><img src="images/c1.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c1.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c1.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c1.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c1.jpg" /></a></li>
+					</ul>
+					
+					<ul>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+						<li><a href="#" target="_blank"><img src="images/c2.jpg" /></a></li>
+					</ul>
+					  
+			</div>
+
+		</div>
+	</div>
+	<!-- end类目 -->
+	</div>
+   <!-- end 商品区域 -->
+   
+	<tags:bottom/>
+	
+	<script type="text/tmpl" id="goods_model_id">
+		<div class="pic-desc" style="height: 400px;">
+			<div class="pic">
+				<a href="#" target="_blank"><img src="${ctx }/images/goods1.jpg"></a>
+			</div>
+		</div>
+	</script>
+	<script>
+		$(function(){
+				var col = 3;
+				//获取人气单品
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/hotList.do?pageSize=8&grade=1&currPage=1&categoryId=0",
+					async:false,
+					dataType : 'json',
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var goods = list[i];
+			        		var html = $("#goods_model_id").html();
+			        		$("#goods_area_id").append(html);
+			        		var newDom = $("#goods_area_id").find(".pic-desc").last();
+			        		newDom.find("img").attr("src","./upload/download.do?fileName="+goods.bigPic).attr("title",goods.title).attr("alt",goods.title);
+			        		newDom.find("a").attr("href","${ctx}/detailGoods/"+goods.id);
+			        	}
+					}
+				});
+				
+		});
+	</script>
+	
+	<script type="text/javascript">
+		//全屏轮播
+		/* 控制左右按钮显示 */
+		jQuery(".fullSlide").hover(function(){ jQuery(this).find(".prev,.next").stop(true,true).fadeTo("show",0.5) },function(){ jQuery(this).find(".prev,.next").fadeOut() });
+		/* 调用SuperSlide */
+		jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click",
+			startFun:function(i){
+				var curLi = jQuery(".fullSlide .bd li").eq(i); /* 当前大图的li */
+				if( !!curLi.attr("_src") ){
+					curLi.css("background-image",curLi.attr("_src")).removeAttr("_src") /* 将_src地址赋予li背景，然后删除_src */
+				}
+			}
+		});
+		
+		//热品推荐
+		jQuery(".foucebox").slide({ effect:"fold", autoPlay:true, delayTime:300, startFun:function(i){
+			//下面代码控制文字显示
+			jQuery(".foucebox .showDiv").eq(i).find("h2").css({display:"none",bottom:0}).animate({opacity:"show",bottom:"60px"},300);
+			jQuery(".foucebox .showDiv").eq(i).find("p").css({display:"none",bottom:0}).animate({opacity:"show",bottom:"10px"},300);
+		}
+		});
+		
+		//新品滚动
+		jQuery(".new-fullSlide").slide({ titCell:".hd li", mainCell:".bd ul", effect:"fold",  autoPlay:true, delayTime:700 });
+		
+		//类目
+		jQuery(".hp-tab-newprd").slide({ titCell:".j-sw-nav li",mainCell:".j-sw-c",effect:"left",easing:"easeInElastic",delayTime:800 });
+	</script>
+	
+</body>

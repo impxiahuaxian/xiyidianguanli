@@ -1,0 +1,184 @@
+package com.weiweiqin.controller.home;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Color;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.service.ColorService;
+import com.weiweiqin.service.GoodsService;
+import com.weiweiqin.vo.common.CartVO;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("/cart")
+public class CartController {
+
+	@Autowired
+	private GoodsService goodsService;
+	
+	@Autowired
+	private ColorService colorService;
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(CartController.class);
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/addCart.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String addCart(int goodsId, int num, String color,String size,String pic,HttpSession session) {
+		logger.info("Enter method addCart,goodsId=" + goodsId + ":num=" + num+":color="+color+":size="+size+":pic="+pic);
+		if(null == color){
+			color = "";
+		}
+		
+		if(null == size){
+			size = "";
+		}
+		Result result = new Result();
+		//以商品ID、颜色、尺码为key
+		String key = genSessionKey(goodsId,color,size);
+		Map<String, CartVO> carts = null;
+		if (null != session.getAttribute("carts")) {
+			carts = (Map<String, CartVO>) session.getAttribute("carts");
+		} else {
+			carts = new HashMap<String, CartVO>();
+		}
+		if (carts.containsKey(key)) {
+			CartVO cartVO = carts.get(key);
+			cartVO.setNum(cartVO.getNum()+num);
+		} else {
+			CartVO cartVO = new CartVO();
+			cartVO.setColor(color);
+			cartVO.setSize(size);
+			cartVO.setNum(num);
+			cartVO.setGoodsId(goodsId);
+			cartVO.setPic(pic);
+			carts.put(key,cartVO);
+			//设置最新商品
+			session.setAttribute("lastCarts", cartVO);
+		}
+		session.setAttribute("carts", carts);
+		
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/delCart.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String delCart(int goodsId, String color,String size,HttpSession session) {
+		Result result = new Result();
+		if(null == color){
+			color = "";
+		}
+		if(null == size){
+			size = "";
+		}
+		String key = genSessionKey(goodsId,color,size);
+		Map<String, Integer> carts = null;
+		if (null != session.getAttribute("carts")) {
+			carts = (Map<String, Integer>) session.getAttribute("carts");
+		} else {
+			carts = new HashMap<String, Integer>();
+		}
+		if (carts.containsKey(key)) {
+			carts.remove(key);
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/getCartList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getCartList(HttpSession session) {
+		Result result = new Result();
+		Map<String, CartVO> carts = null;
+		List<CartVO> cartList = new ArrayList<CartVO>();
+		if (null != session.getAttribute("carts")) {
+			carts = (Map<String, CartVO>) session.getAttribute("carts");
+			Set<Entry<String, CartVO>> entrySet = carts.entrySet();
+			for (Entry<String, CartVO> entry : entrySet) {
+				CartVO vo = entry.getValue();
+				Goods goods = goodsService.get(vo.getGoodsId());
+				//获取该颜色对应价格
+				Color color = colorService.getByNameAndGoodsId(vo.getColor(), vo.getGoodsId());
+				if(color.getPrice() != 0){
+					goods.setNowPrice(color.getPrice());
+				}
+				vo.setGoods(goods);
+				cartList.add(vo);
+			}
+		} 
+		result.setObj(cartList); 
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/getCartNum.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getCartNum(HttpSession session) {
+		int num = 0;
+		if (null != session.getAttribute("carts")) {
+			Map<String, CartVO> carts  = (Map<String, CartVO>) session.getAttribute("carts");
+			num = carts.entrySet().size();
+		} 
+		return num+"";
+	}
+	
+	@RequestMapping(value = "/modifyNum.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	private String modifyNum(String key,int num,HttpSession session){
+		Result result = new Result();
+		try {
+			if (null != session.getAttribute("carts")) {
+				@SuppressWarnings("unchecked")
+				Map<String, CartVO> carts = (Map<String, CartVO>) session
+						.getAttribute("carts");
+				CartVO cartVO = carts.get(key);
+				cartVO.setNum(num);
+			}
+		} catch (Exception e) {
+			logger.error("修改购物车商品数量异常...",e);
+			result.setResult(false);
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	
+	private String  genSessionKey(int goodsId,String color,String size){
+		
+		return goodsId+"_"+color+"_"+size;
+	}
+
+	public GoodsService getGoodsService() {
+		return goodsService;
+	}
+
+	public void setGoodsService(GoodsService goodsService) {
+		this.goodsService = goodsService;
+	}
+
+}

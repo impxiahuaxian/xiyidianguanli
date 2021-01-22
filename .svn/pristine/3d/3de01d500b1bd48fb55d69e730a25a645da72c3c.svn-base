@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0052)http://www.zixing8.com/sfmb/publicfiles/orderv4.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    
+    <style type="text/css">
+        *{ *position: inherit}
+        body { margin: 0; padding: 0; color: #4b4b4b; background: #fff; }
+        .container { font-size: 12px; text-align: left; margin: 0 auto; min-width: 550px; width: 960px; border: solid 0 red; }
+        em { color: #ff0000; padding: 0 5px; }
+        span.msg { color: #999; }
+        span.error { color: #ff0000; }
+        span.right { color: #4e7d0e; }
+        div.block, #DIVPB label { padding: 3px; margin:4px; }
+        #DIVPB label { display: inline-block; cursor: pointer; }
+        div.block, div textarea { margin-left: 20px; }
+        #DIVPB label.curr{ border: solid 2px #f47a20;margin:2px; background:#ffd4b5 url('currbg.gif') no-repeat right -64px }
+        .onfocus { background-color: #FFFFCC; }
+        .onblur { background-color: #FFF; }
+        .inputtext { padding: 6px; border: solid 1px #ccc; font-size: 12px; font-family: "微软雅黑"; color: #333; box-shadow: inset 0 1px 2px rgba(0,0,0,.1);margin-left: 20px;}
+        .button { display: inline-block; zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */ *display: inline; vertical-align: baseline; margin: 0 2px; outline: none; cursor: pointer; text-align: center; text-decoration: none; font: 14px/100% Arial, Helvetica, sans-serif; padding: .5em 2em .55em;  -webkit-border-radius: .5em; -moz-border-radius: .5em; border-radius: .5em;  }
+        .button:hover { text-decoration: none; }
+        .button:active { position: relative; top: 1px; }
+        .bigrounded { -webkit-border-radius: 2em; -moz-border-radius: 2em; border-radius: 2em; }
+        .medium { font-size: 12px; padding: .4em 1.5em .42em; }
+        .small { font-size: 11px; padding: .2em 1em .275em; }
+        /* orange */
+        .orange { color: #fef4e9; border: solid 1px #da7c0c; background: #f78d1d; background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20)); background: -moz-linear-gradient(top, #faa51a, #f47a20); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20'); }
+        .orange:hover { background: #f47c20; background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015)); background: -moz-linear-gradient(top, #f88e11, #f06015); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015'); }
+        .orange:active { color: #fcd3a5; background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a)); background: -moz-linear-gradient(top, #f47a20, #faa51a); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a'); }
+        /*.inputtext:focus { transition: border linear .5s,box-shadow linear .5s; -moz-transition: border linear .2s,-moz-box-shadow linear .5s; -webkit-transition: border linear .2s,-webkit-box-shadow linear .5s; outline: none; border-color: #7db72f; box-shadow: inset 0 1px 2px rgba(0,0,0,.1),0 0 4px #7db72f;} -moz-box-shadow:inset 0 1px 2px rgba(0,0,0,.1),0 0 4px #7db72f;-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,.1),0 0 4px #7db72f;*/
+        .inputtext:focus { transition: border linear .5s,box-shadow linear .5s; -moz-transition: border linear .2s,-moz-box-shadow linear .5s; -webkit-transition: border linear .2s,-webkit-box-shadow linear .5s; outline: none; border-color: #faa51a; box-shadow: inset 0 1px 2px rgba(0,0,0,.1),0 0 4px #faa51a; }
+        button::-moz-focus-inner { border: 0; padding: 0; margin: 0; }
+        .easyDialog_wrapper { width: 525px; color: #444; border: 3px solid rgba(255,255,255,0); -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4); -moz-box-shadow: 0 0 10px rgba(0,0,0,0.4); box-shadow: 0 0 10px rgba(0,0,0,0.4); display: none; font-family: "Microsoft yahei", Arial; }
+        .easyDialog_wrapper .easyDialog_content { -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; background: #fff; border: 1px solid #e5e5e5; }
+        .easyDialog_wrapper .easyDialog_title { height: 30px; line-height: 30px; overflow: hidden; color: #666; padding: 0 10px; font-size: 14px; border-bottom: 1px solid #e5e5e5; background: #f7f7f7; border-radius: 4px 4px 0 0; margin: 0; }
+        .easyDialog_wrapper .close_btn { font-family: arial; font-size: 18px; _font-size: 12px; font-weight: 700; color: #999; text-decoration: none; float: right; }
+        .easyDialog_wrapper .close_btn:hover { color: #333; }
+        .easyDialog_wrapper .easyDialog_text { padding: 25px 10px; font-size: 13px; line-height: 22px; }
+        .easyDialog_wrapper .easyDialog_text td{background-color: #FFF}
+        .easyDialog_wrapper .easyDialog_footer { padding: 0 10px; *zoom: 1; }
+        .easyDialog_wrapper .easyDialog_footer:after { content: ''; display: block; height: 0; overflow: hidden; visibility: hidden; clear: both; }
+        .easyDialog_wrapper .btn_highlight,
+        .easyDialog_wrapper .btn_normal { border: 1px solid; border-radius: 2px; cursor: pointer; font-family: "Microsoft yahei", Arial; float: right; font-size: 12px; padding: 0 12px; height: 24px; line-height: 24px; margin-bottom: 10px; }
+        .easyDialog_wrapper .btn_highlight { background: #f78d1d; background: -webkit-gradient(linear,center bottom,center top,from(#f06015),to(#f88e11)); background: -moz-linear-gradient(90deg, #f06015, #f88e11); border-color: #da7c0c; color: #fff; }
+        .easyDialog_wrapper .btn_normal { margin-left: 10px; border-color: #c3c3c3; background: #ececec; color: #333; background: -webkit-gradient(linear,center bottom,center top,from(#ececec),to(#f4f4f4)); background: -moz-linear-gradient(90deg,#ececec,#f4f4f4); }
+        .hong{ color: red; font-weight: bold}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form name="OrderForm" method="post" id="OrderForm" target="_blank">
+        	<input name="type" value="1" type="hidden"/>
+            <strong>选择产品套装：</strong><span><em>*</em> 表示为必须填写选项,</span><br>
+            <div class="block" id="DIVPB" style="border-bottom:dotted 1px #ccc; ">
+				<div style="line-height:36px;height:36px;_line-height:45px;_height:45px; *line-height:45px;*height:45px;font:800 14px/36px microsoft yahei"><div style="border:solid 1px #a40000;background-color:#e13335;border-radius: 15px;color:#FFF;position: absolute;width:30px;height:30px;line-height:30px; text-align:center">1</div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一步选择您要的套装吧！</span></div>
+				<div style="float:left;width:510px;overflow:hidden;">
+				<span class="hong">好字通</span><br>
+				<label class="curr">
+				<input type="radio" value="好字通特效练字套装标准版1套 ￥298元" name="product" sp="298" q="1" checked="checked" pid="75"><span>好字通特效练字套装标准版1套 <span class="hong"> ￥298.00元</span></span>&nbsp; </label><br>
+                <span id="productMsg" style="padding-left: 20px"></span>
+				</div>
+				
+			<div style="clear:both"></div> 
+            </div>
+
+			<div style="float:left;width:520px;overflow:hidden;">
+			<div class="block" style="line-height:36px; font:800 14px/36px microsoft yahei"><div style="border:solid 1px #a40000;background-color:#e13335;border-radius: 15px;color:#FFF;position: absolute;width:30px;height:30px;line-height:30px; text-align:center">2</div><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第二步填写收货人信息！</span></div>
+            <div class="block">
+                <label for="un">姓名:<input name="name" id="un" size="25" value="" maxlength="22" class="inputtext" type="text"></label><em> * </em><span id="unMsg" class="msg">您的姓名</span>
+            </div>
+            <div class="block">
+                <label for="mp">手机:<input name="mobile" id="mp" size="25" maxlength="11" value="" class="inputtext" type="text"></label><em> * </em><span id="mpMsg" class="msg">您的手机号码</span>
+            </div>
+            
+            
+            <div class="block">
+                <label for="pr">省市:<select name="province" id="selProvance" style="margin-left: 20px;" class="inputtext"><option value="--请选择省--" pcacode="000001">--请选择省--</option><option value="北京市" pcacode="110000">北京市</option><option value="天津市" pcacode="120000">天津市</option><option value="河北省" pcacode="130000">河北省</option><option value="山西省" pcacode="140000">山西省</option><option value="内蒙古自治区" pcacode="150000">内蒙古自治区</option><option value="辽宁省" pcacode="210000">辽宁省</option><option value="吉林省" pcacode="220000">吉林省</option><option value="黑龙江省" pcacode="230000">黑龙江省</option><option value="上海市" pcacode="310000">上海市</option><option value="江苏省" pcacode="320000">江苏省</option><option value="浙江省" pcacode="330000">浙江省</option><option value="安徽省" pcacode="340000">安徽省</option><option value="福建省" pcacode="350000">福建省</option><option value="江西省" pcacode="360000">江西省</option><option value="山东省" pcacode="370000">山东省</option><option value="河南省" pcacode="410000">河南省</option><option value="湖北省" pcacode="420000">湖北省</option><option value="湖南省" pcacode="430000">湖南省</option><option value="广东省" pcacode="440000">广东省</option><option value="广西壮族自治区" pcacode="450000">广西壮族自治区</option><option value="海南省" pcacode="460000">海南省</option><option value="重庆市" pcacode="500000">重庆市</option><option value="四川省" pcacode="510000">四川省</option><option value="贵州省" pcacode="520000">贵州省</option><option value="云南省" pcacode="530000">云南省</option><option value="西藏自治区" pcacode="540000">西藏自治区</option><option value="陕西省" pcacode="610000">陕西省</option><option value="甘肃省" pcacode="620000">甘肃省</option><option value="青海省" pcacode="630000">青海省</option><option value="宁夏回族自治区" pcacode="640000">宁夏回族自治区</option><option value="新疆维吾尔自治区" pcacode="650000">新疆维吾尔自治区</option><option value="台湾省" pcacode="710000">台湾省</option><option value="香港特别行政区" pcacode="810000">香港特别行政区</option><option value="澳门特别行政区" pcacode="820000">澳门特别行政区</option></select><select id="selCity" name="city" class="inputtext" style="margin-left: 0;"><option value="--请选择市--" pcacode="000000">--请选择市--</option></select><select id="selArea" name="area" class="inputtext" style="margin-left: 0;"><option value="--请选择区--">--请选择区--</option></select></label><em> * </em><span id="selProvanceMsg" class="msg">请选择</span>
+            </div>
+            <div class="block">
+                <label for="ad">街道:<input size="25" name="street" id="ad" value="" maxlength="120" class="inputtext" type="text"></label><em> * </em><span id="adMsg" class="msg">详细的地址(省市区不用填)</span>
+            </div>
+            
+            <div class="block">
+                <label for="tela">电话:<input name="" id="tela" value="" size="1" maxlength="4" class="inputtext" style="width: 45px;"></label>-<label for="tel"><input style="margin: 0" name="tel" id="tel" value="" size="17" maxlength="8" class="inputtext"></label><em> </em><span id="telMsg" class="msg">您的电话</span>
+            </div>
+            
+            <div class="block">
+                <label for="r">备注:<textarea rows="3" cols="30" id="r" name="remark" class="inputtext"></textarea></label>
+            </div>
+            <div class="block">
+                <label for="payType">支付方式：</label>
+                <input type="radio" checked="checked" value="货到付款" name="payType">货到付款
+            </div>
+            <div style="padding-left: 50px">
+                <input type="hidden" value="2" id="productId">
+                <input type="hidden" value="1" name="price" id="price">
+                <input type="hidden" value="1" name="count" id="count">
+                <input type="hidden" value="" name="callSource" id="callSource">
+                <input type="button" value="提交订单" class="button orange" id="btnSubmit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="reset" value="清空表单" class="button orange" id="btnReset">
+            </div>
+			</div>
+			<div style="margin-left:520px;overflow:hidden;">
+			<iframe src="sfmbfhtz.html" frameborder="0" height="470" scrolling="no" width="99%"></iframe>
+			</div>
+			<div style="clear:both"></div>
+        </form>
+    </div>
+    
+    <div id="overlay" style="display:none;margin: 0px; padding: 0px; border: none; width: 100%; height: 100%; opacity: 0.6; z-index: 9999; position: fixed; top: 0px; left: 0px; background: rgb(255, 255, 255);"></div>
+
+	<div id="easyDialogBox" style="display:none;margin: 0px; padding: 0px; border: none; z-index: 10000; position: fixed;"> 
+		<div id="easyDialogWrapper" class="easyDialog_wrapper" style="display: block; margin: 0px;">
+			<div class="easyDialog_content">
+				<h4 class="easyDialog_title" id="easyDialogTitle">
+					<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">×</a>
+					确认订单
+				</h4>
+				<div class="easyDialog_text">
+					<table style="font-size:13px;" cellpadding="8" cellspacing="1" bgcolor="#dddddd" width="100%">
+						<tbody>
+							<tr>
+								<td style="width:40px;">姓名：</td>
+								<td>jjj</td></tr><tr><td>电话：</td>
+								<td> 15952525252</td>
+							</tr>
+							
+							<tr>
+								<td>地址：</td>
+								<td>河北省秦皇岛市北戴河区222</td>
+							</tr>
+							
+							<tr>
+								<td>产品：</td>
+								<td>
+									好字通特效练字套装标准版2套 ￥590.00元<br>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>总价：</td>
+								<td>￥888.00</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="easyDialog_footer">
+					<button class="btn_normal" id="easyDialogNoBtn">返回修改</button>
+					<button class="btn_highlight" id="easyDialogYesBtn">确认提交</button>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+	
+	<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+  		$.noConflict();
+	</script>
+	
+   <script src="ClientData.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+   <script>
+   		jQuery(function(){
+   			jQuery("#easyDialogNoBtn").click(function(){
+   				jQuery("#easyDialogBox").hide(); 
+   		        jQuery("#overlay").hide();
+   				return false;
+   			});
+   			
+   			jQuery("#easyDialogYesBtn").click(function(){
+   				
+   				return false;
+   			});
+   			
+   		});
+   </script>
+
+</body></html>

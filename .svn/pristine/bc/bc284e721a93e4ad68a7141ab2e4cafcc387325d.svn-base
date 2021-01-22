@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0053)http://www.zixing8.com/sfmb/publicfiles/sfmbfhtz.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+        <title>发货通知</title>
+        
+        <style type="text/css">
+            *{font-size: 12px;line-height: 16px;color: #524f4f;}
+            body {background-color: #FFF0F0;}
+			#fah_list{font-size: 12px;line-height: 16px;color: #524f4f;}
+			.box{border:solid 1px #F8C0C0;padding:5px; margin:15px 5px;background-color:#fff;line-height:20px;}
+        </style>
+    </head>
+    <body style="padding:0; margin:0;">
+		<div style="background-color:#a40000;font:800 14px/30px microsoft yahei;color:#fff; text-align:center">
+		今日发货通知
+		</div>
+        <div id="qdemo" style="overflow:hidden; height:400px;_height:380px">
+            <div id="qdemo1">
+                            <div id="fah_list">
+                                <div style="padding:5px;">
+                                    <script type="text/javascript">
+                                        var i=0;
+                                        for(i=0;i<22;i++){
+                                            var outputStr='<div class="box">';
+                                            tmpDate=new Date();
+                                            date=tmpDate.getDate();
+                                            month= tmpDate.getMonth() + 1 ;
+                                            year= tmpDate.getFullYear();
+                                            //document.write(year+'年'+month+'月'+date+'日');
+                                            outputStr+=year+'年'+month+'月'+date+'日';
+                                            var rand1=parseInt(Math.random()*22+1);
+                                            quotes=new Array;
+                                            quotes[1]=' 北京的';quotes[2]=' 上海的';quotes[3]=' 天津的';quotes[4]=' 湖南的';quotes[5]=' 湖北的';quotes[6]=' 内蒙古的';
+                                            quotes[7]=' 广东的';quotes[8]=' 广西的';quotes[9]=' 重庆的';quotes[10]=' 四川的';quotes[11]=' 山东的';quotes[12]=' 河南的';
+                                            quotes[13]=' 河北的';quotes[14]=' 山西的';quotes[15]=' 贵州的';quotes[16]=' 黑龙江的';quotes[17]=' 福建的';quotes[18]=' 浙江的';
+                                            quotes[19]=' 江苏的';quotes[20]=' 江西的';quotes[21]=' 海南的';quotes[22]=' 陕西的';var quote=quotes[rand1];
+                                            //document.write(quote)
+                                            outputStr+=quote;
+                                            var rand1=parseInt(Math.random()*22+1);
+                                            quotes=new Array;
+                                            quotes[1]='张小姐';quotes[2]='刘先生';quotes[3]='周小姐';quotes[4]='吴小姐';
+                                            quotes[5]='朱先生';quotes[6]='陈小姐';quotes[7]='田先生';quotes[8]='钟先生';
+                                            quotes[9]='马小姐';quotes[10]='韩小姐';quotes[11]='顾先生';quotes[12]='王小姐';
+                                            quotes[13]='李小姐';quotes[14]='卢先生';quotes[15]='崔小姐';quotes[16]='段先生';
+                                            quotes[17]='胡小姐';quotes[18]='潘先生';quotes[19]='陈小姐';quotes[20]='林先生';
+                                            quotes[21]='代小姐';quotes[22]='苏先生';
+                                            var quote=quotes[rand1];
+                                            //document.write(quote)
+                                            outputStr+=quote;
+                                            var rand1=parseInt(Math.random()*22+1);
+                                            quotes=new Array;
+                                            var j=1;
+                                            for(j=1;j<23;j++){
+                                                var str='（13'+parseInt(Math.random()*9+1) + '****' + parseInt(Math.random()*9+1)+ parseInt(Math.random()*9+1)+parseInt(Math.random()*9+1)+parseInt(Math.random()*9+1)+'）' ;
+                                                quotes[j]=str;
+                                            }
+                                            var quote=quotes[rand1];
+                                            //document.write(quote)
+                                            outputStr+=quote;
+
+                                            var rand1=parseInt(Math.random()*6+1);
+                                            quotes=new Array;
+											quotes[1] = '好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！';
+                                            quotes[2] = '好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font>！';
+											quotes[3] = '好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font>！';
+                                            quotes[4] = '好字通特效练字套装标准版1套 ￥298.00元 <font style="color:red">已发货</font>！';
+                                            quotes[5] = '好字通特效练字套装标准版1套 ￥298.00元 <font style="color:red">已发货</font>！';
+                                            quotes[6] = '好字通特效练字套装标准版1套 ￥298.00元  <font style="color:red">已发货</font>！';
+                                            var quote=quotes[rand1];
+                                            outputStr+=quote;
+                                            outputStr+='</div>';
+                                            document.write(outputStr);
+                                            delete outputStr;
+                                        }
+                                    </script><div class="box">2015年3月5日 贵州的苏先生（137****2582）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的吴小姐（134****5948）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 湖北的顾先生（132****9251）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的李小姐（133****9821）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 北京的张小姐（138****7245）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 福建的陈小姐（138****6987）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 黑龙江的张小姐（136****1117）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 江苏的潘先生（139****1648）好字通特效练字套装合家共享版2套 ￥980元  <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 上海的段先生（133****5519）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 河南的陈小姐（136****1917）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 内蒙古的代小姐（137****3139）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 浙江的朱先生（133****5993）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 河北的韩小姐（131****4491）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 福建的田先生（136****2728）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的吴小姐（139****3515）好字通特效练字套装加强版1套 ￥396.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 上海的朱先生（133****1751）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 广东的潘先生（135****3623）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 江西的苏先生（139****6115）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的陈小姐（139****9222）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 山西的刘先生（134****8218）好字通特效练字套装合家共享版2套 ￥980元  <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山东的周小姐（133****6378）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 海南的苏先生（138****3425）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div>
+                                </div>
+                            </div>
+            </div>
+            <div id="qdemo2">
+                            <div id="fah_list">
+                                <div style="padding:5px;">
+                                    <script type="text/javascript">
+                                        var i=0;
+                                        for(i=0;i<22;i++){
+                                            var outputStr='<div class="box">';
+                                            tmpDate=new Date();
+                                            date=tmpDate.getDate();
+                                            month= tmpDate.getMonth() + 1 ;
+                                            year= tmpDate.getFullYear();
+                                            //document.write(year+'年'+month+'月'+date+'日');
+                                            outputStr+=year+'年'+month+'月'+date+'日';
+                                            var rand1=parseInt(Math.random()*22+1);
+                                            quotes=new Array;
+                                            quotes[1]=' 北京的';quotes[2]=' 上海的';quotes[3]=' 天津的';quotes[4]=' 湖南的';quotes[5]=' 湖北的';quotes[6]=' 内蒙古的';
+                                            quotes[7]=' 广东的';quotes[8]=' 广西的';quotes[9]=' 重庆的';quotes[10]=' 四川的';quotes[11]=' 山东的';quotes[12]=' 河南的';
+                                            quotes[13]=' 河北的';quotes[14]=' 山西的';quotes[15]=' 贵州的';quotes[16]=' 黑龙江的';quotes[17]=' 福建的';quotes[18]=' 浙江的';
+                                            quotes[19]=' 江苏的';quotes[20]=' 江西的';quotes[21]=' 海南的';quotes[22]=' 陕西的';var quote=quotes[rand1];
+                                            //document.write(quote)
+                                            outputStr+=quote;
+                                            var rand1=parseInt(Math.random()*22+1);
+                                            quotes=new Array;
+                                            quotes[1]='张小姐';quotes[2]='刘先生';quotes[3]='周小姐';quotes[4]='吴小姐';
+                                            quotes[5]='朱先生';quotes[6]='陈小姐';quotes[7]='田先生';quotes[8]='钟先生';
+                                            quotes[9]='马小姐';quotes[10]='韩小姐';quotes[11]='顾先生';quotes[12]='王小姐';
+                                            quotes[13]='李小姐';quotes[14]='卢先生';quotes[15]='崔小姐';quotes[16]='段先生';
+                                            quotes[17]='胡小姐';quotes[18]='潘先生';quotes[19]='陈小姐';quotes[20]='林先生';
+                                            quotes[21]='代小姐';quotes[22]='苏先生';
+                                            var quote=quotes[rand1];
+                                            //document.write(quote)
+                                            outputStr+=quote;
+                                            var rand1=parseInt(Math.random()*22+1);
+                                            quotes=new Array;
+                                            var j=1;
+                                            for(j=1;j<23;j++){
+                                                var str='（13'+parseInt(Math.random()*9+1) + '****' + parseInt(Math.random()*9+1)+ parseInt(Math.random()*9+1)+parseInt(Math.random()*9+1)+parseInt(Math.random()*9+1)+'）' ;
+                                                quotes[j]=str;
+                                            }
+                                            var quote=quotes[rand1];
+                                            //document.write(quote)
+                                            outputStr+=quote;
+
+                                            var rand1=parseInt(Math.random()*6+1);
+                                            quotes=new Array;
+											quotes[1] = '好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！';
+                                            quotes[2] = '好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！';
+											quotes[3] = '好字通特效练字套装加强版1套 ￥396.00元 <font style="color:red">已发货</font>！';
+                                            quotes[4] = '好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！';
+                                            quotes[5] = '好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！';
+                                            quotes[6] = '好字通特效练字套装合家共享版2套 ￥980元  <font style="color:red">已发货</font>！';
+                                            var quote=quotes[rand1];
+                                            outputStr+=quote;
+                                            outputStr+='</div>';
+                                            document.write(outputStr);
+                                            delete outputStr;
+                                        }
+                                    </script><div class="box">2015年3月5日 贵州的苏先生（137****2582）好字通特效练字套装加强版1套 ￥396.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的吴小姐（134****5948）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 湖北的顾先生（132****9251）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的李小姐（133****9821）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 北京的张小姐（138****7245）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 福建的陈小姐（138****6987）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 黑龙江的张小姐（136****1117）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 江苏的潘先生（139****1648）好字通特效练字套装合家共享版2套 ￥980元  <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 上海的段先生（133****5519）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 河南的陈小姐（136****1917）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 内蒙古的代小姐（137****3139）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 浙江的朱先生（133****5993）好字通特效练字套装标准版2套 ￥590.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 河北的韩小姐（131****4491）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 福建的田先生（136****2728）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的吴小姐（139****3515）好字通特效练字套装加强版1套 ￥396.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 上海的朱先生（133****1751）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 广东的潘先生（135****3623）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 江西的苏先生（139****6115）好字通特效练字套装加强版2套 ￥780.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山西的陈小姐（139****9222）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div><div class="box">2015年3月5日 山西的刘先生（134****8218）好字通特效练字套装合家共享版2套 ￥980元  <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 山东的周小姐（133****6378）好字通特效练字套装合家共享版1套 ￥496.00元 <font style="color:red">已发货</font>！</div><div class="box">2015年3月5日 海南的苏先生（138****3425）好字通特效练字套装标准版1套 ￥298.00元<font style="color:red">已发货</font> ！</div>
+                                </div>
+                            </div>
+            </div>
+             <script type="text/javascript">
+                 var qspeed = 35;
+                 var d = document.getElementById('qdemo');
+                 var d1 = document.getElementById('qdemo1');
+                 var d2 = document.getElementById('qdemo2');
+                 d2.innerHTML = d1.innerHTML; //克隆demo1为demo2
+                 function myMarquee() {
+                     //当滚动至demo1与demo2交界时
+                     if (d2.offsetTop - d.scrollTop <= 0) {
+                         d.scrollTop -= d1.offsetHeight; //demo跳到最顶端
+                     } else {
+                         d.scrollTop++;
+                     }
+                 }
+
+
+                     var intervalId = setInterval(myMarquee, qspeed); //设置定时器
+                     //鼠标移上时清除定时器达到滚动停止的目的
+                     d.onmouseover = function() { clearInterval(intervalId); };
+                     //鼠标移开时重设定时器
+                     d.onmouseout = function() { intervalId = setInterval(myMarquee, qspeed); };
+
+
+
+        </script>
+        </div>
+		<div style="background-color:#a40000;font:800 14px/30px microsoft yahei;color:#fff; text-align:center">24小时服务热线 13799150182</div>
+    
+
+</body></html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.CustomerMapper">
+	<resultMap type="com.weiweiqin.model.Customer" id="customerResultMap">
+		<id property="id" column="id" />
+        <result property="activeCode" column="active_code"/>
+        <result property="regDate" column="reg_date"/>
+	</resultMap>
+	<insert id="Customer_insert" parameterType="com.weiweiqin.model.Customer"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+	          INSERT INTO customer (nickname,reg_date,email,mobile,password,mark,active_code) values
+	          (#{nickname},#{regDate},#{email},#{mobile},#{password},#{mark},#{activeCode})
+	]]>
+	</insert>
+
+	<select id="Customer_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Customer" resultMap="customerResultMap"> 
+		<![CDATA[ 
+		select a.* from customer a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Customer_getByActiveCode" parameterType="String"
+		resultType="com.weiweiqin.model.Customer" resultMap="customerResultMap"> 
+		<![CDATA[ 
+		select a.* from customer a where a.active_code = #{activeCode}
+	        ]]>
+	</select>
+	
+	<select id="Customer_getByUsername" parameterType="String"
+		resultType="com.weiweiqin.model.Customer" resultMap="customerResultMap"> 
+		<![CDATA[ 
+		select a.* from customer a where a.email = #{username}
+	        ]]>
+	</select>
+
+	<select id="Customer_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Customer" resultMap="customerResultMap"> 
+		<![CDATA[ 
+		select a.* from customer a where 1 =1
+	        ]]>
+
+		<if test="email != null">
+	        <![CDATA[ 
+	        	and a.email like  CONCAT('%','${email}','%' )
+	        ]]>
+		</if>
+
+		<if test="mobile != null">
+	        <![CDATA[ 
+	        	and a.mobile = #{mobile} 
+	        ]]>
+		</if>
+	      
+          <![CDATA[ 
+          	order by a.reg_date desc
+	         limit #{page.start},#{page.pageSize}
+         ]]>
+	</select>
+
+
+
+
+	<select id="Customer_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(a.id) from customer a where 1 =1
+	        ]]>
+
+		<if test="email != null">
+	        <![CDATA[ 
+	        	and a.email like  CONCAT('%','${email}','%' )
+	        ]]>
+		</if>
+
+		<if test="mobile != null">
+	        <![CDATA[ 
+	        	and a.mobile = #{mobile} 
+	        ]]>
+		</if>
+
+	</select>
+
+	<update id="Customer_update" parameterType="com.weiweiqin.model.Customer"> 
+	<![CDATA[ 
+		update customer set nickname=#{nickname}, active_code=#{activeCode},email=#{email}, mobile=#{mobile}, password=#{password}, mark = #{mark} 
+		  where id = #{id}
+	        ]]>
+	</update>
+
+</mapper>
+

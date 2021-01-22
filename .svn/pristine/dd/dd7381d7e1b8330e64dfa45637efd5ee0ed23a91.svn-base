@@ -1,0 +1,36 @@
+package com.weiweiqin.vo.common;
+
+import com.weiweiqin.model.Clothes;
+import com.weiweiqin.model.User;
+
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class UserVO{
+	private String addDate;
+	
+	private User user;
+
+	public String getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(String addDate) {
+		this.addDate = addDate;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	 
+	
+}

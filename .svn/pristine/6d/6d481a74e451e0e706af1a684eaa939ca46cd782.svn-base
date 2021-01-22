@@ -1,0 +1,967 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./header.jsp" %>
+
+<head>
+	<style>
+	  div.wwwcategoryList{
+			display: block ;
+			border:none; 
+		}
+		
+		.glyphicon-chevron-down{
+			display: none ; 
+		}
+		.pic-desc{
+    		display: block;
+    		width:1928px;
+    		margin-left:-964px;
+    		position: absolute;
+    		left: 50%;
+    		overflow: hidden;
+    	}
+     
+    	
+    	/* 本例子css */
+	.fullSlide{ width:100%;  position:relative;  height:550px; background:#000;  }
+	.fullSlide .bd{ margin:0 auto; position:relative; z-index:0; overflow:hidden;  }
+	.fullSlide .bd ul{ width:100% !important;  }
+	.fullSlide .bd li{ width:100% !important;  height:550px; overflow:hidden; text-align:center;  }
+	.fullSlide .bd li a{ display:block; height:500px; }
+
+	.fullSlide .hd{ width:100%;  position:absolute; z-index:1; bottom:0; left:0; height:30px; line-height:30px; }
+	.fullSlide .hd ul{ text-align:center; }
+	.fullSlide .hd ul li{ cursor:pointer; display:inline-block; *display:inline; zoom:1; width:42px; height:11px; margin:1px; overflow:hidden; background:#000;
+		filter:alpha(opacity=50);opacity:0.5;  line-height:999px; 
+	}
+	.fullSlide .hd ul .on{ background:#fff;  }
+
+	.fullSlide .prev,
+	.fullSlide .next{  display:block;  position:absolute; z-index:1; top:50%; margin-top:-30px; left:5%;  z-index:1; width:40px; height:60px; background:url(images/slider-arrow.png) -126px -137px #000 no-repeat;  cursor:pointer; filter:alpha(opacity=50);opacity:0.5; display:none;  }
+	.fullSlide .next{ left:auto; right:5%; background-position:-6px -137px; }
+	</style>
+	
+</head>
+
+<body class="">
+	
+	<tags:top/>
+	
+	<!-- begin全屏轮播图 -->
+	<div class="fullSlide" style="margin-top:15px;">
+		
+		<div class="bd">
+			<ul>
+				<li _src="url(http://img02.taobaocdn.com/imgextra/i2/914260183/TB2aUhscVXXXXbpXpXXXXXXXXXX_!!914260183.jpg)" style="background:#fff center 0 no-repeat;"><a target="_blank" href="${ctx }/detailGoods/1"></a></li>
+				<li _src="url(http://img03.taobaocdn.com/imgextra/i3/914260183/TB2NCJJcVXXXXXRXXXXXXXXXXXX_!!914260183.jpg)" style="background:#fff center 0 no-repeat;"><a target="_blank" href="${ctx }/detailGoods/2"></a></li>
+			</ul>
+		</div>
+
+		<div class="hd"><ul></ul></div>
+		<span class="prev"></span>
+		<span class="next"></span>
+	</div>
+	
+	<script type="text/javascript">
+		//全屏轮播
+		/* 控制左右按钮显示 */
+		jQuery(".fullSlide").hover(function(){ jQuery(this).find(".prev,.next").stop(true,true).fadeTo("show",2) },function(){ jQuery(this).find(".prev,.next").fadeOut() });
+		/* 调用SuperSlide */
+		jQuery(".fullSlide").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click",
+			startFun:function(i){
+				var curLi = jQuery(".fullSlide .bd li").eq(i); /* 当前大图的li */
+				if( !!curLi.attr("_src") ){
+					curLi.css("background-image",curLi.attr("_src")).removeAttr("_src") /* 将_src地址赋予li背景，然后删除_src */
+				}
+			}
+		});
+	</script>
+	<!-- end轮播图 -->
+	
+	<!-- begin全屏产品 -->
+	<div>
+		<div  style="position: relative;height: 500px;overflow: hidden;">
+			<div class="pic-desc" >
+				<a href="${ctx }/detailGoods/3"  target="_blank">
+					<img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2YvRBcVXXXXb1XXXXXXXXXXXX_!!914260183.jpg" />
+				</a>
+			</div>
+		</div>
+		
+		<div  style="position: relative;height: 600px;overflow: hidden;">
+			<div class="pic-desc">
+				<a href="${ctx }/detailGoods/3"  target="_blank">
+					<img src="http://img01.taobaocdn.com/imgextra/i1/914260183/TB2M4tCcVXXXXbvXXXXXXXXXXXX_!!914260183.jpg" />
+				</a>
+			</div>
+		</div>
+		
+		<div  style="position: relative;height: 500px;overflow: hidden;">
+			<div class="pic-desc">
+				<a href="${ctx }/detailGoods/4"  target="_blank">
+					<img src="http://img03.taobaocdn.com/imgextra/i3/914260183/TB2FJRwcVXXXXaAXpXXXXXXXXXX_!!914260183.jpg" />
+				</a>
+			</div>
+		</div>
+		
+<!-- 		<div  style="position: relative;height: 600px;overflow: hidden;"> -->
+<!-- 			<div class="pic-desc"> -->
+<%-- 				<a href="${ctx }/detailGoods/2"  target="_blank"> --%>
+<!-- 					<img src="http://img04.taobaocdn.com/imgextra/i4/914260183/TB2BVJCcVXXXXcbXXXXXXXXXXXX_!!914260183.jpg" /> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+<!-- 		<div  style="position: relative;height: 600px;overflow: hidden;"> -->
+<!-- 			<div class="pic-desc"> -->
+<%-- 				<a href="${ctx }/detailGoods/2"  target="_blank"> --%>
+<!-- 					<img src="http://img04.taobaocdn.com/imgextra/i4/914260183/TB2GB8FcVXXXXaOXXXXXXXXXXXX_!!914260183.jpg" /> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+<!-- 		<div  style="position: relative;height: 702px;overflow: hidden;"> -->
+<!-- 			<div class="pic-desc"> -->
+<%-- 				<a href="${ctx }/detailGoods/3"  target="_blank"> --%>
+<!-- 					<img src="http://img04.taobaocdn.com/imgextra/i4/914260183/TB25CttcVXXXXbaXpXXXXXXXXXX_!!914260183.jpg" /> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+<!-- 		<div  style="position: relative;height: 550px;overflow: hidden;"> -->
+<!-- 			<div class="pic-desc"> -->
+<%-- 				<a href="${ctx }/detailGoods/3"  target="_blank"> --%>
+<!-- 					<img src="http://img01.taobaocdn.com/imgextra/i1/914260183/TB2fn0AcVXXXXbFXXXXXXXXXXXX_!!914260183.jpg" /> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+	</div>
+	<!-- end全屏产品 -->
+	
+	<style>
+		.main-c{
+			line-height: 34px;
+			border-bottom:1px solid #ccc;
+			margin-bottom:5px;
+			margin-top:15px;
+			height: 34px;
+			background: url(${ctx}/images/950.gif) no-repeat #787878;
+		}
+		
+		.main-c  .title{
+			color:#fff;
+			font-weight: bold;
+			padding-left:30px;
+		}
+		
+		.main-c  .more a{
+			color:#fff;
+			padding-right:15px;
+		}
+		
+		.foucebox {width:1000px;height:400px;background:#ccc;margin:0 auto;}
+	.foucebox .bd{position:relative;float:left;width:720px;height:400px;overflow:hidden;}
+	.foucebox .showDiv {position:relative;width:720px;height:400px;}
+	.foucebox .showDiv img {width:720px;height:400px;}
+	.foucebox .showDiv p { position:absolute;left:20px;bottom:0;padding-right:20px;color:#aaa;z-index:9; height:44px; }
+	.foucebox .showDiv h2 { position:absolute;left:20px; bottom:0; width:380px;height:34px;_background:none;_padding-left:0;font-size:24px;font-family:"Microsoft Yahei";line-height:34px;z-index:9;overflow:hidden;}
+	.foucebox .showDiv h2 a {color:#8ecf12;font-weight:normal;}
+	.foucebox .foucebox_bg {position:absolute;left:0;bottom:0;width:720px;height:107px;background:#000;filter:alpha(opacity=60);opacity:0.6;z-index:8;overflow:hidden;}
+
+	.foucebox .hd{width:244px; height:318px;float:right;}
+	.foucebox .hd ul li{width:114px; height:91px; float:left; margin:0 0 10px 4px; display:inline; position:relative;}
+	.foucebox .hd ul a {display:block;width:114px;height:91px;}
+	.foucebox .hd ul img{width:108px; height:84px; border:3px solid #2b2b2b;}
+	.foucebox .hd ul .txt_bg{width:108px; height:24px; position:absolute; left:0px; top:63px; background:url(images/bg_png.png) no-repeat; _background:none;_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, src="${ctx}/images/bg_png.png");}
+	.foucebox .hd ul .txt{width:103px; height:24px; line-height:24px; color:#fff; position:absolute; left:4px; bottom:4px; z-index:2; text-align:right; padding-right:5px;overflow:hidden;}
+	.foucebox .hd ul .mask{width:108px; height:85px; display:block; position:absolute; left:0px; bottom:6px; z-index:3; filter:progid:DXImageTransform.Microsoft.gradient(enabled='true',startColorstr='#66000000', endColorstr='#66000000');background:rgba(0,0,0,0.4);}
+	.foucebox .hd ul a:hover .mask, .foucebox .hd ul .on .mask{display:none; position:relative;}
+	.foucebox .hd ul a:hover img, .foucebox .hd ul .on img{border-color:#70a20f;}
+	.foucebox .hd ul a:hover{color:#fff;}
+	.foucebox .hd ul a:hover .txt_bg {background:#70a20f;}
+	</style>
+
+   <!-- begin 商品区域 -->    
+   <div class="container clearfix">
+		<!-- begin热品推荐区域 -->
+		<div class="main-c">
+			<span class="title">精品推荐——有一种情怀叫怀恋自然美！</span>
+			<span class="more" style="float: right;"><a href="#">查看更多</a></span>
+		</div>
+		
+		<!--begin 模板 -->
+		<div  class="showDiv" style="display: none;" id="jp_model_id"> 
+					<a href="#" target="_blank"><img class="big-img" src="${ctx}/images/4.jpg" ></a>
+					<div class="foucebox_bg"></div>
+					<div>
+						<h2><a href="#">实木衣帽架</a></h2>
+						<p>特价落地挂衣架卧室移动衣服架简约时尚壁挂竹衣架欧式实木衣帽架</p>
+					</div>
+		</div>
+		
+		<ul style="display: none;">
+			<li  id="jp_small_model_id"><a href="#" target="_blank"><img src="${ctx}/images/1.jpg"><span class="txt">精品书架</span><span class="txt_bg"></span><span class="mask"></span></a></li>
+		</ul>
+		<!-- end 模板 -->
+		<div class="foucebox" style="margin:0 auto">
+			<!-- 大图 -->
+			<div  class="bd" id="jp_big_div">
+			</div>
+			<!-- 小图 -->
+			<div class="hd">
+				<ul id="jp_small_div">
+				</ul>
+			</div>
+	</div>
+	<!-- end热品推荐区域 -->
+	<div class="main-c">
+			<span class="title">限时特卖</span>
+	</div>
+	<!-- begin 特价折扣区域 -->
+	<style>
+		.col-xs-6{
+			margin-top:15px;
+		}
+		.tm-shop-box{
+			position: relative;
+			border:3px solid #ccc;
+			padding:5px;
+		}
+		
+		.tm-shop-box:hover{
+			border:3px solid #36ab2a;
+		}
+		
+		.tm-shop-box .img-a img{
+			width:458px;
+			height:295px;
+		}
+		
+		.tm-shop-box .diyico {
+			display: block;
+			position: absolute;
+			top: 5px;
+			left:5px;
+			width: 54px;
+			height: 52px;
+			padding-bottom: 4px;
+			background-color: #36ab2a;
+			overflow: hidden;
+		}
+		
+		.tm-shop-box .diyico em {
+			float: left;
+			display: block;
+			width: 54px;
+			height: 52px;
+			line-height: 26px;
+			color: #FFF;
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			font-family: "\5fae\8f6f\96c5\9ed1";
+			overflow: hidden;
+			font-style:normal;
+			}
+	</style>
+	
+	<!-- begin 模板 -->
+	<div class="col-xs-4"  style="display: none;margin-top:15px;" id="xs_model_id">
+			<div class="tm-shop-box">
+				<i class="diyico"><em>特价促销</em></i>
+				<a class="img-a" href="#" target="_blank">
+					<img src="" style="max-width:100%;"/>
+				</a>
+				<h5 style="margin-top:5px;">楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子</h5>
+				<p class="content" style="margin:0px;">
+		        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;">￥100</strong>
+		        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;">￥100</span>
+		        </p>
+		        <div align="" style="margin-bottom:5px;">
+		        	<span style="font-size:12px;color:#666;"><span class="buy-num" style="padding-right:5px;">20</span>人已经购买</span>
+		        	<a href="./detailGoods/5" target="_blank" class="btn btn-sec btn-lg" style="float: right;margin-top:-25px;" role="button">立即抢购</a>
+		        </div> 
+		        
+			</div>
+		</div>
+		<!-- end 模板 -->
+		
+		<div class="row" id="xs_div">
+			
+		</div>
+	
+	<!-- end 特价折扣区域 -->
+	
+	<!-- begin 新款上市 -->
+	<style>
+		.new-shop-box{
+			height: 320px;
+			border:1px solid #ccc;
+			padding:4px;
+		}
+		
+		.new-shop-box:hover{
+			background: #65c178;
+		}
+		
+		.new-shop-box:hover .desc{
+			color:#fff;
+			font-family: "微软雅黑", "宋体";
+		}
+		
+		.new-shop-box .img{
+			width:219px;
+			height:219px;
+		}
+		
+		.new-shop-box  .price{
+			height: 50px;
+			line-height: 50px;
+			font-size:26px;
+			color:#F76120;
+			text-align: center;
+			font-family: "impact", "微软雅黑", "宋体";
+			font-weight: bold;
+			border-bottom:1px solid #65c178;
+			background: #fff;
+		}
+		
+		.new-shop-box .desc{
+			color:#777;
+			font-size:12px;
+			padding:5px;
+		}
+		
+		.newshop .col-xs-3{
+			margin-top:15px;
+		}
+	</style>
+	<div class="main-c">
+			<span class="title">新品上市</span>
+			<span class="more" style="float: right;"><a href="#">查看更多</a></span>
+	</div>
+	
+	<!-- begin 模板 -->
+	<div class="col-xs-3" id="new_model_id" style="display: none;">
+			<div class="new-shop-box">
+				<a href="#"  target="_blank"> 
+					<img class="img" src="${ctx }/images/new1.jpg"/>
+				</a>
+				<div class="price">
+                	￥100.00
+				</div>
+				
+				<div class="desc">
+                	诗情画意 楠竹床头柜 简约实木宜家时尚抽屉柜 置物架储物柜柜子
+				</div>
+			</div>
+	</div>
+	<!-- end 模板 -->
+	
+	<div class="row newshop" id="new_goods_div">
+		
+	</div>
+	<!-- end 新款上市 -->
+	
+	<!-- begin 新款滚动 -->
+	<style>
+		.new-fullSlide{ min-width:1000px; position:relative;  height:330px; overflow:hidden; margin-top:5px; }
+		.new-fullSlide .bd{ position:relative; z-index:0;  }
+		.new-fullSlide .bd ul{ width:100% !important;  }
+		.new-fullSlide .bd li{ width:100% !important;  height:330px; overflow:hidden; text-align:center;  }
+		.new-fullSlide .bd li a{ display:block; height:330px; }
+	
+		.new-fullSlide .hd{ width:1000px; left:50%; margin-left:-500px; bottom:15px; position:absolute; z-index:1; bottom:15px; overflow:hidden;  }
+		.new-fullSlide .hd ul{ width:360px;margin-left:auto;margin-right:auto;}
+		.new-fullSlide .hd ul li{ float:left; margin:0 5px; display:inline; cursor:pointer; }
+		.new-fullSlide .hd ul li img{ width:80px; line-height:41px; display:block; border:2px solid #fff; filter:alpha(opacity=50);opacity:0.5;  }
+		.new-fullSlide .hd ul .on img{ border-color:#000; filter:alpha(opacity=100);opacity:1;  }
+	</style>
+	
+	
+	<div class="new-fullSlide" >
+		
+		<div class="bd">
+			<ul>
+				
+			</ul>
+		</div>
+
+		<div class="hd">
+			<ul>
+			</ul>
+		</div>
+	</div>
+	<!-- end 新款滚动 -->
+	
+	<!-- begin类目 -->
+	<style>
+	
+		/* 本例子css */
+		.hp-tab-newprd { width: 1000px; height: 370px; overflow: hidden; position: relative; background: #ccc url(images/bg-newprd.jpg) no-repeat 0 0;border-box:content-box; }
+		.hp-tab-newprd .j-sw-nav { padding-top: 1px; height: 26px; margin: 0 auto; overflow: hidden; position: relative;list-style: none; }
+		.hp-tab-newprd .j-sw-nav li { float: left; margin-right: -20px ;padding:0;}
+		.hp-tab-newprd .j-sw-nav li a { position: relative; display: block; width: 140px; height: 26px; line-height: 1.91; padding: 0 20px; text-align: center; text-transform: uppercase; background: url(images/bg-tag-off.png) no-repeat 0 0; color: #fefefe; font-weight: bold; word-wrap: break-word; overflow: hidden; outline: 0; cursor:pointer;  padding:0px;}
+		.newprd-s1, .newprd-s1 a { z-index: 20 }
+		.newprd-s2, .newprd-s2 a { z-index: 19 }
+		.newprd-s3, .newprd-s3 a { z-index: 18 }
+		.newprd-s4, .newprd-s4 a { z-index: 17 }
+		.newprd-s5, .newprd-s5 a { z-index: 16 }
+		.newprd-s6, .newprd-s6 a { z-index: 15 }
+		.newprd-s7, .newprd-s7 a { z-index: 14 }
+		.hp-tab-newprd .newprd-clip{ padding-left:25px;  }
+		.hp-tab-newprd .j-sw-nav .on { position: relative; z-index: 99 }
+		.hp-tab-newprd .j-sw-nav li a:hover, .hp-tab-newprd .j-sw-nav .on a { background-image: url(images/bg-tag-on.png); z-index: 99; color: #fefefe; text-decoration: none; cursor: pointer;  }
+		.hp-tab-newprd .j-sw-c ul{ zoom:1; overflow:hidden; width:940px;  }
+		.hp-tab-newprd .j-sw-c li { float: left; margin-top: 35px; margin-right: 6px; display:inline; }
+		.hp-tab-newprd .j-sw-c li img { width: 175px; height: 228px; padding: 2px; background-color: #fff; border: 1px solid #ccc }
+	</style>
+	
+	<div class="main-c">
+			<span class="title">本月人气排行榜</span>
+	</div>
+	
+	<div class="hp-tab-newprd" style="margin:20px auto auto 0">
+		<ul class="j-sw-nav">
+		   <li class="newprd-s1"><a href="javascript:void(0);" >最多购买</a></li>
+		   <li class="newprd-s2"><a href="javascript:void(0);" >最多收藏</a></li>
+		   <li class="newprd-s3"><a href="javascript:void(0);" >最多好评</a></li>
+		   <li class="newprd-s4"><a href="javascript:void(0);" >最美设计</a></li>
+		</ul>
+		<div class="newprd-clip">
+			<div class="j-sw-c">
+					<ul id="mostBuy">
+						 
+					</ul>
+					
+					<ul id="mostCollect">
+						  
+					</ul>
+					
+					<ul id="mostComment">
+						 
+					</ul>
+					
+					<ul id="mostDesign">
+						 
+					</ul>
+					  
+			</div>
+
+		</div>
+	</div>
+	<!-- end类目 -->
+	
+	<!-- begin聚光灯图片墙-->
+	<style>
+		.tpq{
+			float: left;
+		}
+		
+		.tpq-mask{
+			height: 100%;
+			width: 100%;
+			background: #000;
+			filter:alpha(opacity=60);
+			opacity:0.6;
+			display: none;
+		}
+		
+		.tpq-div .info{	
+			background: #fff;
+			filter:alpha(opacity=80);
+			opacity:0.8;
+			position: absolute;
+			width: 100%;
+			bottom:0px;
+			display: none;
+			height: 0px; 
+		}
+		
+		.tpq-div .info .titles{
+			width:70%;
+			float: left;
+			color:#777;
+			font-size:12px;
+			margin-top:4.5px;
+			padding-left:5px;
+			height: 100%;
+		}	
+		
+		.tpq-div .info .price{
+			width:30%;
+			float: left;
+			background: #f3a90b;
+			height: 100%;
+			color:#fff;
+			text-align: center;
+		}
+		
+		.yprice{
+			font-size:12px;
+			margin-top:10.5px;
+		}
+		
+		.xprice{
+			font-size: 18px;
+			font-weight: bold;
+		}
+	</style>
+	<div class="main-c">
+		<span class="title">聚光灯图片墙</span>
+	</div>
+	
+	<div class="clearfix tpq-div" style="background: #000;padding:6px 6px 6px 6px;height: 556px;">
+		<a href="${ctx }/detailGoods/68" class="pic-a"  target="_blank">
+			<div id="tpq_bg1"  style="width:355px;margin-right:3px;height:543px;position:relative;background: url('${ctx}/images/tpq1.jpg');" class="tpq"> 
+				<div class="tpq-mask">
+				
+				</div>
+				
+				<div class="info">
+      				<div class="titles">
+        				<div class="title"  id="tpq_title1" ></div>
+       					<div class="sold">已售：<b id="tpq_buynum1"></b> 件</div>
+      				</div>
+        			<div class="price">
+						<div class="yprice"><span>原价</span><span class="symbol">¥</span><strike id="tpq_price1"></strike></div>
+						<div class="xprice"><span class="symbol">¥</span><span id="tpq_nowprice1"></span></div>
+					</div>
+          		</div>
+			
+			</div>
+		</a>
+		<div style="width:630px;" class="tpq">
+			<a href="${ctx }/detailGoods/65" class="pic-a" target="_blank">
+				<div id="tpq_bg2" style="height: 270px;width: 280px;float: left;margin-right:3px;margin-bottom:3px;position:relative;background: url(${ctx}/images/tpq2.jpg);">
+					<div class="tpq-mask">
+				
+					</div>
+					
+					<div class="info">
+	      				<div class="titles">
+	        				<div class="title" id="tpq_title2"></div>
+	       					<div class="sold" >已售：<b  id="tpq_buynum2"></b> 件</div>
+	      				</div>
+	        			<div class="price">
+							<div class="yprice"><span>原价</span><span class="symbol">¥</span><strike  id="tpq_price2"></strike></div>
+							<div class="xprice"><span class="symbol">¥</span><span id="tpq_nowprice2"></span></div>
+						</div> 
+	          		</div>				
+				</div> 
+				
+			</a>
+			
+			<a href="${ctx }/detailGoods/70" class="pic-a" target="_blank">
+				<div id="tpq_bg3"  style="height: 270px;width:344px;float: left;margin-right:3px;margin-bottom:3px;position:relative;background: url(${ctx}/images/tpq3.jpg);">
+					<div class="tpq-mask">
+				
+					</div>
+					
+					<div class="info">
+	      				<div class="titles">
+	        				<div class="title" id="tpq_title3"></div>
+	       					<div class="sold">已售：<b  id="tpq_buynum3"></b> 件</div>
+	      				</div>
+	        			<div class="price">
+							<div class="yprice"><span>原价</span><span class="symbol">¥</span><strike  id="tpq_price3"></strike></div>
+							<div class="xprice"><span class="symbol">¥</span><span id="tpq_nowprice3"></span></div>
+						</div> 
+	          		</div>
+				</div>
+			</a>
+			
+			<a href="${ctx }/detailGoods/66" class="pic-a"  target="_blank">
+				<div id="tpq_bg4"  style="height: 270px;width:344px;float: left;margin-right:3px;position:relative;background: url(${ctx}/images/tpq4.jpg)">
+					<div class="tpq-mask">
+				
+					</div>
+					
+					<div class="info">
+	      				<div class="titles">
+	        				<div class="title" id="tpq_title4"></div>
+	       					<div class="sold">已售：<b  id="tpq_buynum4"></b> 件</div>
+	      				</div>
+	        			<div class="price">
+							<div class="yprice"><span>原价</span><span class="symbol">¥</span><strike  id="tpq_price4"></strike></div>
+							<div class="xprice"><span class="symbol">¥</span><span id="tpq_nowprice4"></span></div>
+						</div> 
+	          		</div>
+				</div>
+			</a>
+			
+			<a href="${ctx }/detailGoods/80" class="pic-a"  target="_blank">
+				<div id="tpq_bg5"  style="height: 270px;width:280px;float: left;margin-right:3px;position:relative;background: url(${ctx}/images/tpq5.jpg)">
+					<div class="tpq-mask">
+				
+					</div>
+					
+					<div class="info">
+	      				<div class="titles">
+	        				<div class="title" id="tpq_title5"></div>
+	       					<div class="sold">已售：<b  id="tpq_buynum5"></b> 件</div>
+	      				</div>
+	        			<div class="price">
+							<div class="yprice"><span>原价</span><span class="symbol">¥</span><strike  id="tpq_price5"></strike></div>
+							<div class="xprice"><span class="symbol">¥</span><span id="tpq_nowprice5"></span></div>
+						</div> 
+	          		</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<!-- end聚光灯图片墙 -->
+	
+	<!-- begin历史top5 -->
+	
+	<style>
+		/* 本例子css */
+	.hotspot{width:1000px;height:301px;border:1px solid #ddd;overflow:hidden;position:relative}
+	.hotspot .pic{ position:relative;background-color:#F7F7F7}
+	.hotspot .pic img{ width:1000px;height:301px; display:block;  }
+	.hotspot .pic li{ width:1000px; overflow:hidden; float:left; }
+	.hotspot .txt{ height:30px;overflow:hidden;position:absolute;top:271px;left:0;width:100%;}
+	.hotspot .txt .bl{width:100%;margin:0 0 0 -1px}
+	.hotspot .btn{
+		float:left;
+		width:20%;
+		text-align: center;
+		background: #000;
+		filter:alpha(opacity=60);
+		opacity:0.6;
+		color:#fff;
+		border-right:1px solid #fff;
+		line-height: 30px;
+		display: block;
+		height: 30px;
+		padding:0px;
+	}
+	
+	.hotspot .btn:last-child{
+		border-right:0px;
+	}
+	
+	.hotspot .btn:hover{
+		background: #36ab2a;
+		filter:alpha(opacity=100);
+		opacity:1;
+	}
+	
+	</style>
+	<div class="main-c">
+		<span class="title">历史Top5</span>
+	</div>
+	
+	<div class="hotspot" id="hotspot" style="margin:0 auto">
+		<div class="pic">
+			<ul class="scroll">
+			 	<li><a href="${ctx}/detailGoods/87"   target="_blank"><img src="http://img03.taobaocdn.com/imgextra/i3/914260183/TB2s.VCcVXXXXbAXXXXXXXXXXXX_!!914260183.jpg"></a></li>
+			 	<li><a href="${ctx}/detailGoods/105"   target="_blank"><img src="http://img03.taobaocdn.com/imgextra/i3/914260183/TB27r0rcVXXXXb1XpXXXXXXXXXX_!!914260183.jpg"></a></li>
+			 	<li><a href="${ctx}/detailGoods/70"   target="_blank"><img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2eohncVXXXXcbXpXXXXXXXXXX_!!914260183.jpg"></a></li>
+			 	<li><a href="${ctx}/detailGoods/86"   target="_blank"><img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2IGVEcVXXXXa5XXXXXXXXXXXX_!!914260183.jpg"></a></li>
+			 	<li><a href="${ctx}/detailGoods/80"   target="_blank"><img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2IiFtcVXXXXbAXpXXXXXXXXXX_!!914260183.jpg"></a></li>
+			</ul>
+		</div>
+		<div class="txt">
+			<div class="bl clearfix">
+				<a rel="1" class="btn" href="#">
+					<span>历史TOP1</span>
+				</a>
+				<a rel="2" class="btn" href="#">
+					<span>历史TOP2</span>
+				</a>
+				<a rel="3" class="btn current" href="#">
+					<span>历史TOP3</span>
+				</a>
+				<a rel="4" class="btn" href="#">
+					<span>历史TOP4</span>
+				</a>
+				<a rel="5" class="btn" href="#">
+					<span>历史TOP5</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- begin历史top5 -->
+	
+	<!-- begin更多精彩推荐 -->
+	<div class="main-c">
+		<span class="title">更多推荐</span>
+	</div>
+	
+	<div class="col-xs-3" id="more_tuijian_model" style="display: none;">
+			<div class="new-shop-box">
+				<a href="#" target="_blank" class="img-a">
+					<img class="img" src=""/>
+				</a>
+				<div class="price">
+				</div>
+				
+				<div class="desc">
+				</div>
+			</div>
+		</div>
+	
+	<div class="row" id="tuijian_id">
+		
+	</div>
+	
+	
+	<!-- end更多精彩推荐 -->
+		
+	</div>
+   <!-- end 商品区域 -->
+   
+	<tags:bottom/>
+	
+	<script type="text/tmpl" id="goods_model_id">
+		<div class="pic-desc" style="height: 400px;">
+			<div class="pic">
+				<a href="#" target="_blank"><img src="${ctx }/images/goods1.jpg"></a>
+			</div>
+		</div>
+	</script>
+	
+	<script>
+		$(function(){
+				//获取精品推荐
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize=8&grade=1&currPage=1",
+					async:false,
+					dataType : 'json', 
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var goods = list[i];
+			        		var newDom = $("#jp_model_id").clone();
+			        		$("#jp_big_div").append(newDom);
+			        		newDom.find("a").attr("href","${ctx}/detailGoods/"+goods.id);
+			        		newDom.find(".big-img").attr("src","./upload/download.do?fileName="+goods.bigPic);
+			        		newDom.find("h2 a").html(goods.item);
+			        		newDom.find("p").html(goods.title);
+			        		newDom.show();
+			        		var smllNewDom = $("#jp_small_model_id").clone();
+			        		$("#jp_small_div").append(smllNewDom);
+			        		smllNewDom.find("img").attr("src","./upload/download.do?fileName="+goods.bigPic);
+			        		smllNewDom.find(".txt").html(goods.item);
+			        		smllNewDom.find("a").attr("href","${ctx}/detailGoods/"+goods.id);
+			        		smllNewDom.show();
+			        	}
+			        	//热品推荐
+			    		jQuery(".foucebox").slide({ effect:"fold", autoPlay:true, delayTime:300, startFun:function(i){
+			    			//下面代码控制文字显示
+			    			jQuery(".foucebox .showDiv").eq(i).find("h2").css({display:"none",bottom:0}).animate({opacity:"show",bottom:"60px"},300);
+			    			jQuery(".foucebox .showDiv").eq(i).find("p").css({display:"none",bottom:0}).animate({opacity:"show",bottom:"10px"},300);
+			    		}
+			    		});
+					}
+				});
+				
+				//获取限时特卖
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize=6&grade=2&currPage=1",
+					async:false,
+					dataType : 'json', 
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var goods = list[i];
+			        		var newDom = $("#xs_model_id").clone();
+			        		$("#xs_div").append(newDom);
+			        		newDom.find("a").attr("href","${ctx}/detailGoods/"+goods.id);
+			        		newDom.find("img").attr("src","./upload/download.do?fileName="+goods.bigPic);
+			        		newDom.find("h5").html(goods.title);
+			        		newDom.find(".nowprice").html("￥"+goods.nowPrice);
+			        		newDom.find(".oldprice").html("￥"+goods.price);
+			        		newDom.find(".buy-num").html(goods.buyNum);
+			        		newDom.show();
+			        	}
+			        	//热品推荐
+			    		jQuery(".foucebox").slide({ effect:"fold", autoPlay:true, delayTime:300, startFun:function(i){
+			    			//下面代码控制文字显示
+			    			jQuery(".foucebox .showDiv").eq(i).find("h2").css({display:"none",bottom:0}).animate({opacity:"show",bottom:"60px"},300);
+			    			jQuery(".foucebox .showDiv").eq(i).find("p").css({display:"none",bottom:0}).animate({opacity:"show",bottom:"10px"},300);
+			    		}
+			    		});
+					}
+				});
+				
+				//获取新品上市
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize=8&grade=3&currPage=1&isLunbo=0",
+					async:false,
+					dataType : 'json', 
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var goods = list[i];
+			        		var newDom = $("#new_model_id").clone();
+			        		$("#new_goods_div").append(newDom);
+			        		newDom.find("a").attr("href","${ctx}/detailGoods/"+goods.id);
+			        		newDom.find("img").attr("src","./upload/download.do?fileName="+goods.bigPic);
+			        		newDom.find(".desc").html(goods.title);
+			        		newDom.find(".price").html("￥"+goods.nowPrice);
+			        		newDom.show();
+			        	}
+			        
+					}
+				});
+				
+				//新品轮播图
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize=8&grade=3&currPage=1&isLunbo=1",
+					async:false,
+					dataType : 'json', 
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	var bigUl = $(".new-fullSlide .bd").find("ul");
+		        		var smallUl = $(".new-fullSlide .hd").find("ul");
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var goods = list[i];
+			        		var  bigLi = '<li style="background:url(./upload/download.do?fileName='+goods.bigPic+') center 0 no-repeat;"><a target="_blank" href="${ctx}/detailGoods/'+goods.id+'"></a></li>';
+			        		bigUl.append(bigLi);
+			        		var smallLi = '<li><img src="./upload/download.do?fileName='+goods.bigPic+'" /></li>';
+			        		smallUl.append(smallLi);
+			        	}
+			        	
+			        	//新品滚动
+			    		jQuery(".new-fullSlide").slide({ titCell:".hd li", mainCell:".bd ul", effect:"fold",  autoPlay:false, delayTime:700 });
+					}
+				});
+				
+				//最多模块
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListMost.do?pageSize=5&currPage=1",
+					async:false,
+					dataType : 'json', 
+					success:function(dataObj){
+			        	var mostBuyList = dataObj.obj.mostBuyList;
+			        	var mostCollectList = dataObj.obj.mostCollectList;
+			        	var mostCommentList = dataObj.obj.mostCommentList;
+			        	var mostDesignList = dataObj.obj.mostDesignList;
+			        	 
+			        	for(var i = 0 ;i<mostBuyList.length;i++){
+			        		var goods = mostBuyList[i];
+			        		var li = '<li><a href="${ctx}/detailGoods/'+goods.id+'" target="_blank"><img src="./upload/download.do?fileName='+goods.picName+'" /></a></li>';
+			        		$("#mostBuy").append(li);
+			        	}
+			        	
+			        	for(var i = 0 ;i<mostCollectList.length;i++){
+			        		var goods = mostCollectList[i];
+			        		var li = '<li><a href="${ctx}/detailGoods/'+goods.id+'"  target="_blank"><img src="./upload/download.do?fileName='+goods.picName+'" /></a></li>';
+			        		$("#mostCollect").append(li);
+			        	}
+			        	
+			        	for(var i = 0 ;i<mostCommentList.length;i++){
+			        		var goods = mostCommentList[i];
+			        		var li = '<li><a href="${ctx}/detailGoods/'+goods.id+'"  target="_blank"><img src="./upload/download.do?fileName='+goods.picName+'" /></a></li>';
+			        		$("#mostComment").append(li);
+			        	}
+			        	
+			        	for(var i = 0 ;i<mostDesignList.length;i++){
+			        		var goods = mostDesignList[i];
+			        		var li = '<li><a href="${ctx}/detailGoods/'+goods.id+'"  target="_blank"><img src="./upload/download.do?fileName='+goods.picName+'" /></a></li>';
+			        		$("#mostDesign").append(li);
+			        	}
+			        	
+			        	//类目
+			    		jQuery(".hp-tab-newprd").slide({ titCell:".j-sw-nav li",mainCell:".j-sw-c",effect:"left",easing:"easeInElastic",delayTime:800 });
+					}
+				});
+				
+// 				//获取聚光灯
+// 				jQuery.ajax({
+// 					type : 'Get',
+// 					contentType : 'application/json',
+// 					url : "${ctx}/goods/goodsListByGrade.do?pageSize=8&grade=8&currPage=1",
+// 					async:false,
+// 					dataType : 'json', 
+// 					success:function(dataObj){
+// 			        	var list = dataObj.obj.goodsList;
+// 			        	for(var i = 0 ;i<list.length;i++){
+// 			        		var n = i+1;
+// 			        		var goods = list[i];
+// 			        		var url = "./upload/download.do?fileName="+goods.bigPic;
+// 			        		$("#tpq_bg"+n).css("background",'url(' + url + ')').closest(".pic-a").attr("href","${ctx}/detailGoods/"+goods.id); 
+// 			        		$("#tpq_title"+n).html(goods.title);
+// 			        		$("#tpq_buynum"+n).html(goods.buyNum);
+// 			        		$("#tpq_price"+n).html(goods.price);
+// 			        		$("#tpq_nowprice"+n).html(goods.nowPrice);
+// 			        	}
+// 					}
+// 				});
+			        		
+				$(".tpq-div").find(".pic-a").each(function(){
+					
+					$(this).mouseenter(function(){
+						$(this).find(".tpq-mask").addClass("current").fadeOut();
+						//$(this).find(".info").css("height","0px").show().animate({height:'60px'},1000);
+						$(".tpq-div").find(".tpq-mask").not(".current").fadeIn();
+						return false;
+					});
+					
+					$(this).mouseleave(function(){
+						$(this).find(".tpq-mask").fadeIn().removeClass("current");
+						$(this).find(".info").hide(); 
+						return false; 
+					});
+				});
+			        		
+		
+				//历史top5滚动
+			    jQuery(".hotspot").slide({ titCell:".bl a", mainCell:".scroll", effect:"left", autoPlay:false,easing:"easeOutElastic",delayTime:700});
+				//获取历史top5
+// 				jQuery.ajax({
+// 					type : 'Get',
+// 					contentType : 'application/json',
+// 					url : "${ctx}/goods/goodsListByGrade.do?pageSize=8&grade=9&currPage=1",
+// 					async:false,
+// 					dataType : 'json', 
+// 					success:function(dataObj){
+// 			        	var list = dataObj.obj.goodsList;
+// 			        	for(var i = 0 ;i<list.length;i++){
+// 			        		var goods = list[i];
+// 			        		var li = '<li><a href="${ctx}/detailGoods/'+goods.id+'" target="_blank"><img src="./upload/download.do?fileName='+goods.bigPic+'"></a></li>';
+// 			        		$("#hotspot").find("ul").append(li);
+// 			        	}
+			        	
+// 					}
+// 				});
+				
+				//获取更多推荐
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : "${ctx}/goods/goodsListByGrade.do?pageSize=8&grade=10&currPage=1&isLunbo=0",
+					async:false,
+					dataType : 'json', 
+					success:function(dataObj){
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var goods = list[i];
+			        		var newDom = $("#more_tuijian_model").clone();
+			        		$("#tuijian_id").append(newDom);
+			        		newDom.find("a").attr("href","${ctx}/detailGoods/"+goods.id);
+			        		newDom.find("img").attr("src","./upload/download.do?fileName="+goods.bigPic);
+			        		newDom.find(".desc").html(goods.title);
+			        		newDom.find(".price").html("￥"+goods.nowPrice);
+			        		newDom.show();
+			        	}
+					}
+				});
+				
+		});
+	</script>
+</body>

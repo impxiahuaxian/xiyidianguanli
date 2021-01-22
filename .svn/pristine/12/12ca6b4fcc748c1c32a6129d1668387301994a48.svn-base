@@ -1,0 +1,300 @@
+body{margin:0;padding:0}
+.tvp_container{position:relative;width:100%;height:100%;line-height:1;max-width:100%;max-height:100%;overflow:hidden;background:#000;-webkit-background-size:cover;background-size:cover;color:#fff;font-size:16px;font-family:sans-serif;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.tvp_container *{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box}
+.tvp_container *:after,.tvp_container *:before{-webkit-box-sizing:border-box;box-sizing:border-box}
+.tvp_container a,.tvp_container a:hover{color:#fff;text-decoration:none}
+.tvp_container a:focus,.tvp_container a:active,.tvp_container button:focus,.tvp_container button:active{outline:0 none}
+.tvp_container .tvp_video{width:100%;height:100%}
+.tvp_container video{display:block;width:100%;height:100%;overflow:hidden;color:#000;background:#000}
+.tvp_container .tvp_video_with_skin::-webkit-media-controls{display:none!important}
+.tvp_shadow{position:absolute;z-index:2;left:0;top:0;width:100%;height:100%}
+.tvp_controls{position:absolute;display:table;z-index:3;bottom:0;left:0;width:100%;height:40px;background-color:rgba(23,23,23,.9);-webkit-transition:bottom .4s ease;transition:bottom .4s ease}
+.tvp_controls_hide .tvp_controls{bottom:-50px}
+.tvp_controls button{display:block;width:100%;height:100%;padding:0;border:0 none;background:none;text-align:center;font-size:0}
+.tvp_controls .tvp_button{background:none}
+.tvp_playpause_button{display:table-cell;width:42px;height:100%;vertical-align:top}
+.tvp_playpause_button .tvp_btn_value{display:inline-block;width:0;height:0;margin-left:16px;vertical-align:middle;background:none;border:15px solid transparent;border-width:10px 15px;border-left-color:#fff}
+.tvp_pause .tvp_btn_value{width:10px;height:15px;border:0 none;margin-left:0;border-left:2px solid #fff;border-right:2px solid #fff}
+.tvp_fullscreen_button{display:table-cell;width:50px;height:100%;background-position:left 0}
+.tvp_fullscreen_button .tvp_btn_value{display:inline-block;width:16px;height:16px;vertical-align:middle;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAAAgCAYAAACvgw7DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo3MjMxYjAwYi1kYmNlLWQyNDctOTM3MC0wMWNjYTYwMmM5OTAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QjdFNEEzODk2NjI5MTFFNEJFODlCQzBGOTU2QTU5RkIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QjdFNEEzODg2NjI5MTFFNEJFODlCQzBGOTU2QTU5RkIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NGMzM2M5OWUtOGFjNi1jNzQ5LTgzNWMtODBhYzllYmU4MDRiIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjcyMzFiMDBiLWRiY2UtZDI0Ny05MzcwLTAxY2NhNjAyYzk5MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pjm4OzcAAAGXSURBVHja7NldSgMxEAfwTNvta6EH8CA+eQRFsSg+iD54JsWP+uAHWLDewLN4AvFRkDiBWRqW3Wy6ZCbZNgN/yqbfv2ZLJgtaa8VQ67woqARroHJlGMeMvcFc2IOjjKJuCeWSxu45ZwxYGWMWkb64tuJCKS12V8/EP1/GFJg37S7O9296H8DcVe43x4PyMdIoywRgWlE4YZpQxpFhvFC4YFwoKiKMNwoHTBtKTBhvlNAwPigxYbxRQsM8eaBIpxOKCQTslQ4wr7Ru+cAcY34jL+A692wQuIncx5xizhJASQomteoMs+m9UuctjdxdZxg+GHPaPWMOM8yqCswL5oRupXB2KlsHbRGFKWimHFnHs02fMaMaaXCgmFrSOmVrT6UmlJng4u2rshsI9GPO+VdA9U1dXUP4nkDvM8Q8SOwG1sH0CWUhCdMXlDlmKgnTFxQzPokBkzqK4oQBvV57LXmdeUjXfc6tsUe6MPZHxxPMN8fnS7lXum5B2dom8tNCaEL5wUythNuvSPhUUrTC3sNcSc2Usv4FGAARz8n6n48RrQAAAABJRU5ErkJggg==);-webkit-background-size:35px 16px;background-size:35px 16px;background-position:0 0}
+.tvp_unfullscreen .tvp_btn_value{background-position:right 0}
+.tvp_time_rail{position:relative;display:table-cell;height:100%;padding:0;vertical-align:top}
+.tvp_time_total{position:relative;display:block;top:18px;width:100%;height:4px;background:rgba(15,15,15,.7)}
+.tvp_time_loaded,.tvp_time_current{position:absolute;left:0;top:1px;z-index:2;display:block;max-width:100%!important;height:2px;background:#FF9000;background:-webkit-linear-gradient(left,#ff9000 42%,#ff9000 42%,#ff5a00 100%);background:linear-gradient(to right,#ff9000 42%,#ff9000 42%,#ff5a00 100%)}
+.tvp_time_loaded{z-index:1;background:rgba(255,255,255,.2)}
+.tvp_time_handle{position:absolute;z-index:3;top:-11px;right:-16px;display:block;width:27px;height:27px;overflow:hidden}
+.tvp_time_handle:after{content:'';position:absolute;left:6px;top:5px;width:15px;height:15px;background:#F3F5F7;background-image:-webkit-radial-gradient(50% 50%,circle closest-side,#F7F9FB 31%,#D2D4D5 100%);-webkit-background-clip:content-box;background-clip:content-box;border-radius:100%;border-top-left-radius:100%;border-top-right-radius:100%;border-bottom-left-radius:100%;border-bottom-right-radius:100%}
+.tvp_time_panel{position:absolute;right:0;bottom:3px;z-index:2;font-size:10px;color:#888}
+.tvp_time_panel span{float:left}
+.tvp_time_panel .tvp_time_panel_current{color:#DEDEDF}
+.tvp_definition{position:relative;display:table-cell;width:55px;height:45px;vertical-align:top;color:#fff;background-position:left 0}
+.tvp_definition_button,.tvp_definition li{display:block;width:100%;line-height:45px;font-size:14px;text-align:center}
+.tvp_definition_list{position:absolute;display:none;left:0;bottom:45px;width:100%;background-color:rgba(77,77,77,.75)}
+.tvp_definition li{height:35px;line-height:35px;background-image:-webkit-linear-gradient(top,rgba(0,0,0,.3) 0,rgba(0,0,0,.3) 50%,rgba(255,255,255,.1) 50%);background-position:0 bottom;background-repeat:no-repeat;-webkit-background-size:100% 1px;background-size:100% 1px}
+.tvp_definition li:hover,.tvp_definition li:active{background-color:rgba(30,30,30,.6)}
+.open .tvp_definition_list{display:block}
+.tvp_container .tvp_overlay_loading{position:absolute;z-index:5;left:0;right:0;top:0;bottom:0;margin:auto;width:40px;height:40px;background:rgba(0,0,0,.65) url(//i.gtimg.cn/qqlive/images/tvp/loading_small.gif) center center no-repeat;-webkit-background-size:25px 25px;background-size:25px 25px;border-radius:2px}
+.tvp_overlay_play,.tvp_overlay_play_try,.tvp_overlay_replay{position:absolute;z-index:5;left:0;right:0;bottom:0;top:0;bottom:10px;width:76px;height:50px;line-height:50px;margin:auto;overflow:hidden;font-size:0;text-align:center;background:rgba(23,23,23,.9);border-radius:3px}
+.tvp_overlay_play .tvp_button_play,.tvp_overlay_play_try .tvp_button_play{position:absolute;display:block;width:0;height:0;left:30px;top:14px;margin:auto;overflow:hidden;vertical-align:middle;border:20px solid transparent;border-width:12px 21px;border-left-color:#fff}
+.tvp_overlay_play_try{width:94px;height:70px;-webkit-transform:translateZ(0)}
+.tvp_overlay_play_try .tvp_button_play{left:40px}
+.tvp_overlay_play_try .tvp_text{position:absolute;width:100%;left:0;bottom:8px;line-height:1;font-size:13px;color:#fff;text-align:center}
+.tvp_layer_replay{position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);border-radius:2px}
+.tvp_overlay_replay{width:107px;height:50px;text-align:center}
+.tvp_overlay_replay .tvp_button_replay{display:inline-block;width:16px;height:100%;background:url(//i.gtimg.cn/qqlive/images/tvp/icon_replay.png) center center no-repeat;-webkit-background-size:16px 16px;background-size:16px 16px}
+.tvp_overlay_replay .tvp_text{display:inline-block;line-height:50px;margin-left:4px;vertical-align:top;font-size:16px}
+.tvp_overlay_poster{position:absolute;z-index:2;left:0;top:0;width:100%;height:100%;overflow:hidden;text-align:center;background-color:#0000;display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;display:box;box-pack:center;box-align:center;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center}
+.tvp_poster_img{display:block;width:100%;height:100%;max-width:100%;max-height:100%}
+.tvp_overlay_poster_auto{text-align:center}
+.tvp_overlay_poster_auto .tvp_poster_img{display:inline-block;width:auto!important;max-width:100%;max-height:100%;height: auto;}
+.tvp_overlay_bigben{position:absolute;z-index:5;left:0;right:0;top:0;bottom:0;margin:auto;width:120px;height:50px;padding:6px 8px 0;background:rgba(26,26,26,.7);border-radius:3px}
+.tvp_overlay_bigben .tvp_overlay_content{text-align:center}
+.tvp_overlay_bigben .tvp_ico_ff_rw{position:relative;display:inline-block;vertical-align:top;margin-right:3px;margin-top:3px;width:0;height:0;background:none;-webkit-transform:scale(0.9)}
+.tvp_overlay_bigben .tvp_ico_ff_rw:after{content:'';position:absolute;top:-8px;display:inline-block;width:0;height:0;overflow:hidden}
+.tvp_overlay_bigben .tvp_ico_ff{border:20px solid transparent;border-width:9px 13px;border-left-color:#fff}
+.tvp_overlay_bigben .tvp_ico_ff:after{border:20px solid transparent;border-width:9px 13px;border-left-color:#fff}
+.tvp_overlay_bigben .tvp_ico_rw{border:20px solid transparent;border-width:9px 13px;border-right-color:#fff}
+.tvp_overlay_bigben .tvp_ico_rw:after{top:-9px;left:-25px;border:20px solid transparent;border-width:9px 13px;border-right-color:#fff}
+.tvp_overlay_bigben .tvp_text{display:inline-block;line-height:26px;color:#fff;font-size:16px;vertical-align:top}
+.tvp_overlay_bigben .tvp_time_total_small{position:relative;display:block;margin:3px 0 0;display:block;height:7px;width:100%;background:rgba(114,114,114,.8);border-radius:8px}
+.tvp_overlay_bigben .tvp_time_current_small{position:absolute;left:0;top:0;width:10%;height:100%;background:#FFF;border-radius:8px}
+.tvp_overlay_tips{position:absolute;z-index:2;bottom:45px;width:100%;height:24px;line-height:24px;font-size:13px;text-align:center;color:#fff;background:rgba(26,26,26,.75);-webkit-transition:bottom .3s ease;transition:bottom .3s ease}
+.tvp_controls_hide .tvp_overlay_tips{bottom:0}
+.tvp_overlay_warning{display:none}
+.tvp_fullscreen_mode .tvp_overlay_poster .tvp_poster_img,.fullscreen .tvp_overlay_poster .tvp_poster_img,{display:inline-block;width:auto;height:auto;max-width:100%;max-height:100%}
+@media(orientation:landscape){.tvp_overlay_poster{background-color:#000}
+.tvp_overlay_poster .tvp_poster_img{display:inline-block;width:auto;height:auto;max-width:100%;max-height:100%}}
+.tvp_fullscreen_mode,.fullscreen{width:100%!important;height:100%!important;overflow:hidden}
+.tvp_fullscreen_mode .tvp_controls,.fullscreen .tvp_controls{z-index:2147483647}
+@media only screen and (min-width:600px){.tvp_overlay_play{-webkit-transform:scale(1.3);transform:scale(1.3)}
+.tvp_overlay_loading{-webkit-transform:scale(1.5);transform:scale(1.5)}
+.tvp_overlay_bigben{-webkit-transform:scale(1);transform:scale(1)}}
+.tvp_container_live .tvp_controls{display:block}
+.tvp_container_live .tvp_playpause_button{display:block}
+.tvp_container_live .tvp_fullscreen_button{position:absolute;right:0;top:0;display:block}
+.tvp_container .tvp_show{display:block}
+.tvp_container .tvp_none{display:none}
+.tvp_container .tvp_hidden{visibility:hidden}
+.tvp_titles,.tvp_promotion{display:none}
+#mod_tenvideo_video_player_0{background-color:#000}
+.tvp_player_error{position:absolute;top:0;bottom:0;left:0;width:100%;height:100%;z-index:6;color:#fff;font-size:13px;line-height:20px;text-align:left;background:#000 url(//imgcache.gtimg.cn/tencentvideo_v1/vstyle/mobile/v2/style/img/player/bg_poster.jpg) center center no-repeat;-webkit-background-size:cover;background-size:cover}
+.tvp_player_error_row{position:relative;width:100%;height:100%}
+.tvp_player_error_content{display:table;width:100%;height:100%;padding:0 23px 0 25px}
+.tvp_player_error_content .text{display:table-cell;padding:20px 0 0 0;vertical-align:middle;font-size:14px;text-align:left}
+.tvp_player_error_content .btn_feedback{display:table-footer-group;line-height:40px;text-align:right;font-size:14px;color:#F28F24;font-weight:bold;text-decoration:underline}
+.tvp_player_error .tvp_player_goto_app,.tvp_live_download_app{position:absolute;top:0;left:0;bottom:0;right:0;z-index:5;text-align:center;font-size:15px;background-color:#363636;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;display:box;box-orient:horizontal;box-pack:center;box-align:center;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center}
+.tvp_player_error .tvp_player_goto_app .tvp_download_app_inner,.tvp_live_download_app .tvp_download_app_inner{display:inline-block;margin:auto;padding:0 12px;line-height:45px;background-color:rgba(0,0,0,.6);color:#fff}
+.tvp_player_error .tvp_player_goto_app .tpv_icon_download,.tvp_live_download_app .tpv_icon_download{display:inline-block;width:22px;height:22px;margin:10px 5px 0 0;background:url(//i.gtimg.cn/qqlive/images/tvp/icon_download.png) 0 0 no-repeat;-webkit-background-size:contain;background-size:contain;vertical-align:top}
+.tvp_external_layer{position:absolute;left:0;top:0;z-index:999999;width:100%;height:100%;color:#fff;background-color:rgba(0,0,0,.6)}
+.tvp_external_layer .tvp_external_inner{position:absolute;left:0;top:0;right:0;bottom:0;width:240px;height:73px;margin:auto}
+.tvp_external_layer .tvp_overlay_play_try,.tvp_external_layer .tvp_layer_replay,.tvp_external_layer .tvp_overlay_replay{position:relative;top:auto;bottom:auto;width:240px;height:36px;margin-bottom:10px;border-radius:3px}
+.tvp_external_layer .tvp_overlay_play_try .tvp_button_play{-webkit-transform:scale(0.7);left:68px;top:8px}
+.tvp_external_layer .tvp_overlay_play_try .tvp_text,.tvp_external_layer .tvp_overlay_replay .tvp_text{bottom:0;margin-left:5px;line-height:36px;font-size:14px}
+.tvp_external_layer .tvp_layer_replay{background-color:transparent}
+.tvp_external_layer .tvp_app_banner{position:relative;top:auto;bottom:auto;width:240px;margin:auto;border-radius:3px;overflow:hidden}
+.tvp_external_layer .tvp_app_banner .tvp_text:before{display:none!important}
+.tvp_external_layer .tvp_none{display:none}
+.tvp_external_layer .tvp_app_banner .tvp_text{font-size:15px}
+.tvp_ads{position:absolute;z-index:3;left:0;top:0;width:100%;height:100%;font-family:sans-serif;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;display:box;box-orient:horizontal;box-pack:center;box-align:center;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center}
+.tvp_ads .tvp_ads_inner{position:relative;width:100%;height:100%;margin:auto;overflow:hidden;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;display:box;box-orient:horizontal;box-pack:center;box-align:center;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center}
+.tvp_ads .tvp_ads_content{position:absolute;left:0;top:0;width:100%;height:100%}
+.tvp_ads .tvp_ads_content a{display:block;width:100%;height:100%}
+.tvp_ads .tvp_ads_control{position:absolute;right:12px;top:12px}
+.tvp_ads .tvp_icon_arrow,.tvp_ads .tvp_icon_wechat,.tvp_ads .tvp_icon_film,.tvp_ads .tvp_icon_forestall,.tvp_ads .tvp_icon_noads{display:inline-block;background:url(//imgcache.gtimg.cn/tencentvideo_v1/vstyle/mobile/v2/style/img/player/tvp_ads_sprite.png) 0 0 no-repeat;-webkit-background-size:142px 32px;background-size:142px 32px;vertical-align:middle}
+.tvp_ads .tvp_icon_arrow{width:12px;height:15px;background-position:-25px 0;margin:18px 0 0 5px;vertical-align:top;background-position:-130px 0}
+.tvp_ads .tvp_ads_skip,.tvp_ads .tvp_btn_ads_more{float:left;display:block;margin-left:10px;padding:0 10px;line-height:36px;background-color:rgba(37,37,37,.7);border-radius:2px;color:#fff;font-size:16px;z-index:100}
+.tvp_ads .tvp_ads_countdown{color:#FF9300;font-size:20px;font-weight:normal}
+.tvp_ads .tvp_ads_skip .tvp_ads_skip_text{position:relative;display:inline-block;padding-left:15px;margin-left:2px}
+.tvp_ads .tvp_ads_skip .tvp_ads_skip_text:after{position:absolute;display:block;content:'';left:6px;top:8px;width:1px;height:18px;background-color:#45454B}
+.tvp_ads .tvp_btn_ads_more{position:absolute;right:12px;bottom:3px;line-height:46px;height:46px;padding:0 15px}
+.tvp_ads .tvp_btn_close{position:absolute;right:3px;top:0;font-size:30px;line-height:1;color:#4e4e4e}
+.tvp_ads_qqvip_skip{display:none}
+.tvp_ads .tvp_none{display:none}
+.tvp_ads_ontop{z-index:100}
+.tvp_ads_copyright{position:relative;width:460px;height:270px;margin:auto;padding-top:80px;background-color:rgba(37,37,37,.9)}
+.tvp_ads_copyright.tvp_none{display:none}
+.tvp_ads_copyright .tvp_ads_text{display:block;width:80%;margin:auto;font-size:17px;line-height:1.5;color:#FFF}
+.tvp_ads_copyright .tvp_ads_btn{display:block;width:128px;height:38px;line-height:38px;margin:30px auto 0;text-align:center;font-weight:bold;-webkit-border-radius:2px;border-radius:2px;background-color:#E20502;background-image:-webkit-linear-gradient(#e80b01,#dd0002);background-image:linear-gradient(#e80b01,#dd0002);box-shadow:0 2px 2px rgba(0,0,0,.3)}
+.tvp_ads_film_vip{position:relative;width:625px;height:362px;margin:auto;padding:40px 45px 0;background-color:rgba(37,37,37,.9);overflow:hidden;color:#fff}
+.tvp_ads_film_vip .tvp_vip_intro{float:left;width:300px;border-right:1px solid #3D3D3D}
+.tvp_ads_film_vip .tvp_vip_title{font-size:25px}
+.tvp_ads_film_vip .tvp_vip_desc{font-size:14px;color:#999;line-height:2}
+.tvp_ads_film_vip .tvp_vip_privilege{padding-top:15px}
+.tvp_ads_film_vip .tvp_privilege_item{display:block;font-size:16px;line-height:32px;padding-bottom:15px}
+.tvp_ads_film_vip .tvp_privilege_item .tvp_icon_text{display:inline-block;vertical-align:middle;margin-left:10px}
+.tvp_ads_film_vip .tvp_btn_vip_get{display:block;width:240px;height:42px;line-height:42px;margin:10px 0 0;text-align:center;font-weight:bold;border-radius:2px;background-color:#E20502;background-image:-webkit-linear-gradient(#e80b01,#dd0002);background-image:linear-gradient(#e80b01,#dd0002);box-shadow:0 2px 2px rgba(0,0,0,.3);font-size:20px}
+.tvp_ads_film_vip .tvp_icon_noads{width:35px;height:23px}
+.tvp_ads_film_vip .tvp_icon_forestall{width:27px;height:32px;margin:0 5px 2px;background-position:-40px 0}
+.tvp_ads_film_vip .tvp_icon_film{width:26px;height:31px;margin:0 5px 2px;background-position:-70px 0}
+.tvp_ads_film_vip .tvp_vip_wechat{float:right;color:#999}
+.tvp_vip_wechat .tvp_vip_title{font-size:17px}
+.tvp_vip_wechat .tvp_vip_qr{width:180px;margin-top:10px;padding-top:12px;background-color:#fff}
+.tvp_vip_wechat .tvp_vip_qr_pic{display:block;width:155px;height:155px;margin:auto}
+.tvp_vip_wechat .tvp_vip_qr_desc{text-align:center;color:#333;line-height:36px;font-size:15px}
+.tvp_vip_wechat .tvp_vip_qr_desc .tvp_icon_text{display:inline-block;vertical-align:middle;margin-left:4px}
+.tvp_vip_wechat .tvp_vip_play{margin-top:10px;font-size:17px}
+.tvp_vip_wechat .tvp_vip_play .tvp_link{text-decoration:underline}
+.tvp_vip_wechat .tvp_icon_wechat{width:30px;height:24px;background-position:-100px 0}
+@media only screen and (min-width:600px){.tvp_container .tvp_app_badge{-webkit-transform:scale(1.23);margin-right:10px}
+.tvp_container.tvp_controls_hide .tvp_app_badge_fix{right:130px;bottom:16px}}
+.tvp_download_layer,.tvp_dowanload_finish{position:absolute;top:0;left:0;width:100%;height:100%;padding:0 20px;background-color:#000;z-index:8;font-size:14px;display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;-webkit-box-orient:vertical;display:box;box-pack:center;box-align:center;box-orient:vertical;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;-webkit-flex-direction:column;flex-direction:column}
+.tvp_download_layer{max-width:340px}
+.tvp_download_layer .tvp_promote_text{display:block;width:100%;text-align:center}
+.tvp_download_layer .tvp_promote_download{position:relative;display:block;margin:20px 0 0;width:100%;height:3px;min-height:3px;border-radius:6px;overflow:hidden}
+.tvp_download_layer .tvp_promote_progress{position:absolute;left:0;top:0;height:3px;width:0;border-radius:6px;box-shadow:0 0 2px 2px #FF7200}
+.tvp_download_layer .tvp_promote_download[data-status="down"]{background-color:#383838}
+.tvp_download_layer .tvp_promote_download[data-status="downloading"],.tvp_download_layer .tvp_promote_download[data-status="pause"]{background-color:#383838}
+.tvp_download_layer .tvp_promote_download[data-status="downloading"] .tvp_promote_progress,.tvp_download_layer .tvp_promote_download[data-status="pause"] .tvp_promote_progress{background-color:#FF7200}
+.tvp_download_layer .tvp_promote_download[data-status="downloading"] .tvp_promote_progress,.tvp_download_layer .tvp_promote_download[data-status="pause"] .tvp_promote_progress{width:90%}
+.tvp_download_layer .tvp_promote_download[data-status="pause"] .tvp_promote_progress{width:90%;-webkit-animation-play-state:paused;animation-play-state:paused}
+.tvp_download_layer .tvp_dowanload_finish{z-index:8}
+.tvp_download_layer .tvp_icon_finish{position:relative;display:block;width:58px;height:58px;border:2px solid #fff;border-radius:100%}
+.tvp_download_layer .tvp_icon_finish:after{content:'';position:absolute;left:0;right:0;margin:18px auto 0;width:20px;height:10px;border-left:2px solid #fff;border-bottom:2px solid #fff;-webkit-transform:rotate(-45deg)}
+.tvp_download_layer .tvp_btn{display:block;margin:18px auto 0;width:170px;line-height:35px;background-color:#FF7200;border-radius:20px;font-size:14px;text-align:center}
+.tvp_install_success{position:absolute;left:0;top:0;height:100%;width:100%;padding-left:38%;z-index:9;background:-webkit-linear-gradient(left,rgba(0,0,0,0) 0,rgba(0,0,0,.85) 38%,rgba(0,0,0,.85) 100%);background:linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,.85) 38%,rgba(0,0,0,.85) 100%)}
+.tvp_install_success .tvp_tips{margin-top:35%;font-size:14px;line-height:1.4}
+.tvp_install_success .tvp_arrow{display:inline-block;width:33px;height:23px;margin-top:12px;background-image:url(//imgcache.gtimg.cn/tencentvideo_v1/vstyle/mobile/v2/style/img/player/tvp_arrow.png);-webkit-background-size:cover;background-size:cover}
+.tvp_promote_banner{position:relative;margin:8px 0}
+.tvp_promote_banner a:visited{color:#fff!important}
+.tvp_promote_banner .tvp_promote_download{position:relative;min-height:30px;display:block;position:relative;height:30px;line-height:30px;color:#fff;text-align:center;border-radius:3px;box-shadow:1px 1px 3px rgba(0,0,0,.15);font-size:15px;text-decoration:none}
+.tvp_promote_banner .tvp_promote_text{display:inline-block;position:relative;top:0;left:0;height:30px;line-height:30px;border-radius:3px;margin:0 auto;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;padding-left:25px;color:#fff;text-overflow:ellipsis;width:90%;-webkit-box-sizing:border-box;box-sizing:border-box}
+.tvp_promote_banner .tvp_promote_download .tvp_promote_text{font-size:14px}
+.tvp_promote_banner .tvp_promote_attention_right .tvp_promote_text{font-size:16px}
+.tvp_promote_banner .tvp_promote_progress{position:absolute;top:0;left:0;width:0;height:30px;line-height:30px;border-radius:3px;margin:0}
+.tvp_promote_banner .tvp_downloading{background-color:#6eabff;width:90%;-webkit-animation-name:animate-progress;-webkit-animation-iteration-count:1;-webkit-animation-timing-function:linear;-webkit-animation-duration:20s;animation-name:animate-progress;animation-iteration-count:1;animation-timing-function:linear;animation-duration:20s}
+@-webkit-keyframes animate-progress{0%{width:0}
+100%{width:90%}}
+.tvp_promote_banner .tvp_promote_download[data-status="down"]{background-color:#5996eb}
+.tvp_promote_banner .tvp_promote_download[data-status="down"] .tvp_promote_text,.tvp_promote_banner .tvp_promote_download[data-status="downloading"] .tvp_promote_text,.tvp_promote_banner .tvp_promote_download[data-status="pause"] .tvp_promote_text{background:url(//mat1.gtimg.com/www/images/newsapp/wechat/new_download_icon_white.png) no-repeat left center;background-size:17px 16px}
+.tvp_promote_banner .tvp_promote_download[data-status="downloading"],.tvp_promote_banner .tvp_promote_download[data-status="pause"]{background-color:#5996eb}
+.tvp_promote_banner .tvp_promote_download[data-status="downloading"] .tvp_promote_progress{background-color:#6eabff;width:90%;-webkit-animation-name:animate-progress;-webkit-animation-iteration-count:1;-webkit-animation-timing-function:linear;-webkit-animation-duration:20s;animation-name:animate-progress;animation-iteration-count:1;animation-timing-function:linear;animation-duration:20s}
+.tvp_promote_banner .tvp_promote_download[data-status="pause"] .tvp_promote_progress{background-color:#6eabff;width:90%;-webkit-animation-name:animate-progress;-webkit-animation-iteration-count:1;-webkit-animation-timing-function:linear;-webkit-animation-duration:20s;animation-name:animate-progress;animation-iteration-count:1;animation-timing-function:linear;animation-duration:20s;-webkit-animation-play-state:paused;animation-play-state:paused}
+.tvp_promote_banner .tvp_promote_download[data-status="install"]{background-color:#ff6000}
+.tvp_promote_banner .tvp_promote_download[data-status="install"] .tvp_promote_text{background:url(//mat1.gtimg.com/www/images/newsapp/wechat/new_download_install_white.png) no-repeat left center;background-size:17px 16px}
+.tvp_promote_banner .tvp_promote_download[data-status="open"]{background-color:#5eb966}
+.tvp_promote_banner .tvp_promote_download[data-status="open"] .tvp_promote_text{background:url(//mat1.gtimg.com/www/images/newsapp/wechat/open_icon_white.png) no-repeat left center;background-size:17px 16px}
+.tvp_promote_noauto .tvp_promote_download[data-status="downloading"] .tvp_promote_progress,.tvp_promote_banner_noauto .tvp_promote_download[data-status="downloading"] .tvp_promote_progress,.tvp_promote_noauto .tvp_promote_download[data-status="pause"] .tvp_promote_progress,.tvp_promote_banner_noauto .tvp_promote_download[data-status="pause"] .tvp_promote_progress{width:auto;-webkit-animation-name:none;animation-name:none}
+.tvp_promote_attention{display:block;position:absolute;background-color:#ffa93a;width:75px;height:30px;left:0;top:0;border-radius:3px;box-shadow:1px 1px 3px rgba(0,0,0,.15);font-size:15px;text-align:center;line-height:30px}
+.tvp_promote_attention span.tvp_promote_attention_text{display:inline-block;position:relative;top:0;left:0;padding-left:16px;height:30px;line-height:30px;color:#fff;font-size:16px;background-image:url(//mat1.gtimg.com/www/images/newsapp/wechat/shoucang_icon.png);background-repeat:no-repeat;background-position:left center;background-size:15px 14px}
+.tvp_promote_attentioned span.tvp_promote_attention_text{background-image:url(//mat1.gtimg.com/www/images/newsapp/wechat/shoucang_icon_select.png)}
+.tvp_promote_attention span.tvp_promote_attention_text_attented{display:inline-block;position:relative;top:0;left:0;padding-left:16px;height:30px;line-height:30px;color:#fff;font-size:16px;background-image:url(//mat1.gtimg.com/www/images/newsapp/wechat/shoucang_icon_select.png);background-repeat:no-repeat;background-position:left center;background-size:15px 14px}
+.tvp_promote_attention_banner{position:relative;background:-webkit-linear-gradient(left,rgba(207,207,207,1) 0,rgba(207,207,207,1) 23px,rgba(207,207,207,0) 24px,rgba(207,207,207,0) 37px,rgba(207,207,207,1) 38px,rgba(207,207,207,1) 100%);-webkit-background-size:100% 1px;background-size:100% 1px;background-repeat:no-repeat;padding-top:15px;margin-top:8px;height:21px;line-height:21px;font-size:15px;color:#c09572;text-align:left}
+.tvp_promote_attention_banner:after{content:"";position:absolute;top:-5px;left:25px;display:block;height:10px;width:10px;border-bottom:1px solid #cfcfcf;border-right:1px solid #cfcfcf;-webkit-transform:rotate(45deg);transform:rotate(45deg)}
+.tvp_promote_attention_right{height:30px;position:relative;margin:0 0 0 80px;display:block;background-color:#5a96ec;border-radius:3px;box-shadow:1px 1px 3px rgba(0,0,0,.15);font-size:15px;text-align:center;line-height:30px;color:#fff}
+.tvp_promote_attention_right .tvp_promote_text{background-image:url(//mat1.gtimg.com/www/images/newsapp/wechat/play_icon.png);background-repeat:no-repeat;background-position:left center;background-size:21px 21px}
+.tvp_promote_attention_vip{background-color:#FB4B4E}
+.tvp_promote_banner_v2 .tvp_promote_attention_right{margin-left:0}
+.tvp_promote_banner_v2 .tvp_promote_attention_banner{display:none}
+.tvp_follow{position:absolute;right:8px;top:8px;z-index:10;width:45px;height:45px;text-align:center;border-radius:4px;background-color:rgba(255,112,0,.95)}
+.tvp_follow .tvp_icon_follow{display:block;width:20px;height:20px;margin:4px auto 2px;background-image:url(//imgcache.gtimg.cn/tencentvideo_v1/vstyle/mobile/v2/style/img/player/tvp_icon_follow.png);-webkit-background-size:45px 20px;background-size:45px 20px}
+.tvp_follow[data-follow="following"] .tvp_icon_follow{background-position:right 0}
+.tvp_follow .tvp_icon_text{display:block;line-height:15px;font-size:13px;color:#fff}
+.tvp_follow_hint{position:absolute;top:-80px;top:0;left:0;padding:10px 55px 13px 15px;line-height:1.2;z-index:7;width:100%;background-color:rgba(0,0,0,.7);-webkit-transform:translateY(-70px) translateZ(0);-webkit-transition:-webkit-transform .2s cubic-bezier(0.785,.135,.15,.86)}
+.tvp_follow_hint.tvp_show{-webkit-transform:translateY(0) translateZ(0);top:0}
+.tvp_follow_hint .tvp_hint_title{font-size:16px;margin-bottom:5px}
+.tvp_follow_hint .tvp_hint_desc{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@-webkit-keyframes clock{0%{-webkit-transform:rotate(0)}
+100%{-webkit-transform:rotate(360deg)}}
+@-webkit-keyframes zoom{0%{-webkit-transform:scale(1)}
+20%{-webkit-transform:scale(0.75)}
+40%{-webkit-transform:scale(1)}
+60%{-webkit-transform:scale(1.25)}
+100%{-webkit-transform:scale(1)}}
+@-webkit-keyframes downloadingProgress{0%{width:0}
+100%{width:90%}}
+@keyframes downloadingProgress{0%{width:0}
+100%{width:90%}}
+@-webkit-keyframes fadeIn{0%{opacity:0}
+100%{opacity:1}}
+@keyframes fadeIn{0%{opacity:0}
+100%{opacity:1}}
+@-webkit-keyframes fadeOut{0%{opacity:1}
+95%{opacity:0;width:78px;height:30px}
+100%{opacity:0;width:0;height:0}}
+@keyframes fadeOut{0%{opacity:1}
+95%{opacity:0;width:78px;height:30px}
+100%{opacity:0;width:0;height:0}}
+.tvp_app_badge,.tvp_app_banner,.tvp_app_badge *,.tvp_app_banner *{-webkit-box-sizing:border-box;box-sizing:border-box}
+.tvp_app_badge *:before,.tvp_app_badge *:after,.tvp_app_banner *:before,.tvp_app_banner *:after{-webkit-box-sizing:border-box;box-sizing:border-box}
+.tvp_app_badge{position:absolute;z-index:6;right:8px;bottom:48px;width:78px;height:30px;color:#fff;-webkit-animation-duration:.75s;animation-duration:.75s;-webkit-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-name:fadeIn;animation-name:fadeIn;-webkit-transition:all .4s ease;transition:all .4s ease}
+.tvp_app_badge .tvp_app_btn{position:relative;display:block;width:100%;height:100%;background-color:rgba(255,120,0,.8);border-radius:3px}
+.tvp_app_badge .tvp_progress{position:absolute;bottom:5px;left:5px;width:70px;height:3px;background-color:rgba(0,0,0,.2);border-radius:3px;display:none}
+.tvp_app_badge .tvp_progress_current{position:absolute;left:0;top:0;max-width:100%;height:3px;background-color:#fff;border-radius:2px;-webkit-transform:scaleY(0.6)}
+.tvp_app_badge .tvp_app_btn .tvp_text{position:relative;display:block;width:100%;height:100%;padding-top:17px;padding-left:2px;text-align:center;background:url(http://i.gtimg.cn/qqlive/images/20150201/tvp_app_badge.png) center -27px no-repeat;-webkit-background-size:80px 90px;background-size:80px 90px;font-size:10px;color:#FECEB8}
+.tvp_app_badge .tvp_app_btn .tvp_text:after{display:block;content:attr(data-text);white-space:nowrap;-webkit-transform:scale(0.85)}
+.tvp_app_badge .tvp_app_btn[data-status="open"] .tvp_text{background-position:center -57px}
+.tvp_app_badge .tvp_app_btn[data-status="speed"] .tvp_text{background-position:center 3px}
+.tvp_app_badge .tvp_app_btn[data-status="speed"] .tvp_text{background-position:center 3px}
+.tvp_app_badge .tvp_app_btn[data-status="downloading"] .tvp_text,.tvp_app_badge .tvp_app_btn[data-status="pause"] .tvp_text,.tvp_app_badge .tvp_app_btn[data-status="install"] .tvp_text{display:inline-block;background:none;padding-top:4px;font-size:15px;color:#fff;font-weight:normal}
+.tvp_app_badge .tvp_app_btn[data-status="install"]{background-color:rgba(101,194,0,.8)}
+.tvp_app_badge .tvp_app_btn[data-status="install"] .tvp_text:after{display:inline-block;margin-left:-2px;line-height:16px;font-size:14px}
+.tvp_app_badge .tvp_app_btn[data-status="install"] .tvp_text:before{content:'';display:inline-block;width:14px;height:16px;margin-right:0;vertical-align:top;background:url(//i.gtimg.cn/qqlive/images/tvp/icon_ok.png) left center no-repeat;-webkit-background-size:14px 14px;background-size:14px 14px}
+.tvp_app_badge .tvp_app_btn[data-status="install"] .tvp_progress{display:block}
+.tvp_app_badge .tvp_app_btn[data-status="install"] .tvp_progress_current{width:100%}
+.tvp_container .tvp_app_badge.tvp_none{display:block;overflow:hidden;-webkit-animation-name:fadeOut;animation-name:fadeOut}
+.tvp_controls_hide .tvp_app_badge{bottom:8px}
+.tvp_app_banner{position:absolute;z-index:10;left:0;bottom:-60px;width:100%;height:37px}
+.tvp_app_banner .tvp_app_btn{position:absolute;left:0;width:100%;height:100%;line-height:1;text-align:center}
+.tvp_app_banner .tvp_text{position:absolute;left:0;top:0;width:100%;height:100%;font-size:16px}
+.tvp_app_banner .tvp_app_btn[data-status="down"]{background-color:#FF6000}
+.tvp_app_banner .tvp_app_btn[data-status="down"] .tvp_text{padding-top:0;line-height:37px;color:#fff}
+.tvp_app_banner .tvp_app_btn[data-status="down"] .tvp_text:before{content:'';display:inline-block;width:16px;height:100%;margin-right:5px;vertical-align:top;background:url(//i.gtimg.cn/qqlive/images/tvp/logo_simple.png) left center no-repeat;-webkit-background-size:16px 16px;background-size:16px 16px}
+.tvp_app_banner .tvp_progress{position:absolute;left:0;right:0;bottom:6px;width:80%;height:3px;margin:auto;overflow:hidden;background-color:#2A84B8;border-radius:3px;display:none}
+.tvp_app_banner .tvp_progress_current{position:absolute;left:0;top:0;max-width:100%;height:3px;background-color:#fff;-webkit-transform:scaleY(0.6)}
+.tvp_app_banner .tvp_app_btn .tvp_text:after{display:inline-block;line-height:38px;content:attr(data-text)}
+.tvp_app_banner .tvp_app_btn[data-status="downloading"],.tvp_app_banner .tvp_app_btn[data-status="pause"]{background-color:#35A5E6}
+.tvp_app_banner .tvp_app_btn[data-status="downloading"] .tvp_text,.tvp_app_banner .tvp_app_btn[data-status="pause"] .tvp_text{padding-top:6px;font-size:14px;color:#fff}
+.tvp_app_btn[data-status="downloading"] .tvp_progress,.tvp_app_btn[data-status="pause"] .tvp_progress{display:block;-webkit-transform:translateZ(0)}
+.tvp_app_btn[data-status="downloading"] .tvp_progress_current,.tvp_app_btn[data-status="pause"] .tvp_progress_current{-webkit-animation-name:downloadingProgress;-webkit-animation-timing-function:linear;-webkit-animation-fill-mode:both;-webkit-animation-duration:20s;animation-name:downloadingProgress;animation-timing-function:linear;animation-duration:20s;animation-fill-mode:both}
+.tvp_app_btn[data-status="pause"] .tvp_progress_current{-webkit-animation-play-state:paused;animation-play-state:paused}
+.tvp_app_banner .tvp_app_btn[data-status="downloading"] .tvp_text:after,.tvp_app_banner .tvp_app_btn[data-status="pause"] .tvp_text:after{line-height:normal}
+.tvp_app_banner .tvp_app_btn[data-status="install"]{background-color:#35A5E6}
+.tvp_app_banner .tvp_app_btn[data-status="install"] .tvp_text{padding-top:0;line-height:37px;color:#fff}
+.tvp_app_banner .tvp_app_btn[data-status="install"] .tvp_text:before{content:'';display:inline-block;width:16px;height:100%;margin-right:5px;vertical-align:top;background:url(//i.gtimg.cn/qqlive/images/tvp/icon_ok.png) left center no-repeat;-webkit-background-size:16px 16px;background-size:16px 16px}
+.tvp_app_banner .tvp_app_btn[data-status="open"]{background-color:#65C200}
+.tvp_app_banner .tvp_app_btn[data-status="open"] .tvp_text{padding-top:0;line-height:37px;color:#fff}
+.tvp_nonauto .tvp_progress .tvp_progress_current{width:auto;-webkit-animation-name:none;-webkit-animation-name:none}
+.tvp_controls_hide .tvp_app_banner{bottom:0}
+.tvp_recommend{position:absolute;z-index:5;top:0;left:0;right:0;bottom:37px;width:100%;background-color:rgba(43,43,43,.7);display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;display:box;box-orient:horizontal;box-pack:center;box-align:center;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center}
+.tvp_video_multipage{width:100%;white-space:nowrap;font-size:0;letter-spacing:-3px}
+.tvp_video_multipage .tvp_video_list{display:inline-block;width:100%;margin:0;list-style:none;padding:0 8px 0 10px;overflow:hidden;letter-spacing:normal}
+.tvp_video_multipage .tvp_item{display:block;max-width:340px;margin:0 auto 6px}
+.tvp_video_multipage .tvp_link{display:block;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:start;-webkit-box-align:center;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:flex-start;justify-content:flex-start;color:#fff}
+.tvp_video_multipage .tvp_figure{width:110px;height:62px;-webkit-box-flex:0;-webkit-flex:0 0 110px;flex:0 0 110px}
+.tvp_video_multipage .tvp_title{display:block;max-height:60px;line-height:18px;margin-left:6px;overflow:hidden;white-space:normal;font-size:14px;font-weight:normal;color:#fff;display:-webkit-box;-webkit-line-clamp:3;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-box-flex:1}
+.tvp_multipage_nav{position:absolute;bottom:7px;left:0;width:100%;height:5px;text-align:center;font-size:0}
+.tvp_multipage_nav .tvp_dot{display:inline-block;width:5px;height:5px;margin:0 3px;background-color:#7C736F;border-radius:100%;vertical-align:top}
+.tvp_multipage_nav .tvp_current{background-color:#fff}
+.tvp_recommend .tvp_replay{position:absolute;z-index:6;right:0;bottom:0;height:32px;line-height:30px;padding:0 15px 5px 5px;font-size:12px}
+.tvp_recommend .tvp_replay .tvp_button_replay{display:inline-block;width:14px;height:100%;background:url(//i.gtimg.cn/qqlive/images/tvp/icon_replay.png) center center no-repeat;-webkit-background-size:14px 14px;background-size:14px 14px}
+.tvp_recommend .tvp_replay .tvp_text{display:inline-block;vertical-align:top;margin-left:4px}
+.landscape .tvp_recommend .tvp_video_multipage{white-space:normal}
+.landscape .tvp_recommend .tvp_video_multipage .tvp_related_list{width:100%}
+.landscape .tvp_recommend .tvp_video_multipage .tvp_item{width:50%;float:left;padding-right:10px}
+.landscape .tvp_recommend .tvp_video_multipage .tvp_item:nth-child(2n){padding-right:0}
+.landscape .tvp_multipage_nav{display:none}
+@media screen and (min-height:500px){.fullscreen .tvp_recommend .tvp_video_multipage{white-space:normal}
+.fullscreen .tvp_multipage_nav{display:none}
+.fullscreen .tvp_recommend .tvp_replay{bottom:0}}
+.tvp_finished .tvp_titles,.tvp_finished .tvp_overlay_poster,.tvp_finished .tvp_controls{display:none}
+.tvp_app_download_onpause{position:absolute;z-index:6;bottom:-60px;left:0;width:100%;height:55px;background-color:rgba(31,31,31,.9);border-top:none;box-shadow:none}
+.tvp_app_download_onpause .tvp_download_app{display:block;width:100%;padding-left:56px;text-decoration:none}
+.tvp_app_download_onpause .tvp_icon_logo{position:absolute;left:10px;top:10px;width:35px;height:35px;background:#fff url(//imgcache.gtimg.cn/tencentvideo_v1/vstyle/mobile/v2/style/img/common/icon_logo.png) center center no-repeat;-webkit-background-size:28px;background-size:28px;border-radius:5px;box-shadow:0 1px 1px #898989}
+.tvp_app_download_onpause .tvp_download_app_wording{display:block;float:left;margin-top:11px;color:#fff}
+.tvp_app_download_onpause .tvp_download_app_desc,.tvp_app_download_onpause .tvp_download_app_title{display:block;max-width:9.5em;font-size:16px;line-height:16px;overflow:hidden;white-space:nowrap}
+.tvp_app_download_onpause .tvp_download_app_desc{width:10em;margin-top:4px;font-size:12px}
+.tvp_app_download_onpause .tvp_app_btn_em{display:none}
+.tvp_app_download_onpause.tvp_show{bottom:0}
+.tvp_app_download_onpause .tvp_btn_download_btn{position:absolute;right:10px;top:10px;width:75px;height:36px;line-height:36px;border-radius:2px;overflow:hidden;background-color:#FF890B;background:-webkit-linear-gradient(top,#ff890b 1%,#ff7901 100%);background:linear-gradient(to bottom,#ff890b 1%,#ff7901 100%);font-size:15px;color:#fff;text-shadow:0 1px 1px rgba(4,0,0,.24);text-align:center}
+.tvp_app_download_onpause .tvp_btn_download_btn_text{position:relative;display:block;width:100%;font-size:15px;font-family:arial}
+.tvp_app_download_onpause .tvp_btn_download_btn .tvp_btn_progress{position:absolute;left:0;top:0;height:100%;min-width:0;max-width:75px;-webkit-border-radius:2px 0 0 2px;border-radius:1px 0 0 1px;background-color:#62B403;background:-webkit-gradient(linear,left top,left bottom,color-stop(1%,#57b100),color-stop(100%,#6eb706));background:-webkit-linear-gradient(top,#57b100 1%,#6eb706 100%);background:linear-gradient(to bottom,#57b100 1%,#6eb706 100%)}
+.tvp_app_download_onpause .tvp_btn_download_btn_loading_auto,.tvp_app_download_onpause .tvp_btn_download_btn_loading{background:#393B3D}
+.tvp_app_download_onpause .tvp_btn_download_btn_loading_auto .tvp_btn_progress{-webkit-transition:min-width 13s;min-width:100%}
+.tvp_app_download_onpause .tvp_btn_download_btn_pause .tvp_btn_progress{min-width:0;-webkit-transition:min-width 100000000s}
+.tvp_onpause .tvp_controls{bottom:-100px}
+.tvp_onpause .tvp_app_download_onpause{bottom:0}
+.tvp_none,.tvp_container .tvp_none{display:none}
+.tvp_show,.tvp_container .tvp_show{display:block!important}
+.tvp_onpause .tvp_overlay_play_try{bottom:40px}
+.tvp_app_badge .tvp_app_btn .tvp_text{background-image:url(//i.gtimg.cn/qqlive/images/tvp/tvp_app_badge.uniform.png)}
+#CssGaga{content:"150116094046,blu,327"}/*  |xGv00|76a87e4731a4418698466cf744d510d7 */

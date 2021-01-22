@@ -1,0 +1,67 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.BrandsDao;
+import com.weiweiqin.model.Brands;
+import com.weiweiqin.service.BrandsService;
+import com.weiweiqin.vo.common.Page;
+@Service
+public class BrandsServiceImpl implements BrandsService {
+	@Autowired
+	private BrandsDao brandsDao;
+
+	public void update(Brands brands) {
+		brandsDao.update(brands);
+
+	}
+
+	public Brands getByName(String name) {
+		return brandsDao.getByName(name);
+	}
+
+	public List<Brands> getAll() {
+		return brandsDao.getAll();
+	}
+
+	public void save(Brands brands) {
+		brandsDao.insert(brands);
+	}
+
+	public List<Brands> pageList(Page page,Map<String,Object> conditions) {
+		return brandsDao.pageList(page,conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return brandsDao.totalCount(conditions);
+	}
+
+	public void del(int id) {
+		brandsDao.delete(id);
+	}
+
+	public List<Brands> pageListForHome(Page page) {
+		
+		return brandsDao.pageListForHome(page);
+	}
+
+	public int getTotalCountForHome() {
+		return brandsDao.getTotalCountForHome();
+	}
+
+	public Brands get(int id) {
+		return brandsDao.get(id);
+	}
+
+	public List<Brands> getAllAddOn() {
+		return brandsDao.getAllAddOn();
+	}
+
+	public List<Brands> getByPicName(String pic) {
+		return brandsDao.getByPicName(pic);
+	}
+}

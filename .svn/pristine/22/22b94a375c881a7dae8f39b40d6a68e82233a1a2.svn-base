@@ -1,0 +1,128 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+
+public class OrderGoodsItem implements Serializable{
+	 
+	private static final long serialVersionUID = -400055590749272336L;
+
+	private int id;
+	
+	private int goodsId;
+	
+	private int orderId;
+	
+	private int num;
+	
+	private String color;
+	
+	private String size;
+	
+	private int mark;
+	
+	 
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("id=");
+		sb.append(id);
+		sb.append(":goodsId=");
+		sb.append(goodsId);
+		sb.append(":orderId=");
+		sb.append(orderId);
+		sb.append(":num=");
+		sb.append(num);
+		sb.append(":color=");
+		sb.append(color);
+		sb.append(":size=");
+		sb.append(size);
+		sb.append(":mark=");
+		sb.append(mark);
+		return sb.toString();
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public int getGoodsId() {
+		return goodsId;
+	}
+
+
+
+	public void setGoodsId(int goodsId) {
+		this.goodsId = goodsId;
+	}
+
+
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+	public int getNum() {
+		return num;
+	}
+
+
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+
+
+	public String getColor() {
+		return color;
+	}
+
+
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+
+
+	public String getSize() {
+		return size;
+	}
+
+
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+
+
+	public int getMark() {
+		return mark;
+	}
+
+
+
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+
+}

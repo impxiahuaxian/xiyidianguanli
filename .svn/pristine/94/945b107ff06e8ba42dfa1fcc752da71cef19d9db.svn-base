@@ -1,0 +1,11 @@
+package com.weiweiqin.dao;
+
+import java.util.Map;
+
+import com.weiweiqin.model.IpLimit;
+
+
+public interface IpLimitDao extends GenericDao<IpLimit,Integer>{
+	
+	IpLimit getByIpAndDate(Map<String,Object> conditions);
+}

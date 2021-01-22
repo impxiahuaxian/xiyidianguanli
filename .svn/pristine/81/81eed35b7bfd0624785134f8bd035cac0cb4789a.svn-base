@@ -1,0 +1,42 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.PicDao;
+import com.weiweiqin.model.Pic;
+import com.weiweiqin.service.PicService;
+
+@Service
+public class PicServiceImpl implements PicService {
+
+	@Autowired
+	private PicDao picDao;
+
+	public void update(Pic pic) {
+		picDao.update(pic);
+	}
+
+	public void save(Pic pic) {
+		picDao.insert(pic);
+
+	}
+
+	public void del(int id) {
+		picDao.delete(id);
+	}
+
+	public List<Pic> getAll() {
+		return picDao.getAll();
+	}
+
+	/**
+	 * 通过图片名称获取图片信息，用于删除垃圾图片
+	 */
+	public List<Pic> getByName(String name) {
+		return picDao.getByName(name);
+	}
+
+}

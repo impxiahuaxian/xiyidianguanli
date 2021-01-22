@@ -1,0 +1,454 @@
+package com.weiweiqin.controller.common;
+
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.model.Comment;
+import com.weiweiqin.model.Customer;
+import com.weiweiqin.model.GoodsCommentItem;
+import com.weiweiqin.service.CommentService;
+import com.weiweiqin.service.GoodsCommentItemService;
+import com.weiweiqin.utils.DateUtil;
+import com.weiweiqin.vo.common.CommentListVO;
+import com.weiweiqin.vo.common.CommentVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("/comment")
+public class CommentController {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(CommentController.class);
+	@Autowired
+	private CommentService commentService;
+
+	@Autowired
+	private GoodsCommentItemService goodsCommentItemService;
+
+	@SuppressWarnings("static-access")
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String add(CommentListVO commentListVO) {
+		logger.info("Enter method add...,commentListVO=" + commentListVO);
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		List<CommentVO> commentVOList = commentListVO.getCommentVOList();
+		// 用于随机生成时间的变量
+		Random random = new Random();
+		Calendar calendar = new GregorianCalendar();
+		int sub = 0;
+		Date sta = null;
+		Date end = null;
+		// 用户选择了随机生成日期
+		if (!StringUtils.isEmpty(commentListVO.getIsRandomDate())) {
+			String startDate = commentListVO.getStartDate();
+			String endDate = commentListVO.getEndDate();
+			try {
+				sta = sdf.parse(startDate);
+				end = sdf.parse(endDate);
+				sub = DateUtil.daysBetween(sta, end);
+			} catch (Exception e) {
+				logger.error("随机日期解析失败。。。。。");
+				result.setResult(false);
+				result.setErrorMsg("随机日期设置失败...");
+				return result.toJson();
+			}
+		}
+		int goodsId = commentListVO.getGoodsId();
+		if (null != commentVOList && !commentVOList.isEmpty()) {
+			for (CommentVO commentVO : commentVOList) {
+				if (null != commentVO) {
+					Comment comment = commentVO.getComment();
+					if(null != comment){
+						try {
+							// 是否随机生成评论时间
+							if (!StringUtils.isEmpty(commentListVO
+									.getIsRandomDate())) {
+								if(sub == 0){
+									comment.setUpdateDate(sta);
+								}else{
+									int d = random.nextInt(sub) + 1;
+									calendar.setTime(sta);
+									// 把日期往后增加一天.整数往后推,负数往前移动
+									calendar.add(calendar.DATE, d);
+									// 这个时间就是日期往后推一天的结果
+									Date randomDate = calendar.getTime();
+									comment.setUpdateDate(randomDate);
+									
+								}
+								
+							} else {
+								Date date = sdf.parse(commentVO.getUpdateDate());
+								comment.setUpdateDate(date);
+							}
+							commentService.save(comment);
+							GoodsCommentItem goodsCommentItem = new GoodsCommentItem();
+							goodsCommentItem.setCommentId(comment.getId());
+							goodsCommentItem.setGoodsId(goodsId);
+							goodsCommentItemService.save(goodsCommentItem);
+						} catch (ParseException e) {
+							logger.error("parse date error", e);
+							result.setResult(false);
+							result.setErrorMsg("时间格式不正确");
+							return result.toJson();
+						}
+						
+					}
+					
+				}
+			}
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/addByCoustomer.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String addByCoustomer(CommentVO commentVO, HttpSession session) {
+		logger.info("Enter method addByCoustomer...,commentVO=" + commentVO);
+		Result result = new Result();
+		try {
+			if (null != session.getAttribute("customer")) {
+				Customer customer = (Customer) session.getAttribute("customer");
+				Comment comment = commentVO.getComment();
+				if (null != comment) {
+					if (commentVO.getNiming() == 1) {
+						if (StringUtils.isEmpty(customer.getNickname())) {
+							comment.setUsername("匿名用户");
+						} else {
+							String nickname = customer.getNickname();
+
+							if (nickname.length() == 1) {
+								String s = nickname.substring(0, 1);
+								nickname = s + "***" + s + "（匿名）";
+							} else {
+								String s = nickname.substring(0, 1);
+								String lastS = nickname.substring(
+										nickname.length() - 1,
+										nickname.length());
+								nickname = s + "***" + lastS + "（匿名）";
+							}
+							comment.setUsername(nickname);
+						}
+					} else {
+						if (StringUtils.isEmpty(customer.getNickname())) {
+							comment.setUsername("匿名用户");
+						} else {
+							comment.setUsername(customer.getNickname());
+						}
+					}
+					// 待审核
+					comment.setStatus(1);
+					comment.setUpdateDate(new Date());
+					commentService.addByCoustomer(comment,
+							commentVO.getGoodsIds());
+				}
+
+			}
+
+		} catch (Exception e) {
+			logger.error("发表评论失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("发表评论失败...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(int goodsId, int currPage) {
+		Result result = new Result();
+		Page page = new Page();
+		page.setCurrPage(currPage);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put("goodsId", goodsId);
+		conditions.put("status", 0);
+		List<Comment> commentList = commentService.pageList(page, conditions);
+		int totalCount = commentService.totalCount(conditions);
+		List<CommentVO> commentVOList = new ArrayList<CommentVO>();
+		if (null != commentList && !commentList.isEmpty()) {
+			for (Comment comment : commentList) {
+				CommentVO vo = new CommentVO();
+				vo.setComment(comment);
+				String date = sdf.format(comment.getUpdateDate());
+				vo.setUpdateDate(date);
+				commentVOList.add(vo);
+			}
+		}
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalCount", totalCount);
+		mp.put("list", commentVOList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageListForExport.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String pageListForExport(int currPage) {
+		Result result = new Result();
+		Page page = new Page();
+		page.setCurrPage(currPage);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put("status", 0);
+		List<Comment> commentList = commentService.pageListForExprot(page,
+				conditions);
+		int totalCount = commentService.totalCountForExprot(conditions);
+		List<CommentVO> commentVOList = new ArrayList<CommentVO>();
+		if (null != commentList && !commentList.isEmpty()) {
+			for (Comment comment : commentList) {
+				CommentVO vo = new CommentVO();
+				vo.setComment(comment);
+				String date = sdf.format(comment.getUpdateDate());
+				vo.setUpdateDate(date);
+				commentVOList.add(vo);
+			}
+		}
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalCount", totalCount);
+		mp.put("list", commentVOList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/auditPageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String auditPageList(int currPage) {
+		Result result = new Result();
+		Page page = new Page();
+		page.setCurrPage(currPage);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put("status", 1);
+		List<Comment> commentList = commentService.pageList(page, conditions);
+		int totalCount = commentService.totalCount(conditions);
+		List<CommentVO> commentVOList = new ArrayList<CommentVO>();
+		if (null != commentList && !commentList.isEmpty()) {
+			for (Comment comment : commentList) {
+				CommentVO vo = new CommentVO();
+				vo.setComment(comment);
+				String date = sdf.format(comment.getUpdateDate());
+				vo.setUpdateDate(date);
+				commentVOList.add(vo);
+			}
+		}
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalCount", totalCount);
+		mp.put("list", commentVOList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/auditPass.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String auditPass(int id) {
+		Result result = new Result();
+		try {
+			Comment comment = commentService.get(id);
+			comment.setStatus(0);
+			commentService.update(comment);
+		} catch (Exception e) {
+			logger.error("审核异常。。。");
+			result.setErrorMsg("审核异常。。。");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/auditNotPass.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String auditNotPass(int id) {
+		Result result = new Result();
+		try {
+			Comment comment = commentService.get(id);
+			comment.setStatus(2);
+			commentService.update(comment);
+		} catch (Exception e) {
+			logger.error("审核异常。。。");
+			result.setErrorMsg("审核异常。。。");
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/addUpdateDate1.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String addUpdateDate1() {
+		Result result = new Result();
+
+		try {
+			commentService.addUpdateDate1();
+		} catch (Exception e) {
+			logger.error("递增时间失败...");
+			result.setResult(false);
+			result.setErrorMsg("递增时间失败...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/subUpdateDate1.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String subUpdateDate1() {
+		Result result = new Result();
+
+		try {
+			commentService.subUpdateDate1();
+		} catch (Exception e) {
+			logger.error("递增时间失败...");
+			result.setResult(false);
+			result.setErrorMsg("递增时间失败...");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/pageListForHome.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String pageListForHome(int goodsId, int currPage) {
+		Result result = new Result();
+		Page page = new Page();
+		page.setCurrPage(currPage);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		conditions.put("goodsId", goodsId);
+		conditions.put("status", 0);
+		List<Comment> commentList = commentService.pageList(page, conditions);
+		int totalCount = commentService.totalCount(conditions);
+		page.setTotalCount(totalCount);
+		List<CommentVO> commentVOList = new ArrayList<CommentVO>();
+		if (null != commentList && !commentList.isEmpty()) {
+			for (Comment comment : commentList) {
+				CommentVO vo = new CommentVO();
+				vo.setComment(comment);
+				String date = sdf.format(comment.getUpdateDate());
+				vo.setUpdateDate(date);
+				commentVOList.add(vo);
+			}
+		}
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("totalPage", page.getTotalPage());
+		mp.put("totalCount", totalCount);
+		mp.put("list", commentVOList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/getByGoodsId.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getByGoodsId(int goodsId) {
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		List<Comment> commentList = commentService.getByGoodsId(goodsId);
+		List<CommentVO> commentVOList = new ArrayList<CommentVO>();
+		if (null != commentList && !commentList.isEmpty()) {
+			for (Comment comment : commentList) {
+				CommentVO vo = new CommentVO();
+				vo.setComment(comment);
+				String date = sdf.format(comment.getUpdateDate());
+				vo.setUpdateDate(date);
+				commentVOList.add(vo);
+			}
+		}
+		CommentListVO comVO = new CommentListVO();
+		comVO.setCommentVOList(commentVOList);
+		comVO.setGoodsId(goodsId);
+		result.setObj(comVO);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/del.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String del(int id) {
+		Result result = new Result();
+		commentService.del(id);
+		GoodsCommentItem item = goodsCommentItemService.getByCommentId(id);
+		goodsCommentItemService.del(item.getId());
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String get(int id) throws UnsupportedEncodingException {
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Comment comment = commentService.get(id);
+		String date = sdf.format(comment.getUpdateDate());
+		CommentVO commentVO = new CommentVO();
+		commentVO.setComment(comment);
+		commentVO.setUpdateDate(date);
+		result.setObj(commentVO);
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(CommentVO commentVO) {
+		Result result = new Result();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Comment comment = commentVO.getComment();
+		try {
+			Date date = sdf.parse(commentVO.getUpdateDate());
+			comment.setUpdateDate(date);
+			commentService.update(comment);
+		} catch (ParseException e) {
+			logger.error("parse date error", e);
+			result.setResult(false);
+			result.setErrorMsg("时间格式不正确");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+}

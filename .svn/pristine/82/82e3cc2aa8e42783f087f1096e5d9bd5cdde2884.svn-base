@@ -1,0 +1,49 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.OrderDao;
+import com.weiweiqin.model.Order;
+import com.weiweiqin.model.OrderDetail;
+import com.weiweiqin.service.OrderService;
+import com.weiweiqin.vo.common.Page;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+	private OrderDao orderDao;
+
+	public void update(Order order) {
+		orderDao.update(order);
+	}
+
+	public Order get(int id) {
+		return orderDao.get(id);
+	}
+
+	public List<Order> pageList(Page page, Map<String, Object> conditions) {
+		return orderDao.pageList(page, conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return orderDao.totalCount(conditions);
+	}
+
+	public void save(Order order) {
+		orderDao.insert(order);
+	}
+
+	public void save(Order order, List<OrderDetail> detailList) {
+		orderDao.insert(order);
+	}
+
+	public void del(int id) {
+		orderDao.delete(id);
+	}
+
+}

@@ -1,0 +1,134 @@
+package com.weiweiqin.service.impl;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.weiweiqin.dao.CommentDao;
+import com.weiweiqin.model.Comment;
+import com.weiweiqin.model.GoodsCommentItem;
+import com.weiweiqin.model.Order;
+import com.weiweiqin.service.CommentService;
+import com.weiweiqin.service.GoodsCommentItemService;
+import com.weiweiqin.service.OrderService;
+import com.weiweiqin.vo.common.Page;
+
+@Service
+public class CommentServiceImpl implements CommentService {
+
+	@Autowired
+	private CommentDao commentDao;
+
+	@Autowired
+	private GoodsCommentItemService goodsCommentItemService;
+	
+	@Autowired
+	private OrderService orderService;
+
+	public void update(Comment comment) {
+		commentDao.update(comment);
+	}
+
+	public Comment get(int id) {
+		return commentDao.get(id);
+	}
+
+	public List<Comment> pageList(Page page, Map<String, Object> conditions) {
+		return commentDao.pageList(page, conditions);
+	}
+
+	public List<Comment> getByGoodsId(int goodsId) {
+		return commentDao.getByGoodsId(goodsId);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return commentDao.totalCount(conditions);
+	}
+
+	public void save(Comment comment) {
+		commentDao.insert(comment);
+	}
+
+	public void del(int id) {
+		commentDao.delete(id);
+	}
+	
+	/**
+	 * 将评论日期递增一天
+	 */
+	@SuppressWarnings("static-access")
+	@Transactional
+	public void addUpdateDate1() {
+		List<Comment> list = selectAll();
+		Calendar   calendar   =   new   GregorianCalendar(); 
+		for (Comment comment : list) {
+		     calendar.setTime(comment.getUpdateDate()); 
+		   //把日期往后增加一天.整数往后推,负数往前移动
+		     calendar.add(calendar.DATE,1); 
+		   //这个时间就是日期往后推一天的结果
+		     Date newDate =calendar.getTime();    
+		     comment.setUpdateDate(newDate);
+		     commentDao.update(comment);
+		}
+	}
+	
+	/**
+	 * 将评论日期递增一天
+	 */
+	@SuppressWarnings("static-access")
+	@Transactional
+	public void subUpdateDate1() {
+		List<Comment> list = selectAll();
+		Calendar   calendar   =   new   GregorianCalendar(); 
+		for (Comment comment : list) {
+		     calendar.setTime(comment.getUpdateDate()); 
+		   //把日期往后减一天.整数往后推,负数往前移动
+		     calendar.add(calendar.DATE,-1); 
+		   //这个时间就是日期往后推一天的结果
+		     Date newDate =calendar.getTime();    
+		     comment.setUpdateDate(newDate);
+		     commentDao.update(comment);
+		}
+	}
+	
+
+	/**
+	 * 客户新增评价
+	 */
+	@Transactional
+	public void addByCoustomer(Comment comment, List<Integer> goodsIds) {
+		save(comment);
+		if (null != goodsIds && !goodsIds.isEmpty()) {
+			for (int i = 0; i < goodsIds.size(); i++) {
+				GoodsCommentItem goodsCommentItem = new GoodsCommentItem();
+				goodsCommentItem.setCommentId(comment.getId());
+				goodsCommentItem.setGoodsId(goodsIds.get(i));
+				goodsCommentItemService.save(goodsCommentItem);
+			}
+		}
+		Order order = orderService.get(comment.getOrderId());
+		//已经评论，1：已评论，0：未评论
+		order.setIsComment(1);
+		orderService.update(order);
+	}
+
+	public List<Comment> selectAll() {
+		return commentDao.selectAll();
+	}
+
+	public List<Comment> pageListForExprot(Page page,
+			Map<String, Object> conditions) {
+		return commentDao.pageListForExprot(page, conditions);
+	}
+
+	public int totalCountForExprot(Map<String, Object> condtions) {
+		return commentDao.totalCountForExprot(condtions);
+	}
+
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.ColorSizeItemSizeItemMapper">
+	<resultMap type="com.weiweiqin.model.ColorSizeItem" id="colorSizeItemResultMap">
+		<id property="id" column="id" />
+		<result property="colorId" column="color_id" />
+		<result property="sizeId" column="size_id" />
+	</resultMap>
+	
+	<insert id="ColorSizeItem_insert" parameterType="com.weiweiqin.model.ColorSizeItem"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO color_size_item (color_id,size_id) values
+		          (#{colorId},#{sizeId})
+		        ]]>
+	</insert>
+	
+	<select id="ColorSizeItem_getByColorId" parameterType="map"
+		resultType="com.weiweiqin.model.ColorSizeItem" resultMap="colorSizeItemResultMap"> 
+		<![CDATA[ 
+			select a.* from color_size_item  a where a.color_id = #{colorId}  
+	        ]]>
+	</select>
+	
+	<select id="ColorSizeItem_getBySizeId" parameterType="map"
+		resultType="com.weiweiqin.model.ColorSizeItem" resultMap="colorSizeItemResultMap"> 
+		<![CDATA[ 
+			select a.* from color_size_item  a where a.size_id = #{sizeId}  
+	        ]]>
+	</select>
+	
+	<delete id="ColorSizeItem_delete"  parameterType="Integer">
+		delete from color_size_item  where id = #{primaryKey}
+	</delete>
+	
+</mapper>
+

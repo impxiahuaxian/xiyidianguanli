@@ -1,0 +1,952 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./header.jsp" %>
+<head>
+	<style>
+		
+		.pordIxzj
+		 {
+			position: absolute;
+			bottom: 1px;
+			right: 1px;
+			z-index: 50;
+		}
+		.group{
+			margin-top:4px;
+		}
+		
+		.group  .not{
+			color: #CDCDCD;
+			border:1px dashed #ccc!important;
+		}
+		
+	 
+		
+		.group .not-img{
+			color: #CDCDCD;
+			border:2px dashed #ccc!important;
+		}
+		.shopinfo{
+			color: #333;
+			font: 700 16px/1.5 helvetica,tahoma,arial,sans-serif;
+		}
+		
+		.buy{
+			margin-top:20px;
+		}
+		
+		
+		#nowprice{
+			padding: 0 5px;
+			color: #F76120;
+			font: 700 30px/36px verdana,arial;
+		}
+		
+		.free_cost{
+			height: 16px;
+			line-height: 16px;
+			padding: 0 4px;
+			margin-top: 9px;
+			background: #7FC800;
+			border: 1px solid #66A600;
+			color: #FFF;
+			border-radius: 2px;
+		}
+		
+		.oldprice{
+			font: 400 14px/36px 'Microsoft YaHei',STXihei,MingLiu;
+			color: #AAA;
+			text-decoration: line-through;
+		}
+		
+		.buynum{
+			border: 1px solid #ccc;
+			display:block;
+			width: 38px;
+			height: 20px;
+			padding:5px 5px;
+			font-weight: 700;
+			line-height: 20px;
+			background-position: 0 -80px;
+			color: #333;
+		}
+		
+		#star ul{
+			padding-left:0px;
+		}
+
+		#star li {
+			float: left;
+			width: 24px;
+			cursor: pointer;
+			text-indent: -9999px;
+			background: url(${ctx}/images/star.png) no-repeat;
+		}
+
+
+		#star li.on {
+			background-position: 0 -28px;
+		}
+		
+		.colorlist .current{
+			border:2px solid #be0106;
+		}
+		
+		.colorlist button.current{
+			border:1px solid #be0106;
+		}
+		
+		.color-img{
+			border:2px solid #eee;
+			height:50px;
+		}
+		
+		.color-img:hover{ 
+			border:2px solid #be0106;
+		}
+		
+		.colorlist button:hover{
+			border:1px solid #be0106;
+		}
+		
+		.pic-desc{
+			font-size: 18px;
+			color: #333;
+			background: url(${ctx}/images/pic-desc-bg.png) repeat;
+			margin-bottom: 20px;
+			border-left: 5px solid #36ab2a;
+			padding-left: 10px;
+			line-height: 36px;
+		}
+		
+		.model-title{
+			line-height:30px;
+			height:30px;
+			margin-top:0px;
+			padding-left:10px;
+			background: #eee;
+			color:#333;
+		}
+		
+	</style>
+</head>
+
+<body>
+	<tags:top/>
+		
+    <div class="container">
+    	
+    	<div class="thumbnail" style="border:none;margin-bottom:0px;display: none;" id="safe_desc">
+			<img src="${ctx }/images/safe_desc.jpg"/>
+		</div>
+		
+    	<div class="page-header">
+  			<h4>商品详情</h4>
+		</div>
+    	
+		<div class="row shop-box">
+		    <div class="col-sm-5 col-md-5" >
+		    	<div class="thumbnail" style="border:0px;margin:0px;padding:0px;">
+		    		<img alt="" class="img-box" src="">
+		    	</div>
+		      	  
+	  		</div>
+	  		
+	  		<div class="col-sm-7 col-md-7" style="background:#FFF;padding-top:20px;">
+			    <div class="shopinfo" id="buy_div_id"></div>
+			    
+			    <div class="pricebox">
+			    	<div class="nowprice clearfix" style="padding-top:10px;padding-bottom:10px;">
+	            		<span style="color:#999;">现价：</span>
+                        <span class="unit fl" style="color:#AAA;">¥ </span>
+	                	<span class="pricein num fl"  id="nowprice"></span>
+                        <span class="free_cost fl"></span>                            
+                	</div>
+                
+	           		<div>
+	           			<span style="color:#999;">原价：</span>
+	           			<span style="color:#AAA;">¥</span>
+	           			<span class="oldprice num" id="oldprice"></span>
+	           		</div>
+	           		
+	           		<div>
+	           			<span style="color:#999;">配送：</span>
+	           			<span class="num" style="color:#AAA;">顺丰快递</span>
+	           		</div>
+	           		
+			    </div>
+			    
+			    <div class="infobox" style="margin-top:20px;">
+			    	<div>
+			    		<span style="color:#999;">最近30天已售：</span>
+			    		<span style="color:#333;" id="lastsale_id"></span>
+			    	</div>
+			    	
+			    	<div style="margin-top:10px;" class="clearfix">
+			    	
+			    		<div class="row">
+			    			<div class="col-md-2 col-xs-3" style="color:#999;line-height: 34px;padding-right:0px;width:59px;">
+			    				颜色：
+			    			</div>
+			    			
+			    			<div class="col-md-10 col-xs-9 colorlist" style="color:#333;padding-left: 0px;">
+			    			 <div class="btn-toolbar" role="toolbar" style="line-height:26px;" id="color_div_id">
+			    			    <!-- 文字颜色 -->
+						        <div class="btn-group btn-group-sm group" id="color_model_id" style="display: none;position: relative;">
+				          			<button type="button" class="btn btn-default color-button"></button>
+					          		<img src="${ctx}/images/imgxuanzhongjiao.png" class="pordIxzj" style="display: none;"> 
+						        </div>
+						        
+						        <!-- 图片颜色 -->
+						        <div class="btn-group btn-group-sm group" id="color_img_model_id" style="display: none;position: relative;">
+				          			<a class="color-img-a"> 
+			    						<img src="" class="color-img" style="cursor: pointer;"/>
+			    						<div class="not-div" style="height:50px; position: absolute;left:0px;top:0px;z-index: 100px;cursor: not-allowed;background-image: url('${ctx}/images/colorimg.gif');display:none;"></div> 
+		    					  	</a>
+					          		<img src="${ctx}/images/imgxuanzhongjiao.png" class="pordIxzj" style="display: none;"> 
+						        </div>
+						        
+						        
+						    
+						        
+						      </div>
+			    			</div>
+			    		</div>
+			    		
+			    		
+			    	</div>
+			    	
+			    	<div style="margin-top:10px;" class="clearfix">
+			    	
+			    		<div class="row">
+			    			<div class="col-md-2 col-xs-3" style="color:#999;line-height: 34px;padding-right:0px;width:59px;">尺码：</div>
+			    			
+			    			<div class="col-md-10 col-xs-9 colorlist" style="color:#333;padding-left: 0px;">
+			    			 <div class="btn-toolbar" role="toolbar" style="line-height:26px;" id="size_div_id">
+						        <div class="btn-group btn-group-sm group" id="size_model_id" style="display: none;">
+						          <button type="button" class="btn btn-default"></button>
+						          <img src="${ctx}/images/imgxuanzhongjiao.png" class="pordIxzj" style="display: none;">
+						        </div>
+						      </div>
+			    			</div>
+			    		</div>
+			    		
+			    		
+			    	</div>
+			    	
+			    	
+			    	
+			    	<div style="margin-top:20px;" class="clearfix">
+			    		<span style="color:#999;float:left;">数量：</span>
+			    		<div style="float:left;">
+			    			<a href="#" style="text-decoration:none;color:#000;padding:5px;" class="reduce">-</a>
+                            <span class="buyNum" style="padding:2px 10px;color:#000;border:1px solid #ccc;">1</span>
+                    		<a href="#" class="add" style="text-decoration:none;color:#000;padding:5px;">+</a>
+                        </div>
+			    	</div>
+			    </div>
+			    
+			    <div class="buy" style="margin-bottom:10px;">
+			    	<a type="button" id="register_btn" data-buy="yes" class="btn btn-lg add-scart btn-pfwm-yellow" href="${ctx }/cart">立即购买</a>
+			    	<a type="button" id="add_cart_id" class="btn btn-lg btn-buy add-scart" href="${ctx }/addCart"><span class="glyphicon glyphicon-shopping-cart" style="margin-right:2px;"></span>加入购物车</a>
+			    </div>
+	            
+	  		</div>
+	  		
+  		</div>
+  		
+  		<div class="row" style="margin-top:20px;" id="fix-nav">
+  			
+    		<div class="col-sm-9 col-md-9">
+    			<div class="bs-example bs-example-tabs">
+				      <ul id="myTab" class="nav nav-tabs" style="z-index: 1000;background-color:#fff;border-bottom:1px solid #ccc;">
+				        <li class="active" id="home_a"> <a href="#home" data-toggle="tab">商品详情</a></li>
+				        <li class=""><a href="#comment" id="comment_a" data-toggle="tab">评价</a></li>
+				        <li class="" style="float: right;">
+				        	<button type="button" id="go_buy" class="btn btn-lg btn-buy">立即购买</button>
+				        </li>
+				      </ul>
+				      <div id="myTabContent" class="tab-content">
+				        <div class="tab-pane fade active in" id="home">
+				        	<div id="subPicBox" class="thumbnail" style="border-top:0px;padding: 0px;">
+								
+								<!-- begin 商品详情信息 -->
+				        		<div  id="goods_content" >
+				        			 
+								   	<ul class="brands clearfix">
+								    		<li id="brands_img_model_id" style="display: none;">
+								    			<a href="#" target="_blank">
+									    			<img src="${ctx }/images/nike.jpg"/>
+									    			<div class="bg" ></div>
+								    			</a>
+								    		</li>
+								    </ul>
+				        		
+				        		</div>
+				        		<!-- end 商品详情信息 -->
+				        		
+				        		<div class="thumbnail" style="border:0px;margin-bottom:0px;display: none;" id="sub_pic_model">
+				        			<img class="lazyImg" src="${ctx}/images/d_loading.gif" data-url=""/>
+				        		</div>
+				        		
+					        </div>
+					        
+					        <!-- begin商品温馨提示 -->
+					        <div style="margin-top:15px;margin-bottom:10px;display: none;" id="tips_div" > 
+						    	<div style="color:#999;font-size:20px;">
+						    		竹的家温馨提示：
+						    	</div>
+						    	<div style="font-size:16px;color:#999;" class="tips"> 
+						    		
+						    	</div>
+						    </div>
+						    <!-- end商品温馨提示 -->
+				        </div>
+				        
+				        <div class="tab-pane fade" id="comment">
+					        <li class="list-group-item" id="comment_model_id" style="display:none;border-top:0px;">
+								  	<div class="row">
+								  		<div class="col-md-1">
+								  			<img src="${ctx}/images/avatar-61.png">
+								  		</div>
+								  		<div class="col-md-11">
+								  			<div class="list-group">
+											  	<div class="row" id="star">
+											  		<div class="col-md-3">
+											  			<span class="username" style="color:#36ab2a;font-size:12px;"></span>
+											  		</div>
+											  		
+											  		<div class="col-md-9">
+											  			<ul class="star">
+															<li class="li-1"><a href="javascript:;">1</a></li>
+															<li class="li-2"><a href="javascript:;">2</a></li>
+															<li class="li-3"><a href="javascript:;">3</a></li>
+															<li class="li-4"><a href="javascript:;">4</a></li>
+															<li class="li-5"><a href="javascript:;">5</a></li>
+														</ul>
+														
+														<span style="color:#999;font-size:12px;" id="star_des_id"></span>	
+											  		</div>
+											  		
+											  	</div>
+											    <div style="color:#000;font-size:12px;margin-top:4px;margin-bottom:4px;" class="comment-content"></div>
+											    <div style="color:#999;font-size:12px;" class="comment-date"></div>
+											</div>
+								  			
+								  		</div>
+								  	</div>
+								  </li>
+				        	<ul class="list-group" id="comment_div_id" style="list-style: none;">
+							</ul>
+							
+							<div id="pager" align="center"></div>
+				        </div>
+				       
+				      </div>
+			    </div>
+			   
+    		</div>
+    		
+    		
+    		
+    		<div class="col-sm-3 col-md-3 more-team" >
+    			<h4>更多团购</h4>
+    			<div id="moretuangou">
+    			</div>
+    			
+    		</div>
+    	</div>
+    	
+    	<div class="row" style="border:1px solid #ccc;margin-top:60px;">
+					<div>
+						<h5 class="model-title">你可能还喜欢：</h5>
+					</div>
+					<div id="shop_recommend_id">
+						<!-- col1 -->
+					    <div class="col-sm-2 col-md-2" id="col_id0">
+							    	
+				  		</div>
+				  		
+				  		<!-- col2 -->
+				  		<div class="col-sm-2 col-md-2" id="col_id1">
+							    	
+				  		</div>
+				  		
+				  		<!-- col3 -->
+				  		<div class="col-sm-2 col-md-2" id="col_id2">
+							    	
+				  		</div>
+				  		
+			  			<!-- col4 -->
+				  		<div class="col-sm-2 col-md-2" id="col_id3">
+							    	
+				  		</div>
+				  		
+				  		
+			  			<!-- col5 -->
+				  		<div class="col-sm-2 col-md-2" id="col_id4">
+							    	
+				  		</div>
+				  		
+				  		
+			  			<!-- co6 -->
+				  		<div class="col-sm-2 col-md-2" id="col_id5">
+							    	
+				  		</div>
+				  		
+				  	
+					</div>
+		</div>
+		
+		<!-- begin model -->
+			<div class="thumbnail goodsbox" style="display: none;" id="goods_recommend_model">
+			      <a href="#" target="_blank" class="title-a" style="text-decoration: none;"><h6 class="title ellipsis" style="color:#666;"></h6></a>
+			      <a href="#" target="_blank"  class="img-a"><img alt="" src="${ctx }/images/loading.gif"></a>
+			      <div class="caption">
+			        
+			        <p>
+			        	<strong class="nowprice" style="color:#F76120;font-size:16px;"></strong>
+			        	<span class="oldprice" style="color:#9F9F9F;font-size:14px;text-decoration:line-through;"></span>
+			        </p>
+			      </div>
+			</div>
+		<!-- end model -->
+		
+		
+		
+    </div>
+    
+    
+	
+	<tags:bottom/>
+ 	
+	<div class="thumbnail" id="goods_new_model" style="display: none;">
+		<a href="#" target="_blank" class="title-a" style="text-decoration: none;"><h6 class="title ellipsis" style="color:#666;"></h6></a>
+		<a href="#" class="img-a" target="_blank"><img alt="" src="${ctx }/images/loading.gif"/></a>
+    	<div class="caption">
+	         <p class="content" style="margin:0px;">
+	        	<strong class="nowprice" style="color:#F76120;font-size:20px;font-weight: bold;height: 31px;line-height: 31px;"></strong>
+	        	<span style="color:#9F9F9F;font-size:12px;">原价</span><span class="oldprice" style="color:#9F9F9F;font-size:12px;text-decoration:line-through;"></span>
+	        	<span class="discount" style="background: #36ab2a;color:#FFF;font-size:12px;">折扣</span>
+        	</p>
+        </div>
+   	</div>
+   	<script src="${ctx}/js/stickUp/stickUp.min.js"></script>
+	<script>
+		$(function(){
+			if(jWei.util.isPC()){
+				$("#safe_desc").show();
+			}
+			//是否显示颜色图片，默认false		
+			var isColorPic = false;
+			//设置商品详情和购买的固定导航条效果
+			var width = $("#myTab").outerWidth();
+			$("#myTab").css("width",width);
+			
+			$("#go_buy").click(function(){
+				$("html,body").animate({scrollTop:$("#buy_div_id").offset().top},100);//1000是ms,也可以用slow代替
+				return false;
+			});
+			
+			$("#home_a,#comment_a").click(function(){
+				$("html,body").animate({scrollTop:$("#fix-nav").offset().top-1},100);//1000是ms,也可以用slow代替
+			});
+			
+			$("#myTab").stickUp();
+			
+			//获取评论信息
+			getComments(1);
+			//评论函数
+			function getComments(currPage) {
+				var aMsg = [ "", "很不满意|差得太离谱，与卖家描述的严重不符", "不满意|部分有破损，与卖家描述的不符",
+						"一般|质量一般，没有卖家描述的那么好", "满意|质量不错，与卖家描述的基本一致",
+						"非常满意|质量非常好，与卖家描述的完全一致" ];
+
+				jQuery.ajax({
+							type : 'Get',
+							contentType : 'application/json',
+							url : '${ctx}/comment/pageListForHome.do',
+							data : {
+								goodsId : "${id}",
+								currPage:currPage
+							},
+							dataType : 'json',
+							success : function(data) {
+								if (data.result) {
+									$("#comment_a").html("评价("+data.obj.totalCount+")");
+									$("#comment_div_id").html("");
+									$("#pager").pager({
+										pagenumber : currPage,
+										pagecount : data.obj.totalPage,
+										isShowPrev:true,
+										buttonClickCallback : PageClick
+									});
+									
+									//为评价分页加瞄
+									$("#pager").on("click","li a",function(){
+										$("html,body").animate({scrollTop:$("#fix-nav").offset().top-1},100);//1000是ms,也可以用slow代替
+										return false;
+									});
+									var voList = data.obj.list;
+									
+									for ( var i = 0; i < voList.length; i++) {
+										var comment = voList[i].comment;
+										var newModel = $("#comment_model_id").clone();
+										
+										newModel.find(".username").html(comment.username);
+										newModel.find(".comment-content").html(comment.content);
+										newModel.find(".comment-date").html(voList[i].updateDate);
+										var grade = comment.grade;
+										newModel.find("#star_des_id").html(aMsg[grade]);
+										for ( var j = 1; j <= grade; j++) {
+											newModel.find(".li-" + j).addClass("on");
+										}
+										newModel.show();
+										$("#comment_div_id").append(newModel);
+									}
+									if (voList.length == 0) {
+										$("#comment_div_id").append('<div style="margin-top:20px;color:#666;font-size:14px;" align="center">该商品暂时没有评论信息！</div>');
+									}
+								} else {
+									$("#comment_div_id").append('<div style="margin-top:20px;color:#666;font-size:14px;" align="center">加载评论信息失败！</div>');
+								}
+							},
+							error : function(data) {
+								$("#comment_div_id").append('<div style="margin-top:20px;color:#666;font-size:14px;" align="center">加载评论信息失败！</div>');
+							}
+						});
+			}
+			
+			//回调函数  
+			var PageClick = function(pageclickednumber) {
+				getComments(pageclickednumber);
+			};
+			
+			//设置更多团购信息
+			 var currMore =Math.floor(Math.random()*13)+1;
+	        $.get("${ctx}/goods/goodsListByGrade.do?pageSize=12&grade=1&currPage="+currMore, function(data){
+	        	
+	        	var dataObj = $.parseJSON(data);
+	        	
+	        	var list = dataObj.obj.goodsList;
+	        	for(var i = 0 ;i<list.length;i++){
+	        		if("${id}" != list[i].id){
+	        			var model = $("#goods_new_model").clone();
+		        		var goods = list[i];
+		            	$("#moretuangou").append(model);
+		            	model.find(".img-a").attr("href","${ctx}/detailGoods/"+goods.id);
+		            	model.find("img").attr("data-url","${ctx}/upload/downloadCompress.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+		            	model.find(".title").html(goods.title);
+		            	model.find(".nowprice").html("￥"+goods.nowPrice);
+		            	model.find(".discount").html(goods.discount+"折");
+		            	model.find(".btn").attr("href","${ctx}/detailGoods/"+goods.id);
+		            	model.find(".oldprice").html(goods.price);
+		            	model.show();	
+	        		}
+	        	}
+	        	$("#moretuangou img").scrollLoading();
+	        });	
+			  //设置商品详细信息
+			  jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : '${ctx}/goods/get.do',
+					async:false,
+					data : {
+						id : "${id}",
+					},
+					dataType : 'json',
+					success : function(data) {
+						if(data.result){
+							var obj = data.obj;
+							//设置商品基本信息
+							var goods = obj.goods;
+							$(".shop-box .img-box").attr("src","${ctx }/upload/download.do?fileName="+goods.picName);
+							$(".shop-box .img-box").attr("alt",goods.title);
+							$(".shop-box .shopinfo").html(goods.title+"（顺丰包邮、货到付款	）");
+							$(".shop-box #lastsale_id").html(goods.buyNum+"件");
+							$(".shop-box #nowprice").html(goods.nowPrice);  
+							//$(".fix-nowprice").html("￥"+obj.nowPrice);
+							$(".shop-box .free_cost").html(goods.discount+"折");
+							$(".shop-box .oldprice").html(goods.price);
+							//设置商品详情信息
+							$("#goods_content").append(goods.content);
+							
+							//设置温馨提示
+			            	if(goods.tips){
+			            		$("#tips_div").show();
+			            		$("#tips_div .tips").html(goods.tips);
+			            	}
+							
+							var picList = obj.picList;
+							
+							for(var i = 0 ;i<picList.length;i++){
+								var picHeight = 200;
+								if(jWei.util.isMobile()){
+									picHeight = 120;
+									if(picList[i].height <120){
+										picHeight =picList[i].height;
+									}
+								}else{
+									if(picList[i].height <200){
+										picHeight =picList[i].height;
+									}
+								}
+								//默认先加载2张图片
+								var html = "";
+								var picDesc = picList[i].picDesc;
+								if(i<2){
+									if(picDesc){
+										html = '<div class="pic-desc">'+picDesc+'</div><div class="thumbnail" style="border:0px;margin-bottom:0px;padding:0px; min-height:'+picHeight+'px;"><img class="lazyImg" src="${ctx }/upload/download.do?fileName='+picList[i].name+'"/></div>';
+									}else{
+										html = '<div class="thumbnail" style="border:0px;margin-bottom:0px;padding:0px; min-height:'+picHeight+'px;"><img class="lazyImg" src="${ctx }/upload/download.do?fileName='+picList[i].name+'"/></div>';
+									}
+								}else{
+									if(picDesc){
+										html = '<div class="pic-desc">'+picDesc+'</div><div class="thumbnail" style="border:0px;margin-bottom:0px;padding:0px; min-height:'+picHeight+'px;"><img class="lazyImg" src="${ctx}/images/d_loading.gif" data-url="${ctx }/upload/download.do?fileName='+picList[i].name+'"/></div>';	
+									}else{
+										html = '<div class="thumbnail" style="border:0px;margin-bottom:0px;padding:0px; min-height:'+picHeight+'px;"><img class="lazyImg" src="${ctx}/images/d_loading.gif" data-url="${ctx }/upload/download.do?fileName='+picList[i].name+'"/></div>';
+									}
+								}
+								
+								$("#subPicBox").append(html);
+							}
+							
+							$(".lazyImg").scrollLoading();
+							//设置颜色信息
+							var colorList = obj.colorList;
+							if(colorList){
+								if(colorList[0] && colorList[0].pic){
+									isColorPic = true;
+								}
+								for(var j = 0;j<colorList.length;j++){
+									var color = colorList[j];
+									//颜色显示图片
+									if(isColorPic){
+										var colorModel = $("#color_img_model_id").clone();
+										colorModel.find(".color-img").data("id",color.id).data("pic",color.pic).attr("title",color.color).attr("src",_ctx+"/upload/downloadCompress.do?fileName="+color.pic).data("color",color.color);
+										colorModel.show();
+										$("#color_div_id").append(colorModel);
+									//颜色显示文字
+									}else{
+										var colorModel = $("#color_model_id").clone();
+										colorModel.find("button").html(color.color).data("id",color.id).data("pic",color.pic).data("color",color.color);
+										colorModel.show();
+										$("#color_div_id").append(colorModel);
+									}
+									 
+								}
+								
+								
+							}
+							
+							//设置尺码信息
+							var sizeList = obj.sizeList;
+							if(sizeList){
+								for(var k = 0 ;k<sizeList.length;k++){
+									var size = sizeList[k];
+									var sizeModel = $("#size_model_id").clone();
+									sizeModel.find("button").html(size.size).data("id",size.id);	
+									sizeModel.show();
+									$("#size_div_id").append(sizeModel);
+								}
+								
+								
+							}
+						}
+						
+					}
+			  });
+			  
+			  //绑定加入购物车操作
+			  $(".add-scart").each(function(){
+				    var that = $(this);
+					$(this).click(function(){
+						//验证是否选择了颜色
+						var colorDom = $("#color_div_id .current");
+						if(colorDom.size() <=0){
+							alert("请选择商品颜色！");
+							return false;
+						}
+						
+						//验证是否选择了尺码
+						var sizeDom = $("#size_div_id .current");
+						if(sizeDom.size() <=0){
+							alert("请选择商品尺码！");
+							return false;
+						}
+						if($(".buyNum").html() == 0){
+					  		alert("商品数量不能为0");
+					  		return false;
+					  	}
+						var num = $(".buyNum").html();
+						
+						
+						jQuery.ajax({
+							type : 'Get',
+							contentType : 'application/json',
+							url : '${ctx}/cart/addCart.do',
+							data : {
+								goodsId : "${id}",
+								num: num,
+								color: colorDom.data("color"),
+								size: sizeDom.html()
+							},
+							async:false,
+							dataType : 'json',
+							success : function(data) {
+								if(that.data("buy") == "yes"){
+									window.location.href = "${ctx}/cart";
+								}else{
+									window.location.href = "${ctx}/addCart/${id}/"+num;	
+								}
+							}
+						});
+						
+						return false;
+					});
+				});
+				
+			
+			$('#myTab a').click(function (e) {
+				  e.preventDefault();
+				  $(this).tab('show');
+			});
+			
+			//增加数量按钮
+			$(".add").click(function(){
+				var num = $(".buyNum").html();
+				$(".buyNum").html(parseInt(num)+1);
+				return false;
+			});
+			
+			//减少数量按钮
+			$(".reduce").click(function(){
+				var num = $(".buyNum").html();
+				if(num != 1){
+					$(".buyNum").html(parseInt(num)-1);	
+				}
+				return false;
+			});
+			
+			//绑定颜色按钮
+			$("#color_div_id").on("click",".color-button,.color-img",function(){
+				
+				if($(this).hasClass("current")){
+					$(this).removeClass("current"); 
+					//隐藏选中的钩钩
+					$(this).closest(".btn-group-sm").find(".pordIxzj").hide(); 
+					$("#size_div_id button").each(function(){
+						$(this).prop("disabled",false).removeClass("not");
+					});
+				}else{
+					//移除原来选择颜色
+					$("#color_div_id .current").closest(".btn-group-sm").find(".pordIxzj").hide();
+					$("#color_div_id .current").removeClass("current");
+					
+					$(this).addClass("current");
+					//显示选中的钩钩
+					$(this).closest(".btn-group-sm").find(".pordIxzj").show();
+					
+					var	colorId = $(this).data("id");
+							
+					jQuery.ajax({
+						type : 'Get',
+						contentType : 'application/json',
+						url : '../goods/getColorSizeItemListByColorId.do',
+						data : {
+							colorId:colorId
+						},
+						dataType : 'json',
+						success : function(data) {
+							if(data.result){
+								var colorSizeItemList = data.obj;
+								var sizeIds = [];
+								if(colorSizeItemList){
+									for(var i = 0;i<colorSizeItemList.length;i++){
+										var sizeId = colorSizeItemList[i].sizeId;
+										sizeIds.push(sizeId);
+									}
+								}
+								
+								$("#size_div_id button").each(function(){
+									var id = $(this).data("id");
+									if(jQuery.inArray( id, sizeIds) == -1){
+										$(this).addClass("not").prop("disabled",true);
+									}else{
+										$(this).prop("disabled",false).removeClass("not");
+									}
+								});
+							}
+						}
+					});
+					
+				}
+				
+				//将封面图片改成当前颜色图片
+				var pic = $(this).data("pic");
+				if(pic){
+					$(".shop-box .img-box").attr("src","${ctx }/upload/download.do?fileName="+pic);					
+				}
+				
+				return false; 
+				
+			});
+			
+			//绑定尺寸按钮
+			var isCalNotDiv = false;
+			$("#size_div_id").on("click","button",function(){
+				//计算颜色图片遮罩宽度
+				if(isColorPic && !isCalNotDiv){
+					$("#color_img_model_id .color-img").each(function(){
+							$(this).parent().find(".not-div").css("width",$(this).outerWidth());	
+					});
+					isCalNotDiv = true;
+				}
+						
+				if($(this).hasClass("current")){
+					$(this).removeClass("current");
+					//隐藏选中的钩钩
+					$(this).parent().find(".pordIxzj").hide(); 
+					//图片颜色
+					if(isColorPic){
+						$("#color_div_id .color-img").each(function(){
+							$(this).parent().find(".not-div").hide();
+							$(this).removeClass("not-img");
+						});
+					//文字颜色
+					}else{
+						$("#color_div_id button").each(function(){
+							$(this).prop("disabled",false).removeClass("not");
+						});
+					}
+					
+				}else{
+					//移除原来选择颜色
+					$("#size_div_id .current").parent().find(".pordIxzj").hide();
+					$("#size_div_id .current").removeClass("current");
+					$(this).addClass("current");
+					//显示红色钩钩
+					$(this).parent().find(".pordIxzj").show();
+					var sizeId = $(this).data("id");
+					jQuery.ajax({
+						type : 'Get',
+						contentType : 'application/json',
+						url : '../goods/getColorSizeItemListBySizeId.do',
+						data : {
+							sizeId:sizeId
+						},
+						dataType : 'json',
+						success : function(data) {
+							if(data.result){
+								var colorSizeItemList = data.obj;
+								var colorIds = [];
+								if(colorSizeItemList){
+									for(var i = 0;i<colorSizeItemList.length;i++){
+										var colorId = colorSizeItemList[i].colorId;
+										colorIds.push(colorId);
+									}
+								}
+								//图片颜色
+								if(isColorPic){
+									$("#color_div_id .color-img").each(function(){
+										var id = $(this).data("id");
+										if(jQuery.inArray( id, colorIds) == -1){
+											$(this).parent().find(".not-div").show();
+											$(this).addClass("not-img");
+										}else{
+											$(this).parent().find(".not-div").hide();
+											$(this).removeClass("not-img");
+										}
+									});
+								
+								//文字颜色
+								}else{
+									$("#color_div_id button").each(function(){
+										var id = $(this).data("id");
+										if(jQuery.inArray( id, colorIds) == -1){
+											$(this).addClass("not").prop("disabled",true);
+										}else{
+											$(this).prop("disabled",false).removeClass("not");
+										}
+									});
+									
+								}
+								
+							}
+						}
+					});
+				}
+				
+			});
+			
+			//设置购买了该商品的用户还购买了
+			  (function(){
+				    var currP =Math.floor(Math.random()*13)+1;
+				    //如果当前页数和更多团购一样重新随机
+				    while(currP == currMore){
+				    	currP =Math.floor(Math.random()*13)+1;
+				    }
+			        $.get("${ctx}/goods/goodsListByGrade.do?pageSize=12&grade=1&currPage="+currP, function(data){
+			        	var dataObj = $.parseJSON(data);
+			        	
+			        	var list = dataObj.obj.goodsList;
+			        	for(var i = 0 ;i<list.length;i++){
+			        		var model = $("#goods_recommend_model").clone();
+			        		var goods = list[i];
+			        		var price = goods.price;
+							$("#shop_recommend_id #col_id"+i%6).append(model);
+			            	model.find("img").attr("data-url","${ctx}/upload/downloadCompress.do?fileName="+goods.picName).attr("title",goods.title).attr("alt",goods.title);
+			            	model.find(".title").html(goods.title);
+			            	model.find(".img-a,.btn-buy,.title-a").attr("href","${ctx}/detailGoods/"+goods.id);
+			            	model.find(".nowprice").html("￥"+goods.nowPrice);
+			            	model.find(".oldprice").html("￥"+price);
+			            	model.show();
+			        	}
+			        	
+			        	$("#shop_recommend_id img").scrollLoading();
+
+			        });	
+					
+				})();
+			
+			//获取上架品牌
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : '${ctx}/brands/getAlllAddOn.do',
+					cache:true,
+					async:false,
+					data : {
+					},
+					dataType : 'json',
+					success : function(data) {
+						if (data.result) {
+							var brandsList = data.obj;
+							if(brandsList){
+								var html = "";
+								for(var i = 0 ;i<brandsList.length;i++){
+									var brands = brandsList[i];
+									if(brands){
+									 
+										//设置图片品牌分类
+										var cloneLi = $("#brands_img_model_id").clone();
+										cloneLi.find("a").attr("href",_ctx+"/discount/?brands="+brands.id+"#名鞋专场");
+										cloneLi.find("img").attr("src",_ctx+"/upload/download.do?fileName="+brands.pic);
+										$(".brands").append(cloneLi);
+										cloneLi.show(); 
+									}
+								}
+							}
+							
+						} else {
+							//alert('数据库异常,查询数据失败');
+						}
+					},
+					error : function(data) {
+					}
+				});	
+		});
+	</script>
+	
+</body>

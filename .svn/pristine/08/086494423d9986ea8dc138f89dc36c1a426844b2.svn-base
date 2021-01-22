@@ -1,0 +1,19 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.OrderGoodsItemDao;
+import com.weiweiqin.model.OrderGoodsItem;
+@Repository
+public class OrderGoodsItemDaoImpl extends GenericMybatisDao<OrderGoodsItem, Integer>
+		implements OrderGoodsItemDao {
+
+	@SuppressWarnings("unchecked")
+	public List<OrderGoodsItem> getOrderGoodsItemListByOrderId(int orderId) {
+		return (List<OrderGoodsItem>) getSqlSession().selectList("OrderGoodsItem_getByOrderId",orderId);
+	}
+
+	
+}

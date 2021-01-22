@@ -1,0 +1,107 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class News implements Serializable {
+
+	private static final long serialVersionUID = -7970848646314840509L;
+
+	private int id;
+
+	private String title = "";
+
+	private String content = "";
+
+	private Date date = new Date();
+
+	private int mark;
+
+	private String remark = "";
+
+	private String picPath = "";
+
+	private String picName = "";
+
+	private int type;
+	
+	public News(){
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public int getMark() {
+		return mark;
+	}
+
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getPicPath() {
+		return picPath;
+	}
+
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
+
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return this.id + "#" + this.title + "#";
+	}
+}

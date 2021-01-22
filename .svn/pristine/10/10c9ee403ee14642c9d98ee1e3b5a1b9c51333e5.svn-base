@@ -1,0 +1,64 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.weiweiqin.model.Order;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class OrderTabVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+
+	private Order order;
+
+	private String updateDate;
+
+	/**
+	 * 保存订单商品信息
+	 */
+	private List<CartVO> goodsList;
+
+ 
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+ 
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("order=");
+		sb.append(order);
+		sb.append(":updateDate=");
+		sb.append(updateDate);
+		return sb.toString();
+	}
+
+
+	public List<CartVO> getGoodsList() {
+		return goodsList;
+	}
+
+	public void setGoodsList(List<CartVO> goodsList) {
+		this.goodsList = goodsList;
+	}
+}

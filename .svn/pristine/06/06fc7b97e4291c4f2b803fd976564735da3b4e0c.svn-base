@@ -1,0 +1,49 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class  Feedback implements Serializable {
+
+	private static final long serialVersionUID = -7970848646314840509L;
+	
+	private int id;
+	
+	private String content;
+	
+	private String email;
+	
+	private Date addDate = new Date();
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
+}

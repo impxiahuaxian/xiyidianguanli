@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+<%@ include file="./common/top.jsp"%>
+
+<div class="container">
+	
+	
+	<div style="margin-top:20px;">
+		<table id="feedback_table">
+	
+		</table>
+	
+	</div>
+	</div>
+	
+		
+	
+	<script>
+		$(function() {
+			var grid = new jWei.Datagrid({
+				renderTo : $("#feedback_table"),
+				tabWidth:"",
+				fieldset:false,
+				legendTitle:"意见反馈列表",
+				url : "../feedback/pageList.do",
+				colModels : [ 
+				
+				{
+					name : "addDate",
+					displayName : "反馈时间",
+				}, 
+				{
+					name : "feedback_email",
+					displayName : "邮箱地址",
+				},
+				
+				{
+					name : "feedback_content",
+					displayName : "反馈内容"
+					
+				}
+				
+				]
+			});
+	});
+
+	</script>
+</body>
+</html>

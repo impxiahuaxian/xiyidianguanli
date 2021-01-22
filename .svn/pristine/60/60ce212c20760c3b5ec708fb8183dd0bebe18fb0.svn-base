@@ -1,0 +1,15 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.GoodsCommentItemDao;
+import com.weiweiqin.model.GoodsCommentItem;
+@Repository
+public class GoodsCommentItemDaoImpl extends GenericMybatisDao<GoodsCommentItem, Integer>
+		implements GoodsCommentItemDao {
+
+	public GoodsCommentItem getByCommentId(int commentId) {
+		return (GoodsCommentItem) getSqlSession().selectOne("GoodsCommentItem_getByCommentId",commentId);
+	}
+
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="washcloth"
+  id="myeclipse.1367806033328"
+  context-root="/washcloth"
+  j2ee-spec="5.0"
+  archive="washcloth.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

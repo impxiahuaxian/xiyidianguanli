@@ -1,0 +1,72 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+body {
+	PADDING-BOTTOM: 0px;
+	MARGIN: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-RIGHT: 0px;
+	FONT-FAMILY: "宋体";
+	FONT-SIZE: 14px;
+	PADDING-TOP: 0px; line-height:1.5;
+	
+}
+a {
+	text-decoration: none;
+	color: #FFF;
+}
+
+.clear {
+	clear:both;	
+}
+
+
+.red{ color:red;}
+.red2{ color:red; font-weight:bold;}
+.font16{ font-size:16px; color:red;}
+.font14{ font-size:14px; }
+.center{ text-align:center;}
+.text{ text-indent:2em;}
+.bg{ background:#c20008; color:#fff;}
+.tit{background:url(../../../img03.taobaocdn.com/imgextra/i3/45237366/TB2McdtaFXXXXb.XXXXXXXXXXXX_!!45237366.jpg); height:32px; line-height:32px; font-size:16px; font-weight:bold; text-align:center; margin:5px 0;}
+.tit2{background:url(../../../img04.taobaocdn.com/imgextra/i4/45237366/TB2VutAaFXXXXXDXXXXXXXXXXXX_!!45237366.jpg); height:30px; line-height:30px; font-size:16px; font-weight:bold; text-align:center; color:#fff;}
+.xin{ line-height:1.6;}
+.con1{ padding:10px 0; line-height:2;}
+.con1 .con1a{ padding-left:40px;}
+.con1 .con1a p{ float:left; width:90px; height:26px; padding-left:20px;}
+.con1 .con1a p a{ display:block; background:#d42149; height:26px; line-height:26px; font-size:14px; text-align:center; text-decoration:underline;}
+.zp{ padding:10px 0; font-size:14px; line-height:2;}
+.zp h2{ background:#c20008; width:220px; margin:0 auto; line-height:30px; text-align:center; color:#fff; font-size:14px; margin-bottom:10px;}
+.zp .red{ color:#c20008;}
+.zj .box{ line-height:2; padding:10px 0;}
+.zj .box a{ color:#000; text-decoration:underline; font-weight:bold;}
+.js{ line-height:1.8;}
+.js .list{background:url(../../../img01.taobaocdn.com/imgextra/i1/45237366/TB2rMtoaFXXXXaNXpXXXXXXXXXX_!!45237366.jpg) no-repeat left 7px; text-indent:16px;}
+.th{ padding:5px 0;}
+.tit3{ background:#c20008; color:#fff; line-height:2; padding:5px 15px 5px 2px;}
+.zpbz{ padding:8px 0;}
+.zpbz img{ padding-right:5px; float:left;}
+.jgyh{ padding:8px 0;}
+.jgyh img{ float:right;}
+.gkxs{ padding-bottom:10px;}
+.vip{ font-size:12px; line-height:1.8;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

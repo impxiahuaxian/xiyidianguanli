@@ -1,0 +1,44 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.ColorDao;
+import com.weiweiqin.model.Color;
+import com.weiweiqin.service.ColorService;
+
+@Service
+public class ColorServiceImpl implements ColorService {
+	@Autowired
+	private ColorDao colorDao;
+
+	public void save(Color color) {
+		colorDao.insert(color);
+	}
+
+	public void del(int id) {
+		colorDao.delete(id);
+	}
+
+	public List<Color> getByGoodsId(int goodsId) {
+		return colorDao.getByGoodsId(goodsId);
+	}
+
+	public Color get(int id) {
+		return colorDao.get(id);
+	}
+
+	public void update(Color color) {
+		colorDao.update(color);
+	}
+
+	public List<Color> getByPicName(String picName) {
+		return colorDao.getByPicName(picName);
+	}
+
+	public Color getByNameAndGoodsId(String name, int goodsId) {
+		return colorDao.getByNameAndGoodsId(name, goodsId);
+	}
+}

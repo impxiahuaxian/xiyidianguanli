@@ -1,0 +1,12 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.AnnouncementDao;
+import com.weiweiqin.model.Announcement;
+
+@Repository
+public class AnnouncementDaoImpl extends GenericMybatisDao<Announcement, Integer>
+		implements AnnouncementDao {
+
+}

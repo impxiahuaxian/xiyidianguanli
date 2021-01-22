@@ -1,0 +1,75 @@
+package com.weiweiqin.vo.common;
+
+import com.weiweiqin.model.Goods;
+
+public class CartVO {
+
+	/**
+	 * 商品数量
+	 */
+	private int num;
+	
+	private String color;
+	
+	private String size;
+	
+	/**
+	 * 保存图片名称
+	 */
+	private String pic;
+	
+	private int goodsId;
+
+	private Goods goods;
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public int getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(int goodsId) {
+		this.goodsId = goodsId;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	 
+
+}

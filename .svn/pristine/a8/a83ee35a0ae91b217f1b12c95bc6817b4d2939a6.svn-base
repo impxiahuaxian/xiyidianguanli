@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.CommentMapper">
+	<resultMap type="com.weiweiqin.model.Comment" id="commentResultMap">
+		<id property="id" column="id" />
+		<result property="content" column="content" />
+		<result property="grade" column="grade" />
+		<result property="updateDate" column="update_date" />
+		<result property="orderId" column="order_id" />
+		
+	</resultMap>
+	<insert id="Comment_insert" parameterType="com.weiweiqin.model.Comment"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[ 
+		          INSERT INTO team_comment (status,order_id,content,grade,update_date,username) values
+		          (#{status},#{orderId},#{content},#{grade},#{updateDate},#{username})
+		]]>
+	</insert>
+
+	<select id="Comment_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Comment" resultMap="commentResultMap"> 
+		<![CDATA[ 
+			select a.* from team_comment a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Comment_selectAll" resultType="com.weiweiqin.model.Comment" resultMap="commentResultMap"> 
+		<![CDATA[ 
+			select a.* from team_comment a
+	        ]]>
+	</select>
+	
+
+	<select id="Comment_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Comment" resultMap="commentResultMap"> 
+		<![CDATA[ 
+			select a.* from team_comment a left join team_goods_comment_item b on a.id = b.comment_id left join team_goods c on b.goods_id = c.id where 1=1
+	        ]]>
+	        
+	           <if test="goodsId!= null">
+	        <![CDATA[ 
+	        	and c.id = #{goodsId} 
+	        ]]>
+	        </if>
+	        
+	        <if test="status!= null">
+	        <![CDATA[ 
+	        	and a.status = #{status} 
+	        ]]>
+	        </if>
+	        
+	          <![CDATA[ 
+	          order by a.update_date desc 
+	         limit #{page.start},#{page.pageSize} 
+	         ]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="Comment_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+			select count(a.id) from team_comment a left join team_goods_comment_item b on a.id = b.comment_id left join team_goods c on b.goods_id = c.id where 1=1 
+	        ]]>
+	        
+	        <if test="goodsId!= null">
+	        <![CDATA[ 
+	        	and c.id = #{goodsId} 
+	        ]]>
+	        </if>
+	        
+	        <if test="status!= null">
+	        <![CDATA[ 
+	        	and a.status = #{status} 
+	        ]]>
+	        </if>
+	
+	</select>
+	
+	
+	<select id="Comment_pageListForExprot" parameterType="map"
+		resultType="com.weiweiqin.model.Comment" resultMap="commentResultMap"> 
+		<![CDATA[ 
+			select a.* from team_comment a   where 1=1
+	        ]]>
+	        
+	        <if test="status!= null">
+	        <![CDATA[ 
+	        	and a.status = #{status} 
+	        ]]>
+	        </if>
+	          <![CDATA[ 
+	         limit #{page.start},#{page.pageSize} 
+	         ]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="Comment_totalCountForExprot" resultType="Integer"> 
+		<![CDATA[ 
+			select count(a.id) from team_comment a  where 1=1 
+	        ]]>
+	        
+	        <if test="status!= null">
+	        <![CDATA[ 
+	        	and a.status = #{status} 
+	        ]]>
+	        </if>
+	
+	</select>
+	
+	
+	<select id="Comment_getByGoodsId" parameterType="map"
+		resultType="com.weiweiqin.model.Comment" resultMap="commentResultMap"> 
+		<![CDATA[ 
+			select a.* from team_comment a left join team_goods_comment_item b on a.id = b.comment_id left join team_goods c on b.goods_id = c.id where 1=1 and 
+			c.id = #{goodsId}  
+	        ]]>
+
+	</select>
+	
+
+
+
+	<update id="Comment_update" parameterType="com.weiweiqin.model.Comment"> 
+		<![CDATA[ 
+			update team_comment set status = #{status}, order_id = #{orderId}, username=#{username}, content=#{content}, grade = #{grade},update_date = #{updateDate} 
+			where id = #{id}
+		     ]]>
+	</update>
+
+	<delete id="Comment_delete" parameterType="Integer">
+		delete from
+		team_comment where id = #{primaryKey}
+	</delete>
+</mapper>
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.VipTypeMapper">
+	<resultMap type="com.weiweiqin.model.VipType" id="vipTypeResultMap">
+		<id property="id" column="id" />
+		<result property="addDate" column="add_date" />
+	</resultMap>
+
+	<insert id="VipType_insert" parameterType="com.weiweiqin.model.VipType"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO vip_type (name,level,discount) values
+		          (#{name},#{level},#{discount})
+		        ]]> 
+	</insert>
+
+	<select id="VipType_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.VipType" resultMap="vipTypeResultMap"> 
+		<![CDATA[ 
+		select a.* from vip_type a order by a.level limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+	
+	<select id="VipType_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.VipType" resultMap="vipTypeResultMap"> 
+		<![CDATA[ 
+		select a.* from vip_type a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+
+	<select id="VipType_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from vip_type
+	        ]]>
+	</select>
+	
+	 
+
+	<update id="VipType_update" parameterType="com.weiweiqin.model.VipType"> 
+	<![CDATA[ 
+		update vip_type set name = #{name}, level = #{level} , discount = #{discount} where id = #{id}
+	        ]]>
+	</update> 
+	
+	<delete id="VipType_delete"  parameterType="Integer">
+		delete from vip_type  where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

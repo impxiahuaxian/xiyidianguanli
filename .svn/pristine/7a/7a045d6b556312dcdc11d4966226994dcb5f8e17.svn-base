@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebRoot/js/jquery.pager.js=utf-8
+encoding//src/com/weiweiqin/controller/common/CategoryController.java=UTF-8
+encoding//src/com/weiweiqin/controller/common/CommentController.java=UTF-8
+encoding//src/com/weiweiqin/controller/common/GoodsController.java=UTF-8
+encoding//src/com/weiweiqin/controller/common/OrderController.java=UTF-8
+encoding//src/com/weiweiqin/model/Account.java=UTF-8
+encoding//src/com/weiweiqin/model/Announcement.java=UTF-8
+encoding//src/com/weiweiqin/model/Feedback.java=UTF-8
+encoding//src/com/weiweiqin/utils/KeywordUtil.java=UTF-8

@@ -1,0 +1,37 @@
+package com.weiweiqin.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Comment;
+import com.weiweiqin.vo.common.Page;
+
+public interface CommentService {
+
+	void update(Comment comment);
+
+	Comment get(int id);
+
+	List<Comment> pageList(Page page, Map<String, Object> conditions);
+
+	int totalCount(Map<String, Object> conditions);
+
+	void save(Comment comment);
+
+	void del(int id);
+	
+	List<Comment> getByGoodsId(int goodsId);
+	
+	void addByCoustomer(Comment comment,List<Integer> goodsIds);
+	
+	void addUpdateDate1();
+	
+	void subUpdateDate1();
+	
+	List<Comment> selectAll();
+	
+	List<Comment> pageListForExprot(Page page, Map<String, Object> conditions);
+
+	int totalCountForExprot(Map<String,Object> condtions);
+
+}

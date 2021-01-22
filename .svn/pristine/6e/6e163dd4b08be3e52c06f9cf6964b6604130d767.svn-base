@@ -1,0 +1,38 @@
+package com.weiweiqin.service.impl;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.IpLimitDao;
+import com.weiweiqin.model.IpLimit;
+import com.weiweiqin.service.IpLimitService;
+
+@Service
+public class IpLimitServiceImpl implements IpLimitService {
+
+	@Autowired
+	private IpLimitDao ipLimitDao;
+
+	public void addIpLimit(IpLimit ipLimit) {
+		ipLimitDao.insert(ipLimit);
+	}
+
+	public IpLimit get(int id) {
+		return ipLimitDao.get(id);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return ipLimitDao.totalCount(conditions);
+	}
+
+	public void update(IpLimit ipLimit) {
+		ipLimitDao.update(ipLimit);
+	}
+
+	public IpLimit getByIpAndDate(Map<String, Object> conditions) {
+		return ipLimitDao.getByIpAndDate(conditions);
+	}
+
+}

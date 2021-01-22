@@ -1,0 +1,26 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.GoodsPicItem;
+import com.weiweiqin.model.Pic;
+
+
+public interface GoodsDao extends GenericDao<Goods,Integer>{
+		List<Goods> getListByCategoryId(int categoryId);
+		
+		List<Pic> getPicListById(int id);
+		
+		List<Pic> getTitlePicListById(int id);
+		
+		List<GoodsPicItem> getPicItemListById(int id);
+		
+		List<Goods> getAll();
+		
+		List<Goods> getZhuji(List<String> ids);
+		
+		List<Goods> getByPicName(String picName);
+
+		List<Goods> getListBySecCategoryId(int seCategoryId);
+}

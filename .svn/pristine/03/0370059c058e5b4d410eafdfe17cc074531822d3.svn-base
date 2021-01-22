@@ -1,0 +1,68 @@
+package com.weiweiqin.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.model.Color;
+import com.weiweiqin.model.ColorSizeItem;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.GoodsPicItem;
+import com.weiweiqin.model.Pic;
+import com.weiweiqin.model.Size;
+import com.weiweiqin.vo.common.GoodsVO;
+import com.weiweiqin.vo.common.Page;
+
+public interface GoodsService {
+	
+	void addGoods(GoodsVO goodsVO);
+	
+	void editGoods(GoodsVO goodsVO);
+	
+	void copy(int id);
+
+	void update(Goods goods);
+
+	Goods get(int id);
+
+	List<Goods> pageList(Page page, Map<String, Object> conditions);
+
+	int totalCount(Map<String, Object> conditions);
+
+	void save(Goods goods);
+
+	List<Goods> getListByCategoryId(int categoryId);
+	
+	List<Goods> getListBySecCategoryId(int seCategoryId);
+
+	void savePic(Pic pic);
+
+	void del(int id);
+
+	List<Pic> getPicListById(int id);
+
+	List<GoodsPicItem> getPicItemListById(int id);
+	
+	List<Color> getColorListById(int id);
+	
+	List<Size> getSizeListById(int id);
+	
+	Category getCategoryById(int id);
+	
+	List<Goods> getAll();
+	
+    void addColorSizeItems(int colorId,int[] sizeId);
+    
+    List<ColorSizeItem> getColorSizeItemByColorId(int colorId);
+    
+    List<ColorSizeItem> getColorSizeItemBySizeId(int sizeId);
+    
+    void updateHotExpiredDate();
+    
+    List<Goods> getByPicName(String picName);
+    
+    List<Pic> getTitlePicListById(int id);
+    
+    List<Goods> getZhuji(List<String> ids);
+
+}

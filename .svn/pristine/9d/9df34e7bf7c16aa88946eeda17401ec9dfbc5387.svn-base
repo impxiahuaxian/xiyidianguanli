@@ -1,0 +1,12 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.Pic;
+
+
+public interface PicDao extends GenericDao<Pic,Integer>{
+	List<Pic> getAll();
+	
+	List<Pic> getByName(String name);
+}

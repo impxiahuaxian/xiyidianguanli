@@ -1,0 +1,32 @@
+package com.weiweiqin.vo.common;
+
+import com.weiweiqin.model.Order;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class OrderVO {
+	private String addDate;
+
+	private Order order;
+
+	public String getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(String addDate) {
+		this.addDate = addDate;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+}

@@ -1,0 +1,138 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.model.Color;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.Pic;
+import com.weiweiqin.model.Size;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class GoodsVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+
+	private Goods goods;
+
+	private Category category;
+	
+	private String endDate;
+	
+	/**
+	 * 过期时间
+	 */
+	private String expiredDate;
+
+	/**
+	 * 详情图片
+	 */
+	private List<Pic> picList;
+	
+	/**
+	 * 封面图片
+	 */
+	private List<Pic> titlePicList;
+	
+	private List<Color> colorList;
+	
+	private List<Size> sizeList;
+	
+	/**
+	 * 判断用户是否选中要编辑颜色尺码
+	 */
+	private String chooseEditColorSize = "";
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<Pic> getPicList() {
+		return picList;
+	}
+
+	public void setPicList(List<Pic> picList) {
+		this.picList = picList;
+	}
+
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("goods=");
+		sb.append(goods);
+		sb.append(":category=");
+		sb.append(category);
+		sb.append(":endDate=");
+		sb.append(endDate);
+		sb.append(":picList=");
+		sb.append(picList);
+		return sb.toString();
+	}
+
+	public List<Color> getColorList() {
+		return colorList;
+	}
+
+	public void setColorList(List<Color> colorList) {
+		this.colorList = colorList;
+	}
+
+	public List<Size> getSizeList() {
+		return sizeList;
+	}
+
+	public void setSizeList(List<Size> sizeList) {
+		this.sizeList = sizeList;
+	}
+
+	public String getChooseEditColorSize() {
+		return chooseEditColorSize;
+	}
+
+	public void setChooseEditColorSize(String chooseEditColorSize) {
+		this.chooseEditColorSize = chooseEditColorSize;
+	}
+
+	public String getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(String expiredDate) {
+		this.expiredDate = expiredDate;
+	}
+
+	public List<Pic> getTitlePicList() {
+		return titlePicList;
+	}
+
+	public void setTitlePicList(List<Pic> titlePicList) {
+		this.titlePicList = titlePicList;
+	}
+
+	 
+}

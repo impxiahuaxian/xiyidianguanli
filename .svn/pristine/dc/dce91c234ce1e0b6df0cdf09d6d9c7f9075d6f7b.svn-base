@@ -1,0 +1,437 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Goods implements Serializable {
+
+	private static final long serialVersionUID = -7970848646314840509L;
+
+	private Integer id;
+	
+	private Integer brandsId;
+
+	private String title = "";
+	
+	private String item;
+
+	/**
+	 * 已经失效
+	 */
+	private int browerNum;
+
+	private String picName;
+	
+	private int picWidth;
+	
+	private int picHeight;
+	
+	private int picCompressHeight;
+	
+	private int picCompressWidth;
+
+	/**
+	 * 未使用
+	 */
+	private int picSize;
+	
+	/**
+	 * 未使用
+	 */
+	private int picNum;
+
+	private Date updateDate = new Date();
+	
+	/**
+	 * 首页所属板块
+	 */
+	private int grade;
+	
+	/**
+	 * 导航板块
+	 */
+	private int type;
+	
+	private double price;
+	
+	/**
+	 * 折扣后价格
+	 */
+	private double nowPrice;
+	
+	private double discount;
+	
+	/**
+	 * 未使用
+	 */
+	private Date endDate = new Date();
+	
+	private int buyNum;
+	
+	private int mark;
+	
+	private String content;
+	
+	/**
+	 * 已废弃
+	 */
+	private Date topDate;
+	
+	private int orderKey;
+	
+	private String recommend;
+	
+	private String scene;
+
+	private String tips;
+	
+	private int isLunbo;
+	
+	/**
+	 * 团购过期时间
+	 */
+	private Date expiredDate;
+	
+	/**
+	 * 安装类型
+	 */
+	private int installType;
+	
+	/**
+	 * 全屏封面图
+	 */
+	private String bigPic;
+	
+	/**
+	 * 大分类
+	 */
+	private int bigCategory;
+	
+	/**
+	 * 二级分类
+	 */
+	private int secCategory;
+	
+	
+	private Integer moreType;
+	
+	private Integer lipin;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getBrowerNum() {
+		return browerNum;
+	}
+
+	public void setBrowerNum(int browerNum) {
+		this.browerNum = browerNum;
+	}
+
+
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getPicName() {
+		return picName;
+	}
+
+	public void setPicName(String picName) {
+		this.picName = picName;
+	}
+
+	public int getPicSize() {
+		return picSize;
+	}
+
+	public void setPicSize(int picSize) {
+		this.picSize = picSize;
+	}
+
+	public int getPicNum() {
+		return picNum;
+	}
+
+	public void setPicNum(int picNum) {
+		this.picNum = picNum;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public int getBuyNum() {
+		return buyNum;
+	}
+
+	public void setBuyNum(int buyNum) {
+		this.buyNum = buyNum;
+	}
+
+	public int getMark() {
+		return mark;
+	}
+
+	public void setMark(int mark) {
+		this.mark = mark;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Date getTopDate() {
+		return topDate;
+	}
+
+	public void setTopDate(Date topDate) {
+		this.topDate = topDate;
+	}
+
+	public int getOrderKey() {
+		return orderKey;
+	}
+
+	public void setOrderKey(int orderKey) {
+		this.orderKey = orderKey;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	
+
+	public Integer getBrandsId() {
+		return brandsId;
+	}
+
+	public void setBrandsId(Integer brandsId) {
+		this.brandsId = brandsId;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("id=");
+		sb.append(id);
+		sb.append(":title=");
+		sb.append(title);
+		sb.append(":picName=");
+		sb.append(picName);
+		sb.append(":updateDate=");
+		sb.append(updateDate);
+		sb.append(":price=");
+		sb.append(price);
+		sb.append(":discount=");
+		sb.append(discount);
+		sb.append(":buyNum=");
+		sb.append(buyNum);
+		sb.append(":mark=");
+		sb.append(mark);
+		sb.append(":content=");
+		sb.append(content);
+		sb.append(":orderKey=");
+		sb.append(orderKey);
+		sb.append(":grade=");
+		sb.append(grade);
+		sb.append(":brandsId=");
+		sb.append(brandsId);
+		return sb.toString();
+	}
+
+	public int getPicWidth() {
+		return picWidth;
+	}
+
+	public void setPicWidth(int picWidth) {
+		this.picWidth = picWidth;
+	}
+
+	public int getPicHeight() {
+		return picHeight;
+	}
+
+	public void setPicHeight(int picHeight) {
+		this.picHeight = picHeight;
+	}
+
+	public int getPicCompressHeight() {
+		return picCompressHeight;
+	}
+
+	public void setPicCompressHeight(int picCompressHeight) {
+		this.picCompressHeight = picCompressHeight;
+	}
+
+	public int getPicCompressWidth() {
+		return picCompressWidth;
+	}
+
+	public void setPicCompressWidth(int picCompressWidth) {
+		this.picCompressWidth = picCompressWidth;
+	}
+
+	public double getNowPrice() {
+		return nowPrice;
+	}
+
+	public void setNowPrice(double nowPrice) {
+		this.nowPrice = nowPrice;
+	}
+
+	public String getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
+	}
+
+	public String getScene() {
+		return scene;
+	}
+
+	public void setScene(String scene) {
+		this.scene = scene;
+	}
+
+	public String getTips() {
+		return tips;
+	}
+
+	public void setTips(String tips) {
+		this.tips = tips;
+	}
+
+	public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
+
+	public Date getExpiredDate() {
+		return expiredDate;
+	}
+
+	public void setExpiredDate(Date expiredDate) {
+		this.expiredDate = expiredDate;
+	}
+
+	public int getInstallType() {
+		return installType;
+	}
+
+	public void setInstallType(int installType) {
+		this.installType = installType;
+	}
+
+	public String getBigPic() {
+		return bigPic;
+	}
+
+	public void setBigPic(String bigPic) {
+		this.bigPic = bigPic;
+	}
+
+	public int getBigCategory() {
+		return bigCategory;
+	}
+
+	public void setBigCategory(int bigCategory) {
+		this.bigCategory = bigCategory;
+	}
+
+	public int getSecCategory() {
+		return secCategory;
+	}
+
+	public void setSecCategory(int secCategory) {
+		this.secCategory = secCategory;
+	}
+
+	public int getIsLunbo() {
+		return isLunbo;
+	}
+
+	public void setIsLunbo(int isLunbo) {
+		this.isLunbo = isLunbo;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public Integer getMoreType() {
+		return moreType;
+	}
+
+	public void setMoreType(Integer moreType) {
+		this.moreType = moreType;
+	}
+
+	public Integer getLipin() {
+		return lipin;
+	}
+
+	public void setLipin(Integer lipin) {
+		this.lipin = lipin;
+	}
+
+
+}

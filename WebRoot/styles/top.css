@@ -1,0 +1,131 @@
+.top_add_fav {
+			color: #A5710A;
+			display:none;
+			font-size: 14px;
+			height: 30px;
+			padding-top: 5px;
+			text-align: center;
+			line-height: 1;
+			background-color: #ffeecd;
+			border-bottom:1px solid #eee;
+			background-image: -webkit-gradient( linear,left bottom,left top,from( #fff),to( #ffeecd));
+			background-image: -moz-linear-gradient( center bottom, #fff, #ffeecd);
+			filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#FFEECD', endColorStr='#ffffff', gradientType='0');
+		}
+	
+		.top_add_fav .taf_add {
+			background: url("../images/top.png") no-repeat;
+			display: inline-block;
+			width: 120px;
+			height: 25px;
+			overflow: hidden;
+			line-height: 100px;
+			vertical-align: -6px;
+		}
+
+		.top_add_fav .taf_close {
+			font-size: 12px;
+			color: #C4704F;
+			text-decoration: underline;
+			vertical-align: 1px;
+			cursor: pointer;
+		}
+
+		.header{
+			height:80px;
+		}
+		
+		.header span{
+			float:right;
+			vertical-align: middle;
+			line-height:80px;
+			color:#666;
+			font-family: 'Microsoft Yahei', tahoma, arial !important;
+			font-size: 15px;
+			font-style: normal;
+		}
+		
+		.nav{
+			height: 40px;
+			background: #d51938
+		}
+		
+		.wei-navigation li{
+			width: 100px;
+			line-height:40px;
+			font-size:15px;
+			font-weight:700px;
+		}
+		.wei-navigation a{
+			display:block;
+			text-decoration: none !important;
+			font-weight: bold;
+			text-align: center;
+			font-family: "Microsoft Yahei",tahoma,arial!important;
+			font-variant: normal;
+		}
+		
+		.wei-navigation span{
+			padding:5px 12px;
+			background: #fff;
+			color:#c7223d;
+			border-radius:3px;
+		}
+		
+		.eweima{
+			display:none;
+			position: fixed;
+			right: 50px;
+			top: 220px;
+			z-index: 999;
+		}
+		
+		.online-css{
+		overflow: hidden;
+		position: fixed;
+		right: 10px;
+		top: 150px;
+		z-index: 999;
+	}
+	
+	.online-css a{
+		display: block;
+		height: 35px;
+		width: 40px;
+		text-indent: -999px;
+		margin-top:1px;
+	}
+	.qq-css{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 0;
+	}
+	
+	.qq-css:hover{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -143px;
+	}
+	.ww-css{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -36px;
+	}
+	
+	.ww-css:hover{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -179px;
+	}
+	
+	.tel-css{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -72px;
+	}
+	
+.tel-css:hover{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -215px;
+	}
+	
+	.weixin-css{
+		background: url("../images/weixin.jpg") 40px 35px ;
+	}
+	
+	.top-css{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -108px;
+	}
+	
+	.top-css:hover{
+		background: url("../images/default_right_float_bg.png") no-repeat 0 -251px;
+	}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.ColorMapper">
+	<resultMap type="com.weiweiqin.model.Color" id="colorResultMap">
+		<id property="id" column="id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="color" column="color" />
+	</resultMap>
+	
+	<insert id="Color_insert" parameterType="com.weiweiqin.model.Color"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO goods_color (price,goods_id,color,pic) values
+		          (#{price},#{goodsId},#{color},#{pic})
+		        ]]>
+	</insert>
+	
+	<select id="Color_getByGoodsId" parameterType="map"
+		resultType="com.weiweiqin.model.Color" resultMap="colorResultMap"> 
+		<![CDATA[ 
+			select a.* from goods_color  a where a.goods_id = #{goodsId}  
+	        ]]>
+	</select>
+	
+	
+
+	<select id="Color_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Color" resultMap="colorResultMap"> 
+		<![CDATA[ 
+		select a.* from goods_color a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Color_getByPicName" parameterType="String"
+		resultType="com.weiweiqin.model.Color" resultMap="colorResultMap"> 
+		<![CDATA[ 
+		select * from goods_color a where a.pic = #{picName}
+	        ]]>
+	</select>
+	
+	
+	<select id="Color_getByNameAndGoodsId" parameterType="map"
+		resultType="com.weiweiqin.model.Color" resultMap="colorResultMap"> 
+		<![CDATA[ 
+		select * from goods_color a where a.color = #{name} and a.goods_id = #{goodsId}
+	        ]]>
+	</select>
+	
+	
+	<update id="Color_update" parameterType="com.weiweiqin.model.Color"> 
+		<![CDATA[ 
+			update goods_color set price = #{price}, pic = #{pic}  
+			where id = #{id}
+		     ]]>
+	</update>
+	
+	
+	<delete id="Color_delete"  parameterType="Integer">
+		delete from goods_color  where id = #{primaryKey}
+	</delete>
+	
+</mapper>
+

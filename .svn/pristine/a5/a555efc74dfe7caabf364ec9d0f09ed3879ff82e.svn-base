@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.IpLimitMapper">
+  	<resultMap type="com.weiweiqin.model.IpLimit" id="ipLimitResultMap">  
+        <id property="id" column="id"/>  
+        <result property="ip" column="ip"/>
+        <result property="number" column="number"/>
+        <result property="addDate" column="add_date"/>
+	</resultMap> 
+	<insert id="IpLimit_insert" parameterType="com.weiweiqin.model.IpLimit"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[ 
+	          INSERT INTO ip_limit (ip,number,add_date) values
+	          (#{ip},#{number},#{addDate})
+		     ]]>
+	</insert>
+	
+	<select id="IpLimit_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.IpLimit" resultMap="ipLimitResultMap"> 
+		<![CDATA[ 
+			select a.* from ip_limit a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="IpLimit_selectByIp"  resultType="com.weiweiqin.model.IpLimit" resultMap="ipLimitResultMap"> 
+		<![CDATA[ 
+			select a.* from ip_limit a where a.ip = #{ip} and a.add_date = #{addDate}
+	        ]]>
+	</select>
+	
+	<select id="IpLimit_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+			select count(a.id) from ip_limit a  where 1 =1 
+        ]]>
+	        
+         <if test="addDate != null">
+	        <![CDATA[ 
+	        	and a.add_date =#{addDate}
+	        ]]>
+         </if>
+         
+         <if test="ip != null">
+	        <![CDATA[ 
+	        	and a.ip = #{ip}
+	        ]]>
+         </if>
+	</select>
+	
+	<update id="IpLimit_update" parameterType="com.weiweiqin.model.IpLimit"> 
+	<![CDATA[ 
+		update ip_limit set number=#{number}, ip=#{ip} where id = #{id}
+	        ]]>
+	</update>
+</mapper>
+

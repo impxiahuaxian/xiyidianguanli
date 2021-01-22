@@ -1,0 +1,41 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.CommentDao;
+import com.weiweiqin.model.Comment;
+import com.weiweiqin.vo.common.Page;
+@Repository
+public class CommentDaoImpl extends GenericMybatisDao<Comment, Integer>
+		implements CommentDao {
+
+	@SuppressWarnings("unchecked")
+	public List<Comment> getByGoodsId(int goodsId) {
+		return (List<Comment>)getSqlSession().selectList("Comment_getByGoodsId",goodsId);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Comment> selectAll() {
+		return (List<Comment>)getSqlSession().selectList("Comment_selectAll");
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Comment> pageListForExprot(Page page,
+			Map<String, Object> conditions) {
+		if (null == conditions) {
+			conditions = new HashMap<String, Object>();
+		}
+		conditions.put("page", page);
+		return (List<Comment>) getSqlSession().selectList("Comment_pageListForExprot", conditions);
+	}
+
+	public int totalCountForExprot(Map<String, Object> condtions) {
+		return (Integer) getSqlSession().selectOne(
+				"Comment_totalCountForExprot", condtions);
+	}
+
+}

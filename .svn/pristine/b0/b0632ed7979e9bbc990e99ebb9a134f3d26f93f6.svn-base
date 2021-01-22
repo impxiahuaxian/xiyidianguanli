@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.PicMapper">
+	<resultMap type="com.weiweiqin.model.Pic" id="picResultMap">
+		<id property="id" column="id" />
+		<result property="uploadDate" column="upload_date" />
+		<result property="compressHeight" column="compress_height" />
+		<result property="compressWidth" column="compress_widht" />
+		<result property="orderKey" column="order_key" />
+		<result property="picDesc" column="pic_desc" />
+	</resultMap>
+	
+
+	<insert id="Pic_insert" parameterType="com.weiweiqin.model.Pic"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO team_pic (pic_desc,height,width,compress_height,compress_width,order_key,name,size,upload_date) values
+		          (#{picDesc},#{height},#{width},#{compressHeight},#{compressWidth},#{orderKey},#{name},#{size},#{uploadDate})
+		        ]]>
+	</insert>
+	
+	<select id="Pic_getAll" resultType="com.weiweiqin.model.Pic"
+		resultMap="picResultMap"> 
+		<![CDATA[ 
+		select a.* from team_pic a
+	        ]]>
+	</select>
+	
+	
+	<select id="Pic_getByName" parameterType="String"
+		resultType="com.weiweiqin.model.Pic" resultMap="picResultMap"> 
+		<![CDATA[ 
+		select * from team_pic a where a.name = #{name}
+	        ]]>
+	</select>
+	
+	<update id="Pic_update" parameterType="com.weiweiqin.model.Pic"> 
+	<![CDATA[ 
+		update team_pic set pic_desc = #{picDesc}, height = #{height} , width = #{width}
+		, compress_height = #{compressHeight},compress_width=#{compressWidth},order_key = #{orderKey}
+		where id = #{id}
+	        ]]>
+	</update>
+	
+	
+	<delete id="Pic_delete"  parameterType="Integer">
+		delete from team_pic  where id = #{primaryKey}
+	</delete>
+</mapper>
+

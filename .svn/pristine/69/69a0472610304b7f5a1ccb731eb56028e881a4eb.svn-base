@@ -1,0 +1,44 @@
+package com.weiweiqin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.VipTypeDao;
+import com.weiweiqin.model.VipType;
+import com.weiweiqin.service.VipTypeService;
+import com.weiweiqin.vo.common.Page;
+
+@Service
+public class VipTypeServiceImpl implements VipTypeService {
+
+	@Autowired
+	private VipTypeDao vipTypeDao;
+
+	public void update(VipType vipType) {
+		vipTypeDao.update(vipType);
+	}
+
+	public VipType get(int id) {
+		return vipTypeDao.get(id);
+	}
+
+	public List<VipType> pageList(Page page, Map<String, Object> conditions) {
+		return vipTypeDao.pageList(page, conditions);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+		return vipTypeDao.totalCount(conditions);
+	}
+
+	public void save(VipType vipType) {
+		vipTypeDao.insert(vipType);
+	}
+
+	public void del(int id) {
+		vipTypeDao.delete(id);
+	}
+
+}

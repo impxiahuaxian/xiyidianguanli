@@ -1,0 +1,7 @@
+package com.weiweiqin.dao;
+
+import com.weiweiqin.model.VipType;
+
+
+public interface VipTypeDao extends GenericDao<VipType,Integer>{
+}

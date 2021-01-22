@@ -1,0 +1,98 @@
+<%@tag pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx"><%=request.getContextPath()%></c:set>
+
+<div style="border:1px solid #ccc;margin-top:40px;padding-top:24px;background-color: #fff;">
+<div class="container" id="promise">
+		<div class="row">
+		  <div class="col-xs-4 col-md-4">
+		    <div class="thumbnail" style="border: 0px;">
+		      <img src="${ctx}/images/pc_bao_new.png" alt="...">
+		      <div class="caption" align="center">
+        		<h6 style="color:#666;">全国顺丰包邮</h6>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  <div class="col-xs-4 col-md-4">
+		    <div class="thumbnail" style="border: 0px;">
+		      <img src="${ctx}/images/pc_seven_new.png" alt="...">
+		      <div class="caption" align="center">
+        		<h6 style="color:#666;">7天无理由退换</h6>
+		      </div>
+		    </div>
+		  </div>
+		  
+		  <div class="col-xs-4 col-md-4">
+		    <div class="thumbnail" style="border: 0px;">
+		      <img src="${ctx}/images/pc_pei_new.png" alt="...">
+		      <div class="caption" align="center">
+        		<h6 style="color:#666;">货到付款或支付宝、放心购物</h6>
+		      </div>
+		    </div>
+		  </div>
+		  
+		</div>
+</div>
+</div>
+
+<div class="copyright" style="margin-top:20px;margin-bottom:0px;margin-left:auto;margin-right:auto; text-align: center;color:#666;font-size:12px;padding-bottom:20px;">
+	<p>
+		洁衣库隶属于会理县恒泰实业有限责任公司 &nbsp; 地址：会理县通安镇通安街188号&nbsp;&nbsp;
+		&nbsp;&nbsp;联系电话：400-83758588
+		<a href="${ctx }/about" style="color:#666;">关于我们</a>
+		<a href="${ctx }/contract" style="color:#666;">联系我们</a>
+	</p>
+	<p>
+		©&nbsp;<span>2007-2014</span>&nbsp;洁衣库&nbsp;版权所有&nbsp;<a
+			href="http://www.miibeian.gov.cn/" target="_blank" style="color:#666;">闽ICP备13005781号-1 </a>
+		&nbsp;
+	</p>
+	
+</div>
+
+<div style="display: none;">
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a1838a27f4332f5c3dd32ff236ba5e27";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+	
+</div>
+<script>
+$(function(){
+	
+	$.get("${ctx}/cart/getCartNum.do",function(data){
+		$(".topcart").html(data);
+		$(".cart_num").html(data);
+		if(data >0){ 
+			$(".cart_nums").show().html(data);
+		}else{
+			$(".cart_nums").hide().html("");
+		}
+	});
+	
+	//获取待付款订单
+	jQuery.ajax({
+		type : 'Get',
+		contentType : 'application/json',
+		url : '${ctx}/order/getWaitPayTotalCount.do',
+		cache:true,
+		async:false,
+		dataType : 'json',
+		success : function(data) {
+			if(data.result){
+				if(data.obj){
+					$("#wait_pay_order_id").show();
+					$("#wait_pay_order_num_id").html(data.obj);	
+				}
+			}
+		}
+	});
+});
+</script>
+

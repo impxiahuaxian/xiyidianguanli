@@ -1,0 +1,14 @@
+package com.weiweiqin.service;
+
+import java.util.List;
+
+import com.weiweiqin.model.OrderGoodsItem;
+
+
+public interface OrderGoodsItemService {
+	List<OrderGoodsItem> getOrderGoodsItemListByOrderId(int orderId);
+	
+	void save(OrderGoodsItem orderGoodsItem);
+
+	void del(int id);
+}

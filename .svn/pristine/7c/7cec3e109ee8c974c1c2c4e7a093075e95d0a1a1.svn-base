@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.OrderMapper">
+  	<resultMap type="com.weiweiqin.model.Order" id="orderResultMap">  
+        <id property="id" column="id"/>  
+        <result property="outerid" column="outerid"/>
+        <result property="customerId" column="customer_id"/>   
+        <result property="name" column="name"/> 
+        <result property="addr" column="addr"/>
+        <result property="zip" column="zip"/>
+        <result property="remark" column="remark"/>
+        <result property="status" column="status"/>
+        <result property="payStatus" column="pay_status"/>
+        <result property="mark" column="mark"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="memo" column="memo"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="payType" column="pay_type"/>
+        <result property="tradeNo" column="trade_no"/>
+        <result property="expressNo" column="express_no"/>
+        <result property="expressName" column="express_name"/>
+        <result property="expressType" column="express_type"/>
+        <result property="tradeStatus" column="trade_status"/>
+        <result property="isComment" column="is_comment"/>
+	</resultMap> 
+	<insert id="Order_insert" parameterType="com.weiweiqin.model.Order"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[ 
+	          INSERT INTO team_order (ip,is_comment,trade_status,pay_type,customer_id,outerid,total_price,pay_status,name,addr,mobile,zip,remark,status,mark,update_date) values
+	          (#{ip},#{isComment},#{tradeStatus},#{payType},#{customerId},#{outerid},#{totalPrice},#{payStatus},#{name},#{addr},#{mobile},#{zip},#{remark},#{status},#{mark},#{updateDate})
+		     ]]>
+	</insert>
+	
+	<select id="Order_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+		<![CDATA[ 
+			select a.* from team_order a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Order_getByOuterid" parameterType="String"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+		<![CDATA[ 
+			select a.* from team_order a where a.outerid = #{outerid}
+	        ]]>
+	</select>
+	
+	<select id="Order_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+			 <![CDATA[ 
+				select a.* from team_order a  where 1=1 and a.mark != -1
+	         ]]>
+	         
+	          <if test="status != null">
+		        <![CDATA[ 
+		        	and a.status = #{status}
+		        ]]>
+		       </if>
+		       
+		       <if test="outerid != null">
+		        <![CDATA[ 
+		        	and a.outerid = #{outerid}
+		        ]]>
+		       </if>
+		       
+	          <if test="customerId != null">
+		        <![CDATA[ 
+		        	and a.customer_id = #{customerId}
+		        ]]>
+		       </if>
+		       
+		        <if test="ip != null">
+		        <![CDATA[ 
+		        	and a.ip = #{ip}
+		        ]]>
+		       </if>
+		       
+		       
+	            <if test="memo != null">
+		        <![CDATA[ 
+		        	and a.memo like  CONCAT('%','${memo}','%' )
+		        ]]>
+	         </if>
+	         
+	           <if test="name != null">
+		        <![CDATA[ 
+		        	and a.name like  CONCAT('%','${name}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="mobile != null">
+		        <![CDATA[ 
+		        	and a.mobile like  CONCAT('%','${mobile}','%' )
+		        ]]>
+	         </if>
+	         
+             <if test="addr != null">
+		        <![CDATA[ 
+		        	and a.addr like  CONCAT('%','${addr}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="startDate != null">
+		        <![CDATA[ 
+		        	and a.update_date between #{startDate} and #{endDate}
+		        ]]>
+	         </if>
+	         
+	           
+	         <![CDATA[ 
+	          order by a.update_date desc
+	         	limit #{page.start},#{page.pageSize}
+	         ]]>
+	</select>
+	
+	<select id="Order_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+			select count(a.id) from team_order a   where 1=1 and a.mark != -1
+	        ]]>
+	        
+	          <if test="status != null">
+		        <![CDATA[ 
+		        	and a.status = #{status}
+		        ]]>
+		       </if>
+		       
+		       <if test="outerid != null">
+		        <![CDATA[ 
+		        	and a.outerid = #{outerid}
+		        ]]>
+		       </if>
+		       
+	        <if test="customerId != null">
+		        <![CDATA[ 
+		        	and a.customer_id = #{customerId}
+		        ]]>
+		   </if>
+		   
+		    <if test="ip != null">
+		        <![CDATA[ 
+		        	and a.ip = #{ip}
+		        ]]>
+		       </if>
+	        
+            <if test="memo != null">
+		        <![CDATA[ 
+		        	and a.memo like  CONCAT('%','${memo}','%' )
+		        ]]>
+	         </if>
+	         
+             <if test="name != null">
+		        <![CDATA[ 
+		        	and a.name like  CONCAT('%','${name}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="mobile != null">
+		        <![CDATA[ 
+		        	and a.mobile like  CONCAT('%','${mobile}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="addr != null">
+		        <![CDATA[ 
+		        	and a.addr like  CONCAT('%','${addr}','%' )
+		        ]]>
+      	         </if>
+		        
+              <if test="startDate != null">
+		        <![CDATA[ 
+		        	and a.update_date between #{startDate} and #{endDate}
+		        ]]>
+	         </if>
+	         
+	</select>
+	
+	<select id="Order_export" parameterType="map"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+			 <![CDATA[ 
+				select a.* from team_order a  where 1=1  and a.mark =0
+	         ]]>
+	         
+	        <if test="status != null">
+		        <![CDATA[ 
+		        	and a.status = #{status}
+		        ]]>
+	         </if>
+	         
+	           <if test="memo != null">
+		        <![CDATA[ 
+		        	and a.memo like  CONCAT('%','${memo}','%' )
+		        ]]>
+	         </if>
+	         
+	           <if test="name != null">
+		        <![CDATA[ 
+		        	and a.name like  CONCAT('%','${name}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="mobile != null">
+		        <![CDATA[ 
+		        	and a.mobile like  CONCAT('%','${mobile}','%' )
+		        ]]>
+	         </if>
+	         
+             <if test="addr != null">
+		        <![CDATA[ 
+		        	and a.addr like  CONCAT('%','${addr}','%' )
+		        ]]>
+	         </if>
+	         
+	          <if test="startDate != null">
+		        <![CDATA[ 
+		        	and a.update_date between #{startDate} and #{endDate}
+		        ]]>
+	         </if>
+	         
+	         <![CDATA[ 
+	          order by a.update_date desc
+	         ]]>
+	</select>
+	
+	<select id="Order_getOrderListByGoodsId" parameterType="Integer"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+		<![CDATA[ 
+			select a.* from team_goods a where a.goods_id = #{goodsId}
+	        ]]>
+	</select>
+	
+	<update id="Order_update" parameterType="com.weiweiqin.model.Order"> 
+		<![CDATA[ 
+			update team_order set is_comment = #{isComment}, trade_status = #{tradeStatus}, express_type = #{expressType}, express_no = #{expressNo}, express_name = #{expressName}, trade_no = #{tradeNo}, pay_type = #{payType}, total_price = #{totalPrice},memo = #{memo},name = #{name} , addr = #{addr},mobile=#{mobile},
+			zip = #{zip},remark = #{remark},status = #{status},pay_status = #{payStatus},mark = #{mark},update_date = #{updateDate}
+			where id = #{id}
+	        ]]>
+	</update>
+	
+	<delete id="Order_delete"  parameterType="Integer">
+		delete from team_order where id = #{primaryKey}
+	</delete>
+	
+	<select id="Order_waitPayTotalCount" resultType="Integer"> 
+		<![CDATA[ 
+			select count(a.id) from team_order a   where 1=1 and a.mark != -1 and a.pay_type = 1 and a.trade_status = 'WAIT_BUYER_PAY'
+	        ]]>
+	        
+	         <if test="customerId != null">
+		        <![CDATA[ 
+		        	and a.customer_id = #{customerId}
+		        ]]>
+		   </if>
+	</select>
+</mapper>
+

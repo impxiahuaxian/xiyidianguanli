@@ -1,0 +1,500 @@
+.more-group {
+	margin:8px 0 0;
+
+	clear:both;
+
+*zoom:1;
+
+}
+
+.more-group ul {
+
+*zoom:1;
+
+	
+
+	width:1010px;
+
+}
+
+.more-group ul li {
+
+  background: url("i/index_new_yy.png") no-repeat scroll right bottom transparent;
+
+  float: left;
+
+  margin: 5px 15px 0 0;
+
+  padding-bottom: 15px;
+
+  position: relative;
+
+  width: 320px;
+
+}
+
+.more-group ul li .inner-box {
+
+	border:1px solid #E5E5E5;
+
+	background:#fff;
+
+	padding-bottom:15px;
+
+}
+
+.more-group ul li.special .inner-box {
+
+	border:1px solid #FFED85;
+
+	background:#FFFAC2;
+
+}
+
+.more-group ul li .inner-box:hover, .more-group ul li.special .inner-box:hover {
+
+	border:1px solid #DC442F;
+
+}
+
+.more-group ul li.special b.jieti {
+
+	position:absolute;
+
+	width:46px;
+
+	height:17px;
+
+	line-height:17px;
+
+	display:block;
+
+	top:-17px;
+
+	left:0;
+
+	text-align:center;
+
+	background:#FFED85;
+
+	color:#DC442F;
+
+	font-weight:normal;
+
+}
+
+.more-group ul li h3 {
+
+	width:290px;
+
+	height:40px;
+
+	padding-top:13px;
+
+	margin:auto auto 7px auto;
+
+	font-size:16px;
+
+	color:#666;
+
+	line-height:20px;overflow:hidden;
+
+}
+
+.more-group ul li h3 a, .more-group ul li h3 a:visited, .more-group ul li h3 a:hover {
+
+	color:#666666;
+
+}
+
+.more-group ul li .pic {
+
+	position:relative;
+
+	width:285px;
+
+	height:190px;
+
+	overflow:hidden;
+
+	margin:7px auto 0;
+
+	border:1px solid #a51100;
+
+	border-bottom:none;
+
+}
+
+.more-group ul li .pic .discount {
+
+	position:absolute;
+
+	width:27px;
+
+	padding-left:14px;
+
+	height:41px;
+
+	overflow:hidden;
+
+	top:0;
+
+	right:0;
+
+	color:#fff;
+
+	font-size:14px;
+
+	font-weight:bold;
+
+	text-align:Center;
+
+	background:url("i/index_new_yy.png") 0 -56px no-repeat;
+
+}
+
+.more-group ul li .buy-mask {
+
+	background-color:#000;
+
+	width:286px;
+
+	height:20px;
+
+	position:absolute;
+
+	left:17px;
+
+	bottom:78px;
+
+	opacity:.5;
+
+	filter:alpha(opacity=50);
+
+}#footer .footer-nav {
+
+ 
+
+  padding-left: 40px;
+
+
+
+}
+
+.more-group ul li .buy-state {
+
+	width:265px;
+
+	color:#fff;
+
+	position:absolute;
+
+	left:17px;
+
+	bottom:79px;
+
+}
+
+.more-group ul li .buy-state .orig-price {
+
+	float:left;
+
+	padding:0 4px 0 10px;
+
+	font-size:12px;
+
+}
+
+.more-group ul li .buy-state .orig-price del, .more-group ul li .buy-state .orig-price strong {
+
+	font-weight:bold;
+
+	margin-left:3px;
+
+	font-family:Arial;
+
+}
+
+.more-group ul li .buy-state .buy-ed {
+
+	padding-right:6px;
+
+	float:right;
+
+	font-size:12px;
+
+}
+
+.more-group ul li .buy-state .buy-ed strong {
+
+	font-weight:bold;
+
+	color:#b0e553;
+
+	font-family:Arial;
+
+}
+
+.more-group ul li .buy-action {
+
+	display:block;
+
+	margin:0 auto auto auto;
+
+	width:269px;
+
+	height:48px;
+
+	line-height:48px;
+
+	padding-left:18px;
+
+	text-decoration:none;
+
+	position:relative;
+
+	cursor:pointer;
+
+	background:url(../images/index_new_all.png) no-repeat 0 0;
+
+}
+
+.more-group ul li .buy-action:visited, .more-group ul li .buy-action:hover {
+
+	text-decoration:none;
+
+	color:#fff;
+
+}
+
+.more-group ul li .buy-action b {
+
+	height:32px;
+
+	width:86px;
+
+	background:url(../images/index_new_all.png) no-repeat 0 -456px;
+
+	display:block;
+
+	position:absolute;
+
+	right:5px;
+
+	top:10px;
+
+	cursor:pointer;
+
+}
+
+.more-group ul li .buy-action:hover .btn {
+
+	background-position:-91px -456px;
+
+}
+
+.more-group ul .notbegin .buy-action {
+
+	background-position:0 -54px;
+
+}
+
+.more-group ul .notbegin .buy-action:hover {
+
+	background-position:0 -107px;
+
+}
+
+.more-group ul .notbegin .buy-action .btn {
+
+	width:93px;
+
+	height:23px;
+
+	top:13px;
+
+	background-position:0 -493px;
+
+}
+
+.more-group ul .notbegin .buy-action:hover .btn {
+
+	background-position:-98px -493px;
+
+}
+
+.more-group ul .notbegin .pic {
+
+	border-color:#768e00;
+
+}
+
+.more-group ul .timeout .buy-action, .more-group ul .soldout .buy-action {
+
+	background-position:0 -266px;
+
+}
+
+.more-group ul .timeout .buy-action:hover, .more-group ul .soldout .buy-action:hover {
+
+	background-position:0 -319px;
+
+}
+
+.more-group ul .soldout .buy-action .btn {
+
+	width:93px;
+
+	height:23px;
+
+	top:13px;
+
+	background-position:0 -549px;
+
+}
+
+.more-group ul .soldout .buy-action:hover .btn {
+
+	background-position:-98px -549px;
+
+}
+
+.more-group ul .soldout .pic, .more-group ul .timeout .pic {
+
+	border-color:#8b8b8b;
+
+}
+
+.more-group ul .timeout .buy-action .btn {
+
+	width:76px;
+
+	height:23px;
+
+	top:13px;
+
+	background-position:-37px -577px;
+
+}
+
+.more-group ul .timeout .buy-action:hover .btn {
+
+	background-position:-151px -577px;
+
+}
+
+.more-group ul li .buy-action .price {
+
+	float:left;
+
+	color:#fff;
+
+	font:bold 40px "Arial";
+
+	letter-spacing:-2px;
+
+}
+
+.more-group ul li .buy-action .price em {
+
+	font-size:26px;
+
+	font-weight:bold;
+
+	margin-right:3px;
+
+	font-family:"Microsoft Yahei", "Arial", "Verda", "tahoma";
+
+}
+
+.more-group ul li .buy-action .price span {
+
+	font-size:28px;
+
+}
+
+.more-group ul li .buy-action .buy-btn {
+
+	float:right;
+
+	margin-top:4px;
+
+	width:87px;
+
+	height:29px;
+
+	cursor:pointer;
+
+}
+
+.more-group ul li .buy-action .btn-middle {
+
+	float:right;
+
+	margin-top:4px;
+
+	width:87px;
+
+	height:29px;
+
+	cursor:pointer;
+
+}
+
+.more-group ul li .buy-action .deposit {
+
+	width:31px;
+
+	height:19px;
+
+	vertical-align:middle;
+
+#vertical-align:3px;
+
+	_vertical-align:-2px;
+
+	cursor:default;
+
+	margin-left:6px;
+
+	cursor:pointer;
+
+	display:inline-block;
+
+	background:url("../images/index_new_all.png") -258px -456px no-repeat;
+
+	vertical-align:baseline;
+
+*vertical-align:super;
+
+}
+
+.more-group ul li .buy-action .deal {
+
+	width:43px;
+
+	height:19px;
+
+	vertical-align:middle;
+
+#vertical-align:3px;
+
+	_vertical-align:-2px;
+
+	cursor:default;
+
+	margin-left:6px;
+
+	cursor:pointer;
+
+	display:inline-block;
+
+	background:url("../images/index_new_all.png") -246px -476px no-repeat;
+
+	vertical-align:baseline;
+
+*vertical-align:super;
+
+	position:relative;
+
+}

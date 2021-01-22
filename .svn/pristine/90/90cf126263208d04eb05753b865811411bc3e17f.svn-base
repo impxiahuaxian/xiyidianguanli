@@ -1,0 +1,9 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.OrderGoodsItem;
+
+public interface OrderGoodsItemDao extends GenericDao<OrderGoodsItem, Integer> {
+	List<OrderGoodsItem> getOrderGoodsItemListByOrderId(int orderId);
+}

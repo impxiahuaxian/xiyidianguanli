@@ -1,0 +1,7 @@
+package com.weiweiqin.dao;
+
+import com.weiweiqin.model.GoodsCommentItem;
+
+public interface GoodsCommentItemDao extends GenericDao<GoodsCommentItem,Integer>{
+	GoodsCommentItem getByCommentId(int commentId);
+}

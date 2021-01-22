@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.GoodsMapper">
+  	<resultMap type="com.weiweiqin.model.Goods" id="goodsResultMap">  
+        <id property="id" column="id"/>  
+        <result property="title" column="title"/> 
+        <result property="browerNum" column="brower_num"/>
+        <result property="picNum" column="pic_num"/>
+        <result property="picName" column="pic_name"/>
+        <result property="picSize" column="pic_size"/>
+        <result property="picHeight" column="pic_height"/>
+        <result property="picWidth" column="pic_width"/>
+        <result property="picCompressHeight" column="pic_compress_height"/>
+        <result property="picCompressWidth" column="pic_compress_width"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="topDate" column="top_date"/>
+        
+        <result property="endDate" column="end_date"/>
+        <result property="price" column="price"/>
+        <result property="nowPrice" column="now_price"/>
+        <result property="discount" column="discount"/>
+        <result property="buyNum" column="buy_num"/>
+        <result property="content" column="content"/>
+        <result property="mark" column="mark"/>
+        <result property="orderKey" column="order_key"/>
+        <result property="grade" column="grade"/>
+        <result property="brandsId" column="brands_id"/>
+        <result property="expiredDate" column="expired_date"/>
+        <result property="installType" column="install_type"/>
+        <result property="bigPic" column="big_pic"/>
+        <result property="bigCategory" column="big_category"/>
+        <result property="moreType" column="more_type"/>
+         <result property="secCategory" column="sec_category"/>
+          <result property="isLunbo" column="is_lunbo"/>
+	</resultMap> 
+	<insert id="Goods_insert" parameterType="com.weiweiqin.model.Goods"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO team_goods (lipin,more_type,type,is_lunbo,sec_category,big_category,big_pic,install_type,order_key,expired_date,item,recommend,scene,tips,now_price,pic_height,pic_width,pic_compress_height,pic_compress_width,brands_id,grade,content,title,brower_num,pic_num,pic_name,pic_size,update_date,end_date,price,discount,buy_num,mark) values
+		          (#{lipin},#{moreType},#{type},#{isLunbo},#{secCategory},#{bigCategory},#{bigPic},#{installType},#{orderKey},#{expiredDate},#{item},#{recommend},#{scene},#{tips},#{nowPrice},#{picHeight},#{picWidth},#{picCompressHeight},#{picCompressWidth},#{brandsId},#{grade},#{content},#{title},#{browerNum},#{picNum},#{picName},#{picSize},#{updateDate},#{endDate},#{price},#{discount},#{buyNum},#{mark})
+		        ]]>
+	</insert>
+	
+		<select id="Goods_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Goods" resultMap="goodsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_goods a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+		<select id="Goods_getZhuji" parameterType="map"
+				resultType="com.weiweiqin.model.Goods" resultMap="goodsResultMap"> 
+				select a.* from team_goods a where a.id in
+		 			<foreach item="item" index="index" collection="list"  open="("  separator=","  close=")">
+                        #{item}
+                </foreach>
+	       </select>
+	
+		<select id="Goods_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Goods" resultMap="goodsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_goods a left join team_category b on a.big_category = b.id where 1 =1
+	        ]]>
+	        
+	        <if test="title != null">
+	        <![CDATA[ 
+	        	and a.title like  CONCAT('%','${title}','%' )
+	        ]]>
+	        </if>
+	        
+	       <if test="brandsId != null">
+	        <![CDATA[ 
+	        	and a.brands_id = #{brandsId} 
+	        ]]>
+	        </if>
+	        
+	         <if test="secCategory != null">
+	        <![CDATA[ 
+	        	and a.sec_category = #{secCategory} 
+	        ]]>
+	        </if>
+	        
+	        <if test="mark != null">
+	        <![CDATA[ 
+	        	and a.mark = 0 
+	        ]]>
+	        </if>
+	        
+	        
+	        <if test="grade != null">
+	        <![CDATA[ 
+	        	and a.grade = #{grade} 
+	        ]]>
+	        </if>
+	        
+	        <if test="type != null">
+	        <![CDATA[ 
+	        	and a.type = #{type} 
+	        ]]>
+	        </if>
+	        
+	        <if test="isLunbo != null">
+	        <![CDATA[ 
+	        	and a.is_lunbo = #{isLunbo} 
+	        ]]>
+	        </if>
+	        
+	       <if test="moreType != null">
+		        <![CDATA[ 
+		        	and a.more_type = #{moreType} 
+		         ]]>
+	        </if>
+	        
+	         <if test="lipin != null">
+		        <![CDATA[ 
+		        	and a.lipin = #{lipin} 
+		         ]]>
+	        </if>
+	        
+	         <if test="orderBy != null and orderBy !=''">
+		        <![CDATA[ 
+		        	order by ${orderBy} 
+		        ]]>
+	        </if>
+	        
+	        <if test="orderBy == null or orderBy ==''">
+	          <![CDATA[ 
+	          order by a.order_key desc,a.update_date desc 
+	         ]]>
+	         </if>
+	         
+	         <![CDATA[ 
+	         	limit #{page.start},#{page.pageSize}
+	         ]]>
+	</select>
+	
+	
+	
+	
+	<select id="Goods_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(a.id)  from team_goods a left join team_category b on a.big_category = b.id   where 1= 1
+	        ]]>
+	        
+	         <if test="title != null">
+	        <![CDATA[ 
+	        	and a.title like  CONCAT('%','${title}','%' )
+	        ]]>
+	        </if>
+	        
+	       <if test="brandsId != null">
+		        <![CDATA[ 
+		        	and a.brands_id = #{brandsId} 
+		        ]]>
+	        </if>
+	        
+	       <if test="secCategory != null">
+		        <![CDATA[ 
+		        	and a.sec_category = #{secCategory} 
+		        ]]>
+	        </if>
+	        
+	        <if test="mark != null">
+	        <![CDATA[ 
+	        	and a.mark = 0 
+	        ]]>
+	        </if>
+	        
+	        <if test="grade != null">
+	        <![CDATA[ 
+	        	and a.grade = #{grade} 
+	        ]]>
+	        </if>
+	        
+	       <if test="type != null">
+		       <![CDATA[ 
+		        	and a.type = #{type} 
+		        ]]>
+	        </if>
+	        
+	        <if test="moreType != null">
+		        <![CDATA[ 
+		        	and a.more_type = #{moreType} 
+		        ]]>
+	        </if>
+	        
+	        <if test="lipin != null">
+		        <![CDATA[ 
+		        	and a.lipin = #{lipin} 
+		        ]]>
+	        </if>
+	        
+	        <if test="isLunbo != null">
+	        <![CDATA[ 
+	        	and a.is_lunbo = #{isLunbo} 
+	        ]]>
+	        </if>
+	
+	</select>
+	
+	<select id="Goods_getAll" resultType="com.weiweiqin.model.Goods"
+		resultMap="goodsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_goods a where a.pic_width = 0 or  a.pic_width is null
+	        ]]>
+	</select>
+	
+		<select id="Goods_getByCategoryId" parameterType="Integer"
+		resultType="com.weiweiqin.model.Goods" resultMap="goodsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_goods a   where a.big_category = #{bigCategory}
+	        ]]>
+	</select>
+	
+		<select id="Goods_getBySecCategoryId" parameterType="Integer"
+		resultType="com.weiweiqin.model.Goods" resultMap="goodsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_goods a l  where a.sec_category_id = #{secCategoryId}
+	        ]]>
+	</select>
+	
+	
+	<select id="Goods_getPicListById" parameterType="Integer"
+		resultType="com.weiweiqin.model.Pic" resultMap="picResultMap"> 
+		<![CDATA[ 
+		SELECT a.* FROM team_pic a LEFT JOIN team_goods_pic_item b ON a.id = b.pic_id LEFT JOIN team_goods c ON b.goods_id = c.id WHERE c.id = #{id} and b.type = 0
+		 order by a.order_key desc
+	        ]]>
+	</select>
+	
+	<select id="Goods_getTiltePicListById" parameterType="Integer"
+		resultType="com.weiweiqin.model.Pic" resultMap="picResultMap"> 
+		<![CDATA[ 
+		SELECT a.* FROM team_pic a LEFT JOIN team_goods_pic_item b ON a.id = b.pic_id LEFT JOIN team_goods c ON b.goods_id = c.id WHERE c.id = #{id} and b.type = 1
+		 order by a.order_key desc
+	        ]]>
+	</select>
+	
+	
+		<select id="Goods_getPicItemListById" parameterType="Integer"
+		resultType="com.weiweiqin.model.GoodsPicItem" resultMap="goodsPicItemResultMap"> 
+		<![CDATA[ 
+		SELECT b.* FROM team_goods a LEFT JOIN team_goods_pic_item b ON a.id = b.goods_id WHERE a.id = #{id} and b.type=0
+	        ]]>
+	</select>
+		 
+	
+	
+	
+	<select id="Goods_getByPicName" parameterType="String"
+		resultType="com.weiweiqin.model.Goods" resultMap="goodsResultMap"> 
+		<![CDATA[ 
+		select * from team_goods a where a.pic_name = #{picName}
+	        ]]>
+	</select>
+	
+	<update id="Goods_update" parameterType="com.weiweiqin.model.Goods"> 
+	<![CDATA[ 
+		update team_goods set lipin = #{lipin}, more_type=#{moreType}, type=#{type}, is_lunbo = #{isLunbo}, sec_category = #{secCategory}, big_category = #{bigCategory}, big_pic = #{bigPic}, install_type = #{installType}, expired_date = #{expiredDate}, item = #{item}, recommend = #{recommend},scene = #{scene} , tips = #{tips}, now_price = #{nowPrice}, pic_height=#{picHeight},pic_width=#{picWidth},pic_compress_height=#{picCompressHeight},pic_compress_width=#{picCompressWidth}, brands_id=#{brandsId}, grade=#{grade}, content=#{content}, title = #{title} , brower_num = #{browerNum},top_date = #{topDate}
+		, pic_num = #{picNum}, order_key=#{orderKey},pic_size = #{picSize},pic_name = #{picName},end_date = #{endDate},price = #{price},discount = #{discount},buy_num = #{buyNum},mark = #{mark}
+		where id = #{id}
+	        ]]>
+	</update>
+	
+	<delete id="Goods_delete"  parameterType="Integer">
+		delete from team_goods  where id = #{primaryKey}
+	</delete>
+</mapper>
+

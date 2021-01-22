@@ -1,0 +1,76 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+<%@ include file="./common/top.jsp"%>
+	<div class="container">
+		
+		<form class="form-horizontal" role="form" id="brands_form_id">
+			<div class="form-group">
+			  <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<img id="head_pic_id" class="form-control" src="../images/fmmb.png" style="width: 129px;height: 129px">
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			    <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<input type="file" name="uploadFile" id="uploadify" />
+			        <input name="pic" type="hidden" id="user_avatar_id"/>
+			  </div>
+		  <div class="form-group">
+		    <label for="brandsName" class="col-sm-2 control-label">品牌名称：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="name" class="form-control required" id="brandsName">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+	    	  <button type="button" id="add_brands_btn_id" class="btn btn-primary">保存</button>
+		      <a href="./brandsList.jsp" class="btn btn-default">取消</a>
+		    </div>
+  		  </div>
+  		</form>
+  		
+	</div>
+	<script>
+		
+		
+		$(function(){
+			var valid = new jValidation.Validation('brands_form_id',{immediate:true},{onSubmit:false});
+			$('#add_brands_btn_id').click(
+				function(){
+					var result = valid.validate();
+					if(!result){
+						return;
+					}
+					var formData = $('#brands_form_id').serialize();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../brands/add.do',
+						dataType : 'json',
+						data : formData,
+						success : function(obj) {
+							if(obj.result){
+								window.top.jWei.Tips.success("保存数据成功");
+								location.href="./brandsList.jsp";
+							}else{
+								window.top.jWei.Tips.success(obj.errorMsg);
+							}
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+				}		
+			);
+			
+			
+		});
+		
+		
+	</script>
+</body>
+</html>

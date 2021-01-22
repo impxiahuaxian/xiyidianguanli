@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+	<div id="mainContainer" class="container">
+		
+		<div style="margin-top:20px;">
+			<table id="comment_table">
+		
+			</table>
+		
+		</div>
+	</div>
+
+	<script>
+		
+		$(function() {
+			
+			var grid = new jWei.Datagrid({
+				renderTo : $("#comment_table"),
+				tabWidth:"",
+				fieldset:false,
+				showCheck:{
+					chkName:"id",
+					chkValue:"id",
+					handler:function(v,data,td,tr){
+						td.find(".head-check").attr("data-content",data.comment.content).attr("data-date",data.updateDate).attr("data-username",data.comment.username);
+						td.find(".head-check").attr("data-grade",data.comment.grade);
+					}
+				},
+				legendTitle:"",
+				url : "../comment/pageListForExport.do",
+				colModels : [ 
+				
+				{
+					name : "updateDate",
+					displayName : "最后更新时间",
+				}, 
+				{
+					name : "comment_username",
+					displayName : "用户名称",
+				},
+				
+				{
+					name : "comment_grade",
+					displayName : "等级"
+					
+				},
+				
+				{
+					name : "comment_content",
+					displayName : "内容",
+					handler:function(v,data,td,tr){
+						td.html('<div class="comment-data ellipsis" style="width:200px;" title="'+v+'">'+v+'</div>');
+					}
+				} 
+				]
+			});
+		});
+		
+	</script>
+
+</body>
+</html>

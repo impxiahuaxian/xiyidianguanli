@@ -1,0 +1,27 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.ColorSizeItemDao;
+import com.weiweiqin.model.ColorSizeItem;
+
+@Repository
+public class ColorSizeItemDaoImpl extends GenericMybatisDao<ColorSizeItem, Integer>
+		implements ColorSizeItemDao {
+
+	@SuppressWarnings("unchecked")
+	public List<ColorSizeItem> getByColorId(int colorId) {
+		return (List<ColorSizeItem>)getSqlSession().selectList("ColorSizeItem_getByColorId",colorId);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ColorSizeItem> getBySizeId(int sizeId) {
+		return (List<ColorSizeItem>)getSqlSession().selectList("ColorSizeItem_getBySizeId",sizeId);
+	}
+
+	 
+
+ 
+}

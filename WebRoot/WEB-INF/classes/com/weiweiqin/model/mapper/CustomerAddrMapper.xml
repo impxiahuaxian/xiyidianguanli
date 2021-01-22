@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.CustomerAddrMapper">
+	<resultMap type="com.weiweiqin.model.CustomerAddr" id="customerAddrAddrResultMap">
+		<id property="id" column="id" />
+        <result property="customerId" column="customer_id"/>
+        <result property="province" column="province"/>
+        <result property="provinceCode" column="province_code"/>
+        <result property="cityCode" column="city_code"/>
+        <result property="areaCode" column="area_code"/>
+        <result property="defaultAddr" column="default_addr"/>
+	</resultMap>
+	<insert id="CustomerAddr_insert" parameterType="com.weiweiqin.model.CustomerAddr"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+	          INSERT INTO customer_addr (customer_id,mobile,province,province_code,city,city_code,area,area_code,address,name,default_addr) values
+	          (#{customerId},#{mobile},#{province},#{provinceCode},#{city},#{cityCode},#{area},#{areaCode},#{address},#{name},#{defaultAddr})
+	]]>
+	</insert>
+
+	<select id="CustomerAddr_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.CustomerAddr" resultMap="customerAddrAddrResultMap"> 
+		<![CDATA[ 
+		select a.* from customer_addr a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="CustomerAddr_getByCustomerId" parameterType="Integer"
+		resultType="com.weiweiqin.model.CustomerAddr" resultMap="customerAddrAddrResultMap"> 
+		<![CDATA[ 
+		select a.* from customer_addr a where a.customer_id = #{customerId}
+	        ]]>
+	</select>
+	
+	
+
+	
+
+	<update id="CustomerAddr_update" parameterType="com.weiweiqin.model.CustomerAddr"> 
+	<![CDATA[ 
+		update customer_addr set mobile=#{mobile},province=#{province}, province_code=#{provinceCode}, city=#{city}, city_code= #{cityCode},
+		area= #{area},area_code= #{areaCode},address= #{address},name= #{name},default_addr= #{defaultAddr} 
+		  where id = #{id}
+	        ]]>
+	</update>
+	
+	<delete id="CustomerAddr_delete"  parameterType="Integer">
+		delete from customer_addr where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

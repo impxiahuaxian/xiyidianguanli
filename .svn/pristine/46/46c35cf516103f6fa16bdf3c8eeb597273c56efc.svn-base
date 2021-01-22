@@ -1,0 +1,13 @@
+package com.weiweiqin.service;
+
+import com.weiweiqin.model.GoodsCommentItem;
+
+public interface GoodsCommentItemService {
+
+	void save(GoodsCommentItem goodsCommentItem);
+
+	void del(int id);
+	
+	GoodsCommentItem getByCommentId(int commentId);
+
+}

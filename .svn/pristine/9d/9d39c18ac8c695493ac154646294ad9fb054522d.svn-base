@@ -1,0 +1,10 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.ClothesDao;
+import com.weiweiqin.model.Clothes;
+@Repository
+public class ClothesDaoImpl extends GenericMybatisDao<Clothes, Integer>
+		implements ClothesDao {
+}

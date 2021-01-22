@@ -1,0 +1,1450 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<head>
+	<script charset="utf-8" src="${ctx}/js/kindeditor/kindeditor-min.js"></script>
+	<script charset="utf-8" src="${ctx}/js/kindeditor/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="${ctx}/js/kindeditor/style/complex.js"></script>
+	
+	<style>
+		#title_pic_list .title-pic{
+			width:150px;
+		}
+		.title-pic{
+			position: relative;
+		}
+		
+		.title-pic .del{
+			position: absolute;
+			left:0px;
+			top:30px;
+		}
+		
+		.title-pic .paixu{
+			margin-bottom:15px;
+		}
+		
+		.title-pic .paixu input{
+			width:129px;
+			border-radius:3px;
+			border:1px solid #ccc;
+			padding:2px 6px;
+		}
+		
+		.title-pic .img{
+			width:129px;
+			height: 129px;
+		}
+	</style>
+	
+	
+</head>
+<body>
+<%@ include file="./common/top.jsp"%>
+	<div class="container"  id="mainContainer">
+	
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#baseinfo" data-toggle="tab">商品基本信息</a></li>
+		  <li><a href="#colorsizeiteminfo" data-toggle="tab">颜色尺码对应信息</a></li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+
+  		<!-- begin 商品基本信息 -->
+  		<div class="tab-pane active" id="baseinfo">
+			<form class="form-horizontal" role="form" id="obj_form_id" name="obj_form">
+			  <input type="hidden" id="id_id" name="goods.id"/>
+	  		  <input type="hidden" id="orderKey_id" name="goods.orderKey"/>
+	  		  <input type="hidden" id="mark_id" name="goods.mark"/>
+	  		  
+	  		  <!-- begin 上传普通封面 -->
+		  <div class="form-group" id="title_pic_list">
+		  <label class="col-sm-2 control-label sr-only"></label>
+		    <div class="col-sm-2 title-pic" style="display: none;" id="title_pic_model_id">
+		    	<input type="hidden" class="name"/>
+		    	<a href="#" class="del" title="删除图片"><img src="${ctx }/images/remove.png"></a>
+		    	<div class="paixu"><input type="text" class="order-key"  placeholder="排序数字"/></div>
+		    	<img class="img" src="../images/fmmb.png"/>
+		    </div>
+	
+		  </div>
+		  
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label sr-only"></label>
+		    <div class="col-sm-1">
+		    	<input type="file" name="uploadFile" id="uploadify" />
+		    </div>
+		    <div class="col-sm-4" style="line-height: 30px;">
+		    	<span style="color:red;">(最多上传5张封面图片)</span>
+		    </div>
+		    
+		  </div>
+		  
+		  <!-- end 上传普通封面 -->
+			  
+			  <!-- begin 上传全屏封面 -->
+		  
+		   <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <div class="checkbox">
+			        <label>
+			         <input type="checkbox" id="full_screen_chk" name=""> 上传或修改全屏大图封面
+			        </label>
+			      </div>
+			    </div>
+			  </div>
+			  
+		  <div id="full_pic_div" style="display: none;">
+		  
+			  <div class="form-group">
+			  <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<img id="full__pic_id" class="form-control" src="../images/fmmb.png" style="width: 129px;height: 129px">
+			    </div>
+			  </div>
+		  
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<input type="file" name="uploadFile" id="full_uploadify" />
+			        <input name="goods.bigPic" type="hidden" id="bigPic_id"/>
+			    </div>
+			  </div>
+			</div>
+		  
+		  <!-- end 上传全屏封面 -->
+	   
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">标题</label>
+			    <div class="col-xs-3">
+			      <input name="goods.title" id="title_id" type="text" required-title="标题不能为空" class="form-control required useTitle">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">简称</label>
+			    <div class="col-xs-3">
+			      <input name="goods.item" type="text" id="item_id" required-title="货号不能为空" class="form-control required useTitle">
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">大分类</label>
+		    <div class="col-xs-3">
+		      <select class="form-control required  useTitle" required-title="请选择大分类" name="goods.bigCategory" id="category_id">
+					<option value="">请选择</option>
+			  </select>
+		    </div>
+		  </div>
+			  
+		<div class="form-group">
+		    <label for="" class="col-sm-2 control-label">小分类</label>
+		    <div class="col-xs-3">
+		      	<select class="form-control required" name="goods.secCategory" id="sec_category_id">
+		      		<option value="">请选择</option>
+		      	</select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">导航所属板块</label>
+		    <div class="col-xs-3">
+		      	<select class="form-control required" name="goods.type" id="type_id">
+		      		<option value="1">客厅/卧室</option>
+		      		<option value="2">厨房/浴室</option>
+ 				    <option value="4">电子产品</option>
+ 				    <option value="5">大家具</option>
+		      	</select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">首页所属板块</label>
+		    <div class="col-xs-3">
+		      	<select class="form-control required" name="goods.grade" id="grade_id">
+		      		<option value="0">普通产品</option>
+		      		<option value="1">精品推荐</option>
+		      		<option value="2">限时特卖</option>
+		      		<option value="3">新品上市</option>
+ 				    <option value="4">最多购买</option>
+ 				    <option value="5">最多收藏</option>
+ 				    <option value="6">最多好评</option>
+ 				    <option value="7">最美设计</option>
+ 				    <option value="8">聚光灯图片墙</option>
+		      		<option value="9">	历史Top5</option>
+		      		<option value="10">更多推荐</option>
+		      	</select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group" style="display: none;" id="new_lunbo_id">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <div class="checkbox">
+			        <label>
+			         <input type="checkbox"  name="goods.isLunbo" value="1"> 是否轮播大图<span style="color:red;">（注意：选中后用于新品轮播位置）</span>
+			        </label>
+			      </div>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">人气榜</label>
+		    <div class="col-xs-3">
+		      	<select class="form-control" name="goods.moreType" id="moreType_id">
+		      		<option value="">请选择</option>
+		      		<option value="1">最多购买</option>
+		      		<option value="2">最多收藏</option>
+		      		<option value="3">最多好评</option>
+ 				    <option value="4">最美设计</option>
+		      	</select>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">是否作为礼品</label>
+		    <div class="col-xs-3">
+		      	<select class="form-control" name="goods.lipin" id="lipin_id">
+		      		<option value="0">非礼品</option>
+		      		<option value="1">礼品</option>
+		      	</select>
+		    </div>
+		  </div>
+			  
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">购买人数</label>
+			    <div class="col-xs-3">
+			      <input name="goods.buyNum" id="buyNum_id" type="text" maxlength="4" required-title="标题不能为空" class="form-control validate-digits useTitle">
+			    </div>
+			  </div>
+			  
+			  
+			  
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">商品详情</label>
+			    <div class="col-xs-3">
+				  <textarea name="content" style="width:700px;height:200px;visibility:hidden;"></textarea>
+				  <input type="hidden" name="goods.content" id="content_id"/>
+			    </div>
+			  </div>
+			  
+			   <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">推荐理由</label>
+			    <div class="col-xs-3">
+				  <textarea name="goods.recommend"  id="recommend_id" style="width:700px;height:40px;"></textarea>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">适合场景</label>
+			    <div class="col-xs-3">
+				  <textarea name="goods.scene" id="scene_id" style="width:700px;height:40px;"></textarea>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">温馨提示</label>
+			    <div class="col-xs-3">
+				  <textarea name="goods.tips"  id="tips_id" style="width:700px;height:40px;"></textarea>
+			    </div>
+			  </div>
+			  
+			  
+			  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">团购到期时间</label>
+		    <div class="col-xs-3">
+		      <input name="expiredDate" id="expiredDate_id" type="text"  class="form-control" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" >
+		    </div>
+		  </div>
+			  
+			   <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">品牌</label>
+			    <div class="col-xs-3">
+			      <select class="form-control required useTitle" required-title="请选择大分类" name="goods.brandsId" id="brands_id">
+						<option value="">请选择</option>
+				  </select>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+		    <label for="" class="col-sm-2 control-label">安装方式</label>
+		    <div class="col-xs-3">
+		      <select class="form-control required useTitle" required-title="请选择组装方式" name="goods.installType" id="installType_id">
+					<option value="0">整装</option>
+					<option value="1">组装</option>
+			  </select>
+		    </div>
+		  </div>
+			 
+			   <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <div class="checkbox">
+			        <label>
+			         <input type="checkbox" id="chooseEditColorSize_id" name="chooseEditColorSize"> 编辑颜色尺码<span style="color:red;">（注意：选中后需要重新编辑该商品的颜色尺码对应关系）</span>
+			        </label>
+			      </div>
+			    </div>
+			  </div>
+			  
+			  <div id="color_div"  style="display: none;">
+				   <div class="form-group">
+				    <label for="" class="col-sm-2 control-label">颜色</label>
+				    <div class="col-sm-10">
+				    	
+			 		   <label class="checkbox-inline">
+						  <input type="checkbox" style="float:left;" value=""  name="colorList[0].color" > 
+						  <input class=" input-smm color-name" type="text" value="图片色" style="width:80px;"/>
+							-
+						   <input class="input-smm color-price validate-number" name="colorList[0].price"  placeholder="对应价格"   type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[1].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number"  name="colorList[1].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[2].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number"  name="colorList[2].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[3].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number" name="colorList[3].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[4].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number"  name="colorList[4].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[5].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number" name="colorList[5].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[6].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number" name="colorList[6].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						<label class="checkbox-inline">
+						  <input type="checkbox"  value=""  name="colorList[7].color" > 
+						  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+						  -
+						   <input class="input-smm color-price validate-number"  name="colorList[7].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+						</label>
+						
+						<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[8].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[8].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[9].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[9].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[10].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[10].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[11].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[11].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[12].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[12].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[13].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+ 						   <input class="input-smm color-price validate-number" name="colorList[13].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					  
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[14].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[14].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[15].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[15].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[16].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[16].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[17].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[17].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[18].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[18].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[19].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input  class="input-smm color-price validate-number"  name="colorList[19].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[20].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[20].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[21].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[21].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[22].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[22].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[23].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[23].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[24].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[24].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[25].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[25].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[26].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[26].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[27].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number"  name="colorList[27].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[28].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[28].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[29].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[29].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+					
+					<label class="checkbox-inline">
+					  <input type="checkbox"  value=""  name="colorList[30].color" > 
+					  <input class=" input-smm color-name" type="text" value="" style="width:80px;"/>
+					  -
+						   <input class="input-smm color-price validate-number" name="colorList[30].price"  placeholder="对应价格"  type="text" value="0" style="width:80px;"/>
+					</label>
+				    </div>
+				  </div>
+			  </div>
+			  
+			  
+			   <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">原价</label>
+			    <div class="col-xs-3">
+	  				<input name="goods.price" id="price_id" type="text" validate-number-title="请输入数字" required-title="请输入价格" maxlength="5" class="form-control required useTitle validate-number"/>
+			    </div>
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">折扣</label>
+			    <div class="col-xs-3">
+				  <input name="goods.discount" id="discount_id" type="text" required-title="请输入折扣" validate-number-title="请输入数字" maxlength="3" class="form-control required useTitle validate-number max-value-10 min-value-0" />
+							<span style="line-height: 30px;font-size:10px;vertical-align: middle;">请输入0.0-10.0的数字</span>
+			    </div>
+			  </div>
+			 
+			  
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label">现价</label>
+			    <div class="col-xs-3">
+	  				<input name="goods.nowPrice" id="nowPrice_id" type="text" validate-number-title="请输入数字" required-title="请输入价格" maxlength="5" less-than-equal-title="请输入小等于原价的价格" class="form-control required useTitle validate-number less-than-equal-price_id"/>
+			    </div>
+			  </div>
+			  
+			  
+			  <div class="form-group">
+			    <label for="" class="col-sm-2 control-label"></label>
+			    <div class="col-xs-3">
+				   <div class="alert alert-info">
+				 		按住ctrl键可以多张一起上传,排序数字默认为文件名名称，比如文件名为1.jpg,那么排序数字默认为1，如果文件名非数字，排序默认为0
+				   </div>
+				   
+				   <div class="alert alert-info">
+				 		子图片数字越大排序越靠前面
+				   </div>
+			    </div>
+			  </div>
+			  
+			   <div class="form-group" id="sub_div">
+			    <label for="" class="col-sm-2 control-label">子图片</label>
+			    <div class="col-xs-10">
+				   <input type="file" name="uploadFile" id="uploadifySub" />
+				     <div id="sub_model_id" style="display: none;">   
+				   		<input type="hidden" class="name"/>
+				   		<input type="hidden" class="height"/>
+						<input type="hidden" class="width"/>
+						<input type="hidden" class="compressHeight"/>
+						<input type="hidden" class="compressWidth"/>
+						<input type="hidden" class="size"/>
+				   		<div class="row" style="position: relative;margin-top:25px;border:1px solid #ccc;padding-left:0px;">
+				   			<div class="col-md-3">
+				   			<a href="#" class="img-a">
+				   				<img id="sub_pic_ids" src="../images/youc.png"  style="max-height:200px;">
+				   			</a>
+				   			</div> 
+							<a id="del_pic_id" href="#" title="删除图片" style="position: absolute;top:-12px;left:-12px;"><img src="../images/remove.png" /> </a>
+				   			<div class="col-md-3"><input type="text" style="border-color:red;"  class="orderKey form-control" placeHolder="排序数字"/></div>
+				   			<div class="col-md-4"><input type="text" style="border-color:red;" class="pic-desc form-control" placeHolder="一句话描述该图片" /></div>
+				   		</div>
+				   		
+				   	</div>
+				   	
+				   	
+			    </div>
+			  </div>
+			   
+			   <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+		          <button id="add_obj_btn_id" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-folder-close"></i>保存</button>
+			      <a href="./index.jsp" class="btn btn-default">取消</a>
+			    </div>
+	  		  </div>
+	  		  
+	  		</form>
+	  	</div>
+	  	
+	  	 <!-- end 商品基本信息 -->
+  
+  
+  <!-- begin 颜色尺码对应信息 -->
+  <div class="tab-pane" id="colorsizeiteminfo">
+  		<div style="margin-top:20px;margin-left:248px;">
+  			<button class="btn btn-default" id="add_color_btn">添加新颜色</button>
+  		</div> 
+  		<div class="popup-modal" id="add_color_popup">
+  			<form class="form-horizontal"  id="add_new_color_form">
+	  			<label>颜色</label>
+	  			<input type="hidden" name="goodsId" id="new_color_goods_id"/>
+	  			<input type="text" class="form-control input-sm" name="color" id="new_color_name"/>
+	  		</form>
+  		</div>
+  		
+  		<div class="popup-modal" id="add_size_popup">
+  			<form class="form-horizontal"  id="add_new_size_form">
+	  			<label>尺码</label>
+	  			<input type="hidden" name="goodsId" id="new_size_goods_id"/>
+	  			<input type="text" class="form-control input-sm" name="size" id="new_size_name"/>
+	  		</form>
+  		</div>
+  		
+  		
+  		<form class="form-horizontal" role="form" id="colorsize_form" name="colorsize_form" style="margin-top:20px;">
+  			<div>
+			     <div class="form-group">
+			            <label for="" class="col-sm-2 control-label">颜色</label>
+					    <div class="col-sm-10" id="coloritem_div">
+				 		   <label class="checkbox-inline" id="coloritem_model" style="display: none;">
+							  <input type="radio" style="float:left;margin-right:5px;"  value=""  name="colorId"> 
+							  <input class="form-control input-sm"  disabled="disabled" class="disabled" type="text" value="图片色" style="width:80px;"/>
+							  <div style="float:left;margin-top:5px;"  ><img src="" style="width:60px;height:60px;margin-left:18px;" class="color-pic"/></div>
+							</label>
+						</div>
+			      </div>
+			      
+		
+			      
+	        <div class="form-group" id="uploadColor_id" style="display: none;">
+			    <label for="" class="col-sm-2 control-label">上传图片</label> 
+			    <div class="col-xs-3">
+	  				<input type="file" name="uploadifyForColor" id="uploadifyForColor" />
+	  				
+			    </div>
+			  </div>
+			      
+			      
+			</div>
+			
+			
+  		</form>
+  		
+  </div>
+  
+  <!-- end 颜色尺码对应信息 -->
+  
+</div>
+</div>
+	
+	<script>
+		var subPicNum = 0;
+		var titlePicNum = 0;
+		var isDisabled = false;
+		$(function(){
+			
+			//绑定原价和现价blur事件
+			$("#price_id,#nowPrice_id").blur(function(){
+				var price = $("#price_id").val();
+				var nowPrice = $("#nowPrice_id").val();
+				if(price && nowPrice){
+					var discount = nowPrice*10/price;
+					discount = Math.round(discount*10)/10;
+					$("#discount_id").val(discount);	
+				}
+				return false;
+			});
+			//绑定折扣事件
+			$("#discount_id").blur(function(){
+				var discount = $(this).val();
+				var price = $("#price_id").val();
+				var nowPrice = price*discount/10;
+				if(price && nowPrice){
+					nowPrice = Math.round(nowPrice); 
+					$("#nowPrice_id").val(nowPrice);	
+				}
+				
+				return false;
+			});
+			
+			
+			var validateColor = function(){
+				var valid = true;
+				var chooseColor = [];
+				
+				 $("#color_div").find(":checkbox:checked").each(function(){
+					if($(this).val()){
+						if($.inArray($(this).val(),chooseColor) != -1){
+							window.top.jWei.Tips.error("存在多个"+$(this).val());
+							chooseColor =null;
+							valid = false;
+							return false;
+						}else{
+							chooseColor.push($(this).val());
+						}
+					}
+				});
+				 return valid;
+			};
+			
+			//验证重复尺码
+			var validateSize = function(){
+				var valid = true;
+				var chooseSize = [];
+				
+				 $("#size_div").find(":checkbox:checked").each(function(){
+					if($(this).val()){
+						if($.inArray($(this).val(),chooseSize) != -1){
+							window.top.jWei.Tips.error("尺码存在多个"+$(this).val());
+							chooseSize =null;
+							valid = false;
+							return false;
+						}else{
+							chooseSize.push($(this).val());
+						}
+					}
+				});
+				 return valid;
+			};
+			
+			
+			var id = $.request.queryString["id"];
+			//为添加新颜色和添加新尺码增加商品ID
+			$("#new_color_goods_id").val(id);
+			$("#new_size_goods_id").val(id);
+			
+			$("#mainContainer").showLoading();
+			
+			//绑定颜色事件
+			$("#color_div").on("click",":checkbox",function(){
+				$(this).val($(this).next().val());
+				if($(this).prop("checked")){
+					$(this).next()[0].select();
+				}
+			});
+			
+			$("#color_div").on("keyup",".color-name",function(){
+				$(this).prev().val($(this).val());
+			});
+			
+			//绑定尺码事件
+			$("#size_div").on("click",":checkbox",function(){
+				$(this).val($(this).next().val());
+				if($(this).prop("checked")){
+					$(this).next()[0].select();
+				}
+			});
+			
+			$("#size_div").on("keyup",":text",function(){
+				$(this).prev().val($(this).val());
+			});
+			
+			//获取分类信息
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../category/getAll.do',
+				async: false, 
+				data : {
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						var categoryList = data.obj;
+						if(categoryList){
+							for(var i = 0 ;i<categoryList.length;i++){
+								var category = categoryList[i];
+								if(category)
+									$("#category_id").append("<option value="+category.id+">"+category.name+"</option>");
+							}
+						}
+						
+					} else {
+						jWei.Tips.error('数据库异常,查询数据失败');
+					}
+				},
+				error : function(data) {
+					
+				}
+			});	
+			
+			$("#category_id").change(function(){
+				var bigCate = $(this).val();
+				$("#sec_category_id").html('<option value="-1">请选择</option>');
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					async: false, 
+					url : '../secCategory/getByBigCategoryId.do?bigCategoryId='+bigCate,
+					dataType : 'json',
+					success : function(data) {
+						if (data.result) {
+							var categoryList = data.obj;
+							if(categoryList){
+								for(var i = 0 ;i<categoryList.length;i++){
+									var category = categoryList[i];
+									if(category)
+										$("#sec_category_id").append("<option value="+category.id+">"+category.name+"</option>");
+								}
+							}
+							
+						} else {
+							jWei.Tips.error("获取分类异常！");
+						}
+					},
+					error : function(data) {
+						
+					}
+				});	
+				return false;
+			});
+			
+			//查询所有品牌
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../brands/getAll.do',
+				dataType : 'json',
+				async: false, 
+				success : function(data) {
+					if (data.result) {
+						var brandsList = data.obj;
+						if(brandsList){
+							for(var i = 0 ;i<brandsList.length;i++){
+								var brands = brandsList[i];
+								if(brands)
+									$("#brands_id").append("<option value="+brands.id+">"+brands.name+"</option>");
+							}
+						}
+						
+					} else {
+						jWei.Tips.error("获取分类异常！");
+					}
+				},
+				error : function(data) {
+					
+				}
+			});	
+			
+			$("#grade_id").change(function(){
+				var val = $(this).val();
+				if(val == 3){
+					$("#new_lunbo_id").show();
+				}else{
+					$("#new_lunbo_id").hide().find(":checkbox").prop("checked",false);
+				}
+			});
+			
+			//获取商品信息
+			jQuery.ajax({
+				type : 'Get',
+				contentType : 'application/json',
+				url : '../goods/get.do',
+				data : {
+					id:id
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data.result) {
+						
+						$.each(data.obj.goods,function(key,val){
+							$("#"+key+"_id").val(val);
+						});
+						if(data.obj.goods.isLunbo == 1){
+							$("#new_lunbo_id").show().find(":checkbox").prop("checked",true);
+						}
+						$("#brands_id").val(data.obj.goods.brandsId);
+						$("#category_id").val(data.obj.goods.bigCategory).trigger("change");
+						$("#sec_category_id").val(data.obj.goods.secCategory);
+		            	$('#head_pic_id').attr("src","../upload/download.do?fileName="+data.obj.goods.picName);
+		            	$('#user_avatar_id').val(data.obj.goods.picName);
+		            	$('#picHeight_id').val(data.obj.goods.picHeight);
+		            	$('#picWidth_id').val(data.obj.goods.picWidth);
+		            	$('#picCompressHeight_id').val(data.obj.goods.picCompressHeight);
+		            	$('#picCompressWidth_id').val(data.obj.goods.picCompressWidth);
+		            	$('#picSize_id').val(data.obj.goods.picSize);
+		            	$('#expiredDate_id').val(data.obj.expiredDate);
+		            	if(data.obj.goods.bigPic){
+		            		$("#full__pic_id").attr("src","../upload/download.do?fileName="+data.obj.goods.bigPic);
+		            		$("#bigPic_id").val(data.obj.goods.bigPic);
+		            	}
+		            	
+		            	//设置富文本内容
+		            	editor.html(data.obj.goods.content);
+		            	var titlePicList = data.obj.titlePicList;
+		            	if(titlePicList){
+		            		for(var k = 0;k<titlePicList.length;k++){
+		            			var pic = titlePicList[k];
+		            			var newDom = $("#title_pic_model_id").clone();
+		    					newDom.attr("id","");
+		    					newDom.find(".img").attr("src","../upload/download.do?fileName="+pic.name);
+		    					newDom.find(".name").attr("name","titlePicList["+titlePicNum+"].name").val(pic.name);
+		    					newDom.find(".order-key").attr("name","titlePicList["+titlePicNum+"].orderKey").val(pic.orderKey);
+		    					$("#title_pic_list").append(newDom);
+		    					newDom.show(); 
+		    					titlePicNum++;
+		            		}
+		            		if(titlePicList.length >=5){
+		    					isDisabled = true;
+		            		}
+		            		
+		            	}
+		            	var picList = data.obj.picList;
+		            	if(picList){
+			            	for(var i =0 ;i<picList.length;i++){
+			            		var html  = $("#sub_model_id").html();
+				            	html = "<div>"+html+"</div>";
+				            	var newSubPicDiv = $("#sub_model_id").before(html).prev();	
+				            	//设置名称
+				            	newSubPicDiv.find(".name").attr("name","picList["+i+"].name");
+				            	newSubPicDiv.find(".name").val(picList[i].name);
+				            	//设置图片高度
+				            	newSubPicDiv.find(".height").attr("name","picList["+i+"].height");
+				            	newSubPicDiv.find(".height").val(picList[i].height);
+				            	//设置图片宽度
+				            	newSubPicDiv.find(".width").attr("name","picList["+i+"].width");
+				            	newSubPicDiv.find(".width").val(picList[i].width);
+				            	//设置图片压缩高度
+				            	newSubPicDiv.find(".compressHeight").attr("name","picList["+i+"].compressHeight");
+				            	newSubPicDiv.find(".compressHeight").val(picList[i].compressHeight);
+				            	//设置图片压缩宽度
+				            	newSubPicDiv.find(".compressWidth").attr("name","picList["+i+"].compressWidth");
+				            	newSubPicDiv.find(".compressWidth").val(picList[i].compressWidth);
+				            	//设置图片尺寸
+				            	newSubPicDiv.find(".size").attr("name","picList["+i+"].size");
+				            	newSubPicDiv.find(".size").val(picList[i].size);
+				            	//设置图片排序
+				            	newSubPicDiv.find(".orderKey").attr("name","picList["+i+"].orderKey");
+				            	newSubPicDiv.find(".orderKey").val(picList[i].orderKey);
+				            	//设置图片描述
+				            	newSubPicDiv.find(".pic-desc").attr("name","picList["+i+"].picDesc");
+				            	newSubPicDiv.find(".pic-desc").val(picList[i].picDesc);
+				            	
+				            	newSubPicDiv.find("#sub_pic_ids").attr("src","../upload/download.do?fileName="+picList[i].name);
+				            	newSubPicDiv.find(".img-a").attr("href","../upload/download.do?fileName="+picList[i].name).magnificPopup({type:'image'}).css("cursor","zoom-in");
+				            	
+			            	}
+			            	subPicNum = picList.length;
+		            	}
+		            	var colorList = data.obj.colorList;
+		            	
+		            	if(colorList){
+		            		var i = 0;
+		            		$("#color_div :checkbox").each(function(){
+		            			var colorObj = colorList[i];
+		            			if(i<colorList.length){
+		            				$(this).prop("checked",true);
+		            				$(this).val(colorObj.color);
+		            				$(this).next().val(colorObj.color);
+		            				$(this).parent().find(".color-price").val(colorObj.price);
+		            				i++;
+		            			}else{
+		            				return false;
+		            			}
+	            			});
+		            	}
+		            	//设置尺寸信息
+						var sizeList = data.obj.sizeList;
+		            	
+		            	if(sizeList){
+		            		var i = 0;
+		            		$("#size_div :checkbox").each(function(){
+		            			var sizeObj = sizeList[i];
+		            			if(i<sizeList.length){
+		            				$(this).prop("checked",true);
+		            				$(this).val(sizeObj.size);
+		            				$(this).next().val(sizeObj.size);
+		            				i++;
+		            			}else{
+		            				return false;
+		            			}
+	            			});
+		            	}
+						
+		            	$("#mainContainer").hideLoading();
+					} else {
+						jWei.Tips.error('数据库异常,查询数据失败');
+					}
+				},
+				error : function(data) {
+					
+				}
+			});	
+			var valid = new jValidation.Validation('obj_form_id',{immediate:true},{onSubmit:false});
+			$('#add_obj_btn_id').click(
+				function(){
+					var result = valid.validate();
+					if(!result){
+						return false;
+					}
+					if($("#user_avatar_id").val() == ""){
+						window.top.jWei.Tips.error("请上传封面图片！");
+						return false;
+					}
+					
+					if(!validateColor()){
+						return false;
+					}
+					
+					if(!validateSize()){
+						return false;
+					}
+					 
+					$("#mainContainer").showLoading();
+					
+					//获取富文本编辑器内容
+					var content = editor.html();
+					$("#content_id").val(content);
+					var formData = $('#obj_form_id').serialize();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../goods/edit.do',
+						dataType : 'json',
+						data : formData,
+						success : function(obj) {
+							if(obj.result){
+								window.top.jWei.Tips.success("操作成功！");
+								window.location.href = "./index.jsp";
+							}else{
+								jWei.Tips.error(obj.errorMsg);
+							}
+							$("#mainContainer").hideLoading();
+						},
+						error : function() {
+							window.top.jWei.Tips.error("数据库异常！");
+						}
+					});
+				}		
+			);
+			
+			//上传封面图片,最多5张
+			$("#uploadify").uploadify({
+				height        : 30,
+				swf           : '../styles/uploadify.swf',
+				uploader      : '../upload/add.do?jSessionid=9B16F7330BD01F6C96CB79971F36EA2B',
+				buttonText    : '上传封面',  
+				width         : 100,
+				cancelImg     : '../images/uploadify-cancel.png',
+				fileTypeExts   :'*.gif; *.jpg; *.png',
+				onUploadSuccess:function(file, data, response){  
+					var size = $("#title_pic_list").find(".title-pic").size();
+					if(size >=6){
+						jWei.Tips.error("最多上传5张图片");
+						return;
+					}
+					var dataObj = eval("("+data+")");
+					var newDom = $("#title_pic_model_id").clone();
+					newDom.attr("id","");
+					newDom.find(".img").attr("src","../upload/download.do?fileName="+dataObj.obj.name);
+					newDom.find(".name").attr("name","titlePicList["+titlePicNum+"].name").val(dataObj.obj.name);
+					newDom.find(".order-key").attr("name","titlePicList["+titlePicNum+"].orderKey").val(0);
+					$("#title_pic_list").append(newDom);
+					newDom.show(); 
+					titlePicNum++;
+					var size = $("#title_pic_list").find(".title-pic").size();
+					
+					if(size >=6){
+						$('#uploadify').uploadify('disable', true);	
+					}
+					
+	        	} 
+			});
+			
+			//绑定封面删除按钮
+			$("#title_pic_list").on("click",".del",function(){
+				$(this).closest(".title-pic").fadeOut(function(){
+					$(this).remove();
+					var size = $("#title_pic_list").find(".title-pic").size();
+					if(size <6){
+						$('#uploadify').uploadify('disable', false);
+					}
+				});
+				return false;
+			});
+			//如果图片已经存在5张禁止上传
+			setTimeout(function(){ 
+				if(isDisabled){
+					$('#uploadify').uploadify('disable', true);
+				}	
+			}, 2000);
+			
+			
+			//上传全屏封面图片
+			$("#full_uploadify").uploadify({
+				height        : 30,
+				swf           : '../styles/uploadify.swf',
+				uploader      : '../upload/add.do?jSessionid=9B16F7330BD01F6C96CB79971F36EA2B',
+				buttonText    : '上传全屏封面',  
+				width         : 130,
+				cancelImg     : '../images/uploadify-cancel.png',
+				uploadLimit   : 6, 
+				fileTypeExts   :'*.gif; *.jpg; *.png',
+				onUploadSuccess:function(file, data, response){  
+					var dataObj = eval("("+data+")");
+	            	$('#full__pic_id').attr("src","../upload/download.do?fileName="+dataObj.obj.name);
+	            	$('#bigPic_id').val(dataObj.obj.name);
+	        	} 
+			});
+			
+			//上传颜色对应图片
+			$("#uploadifyForColor").uploadify({
+				height        : 30,
+				swf           : '../styles/uploadify.swf',
+				uploader      : '../upload/addForColor.do',
+				buttonText    : '添加或修改颜色图片',
+				width         : 160, 
+				cancelImg     : '../images/uploadify-cancel.png',
+				uploadLimit   : 116,  
+				
+				onUploadSuccess:function(file, data, response){  
+					var dataObj = eval("("+data+")");
+					var pic = dataObj.obj.name;
+					var colorRadio = $("#coloritem_div").find(":radio:checked");
+					var colorId = colorRadio.val();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../goods/updateColorPic.do',
+						dataType : 'json',
+						data : {
+							colorId:colorId,
+							pic:pic
+						},
+						success : function(obj) {
+							if(obj.result){
+								colorRadio.parent().find(".color-pic").attr("src","../upload/download.do?fileName="+pic);
+								jWei.Tips.success("操作成功！");
+								
+							}else{
+								jWei.Tips.error(obj.errorMsg);
+							}
+						},
+						error:function(){
+							jWei.Tips.error("后台异常！");
+						}
+					});
+
+	        	}
+			});
+			//上传子图片
+			$("#uploadifySub").uploadify({
+				height        : 30,
+				swf           : '../styles/uploadify.swf',
+				uploader      : '../upload/add.do?jSessionid=9B16F7330BD01F6C96CB79971F36EA2B',
+				buttonText    : '上传子图片',  
+				width         : 100,
+				uploadLimit   : 1000, 
+				removeCompleted: true,
+				onUploadSuccess:function(file, data, response){  
+					var dataObj = eval("("+data+")");
+					
+					var subPicInfo = $("#sub_model_id").clone();
+					subPicInfo.attr("id","").show();
+					$("#sub_div #uploadifySub-queue").after(subPicInfo);
+					//$("#sub_model_id").before(subPicInfo);
+					
+					subPicInfo.find("#sub_pic_ids").attr("src","../upload/download.do?fileName="+dataObj.obj.name);
+					subPicInfo.find(".img-a").attr("href","../upload/download.do?fileName="+dataObj.obj.name).magnificPopup({type:'image'}).css("cursor","zoom-in");
+	            	//设置图片名称
+	            	var nameInput = subPicInfo.find(".name");
+            	    nameInput.val(dataObj.obj.name);
+            	    nameInput.attr("name","picList["+subPicNum+"].name");
+            	    
+            	    var heightInput = subPicInfo.find(".height");
+            	    heightInput.val(dataObj.obj.height);
+            	    heightInput.attr("name","picList["+subPicNum+"].height");
+            	    
+            	    var widthInput = subPicInfo.find(".width");
+            	    widthInput.val(dataObj.obj.width);
+            	    widthInput.attr("name","picList["+subPicNum+"].width");
+            	    
+            	    var compressHeightInput = subPicInfo.find(".compressHeight");
+            	    compressHeightInput.val(dataObj.obj.compressHeight);
+            	    compressHeightInput.attr("name","picList["+subPicNum+"].compressHeight");
+            	    
+            	    var compressWidthInput = subPicInfo.find(".compressWidth");
+            	    compressWidthInput.val(dataObj.obj.compressWidth);
+            	    compressWidthInput.attr("name","picList["+subPicNum+"].compressWidth");
+            	    
+            	    var sizeInput = subPicInfo.find(".size");
+            	    sizeInput.val(dataObj.obj.size);
+            	    sizeInput.attr("name","picList["+subPicNum+"].size");
+            	    
+            	    var orderKeyInput = subPicInfo.find(".orderKey");
+            	    orderKeyInput.val(dataObj.obj.orderKey);
+            	    orderKeyInput.attr("name","picList["+subPicNum+"].orderKey");
+            	    
+            	    
+            	    subPicNum++;
+	        	},  
+	        	
+	            onDel:function(file){
+	            	if($("[srcName='"+file.name+"']"))
+	            	$("[srcName='"+file.name+"']").remove();
+	            }
+			});
+			
+			//获取颜色尺码对应信息
+			jQuery.ajax({
+			type : 'Get',
+			contentType : 'application/json',
+			url : '../goods/getColorAndSize.do',
+			data : {
+				id:id
+			},
+			dataType : 'json',
+			success : function(data) {
+				if (data.result) {
+					var colorList = data.obj.colorList;
+					var sizeList = data.obj.sizeList;
+					if(colorList){
+						for(var i = 0 ;i<colorList.length;i++){
+							var color = colorList[i];
+							var model = $("#coloritem_model").clone();
+							model.find(":radio").val(color.id);
+							model.find(":text").val(color.color);
+							if(color.pic){
+								model.find(".color-pic").attr("src","../upload/download.do?fileName="+color.pic);	
+							}
+							$("#coloritem_div").append(model);
+							model.show();
+						}
+					}
+					
+					if(sizeList){
+						for(var i = 0 ;i<sizeList.length;i++){
+							var size = sizeList[i];
+							var model = $("#sizeitem_model").clone();
+							model.find(":checkbox").val(size.id).attr("name","sizeId"); ;
+							model.find(":text").val(size.size);
+							$("#sizeitem_div").append(model);
+							model.show();
+						}
+						
+					}
+					
+					//绑定尺寸全选按钮
+					$("#checkAllSize").click(function(){
+						var checked = $(this).prop("checked");
+						$("#sizeitem_div :checkbox").each(function(){
+							$(this).prop("checked",checked);
+						});
+						
+					});
+					
+					//绑定尺寸36-39按钮
+					$("#checkWomen").click(function(){
+						var arry = ["36","37","38","39"];
+						var checked = $(this).prop("checked");
+						$("#sizeitem_div :checkbox").each(function(){
+							if(jQuery.inArray($(this).parent().find(".form-control").val(),arry) != -1){
+								$(this).prop("checked",checked);
+							}
+						});
+						
+					});
+					
+					//绑定尺寸40-45按钮
+					$("#checkMen").click(function(){
+						var arry = ["40","41","42","43","44","45"];
+						var checked = $(this).prop("checked");
+						$("#sizeitem_div :checkbox").each(function(){
+							var val =$(this).parent().find(".form-control").val();
+							if( jQuery.inArray(val,arry) != -1){
+								$(this).prop("checked",checked);
+							}
+						});
+						
+					});
+					//绑定颜色单选按钮事件
+					$("#coloritem_div").on("change",":radio",function(){
+						//取消全选尺寸按钮
+						$("#checkAllSize").prop("checked",false);
+						$("#sizeitem_div :checkbox").each(function(){
+							$(this).prop("checked",false);
+						});
+						var colorId = $(this).val();
+						
+						//显示上传颜色图片按钮
+						$("#uploadColor_id").show();
+						
+						jQuery.ajax({
+							type : 'Get',
+							contentType : 'application/json',
+							url : '../goods/getColorSizeItemListByColorId.do',
+							data : {
+								colorId:colorId
+							},
+							dataType : 'json',
+							success : function(data) {
+								if(data.result){
+									var colorSizeItemList = data.obj;
+									if(colorSizeItemList){
+										for(var i =0;i<colorSizeItemList.length;i++){
+											var item = colorSizeItemList[i];
+											$("#sizeitem_div :checkbox[value='"+item.sizeId+"']").prop("checked",true);
+										}
+									}
+								}else{
+									alert("获取该颜色尺码信息失败...");
+								}
+							}
+						});
+					});
+				}
+			}
+			});
+			 
+			//保存颜色尺码信息
+			
+			$("#add_item_btn_id").click(function(){
+				var formData = $('#colorsize_form').serialize();
+				jQuery.ajax( {
+					type : 'POST',
+					url : '../goods/addColorSizeItem.do',
+					dataType : 'json',
+					data : formData,
+					success : function(obj) {
+						if(obj.result){
+							jWei.Tips.success("保存成功！");
+						}else{
+							jWei.Tips.success(obj.errorMsg);
+						}
+					}
+				});
+			});
+			
+			//是否选择要编辑颜色尺码信息
+			$("#chooseEditColorSize_id").click(function(){
+				var checked = $(this).prop("checked");
+				if(checked){
+					$("#color_div").show();
+					$("#size_div").show();
+					$("#check_all_div").show();
+				}else{
+					$("#color_div").hide();
+					$("#size_div").hide();
+					$("#check_all_div").hide();
+				}
+				
+			});
+			
+			//绑定选中36-44码事件
+			$("#check_all_size").click(function(){
+				var chk = $(this).prop("checked");
+				 $(".offen-size").each(function(){
+					 var chkSize = $(this).prop("checked");
+					 if(chk != chkSize){
+						 $(this).trigger("click");
+					 }
+				 });
+			});
+			
+			//绑定添加新颜色按钮
+			$("#add_color_btn").click(function(){
+				
+				jWei.popUp({
+					title:'添加新颜色',
+					popUpId:'add_color_popup',
+					width:'200px',
+					ok:function(){
+						if($("#new_color_name").val() == ''){
+							jWei.Tips.error("颜色不能为空！");
+							return false;
+						}
+						var formData = $('#add_new_color_form').serialize();
+						jQuery.ajax( {
+							type : 'POST',
+							url : '../goods/addColor.do',
+							dataType : 'json',
+							data : formData,
+							success : function(obj) {
+								if(obj.result){
+									var color =obj.obj;
+									var model = $("#coloritem_model").clone();
+									model.find(":radio").val(color.id);
+									model.find(":text").val(color.color);
+									if(color.pic){
+										model.find(".color-pic").attr("src","../upload/download.do?fileName="+color.pic);	
+									}
+									$("#coloritem_div").append(model);
+									model.show();
+									jWei.Tips.success("保存成功！");
+								}else{
+									jWei.Tips.success(obj.errorMsg);
+								}
+							}
+						});
+					}
+				});
+			});
+			
+			//绑定添加新尺码按钮
+			$("#add_size_btn").click(function(){
+				
+				jWei.popUp({
+					title:'添加新尺码',
+					popUpId:'add_size_popup',
+					width:'200px',
+					ok:function(){
+						if($("#new_size_name").val() == ''){
+							jWei.Tips.error("尺码不能为空！");
+							return false;
+						}
+						var formData = $('#add_new_size_form').serialize();
+						jQuery.ajax( {
+							type : 'POST',
+							url : '../goods/addSize.do',
+							dataType : 'json',
+							data : formData,
+							success : function(obj) {
+								if(obj.result){
+									var size =obj.obj;
+									var model = $("#sizeitem_model").clone();
+									model.find(":checkbox").val(size.id).attr("name","sizeId"); ;
+									model.find(":text").val(size.size);
+									$("#sizeitem_div").append(model);
+									model.show();
+									jWei.Tips.success("保存成功！");
+								}else{
+									jWei.Tips.success(obj.errorMsg);
+								}
+							}
+						});
+					}
+				});
+			});
+			
+			//是否上传全屏封面
+	  		$("#full_screen_chk").change(function(){
+	  			var chk = $(this).prop("checked");
+	  			if(chk){
+	  				$("#full_pic_div").show();
+	  			}else{
+	  				$("#full_pic_div").hide();
+	  			}
+	  		});
+			//删除子图片事件
+	  		$("#sub_div").on("click","#del_pic_id",function(){
+        		$(this).closest(".row").parent().remove();
+        		return false;
+        	});
+		});
+		
+		
+		
+		
+	</script>
+</body>
+</html>

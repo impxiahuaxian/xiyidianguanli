@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.ContactVersionMapper">
+  	<resultMap type="com.weiweiqin.model.ContactVersion" id="contactVersionResultMap">  
+        <result property="contactVersion" column="contact_version"/>  
+	</resultMap> 
+	
+	<select id="ContactVersion_getVersion" 
+		resultType="com.weiweiqin.model.ContactVersion" resultMap="contactVersionResultMap"> 
+		<![CDATA[ 
+		select a.contact_version from edas_vesion a;
+	        ]]>
+	</select>
+	
+	<update id="ContactVersion_update" parameterType="com.weiweiqin.model.ContactVersion"> 
+	<![CDATA[ 
+		update edas_vesion set contact_version = #{contactVersion}
+	        ]]>
+	</update>
+</mapper>
+

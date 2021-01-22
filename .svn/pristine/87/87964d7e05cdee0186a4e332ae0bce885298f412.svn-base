@@ -1,0 +1,7 @@
+package com.weiweiqin.dao;
+
+import com.weiweiqin.model.GoodsPicItem;
+
+
+public interface GoodsPicItemDao extends GenericDao<GoodsPicItem,Integer>{
+}

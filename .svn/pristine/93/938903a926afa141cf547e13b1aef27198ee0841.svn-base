@@ -1,0 +1,470 @@
+package com.weiweiqin.service.impl;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.weiweiqin.dao.GoodsDao;
+import com.weiweiqin.model.Category;
+import com.weiweiqin.model.Color;
+import com.weiweiqin.model.ColorSizeItem;
+import com.weiweiqin.model.Goods;
+import com.weiweiqin.model.GoodsPicItem;
+import com.weiweiqin.model.Pic;
+import com.weiweiqin.model.Size;
+import com.weiweiqin.service.CategoryService;
+import com.weiweiqin.service.ColorService;
+import com.weiweiqin.service.ColorSizeItemService;
+import com.weiweiqin.service.GoodsPicItemService;
+import com.weiweiqin.service.GoodsService;
+import com.weiweiqin.service.PicService;
+import com.weiweiqin.service.SizeService;
+import com.weiweiqin.vo.common.GoodsVO;
+import com.weiweiqin.vo.common.Page;
+
+@Service
+public class GoodsServiceImpl implements GoodsService {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(GoodsServiceImpl.class);
+
+	@Autowired
+	private GoodsDao goodsDao;
+
+	@Autowired
+	private PicService picService;
+
+
+	@Autowired
+	private CategoryService categoryService;
+
+	@Autowired
+	private GoodsPicItemService goodsPicItemService;
+
+	@Autowired
+	private ColorService colorService;
+
+	@Autowired
+	private SizeService sizeService;
+
+	@Autowired
+	private ColorSizeItemService colorSizeItemService;
+
+	/**
+	 * 新增商品信息
+	 */
+	@Transactional
+	public void addGoods(GoodsVO goodsVO) {
+		Goods goods = goodsVO.getGoods();
+		Random ranNum = new Random();
+		int num = ranNum.nextInt(25) + 5;
+		goods.setBuyNum(num);
+		logger.info("save goods .....");
+		
+		setFirstTitlePic(goods,goodsVO);
+		this.save(goods);
+		// 保存子图片信息
+		logger.info("save picList .....");
+		savePicInfo(goodsVO.getPicList(), goods.getId());
+		
+		saveTitlePicInfo(goodsVO.getTitlePicList(), goods.getId());
+
+		// 保存颜色信息
+		saveColorInfo(goodsVO.getColorList(), goods.getId());
+	}
+	
+	/**
+	 * //冗余第一张封面图片,为了更快查询
+	 * @param goods
+	 * @param vo
+	 */
+	private void setFirstTitlePic(Goods goods,GoodsVO vo){
+				int index = -1;
+				int maxNum =-1;
+				
+				List<Pic> titlePicList = vo.getTitlePicList();
+				if(!titlePicList.isEmpty()){
+					for (int i = 0 ;i<titlePicList.size();i++) {
+						Pic pic = titlePicList.get(i);
+						if(!StringUtils.isEmpty(pic.getName())){
+							if(pic.getOrderKey() > maxNum){
+								maxNum = pic.getOrderKey();
+								index  = i;
+							}
+						}
+					}
+					Pic picFirst = titlePicList.get(index);
+					goods.setPicName(picFirst.getName());
+				}
+	}
+	
+	/**
+	 * 修改商品信息
+	 */
+	@Transactional
+	public void editGoods(GoodsVO goodsVO) {
+		Goods goods = goodsVO.getGoods();
+		List<Pic> picList = goodsVO.getPicList();
+		List<Pic> titlePicList = goodsVO.getTitlePicList();
+		if (null != picList && !picList.isEmpty()) {
+			goods.setPicNum(picList.size());
+		}
+
+		// 删除字图片和分类关联关系
+		delGoodsPic(goods.getId());
+		
+		//删除标题图片
+		delTitlePic(goods.getId());
+
+		// 判断用户是否选中了要编辑颜色尺码
+		if (!"".equals(goodsVO.getChooseEditColorSize())) {
+			// 删除颜色尺码关联关系
+			delGoodsSizeAndColorItem(goods.getId());
+		}
+		
+		setFirstTitlePic(goods,goodsVO);
+		update(goods);
+		logger.info("update goods...");
+		//保存详情图片
+		if (null != picList && !picList.isEmpty()) {
+			for (Pic pic : picList) {
+				if (!StringUtils.isEmpty(pic.getName())) {
+					savePic(pic);
+					GoodsPicItem picItem = new GoodsPicItem();
+					picItem.setGoodsId(goods.getId());
+					picItem.setPicId(pic.getId());
+					goodsPicItemService.save(picItem);
+				}
+			}
+		}
+		
+		//保存标题图片
+		if (null != titlePicList && !titlePicList.isEmpty()) {
+			for (Pic pic : titlePicList) {
+				if (!StringUtils.isEmpty(pic.getName())) {
+					savePic(pic);
+					GoodsPicItem picItem = new GoodsPicItem();
+					picItem.setGoodsId(goods.getId());
+					picItem.setPicId(pic.getId());
+					//标题图片类型
+					picItem.setType(1);
+					goodsPicItemService.save(picItem);
+				}
+			}
+		}
+
+		// 判断用户是否选中了要编辑颜色尺码
+		if (!"".equals(goodsVO.getChooseEditColorSize())) {
+			saveColorInfo(goodsVO.getColorList(), goods.getId());
+		}
+	}
+
+	/**
+	 * 删除商品信息
+	 */
+	@Transactional
+	public void del(int id) {
+		delPic(id);
+		delColor(id);
+		delSize(id);
+		goodsDao.delete(id);
+	}
+
+	private void delPic(int id) {
+		List<Pic> picList = getPicListById(id);
+		if (null != picList && !picList.isEmpty()) {
+			for (Pic pic : picList) {
+				picService.del(pic.getId());
+			}
+		}
+
+		List<GoodsPicItem> picItemList = getPicItemListById(id);
+		if (null != picItemList && !picItemList.isEmpty()) {
+			for (GoodsPicItem goodsPicItem : picItemList) {
+				if (null != goodsPicItem) {
+					goodsPicItemService.del(goodsPicItem.getId());
+				}
+			}
+		}
+
+	}
+	
+	private void delTitlePic(int id){
+		List<Pic> picList  = getTitlePicListById(id);
+		if (null != picList && !picList.isEmpty()) {
+			for (Pic pic : picList) {
+				picService.del(pic.getId());
+			}
+		}
+
+		List<GoodsPicItem> picItemList = getPicItemListById(id);
+		if (null != picItemList && !picItemList.isEmpty()) {
+			for (GoodsPicItem goodsPicItem : picItemList) {
+				if (null != goodsPicItem) {
+					goodsPicItemService.del(goodsPicItem.getId());
+				}
+			}
+		}
+	}
+
+	private void delColor(int id) {
+		List<Color> colorList = getColorListById(id);
+		if (null != colorList && !colorList.isEmpty()) {
+			for (Color color : colorList) {
+				// 删除颜色尺码对应的关联关系
+				List<ColorSizeItem> itemList = colorSizeItemService
+						.getByColorId(color.getId());
+				if (null != itemList && !itemList.isEmpty()) {
+					for (ColorSizeItem colorSizeItem : itemList) {
+						colorSizeItemService.del(colorSizeItem.getId());
+					}
+				}
+				colorService.del(color.getId());
+			}
+		}
+	}
+
+	private void delSize(int id) {
+		List<Size> sizeList = getSizeListById(id);
+		if (null != sizeList && !sizeList.isEmpty()) {
+			for (Size size : sizeList) {
+				// 删除颜色尺码对应关系
+				List<ColorSizeItem> itemList = colorSizeItemService
+						.getBySizeId(size.getId());
+				if (null != itemList && !itemList.isEmpty()) {
+					for (ColorSizeItem colorSizeItem : itemList) {
+						colorSizeItemService.del(colorSizeItem.getId());
+					}
+				}
+				sizeService.del(size.getId());
+			}
+		}
+	}
+
+	private void delGoodsPic(int id) {
+		delPic(id);
+	}
+
+	private void delGoodsSizeAndColorItem(int id) {
+		logger.info("Enter method delGoodsItem...,id=" + id);
+		delColor(id);
+		delSize(id);
+	}
+
+	private void saveColorInfo(List<Color> colorList, int id) {
+		if (null != colorList && !colorList.isEmpty()) {
+			for (Color color : colorList) {
+				if (null != color && !StringUtils.isEmpty(color.getColor())) {
+					color.setGoodsId(id);
+					colorService.save(color);
+				}
+			}
+		}
+	}
+
+
+	private void savePicInfo(List<Pic> picList, int goodsId) {
+		if (null != picList && !picList.isEmpty()) {
+			for (Pic pic : picList) {
+				if (!StringUtils.isEmpty(pic.getName())) {
+					this.savePic(pic);
+					logger.info("save pic...,pic=" + pic);
+					GoodsPicItem picItem = new GoodsPicItem();
+					picItem.setGoodsId(goodsId);
+					picItem.setPicId(pic.getId());
+					goodsPicItemService.save(picItem);
+				}
+			}
+		}
+	}
+	
+	private void saveTitlePicInfo(List<Pic> picList, int goodsId) {
+		if (null != picList && !picList.isEmpty()) {
+			for (Pic pic : picList) {
+				if (!StringUtils.isEmpty(pic.getName())) {
+					this.savePic(pic);
+					logger.info("save pic...,pic=" + pic);
+					GoodsPicItem picItem = new GoodsPicItem();
+					picItem.setGoodsId(goodsId);
+					picItem.setPicId(pic.getId());
+					//封面图片类型
+					picItem.setType(1);
+					goodsPicItemService.save(picItem);
+				}
+			}
+		}
+	}
+	
+	
+
+	public void update(Goods goods) {
+		goodsDao.update(goods);
+
+	}
+
+	public List<Goods> pageList(Page page, Map<String, Object> conditions) {
+		return goodsDao.pageList(page, conditions);
+	}
+
+	public void save(Goods goods) {
+		goodsDao.insert(goods);
+
+	}
+
+	public Goods get(int id) {
+
+		return goodsDao.get(id);
+	}
+
+	public List<Goods> getListByCategoryId(int categoryId) {
+		return goodsDao.getListByCategoryId(categoryId);
+	}
+
+	public void savePic(Pic pic) {
+		picService.save(pic);
+	}
+
+
+	public List<Pic> getPicListById(int id) {
+		return goodsDao.getPicListById(id);
+	}
+
+	public List<GoodsPicItem> getPicItemListById(int id) {
+		return goodsDao.getPicItemListById(id);
+	}
+
+	public int totalCount(Map<String, Object> conditions) {
+
+		return goodsDao.totalCount(conditions);
+	}
+
+	public List<Color> getColorListById(int id) {
+		return this.colorService.getByGoodsId(id);
+	}
+
+
+	public List<Size> getSizeListById(int id) {
+		return sizeService.getByGoodsId(id);
+	}
+
+	public List<Goods> getAll() {
+		return goodsDao.getAll();
+	}
+
+	@Transactional
+	public void addColorSizeItems(int colorId, int[] sizeId) {
+		// 删除原来的关联关系
+		List<ColorSizeItem> items = colorSizeItemService.getByColorId(colorId);
+		if (null != items && !items.isEmpty()) {
+			for (ColorSizeItem colorSizeItem : items) {
+				colorSizeItemService.del(colorSizeItem.getId());
+			}
+		}
+		// 新增关联关系
+		if (null != sizeId) {
+			for (int i = 0; i < sizeId.length; i++) {
+				ColorSizeItem item = new ColorSizeItem();
+				item.setColorId(colorId);
+				item.setSizeId(sizeId[i]);
+				colorSizeItemService.save(item);
+			}
+		}
+	}
+
+	public List<ColorSizeItem> getColorSizeItemByColorId(int colorId) {
+
+		return colorSizeItemService.getByColorId(colorId);
+	}
+
+	public List<ColorSizeItem> getColorSizeItemBySizeId(int sizeId) {
+		return colorSizeItemService.getBySizeId(sizeId);
+	}
+
+	/**
+	 * 复制商品信息
+	 */
+	@Transactional
+	public void copy(int id) {
+		Goods goods = get(id);
+		goods.setId(null);
+		// 复制默认下架
+		goods.setMark(-1);
+		// 保存复制的商品
+		goodsDao.insert(goods);
+		// 获取原来商品图片信息
+		List<Pic> picList = getPicListById(id);
+		// 复制图片信息
+		savePicInfo(picList, goods.getId());
+	}
+
+	/**
+	 * 将所有今日秒杀商品过期日期递增一天
+	 */
+	@Transactional
+	@SuppressWarnings("static-access")
+	public void updateHotExpiredDate() {
+		Map<String, Object> conditions = new HashMap<String, Object>();
+		Page page = new Page();
+		page.setPageSize(100);
+		page.setCurrPage(1);
+		conditions.put("grade", 5);
+		conditions.put("mark", 0);
+
+		// 获取今日秒杀商品
+		List<Goods> pageList = pageList(page, conditions);
+		if (null != pageList && !pageList.isEmpty()) {
+			Calendar calendar = new GregorianCalendar();
+			for (Goods goods : pageList) {
+				calendar.setTime(goods.getExpiredDate());
+				long exTime = goods.getExpiredDate().getTime(); 
+				long nowTime = new java.util.Date().getTime();
+				//定时任务有时会执行多次暂时不知道什么原因，判断过期时间是否小于一天，小于一天才执行，否则不执行
+				if(exTime - nowTime<24*1000*60*60){
+					// 把日期往后增加一天整数往后推,负数往前移动
+					calendar.add(calendar.DATE, 1);
+					// 这个时间就是日期往后推一天的结果
+					Date newDate = calendar.getTime();
+					goods.setExpiredDate(newDate);
+					update(goods);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 通过封面图片获取商品，用于删除垃圾图片
+	 */
+	public List<Goods> getByPicName(String picName) {
+		return goodsDao.getByPicName(picName);
+	}
+
+
+	public List<Pic> getTitlePicListById(int id) {
+		return goodsDao.getTitlePicListById(id);
+	}
+
+	public List<Goods> getListBySecCategoryId(int seCategoryId) {
+		return goodsDao.getListBySecCategoryId(seCategoryId);
+	}
+
+	public Category getCategoryById(int id) {
+		Goods goods = goodsDao.get(id);
+		return categoryService.get(goods.getBigCategory());
+	}
+
+	public List<Goods> getZhuji(List<String> ids) {
+		return goodsDao.getZhuji(ids);
+	}
+
+}

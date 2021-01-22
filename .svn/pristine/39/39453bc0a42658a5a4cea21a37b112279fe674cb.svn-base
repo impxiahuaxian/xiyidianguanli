@@ -1,0 +1,56 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+
+import com.weiweiqin.model.Goods;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class GoodsTabVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+
+	private Goods goods;
+	
+	private String titlePicName;
+
+	private String updateDate;
+	
+	private int commentCount;
+
+	public Goods getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public String getTitlePicName() {
+		return titlePicName;
+	}
+
+	public void setTitlePicName(String titlePicName) {
+		this.titlePicName = titlePicName;
+	}
+}

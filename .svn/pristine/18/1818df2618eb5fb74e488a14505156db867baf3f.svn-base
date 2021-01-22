@@ -1,0 +1,22 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.Category;
+import com.weiweiqin.vo.common.Page;
+
+
+public interface CategoryDao extends GenericDao<Category,Integer>{
+	Category getByName(String name);
+	
+	List<Category> getAll();
+	
+	List<Category> getAllAddOn();
+	
+	List<Category> getByType(int type);
+	
+	List<Category> pageListForHome(Page page);
+	
+	int getTotalCountForHome();
+	
+}

@@ -1,0 +1,182 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+<%@ include file="./common/top.jsp"%>
+	<div class="container">  
+		
+		<form class="form-horizontal" role="form" id="user_form_id">
+		  <input type="hidden" name="user.id" id="id_id">  
+			 
+		  <div class="form-group">
+			  <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<img id="head_pic_id" class="form-control" src="../images/fmmb.png" style="width: 129px;height: 129px">
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			    <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<input type="file" name="uploadFile" id="uploadify" />
+			        <input name="user.pic" type="hidden" id="user_avatar_id"/>
+			  </div>
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">名称：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="user.name" class="form-control required" id="name_id">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">手机：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="user.mobile" class="form-control required" id="mobile_id">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">会员等级：</label>
+		    <div class="col-xs-3">
+		    	<select class="form-control required useTitle" required-title="请选择会员等级" name="user.level" id="level_id">
+					<option value="">请选择</option>
+			  </select>
+		     
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">地址：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="user.address" class="form-control required" id="address_id">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">密码：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="user.pwd" class="form-control required" id="pwd_id">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">余额：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="user.surplus" class="form-control required" id="surplus_id">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+	    	  <button type="button" id="add_user_btn_id" class="btn btn-primary">保存</button>
+		      <a href="./userList.jsp" class="btn btn-default">取消</a>
+		    </div>
+  		  </div>
+  		</form>
+  		
+	</div>
+	<script>
+		
+	//查询所有会员等级
+	jQuery.ajax({
+		type : 'Get',
+		contentType : 'application/json',
+		url : '../admin/vipType/getAll.do',
+		dataType : 'json',
+		success : function(data) {
+			if (data.result) {
+				var vipTypeList = data.obj;
+				if(vipTypeList){
+					for(var i = 0 ;i<vipTypeList.length;i++){
+						var vipType = vipTypeList[i];
+						if(vipType) 
+							$("#level_id").append("<option value="+vipType.id+">"+vipType.name+"</option>");
+					}
+				}
+				
+			} else {
+				jWei.Tips.error("获取分类异常！");
+			}
+		},
+		error : function(data) {
+			
+		}
+	});	
+	
+		$(function(){
+			var valid = new jValidation.Validation('user_form_id',{immediate:true},{onSubmit:false});
+			$('#add_user_btn_id').click(
+				function(){
+					var result = valid.validate();
+					if(!result){
+						return;
+					}
+					var formData = $('#user_form_id').serialize();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../admin/user/edit.do',
+						dataType : 'json',
+						data : formData,
+						success : function(obj) {
+							if(obj.result){
+								window.top.jWei.Tips.success("修改数据成功");
+								location.href="./userList.jsp";
+							}else{
+								window.top.jWei.Tips.success(obj.errorMsg);
+							}
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+				}		
+			);
+			
+			var id = $.request.queryString["id"];
+			jQuery.ajax( { 
+				type : 'Get',
+				url : '../admin/user/get.do',
+				dataType : 'json',
+				contentType : 'application/json',
+				data : {
+					id: id
+				},
+				success : function(obj) {
+					if(obj.result){
+						var user = obj.obj;
+						for(var pro in user){
+							$("#"+pro+"_id").val(user[pro]);
+							if(pro == "pic"){
+								$('#head_pic_id').attr("src","../upload/download.do?fileName="+user[pro]);
+				            	$('#user_avatar_id').val(user[pro]);
+							}
+						}
+					}
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+			
+			//上传图片
+			$("#uploadify").uploadify({
+				height        : 30,
+				swf           : '../styles/uploadify.swf',
+				uploader      : '../upload/add.do?jSessionid=9B16F7330BD01F6C96CB79971F36EA2B',
+				buttonText    : '上传头像',  
+				width         : 100,
+				cancelImg     : '../images/uploadify-cancel.png',
+				uploadLimit   : 6, 
+				fileTypeExts   :'*.gif; *.jpg; *.png',
+				onUploadSuccess:function(file, data, response){  
+					var dataObj = eval("("+data+")");
+	            	$('#head_pic_id').attr("src","../upload/download.do?fileName="+dataObj.obj.name);
+	            	$('#user_avatar_id').val(dataObj.obj.name);
+	        	} 
+			});
+		});
+		
+		
+	</script>
+</body>
+</html>

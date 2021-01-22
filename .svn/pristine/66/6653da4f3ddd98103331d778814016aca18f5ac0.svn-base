@@ -1,0 +1,18 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.IpLimitDao;
+import com.weiweiqin.model.IpLimit;
+
+@Repository
+public class IpLimitDaoImpl extends GenericMybatisDao<IpLimit, Integer>
+		implements IpLimitDao {
+	
+	public IpLimit getByIpAndDate(Map<String,Object> conditions){
+		return (IpLimit) getSqlSession().selectOne("IpLimit_selectByIp",conditions);
+	}
+
+}

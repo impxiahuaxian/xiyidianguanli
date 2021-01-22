@@ -1,0 +1,35 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.ColorDao;
+import com.weiweiqin.model.Color;
+
+@Repository
+public class ColorDaoImpl extends GenericMybatisDao<Color, Integer>
+		implements ColorDao {
+
+	@SuppressWarnings("unchecked")
+	public List<Color> getByGoodsId(int goodsId) {
+		return (List<Color>)getSqlSession().selectList("Color_getByGoodsId",goodsId);
+	}
+	
+	/**
+	 * 通过文件名称获取图片
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Color> getByPicName(String picName) {
+		return (List<Color>) getSqlSession().selectList("Color_getByPicName",picName);
+	}
+
+	public Color getByNameAndGoodsId(String name, int goodsId) {
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		conditions.put("name", name);
+		conditions.put("goodsId", goodsId);
+		return (Color) getSqlSession().selectOne("Color_getByNameAndGoodsId",conditions);
+	}
+}

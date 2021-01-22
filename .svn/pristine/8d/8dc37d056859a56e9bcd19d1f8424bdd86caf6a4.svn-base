@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+
+<body>
+<%@ include file="./common/top.jsp"%>
+
+<div class="container">
+	
+	<a  href="./addAnnouncement.jsp" id="add_btn" style="display: none;" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>新增</a>
+	
+	<div style="margin-top:20px;">
+		<table id="Announcement_table">
+	
+		</table>
+	
+	</div>
+	</div>
+	
+		
+	
+	<script>
+		$(function() {
+			var grid = new jWei.Datagrid({
+				renderTo : $("#Announcement_table"),
+				tabWidth:"",
+				fieldset:false,
+				legendTitle:"公告管理列表",
+				url : "../announcement/pageList.do",
+				colModels : [ 
+				
+				{
+					name : "content",
+					displayName : "公告内容",
+					width:'50%'
+				},
+				
+				{
+					name : "isShow",
+					displayName : "当前状态",
+					handler:function(v,data,td,tr){
+						if(v ==1){
+							td.html('<span style="color:#47a447;">显示中</span>');
+						}else{
+							td.html('<span style="color:#36ab2a;">关闭</span>')
+						}
+					}
+				},
+				
+				{
+					name:"id",
+					displayName : "操作",
+					handler:function(v,data,td,tr){
+						if(data.isShow ==0){
+							td.html('<a href="./editAnnouncement.jsp?id='+v+'" style="margin-right:5px;">编辑</a><a data-show="'+data.isShow+'" data-id="'+v+'" href="#" class="set-show" style="color:#47a447;">显示首页公告</a>');	
+						}else{
+							td.html('<a href="./editAnnouncement.jsp?id='+v+'" style="margin-right:5px;">编辑</a><a data-show="'+data.isShow+'" data-id="'+v+'" href="#" class="set-show" style="color:#36ab2a;">隐藏首页公告</a>');
+						}
+						
+					}
+				},
+				
+				]
+			});
+			
+			//显示或隐藏新增按钮
+			if(grid.totalCount <=0){
+				$("#add_btn").show();
+			}
+			
+			$("#Announcement_table").on("click",".set-show",function(){
+				
+				var show = $(this).data("show");
+				var msg = "";
+				if(show == 0){
+					msg = "确定要显示首页公告";
+				}else{
+					msg = "确定要隐藏首页公告";
+				}
+				if (!confirm(msg)) {
+					return;
+				}
+				var delObj = $(this);
+				jQuery.ajax({
+					type : 'Get',
+					contentType : 'application/json',
+					url : '../announcement/setShow.do',
+					data : {
+						id : delObj.data("id")
+					},
+					dataType : 'json',
+					success : function(data) {
+						if (data.result) {
+							window.top.jWei.Tips.success("操作成功！");
+							window.location.reload(true);
+						} else {
+							window.top.jWei.Tips.success(data.errorMsg);
+						}
+					},
+					error : function(data) {
+						
+					}
+				});
+			});
+	});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<body>
+<%@ include file="./common/top.jsp"%>
+	<div class="container">
+		
+		<form class="form-horizontal" role="form" id="brands_form_id">
+		  <input type="hidden" name="id" id="id_id">
+		  
+		  <div class="form-group">
+			  <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<img id="head_pic_id" class="form-control" src="../images/fmmb.png" style="width: 129px;height: 129px">
+			    </div>
+			</div>
+			
+			<div class="form-group">
+			    <label class="col-sm-2 control-label sr-only"></label>
+			    <div class="col-sm-10">
+			    	<input type="file" name="uploadFile" id="uploadify" />
+			        <input name="pic" type="hidden" id="user_avatar_id"/>
+			  </div>
+		  <div class="form-group">
+		    <label for="brandsName" class="col-sm-2 control-label">品牌名称：</label>
+		    <div class="col-xs-3">
+		      <input type="text" name="name"  class="form-control required" id="brandsName">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+	    	  <button type="button" id="add_brands_btn_id" class="btn btn-primary">修改</button>
+		      <a href="./brandsList.jsp" class="btn btn-default">取消</a>
+		    </div>
+  		  </div>
+  		</form>
+  		
+	</div>
+	<script>
+		
+		
+		$(function(){
+			var valid = new jValidation.Validation('brands_form_id',{immediate:true},{onSubmit:false});
+			$('#add_brands_btn_id').click(
+				function(){
+					var result = valid.validate();
+					if(!result){
+						return;
+					}
+					var formData = $('#brands_form_id').serialize();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../brands/edit.do',
+						dataType : 'json',
+						data : formData,
+						success : function(obj) {
+							if(obj.result){
+								window.top.jWei.Tips.success("修改数据成功");
+								location.href="./brandsList.jsp";
+							}else{
+								window.top.jWei.Tips.success(obj.errorMsg);
+							}
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+				}		
+			);
+			
+			var id = $.request.queryString["id"];
+			jQuery.ajax( {
+				type : 'Get',
+				url : '../brands/get.do',
+				dataType : 'json',
+				contentType : 'application/json',
+				data : {
+					id: id
+				},
+				success : function(obj) {
+					if(obj.result){
+						$("#brandsName").val(obj.obj.name);
+						$("#id_id").val(obj.obj.id);
+					}else{
+						alert(obj.errorMsg);
+					}
+					if(obj.obj.pic){
+						$("#head_pic_id").attr("src","../upload/download.do?fileName="+obj.obj.pic);	
+					}
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+			
+			//上传图片
+			$("#uploadify").uploadify({
+				height        : 30,
+				swf           : '../styles/uploadify.swf',
+				uploader      : '../upload/add.do?jSessionid=9B16F7330BD01F6C96CB79971F36EA2B',
+				buttonText    : '上传封面图片',  
+				width         : 100,
+				cancelImg     : '../images/uploadify-cancel.png',
+				uploadLimit   : 6, 
+				fileTypeExts   :'*.gif; *.jpg; *.png',
+				onUploadSuccess:function(file, data, response){  
+					var dataObj = eval("("+data+")");
+	            	$('#head_pic_id').attr("src","../upload/download.do?fileName="+dataObj.obj.name);
+	            	$('#user_avatar_id').val(dataObj.obj.name);
+	        	} 
+			});
+			
+			
+		});
+		
+		
+	</script>
+</body>
+</html>

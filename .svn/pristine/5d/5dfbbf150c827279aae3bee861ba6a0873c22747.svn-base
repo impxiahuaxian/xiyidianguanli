@@ -1,0 +1,22 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.Brands;
+import com.weiweiqin.vo.common.Page;
+
+
+public interface BrandsDao extends GenericDao<Brands,Integer>{
+	Brands getByName(String name);
+	
+	List<Brands> getAll();
+	
+	List<Brands> getAllAddOn();
+	
+	
+	List<Brands> pageListForHome(Page page);
+	
+	int getTotalCountForHome();
+	
+	List<Brands> getByPicName(String pic);
+}

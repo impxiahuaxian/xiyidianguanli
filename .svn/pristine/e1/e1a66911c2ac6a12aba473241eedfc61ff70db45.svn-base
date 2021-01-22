@@ -1,0 +1,12 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.FeedbackDao;
+import com.weiweiqin.model.Feedback;
+
+@Repository
+public class FeedbackDaoImpl extends GenericMybatisDao<Feedback, Integer>
+		implements FeedbackDao {
+
+}

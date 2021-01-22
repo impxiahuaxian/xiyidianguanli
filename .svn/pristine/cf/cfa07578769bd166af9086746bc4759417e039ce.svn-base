@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.BrandsMapper">
+	<resultMap type="com.weiweiqin.model.Brands" id="brandsResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="updateDate" column="update_date" />
+		<result property="added" column="added" />
+		<result property="orderKey" column="order_key" />
+	</resultMap>
+
+	<insert id="Brands_insert" parameterType="com.weiweiqin.model.Brands"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO team_brands (pic,order_key,name,update_date,added) values
+		          (#{pic},#{orderKey},#{name},#{updateDate},#{added})
+		        ]]>
+	</insert>
+
+
+	<select id="Brands_getByName" parameterType="String"
+		resultType="com.weiweiqin.model.Brands" resultMap="brandsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_brands a where a.name = #{name}
+	        ]]>
+	</select>
+
+	<select id="Brands_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Brands" resultMap="brandsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_brands a order by a.order_key desc limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+	
+	<select id="Brands_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Brands" resultMap="brandsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_brands a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	<select id="Brands_getByPicName" parameterType="String"
+		resultType="com.weiweiqin.model.Brands" resultMap="picResultMap"> 
+		<![CDATA[ 
+		select * from team_brands a where a.pic = #{pic}
+	        ]]>
+	</select>
+	
+	<select id="Brands_pageListForHome" parameterType="map"
+		resultType="com.weiweiqin.model.Brands" resultMap="brandsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_brands a right join team_goods_Brands_item b on a.id = b.Brands_id where a.added = 1 GROUP BY a.id order by a.order_key desc limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+
+	<select id="Brands_getAll" resultType="com.weiweiqin.model.Brands"
+		resultMap="brandsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_brands a order by a.order_key desc
+	        ]]>
+	</select>
+	
+	<select id="Brands_getAllAddOn" resultType="com.weiweiqin.model.Brands"
+		resultMap="brandsResultMap"> 
+		<![CDATA[ 
+		select a.* from team_brands a order by a.order_key desc
+	        ]]>
+	</select>
+
+	<select id="Brands_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from team_brands
+	        ]]>
+	</select>
+	
+	<select id="Brands_totalCountForHome" resultType="Integer"> 
+		<![CDATA[ 
+			SELECT COUNT(c.id) FROM (SELECT a.id FROM team_brands a RIGHT JOIN team_goods_Brands_item b ON a.id = b.Brands_id WHERE a.added = 1 GROUP BY a.id) c
+	        ]]>
+	</select>
+
+	<update id="Brands_update" parameterType="com.weiweiqin.model.Brands"> 
+	<![CDATA[ 
+		update team_brands set pic = #{pic}, order_key = #{orderKey}, update_date = #{updateDate} , name = #{name}
+		, update_date = #{updateDate},added=#{added}
+		where id = #{id}
+	        ]]>
+	</update>
+	
+	<delete id="Brands_delete"  parameterType="Integer">
+		delete from team_brands  where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

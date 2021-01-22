@@ -1,0 +1,22 @@
+package com.weiweiqin.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weiweiqin.dao.GoodsPicItemDao;
+import com.weiweiqin.model.GoodsPicItem;
+import com.weiweiqin.service.GoodsPicItemService;
+
+@Service
+public class GoodsPicItemServiceImpl implements GoodsPicItemService {
+	@Autowired
+	private GoodsPicItemDao goodsPicItemDao;
+
+	public void save(GoodsPicItem goodsPicItem) {
+		goodsPicItemDao.insert(goodsPicItem);
+	}
+
+	public void del(int id) {
+		goodsPicItemDao.delete(id);
+	}
+}

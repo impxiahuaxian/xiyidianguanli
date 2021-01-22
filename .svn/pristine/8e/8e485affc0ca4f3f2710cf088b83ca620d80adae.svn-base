@@ -1,0 +1,7 @@
+package com.weiweiqin.dao;
+
+import com.weiweiqin.model.Announcement;
+
+public interface AnnouncementDao extends GenericDao<Announcement,Integer>{
+	
+}

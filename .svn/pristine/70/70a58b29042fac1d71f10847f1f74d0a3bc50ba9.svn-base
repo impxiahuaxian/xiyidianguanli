@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.OrderGoodsItemMapper">
+	<resultMap type="com.weiweiqin.model.OrderGoodsItem" id="orderGoodsItemResultMap">
+		<id property="id" column="id" />
+		<result property="orderId" column="order_id" />
+		<result property="goodsId" column="goods_id" />
+		<result property="size" column="size" />
+		<result property="color" column="color" />
+		<result property="num" column="num" />
+		<result property="mark" column="mark" />
+	</resultMap>
+
+	<insert id="OrderGoodsItem_insert" parameterType="com.weiweiqin.model.OrderGoodsItem"
+		useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[ 
+	          INSERT INTO order_goods_item (goods_id,order_id,size,color,num,mark) values
+	         	 (#{goodsId},#{orderId},#{size},#{color},#{num},#{mark})
+       	 ]]>
+	</insert>
+	
+	<select id="OrderGoodsItem_getByOrderId" parameterType="Integer"
+		resultType="com.weiweiqin.model.OrderGoodsItem" resultMap="orderGoodsItemResultMap"> 
+		<![CDATA[ 
+		select a.* from order_goods_item a left join team_goods b on a.goods_id = b.id where a.order_id = #{orderId}
+	        ]]>
+	</select>
+		
+	<delete id="OrderGoodsItem_delete"  parameterType="Integer">
+		delete from order_goods_item  where id = #{primaryKey}
+	</delete>
+</mapper>
+

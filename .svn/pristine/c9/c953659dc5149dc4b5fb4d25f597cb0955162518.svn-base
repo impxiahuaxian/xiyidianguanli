@@ -1,0 +1,51 @@
+#category_id,#brands_id{
+			margin-top: 20px;
+		}
+		
+		#category_id  dt,
+		#category_id dd,
+		#brands_id dt,
+		#brands_id dd{
+			float: left;
+			height:16px;
+		}
+		
+		#category_id  dt,
+		#brands_id dt{
+			line-height:20px;
+			margin-right:10px;
+			font-weight: bold;
+		}
+		
+		#category_id a,
+		#brands_id a{
+			color:#666;
+			font-size:12px;
+			line-height: 16px;
+			margin-right:10px;
+			display: block;
+			padding:2px 2px;
+			text-decoration: none;
+		}
+		#category_id .current,
+		#brands_id .current{
+			background-color: #dd001d;
+			color:#fff;
+		}
+		
+		.box-pic{
+			display: table-cell;
+			vertical-align:middle;
+			/*设置水平居中*/
+			text-align:center;
+			/* 针对IE的Hack */
+			*display: block;
+			*font-size: 175px;/*约为高度的0.873，200*0.873 约为175*/
+			*font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
+			width:285px;
+			height:192px;
+		}
+		
+		.box-pic img{
+			vertical-align:middle;
+		}

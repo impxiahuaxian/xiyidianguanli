@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.UserMapper">
+	<resultMap type="com.weiweiqin.model.User" id="userResultMap">
+		<id property="id" column="id" />
+		<result property="addDate" column="add_date" />
+	</resultMap>
+
+	<insert id="User_insert" parameterType="com.weiweiqin.model.User"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO user (name,mobile,level,state,address,pic,type,pwd,surplus,add_date) values
+		          (#{name},#{mobile},#{level},#{state},#{address},#{pic},#{type},#{pwd},#{surplus},#{addDate})
+		        ]]> 
+	</insert>
+
+	<select id="User_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.User" resultMap="userResultMap"> 
+		<![CDATA[ 
+		select a.* from user a order by a.add_date desc limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+	
+	<select id="User_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.User" resultMap="userResultMap"> 
+		<![CDATA[ 
+		select a.* from user a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+	  
+
+	  
+
+	<select id="User_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from user
+	        ]]>
+	</select>
+	
+	 
+
+	<update id="User_update" parameterType="com.weiweiqin.model.User"> 
+	<![CDATA[ 
+		update user set  name = #{name}, mobile = #{mobile}, level = #{level} , state = #{state}
+		, add_date = #{addDate},address=#{address},pic=#{pic},type=#{type},pwd=#{pwd},surplus=#{surplus}
+		where id = #{id}
+	        ]]>
+	</update>
+	
+	<delete id="User_delete"  parameterType="Integer">
+		delete from user  where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

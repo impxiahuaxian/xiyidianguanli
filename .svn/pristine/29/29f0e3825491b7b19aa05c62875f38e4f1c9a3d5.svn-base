@@ -1,0 +1,302 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<c:set var="ctx"><%=request.getContextPath()%></c:set>
+
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://wap.zhuziyan.com/110.html#a -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta charset="utf-8" />
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="${ctx}/images/favicon.ico">
+    <title>正品保障！全国包邮！货到付款！</title> 
+	<meta name="keywords" content="好字通,练字, 好字通官网,21天练字">
+	<meta name="description" content="21天练出一手好字，好字通特效练字套装，让每个人都写出一手好字！">
+    <link href="${ctx }/styles/mreset.css" rel="stylesheet" type="text/css">
+  	<style>
+  		body{
+  			background-color: #e7e8eb;
+			font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', Î¢ÈíÑÅºÚ, Arial, sans-serif;
+		}
+		
+		.container{
+			max-width:740px;
+			margin-left:auto;
+			margin-right:auto;
+			background: #fff;
+		}
+		
+		.content{
+			font-size: 15px;
+			word-wrap: break-word;
+		}
+		
+		.img-content{
+			position: relative;
+			padding: 10px 15px 15px;
+			background-color: #fff;
+		}
+		
+		.rich_media_title {
+			padding-bottom: 10px;
+			margin-bottom: 14px;
+			border-bottom: 1px solid #e7e7eb;
+			font-weight: normal;
+		}
+		
+		.rich_media_meta_list {
+			position: relative;
+			z-index: 1;
+			margin-bottom: 18px;
+			line-height: 20px;
+			overflow: hidden;
+			}
+
+
+			.rich_media_meta {
+				max-width: none;
+			}
+			.rich_media_meta_text {
+				color: #8c8c8c;
+			}
+			
+			.rich_media_meta {
+				float: left;
+				margin-right: 8px;
+				margin-bottom: 10px;
+			}
+
+			em{
+				font-style:normal;
+			}
+			
+			p{
+				margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none;
+			}
+			
+			.js {
+	TEXT-ALIGN: center; LINE-HEIGHT:24px; BACKGROUND-COLOR: #ff0000; MARGIN: 0px; WIDTH:320px; FONT-FAMILY: Arial, Helvetica, sans-serif; FLOAT: left; HEIGHT:48px; COLOR: #ffff00; FONT-SIZE:14px; VERTICAL-ALIGN: middle; FONT-WEIGHT: bold
+			}
+			
+			.line0 {
+position: fixed;
+bottom: 0;
+height: 60px;
+width: 100%;
+background: #f0f0f0;
+}
+.line-a1, .line-a2 {
+display: inline-block;
+width: 49%;
+height: 60px;
+float: left;
+text-align: center;
+}
+
+.line-a1 a, .line-a2 a {
+width: 83%;
+height: 50px;
+border-radius: 5px;
+background: #dd401c;
+color: #fff;
+display: inline-block;
+line-height: 50px;
+text-align: center;
+margin-right: 10px;
+}
+
+
+.line-a1 a, .line-a2 a {
+width: 83%;
+height: 50px;
+border-radius: 5px;
+background: #dd401c;
+color: #fff;
+display: inline-block;
+line-height: 50px;
+text-align: center;
+margin-right: 10px;
+}
+
+.line-a1 a {
+margin-right: 10px;
+/* margin-left: 15px; */
+background: #e8a40b !important;
+}
+			
+
+
+		
+	 
+  	</style>
+</head>
+<body >
+		<a name="top"></a>
+		<div class="container">
+					<div class="content">
+					<!-- begin主内容区域 -->
+					<div class="img-content">
+								<h2 class="rich_media_title" id="activity-name">好字通特效练字套装官网</h2>
+								<div class="rich_media_meta_list">
+									<em id="post-date" class="rich_media_meta rich_media_meta_text">2015-01-31</em>
+									<em class="rich_media_meta rich_media_meta_text">好字通官网</em>
+									<a class="rich_media_meta rich_media_meta_link rich_media_meta_nickname" href="#"  id="post-user">智宝堂</a>
+							     </div>
+							     
+							     <div class="rich_media_content" id="js_content">
+										   <p><img data-s="300,640" data-type="jpeg" src="http://img03.taobaocdn.com/imgextra/i3/914260183/TB2MqiCcXXXXXaLXXXXXXXXXXXX_!!914260183.png" data-ratio="0.6633333333333333" data-w="300" style="width: auto !important; visibility: visible !important; height: auto !important;" /></p>
+										   <p><img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2n_1CcXXXXXabXXXXXXXXXXXX_!!914260183.png" width="320" style="font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal; width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801058" data-type="jpeg" data-ratio="0.146875" data-w="320" /><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);"></span></p>
+										   <p ><span style="margin: 0px; padding: 0px; list-style: none;">　　俗语说：字如其人。<br style="margin: 0px; padding: 0px; list-style: none;" />　　众所周知，一手好字，可以给人留下终身好印象。当今社会中，钢笔书法的重要性显而易见，</span>无论是签合同签协议、考职称等等，一手好字绝对能给人非常好的印象！</p>
+										   <p ><br /></p>
+										   <p ><span style="font-weight: bold;">众所周知，</span></p>
+										   <p ><span style="font-weight: bold;">学生写一手好字，会得老师喜 爱,</span></p>
+										   <p ><span style="font-weight: bold;"><strong style="margin: 0px; padding: 0px; list-style: none;"><span style="font-weight: normal;"><span style="font-weight: bold;">成人写一手好字，会被上级器重。</span> <br style="margin: 0px; padding: 0px; list-style: none;" /></span></strong></span></p>
+										   <p ><strong style="margin: 0px; padding: 0px; list-style: none;">写一手好字，可以给人好的印象，</strong></p>
+										   <p ><strong style="margin: 0px; padding: 0px; list-style: none;">改变仕途，平步青云， 改变人的一生！</strong></p>
+										   <p ><strong style="margin: 0px; padding: 0px; list-style: none;">在我的见识中,因为一手好字改变命运的 <br style="margin: 0px; padding: 0px; list-style: none;" /></strong></p>
+										   <p ><strong style="margin: 0px; padding: 0px; list-style: none;"><span style="font-weight: normal;"><span style="font-weight: bold;">例子比比皆是！</span> </span><br style="margin: 0px; padding: 0px; list-style: none;" /></strong></p>
+										   <p class="tit" style="padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; font-weight: bold; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;"><em style="margin: 0px; padding: 0px; list-style: none;">但另一个问题是</em></p>
+										   <p><span style="margin: 0px; padding: 0px; list-style: none;"></span><span style="">　　现在教育行政部门和学校普遍</span><span style="color: rgb(255, 0, 0);">不重视学生写字</span><span style="">。以前学校普遍还开有写字和书法课，每周一次，现在随着英语、电脑等课程的增加，<span style="color: rgb(255, 0, 0);">写字课名存实亡</span>，课时被挤占， 只在课表上显示，实际不上。</span><br style="" /><span style="">　　电脑的普及代替了部分手写，一些家长觉得将来都用电脑，字写得好不好不要紧。其实<span style="color: rgb(255, 0, 0);">写不好字直接影响学习效率和考试成绩</span>，小考、中考、和高考是<span style="color: rgb(255, 0, 0);">要吃亏</span><span style="color: rgb(255, 0, 0);">的</span>。</span><br style="margin: 0px; padding: 0px; max-width: 100%; color: rgb(62, 62, 62); background-color: rgb(255, 255, 255); list-style: none; line-height: 14.66px; font-family: 宋体; font-size: 14px; white-space: normal; box-sizing: border-box !important; word-wrap: break-word !important;" /><span style="">　　还有新一代教师的写字水平普遍不好。教师都写不好字，<span style="margin: 0px; padding: 0px; max-width: 100%; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">学生怎么能写好字呢</span>。</span></p>
+										   <p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">写不好字的十大后果：</p>
+										   <p>1、作业被老师撕掉，要求重写。 <br style="margin: 0px; padding: 0px; list-style: none;" />2、影响小考、中考、高考成绩，特别是作文的成绩。 <br style="margin: 0px; padding: 0px; list-style: none;" />3、写字又慢又难看，影响学习效率。别人一小时能完成的作业，你要用两小时。<br style="margin: 0px; padding: 0px; list-style: none;" />4、降低你在同学、老师和领导心目中的地位，被别人瞧不起。 <br style="margin: 0px; padding: 0px; list-style: none;" />5、用一手难看的字写情书，不容易找到对象。<br style="margin: 0px; padding: 0px; list-style: none;" />6、遇到招聘单位需要手写简历时，无从下手。<br style="margin: 0px; padding: 0px; list-style: none;" />7、影响到将来做教师、医生、会计、文秘等职业。<br style="margin: 0px; padding: 0px; list-style: none;" />8、影响自己的升迁。同等条件下，你写一笔烂字，肯定落选。<br style="margin: 0px; padding: 0px; list-style: none;" />9、当了领导后，到基层视察遇到题词手发抖，很尴尬。<br style="margin: 0px; padding: 0px; list-style: none;" />10、缺乏自信心。<br style="margin: 0px; padding: 0px; list-style: none;" /><span style="font-weight: bold;"><br style="margin: 0px; padding: 0px; list-style: none;" /></span></p>
+										   <p ><br /></p>
+										   <p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;"><span style="margin: 0px; padding: 0px; list-style: none;">那有没快速有效的练字方法呢</span>？</p>
+										   <p >　　 练字可以培养品格，让人养成耐心、稳重的心理素质。</p>
+										   <p >很多人都梦想<span style="color: red;">练出一手好字</span>，却反反复复练了很多年都没有成功。 <br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p >现在，一种可以让你<span style="color: red;">少走98%的弯路</span>的方法诞生了，无论您的基础如何，是学生 还是成年人，或者您自认为没有写字的天赋，或者您对成功缺乏信心，</p>
+										   <p >　　但只要您每天练习十几个字，<span style="color: red;">每次练习十几分钟</span>，数周便会奇迹般的克服手不从 心、笔不随意、结构松散、字迹歪斜等的毛病。如果勤练习， <span style="color: red;">几周以后您就会写出一手好字</span></p>
+										   <p ><br /></p>
+										   <p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">我们该如何练好字呢：</p>
+										   <p>　　目前市面上的传统练字字帖，初学者不好掌握，只能垫纸临摹，不耐用学习效果比较差。&quot;好字通特效练字套装&quot;是运用著名的巴浦洛夫&quot;条件反射&quot;原 理，集成近年来多种练字工具之长，研制而成的一种新型、快速练字工具，具有&quot;学字&quot;、&quot;练字&quot;、&quot;纠字&quot;多种功能，它采用独有的凹槽式练字模板,摒弃了传 统字帖的平板模式,每张字帖都采用了凹槽设计,线条流畅、做工精细,让练习者在书写的过程中避免了临摹平板字帖时的随心所欲,规范了笔画,快速提高书写水 平。强化矫正和诱导并用，如同书法家手把手教您，大大提高练习速度。运用&quot;硬笔练大字&quot;这一最新科研成果，锻炼手指的灵活性，迅速掌握字体的结构、提高写 字的能力。<br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p class="tit" style="padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; font-weight: bold; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;"><em style="margin: 0px; padding: 0px; list-style: none;">好字通练字套装包含哪些内容？</em></p>
+										   <p >　　材质说明：环保PVC塑料，无毒无味，</p>
+										   <p >　　使用中字迹会自动消失可以反复使用。 <br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p >　　产品内含12种神奇的练字产品东西，分别有12张万能练字板(单张规格：17.8*12.2cm是正反2面的，共24面包含数字、拼音、笔画、偏旁部首、楷书、行 书)、1支神奇折不断铅笔、2瓶魔幻专用墨水、1支专用魔法笔、1张万用无墨水写字布、1支湖州练字毛笔、1张教学光盘、2个矫正握笔器、1个书法学习U盘、1盒写不断铅笔笔芯、说明书、精美礼盒袋！ <br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p ><img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2BC1AcXXXXXbmXXXXXXXXXXXX_!!914260183.png" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801059" data-type="jpeg" data-ratio="0.671875" data-w="320" /></p>
+										   <p >点击观看产品介绍视频（请在wifi环境观看）</p> 
+										   <p > <iframe class="video_iframe" style="z-index: 1; width: 344px !important; height: 258px !important; overflow: hidden;" height="320" width="320" frameborder="0" src="http://v.qq.com/iframe/player.html?vid=p01443t182f&amp;width=320&amp;height=320&amp;auto=0" allowfullscreen="" scrolling="no"></iframe><br /></p> 
+										   <p ><br style="margin: 0px; padding: 0px; list-style: none;" /><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">14张/正反面28面</span> </p>
+										   <p ><img src="http://img01.taobaocdn.com/imgextra/i1/914260183/TB2zLeBcXXXXXbdXXXXXXXXXXXX_!!914260183.png" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801060" data-type="jpeg" data-ratio="0.684375" data-w="320" /></p>
+										   <p ><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">使用方法：</span></p>
+										   <p ><img src="http://img04.taobaocdn.com/imgextra/i4/914260183/TB2QimycXXXXXX4XpXXXXXXXXXX_!!914260183.png" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801061" data-type="jpeg" data-ratio="0.65" data-w="320" /><br style="margin: 0px; padding: 0px; list-style: none;" />　　用水擦笔直接在练字板上书写，无需垫纸，先写5-10分钟大字充分活动手腕。再写20分钟小字仔细体会，每字连写3遍，牢固手的触觉定位。先练10天楷书 再练10天行楷，每天20-30分钟，练满三周会比现在有所进步。<br style="margin: 0px; padding: 0px; list-style: none;" /><br style="margin: 0px; padding: 0px; list-style: none;" /><img src="http://img01.taobaocdn.com/imgextra/i1/914260183/TB2Ai5AcXXXXXbUXXXXXXXXXXXX_!!914260183.gif" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801062" data-type="gif" data-ratio="0.66875" data-w="320" /><br style="margin: 0px; padding: 0px; list-style: none;" />　　写完后墨迹用水轻轻冲洗瞬间变干净，可反复使用长达十年以上，无需浪费纸，不累眼睛，不受场地限制，比临摹传统字帖跟环保，跟经济实用，练字效果更好。<br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p class="tit2" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold; text-align: center; color: rgb(255, 255, 255); background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2zsoRbFXXXXczXXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">这一套价格是多少呢？</p>
+										   <p><span style="color: red;">练字可以培养品格，让人养成耐心、稳重的心理素质，改变一生！</span><br style="color: red;" /><span style="color: red;">那么这套能够改变很多孩子命运的教材到底多少钱呢？</span><br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p ><strong style="margin: 0px; padding: 0px; list-style: none;"><strong class="font16" style="font-size: 16px; color: red;">2015年本月市场优惠价仅为600元！！！<br style="margin: 0px; padding: 0px; list-style: none;" />今天特价，免快递费 仅需298元！！！</strong></strong></p>
+										   <p class="font16" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; font-size: 16px; color: red;"><strong style="margin: 0px; padding: 0px; list-style: none;">孩子童年只有一次，永远不可能重来！家长一次决定，影响的却是孩子的一辈子！</strong></p>
+										   <p >孩子是我们这辈子最大的投资！最重要的事业！<br style="margin: 0px; padding: 0px; list-style: none;" />今天，您只需要投资<strong class="red" style="color: red;">298</strong>元，<br style="margin: 0px; padding: 0px; list-style: none;" />就可以得到价值<span style="font-weight: bold;">800</span><strong class="red" style="color: red;">元</strong>的 练字套装！<br style="margin: 0px; padding: 0px; list-style: none;" />仅用相当于一顿饭 ，一瓶酒，一条烟，一件衣服的投资，练一手好字，改变一生！<br style="margin: 0px; padding: 0px; list-style: none;" /><br style="margin: 0px; padding: 0px; list-style: none;" /></p>
+										   <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; line-height: 1.75em;"><span style="font-size: 18px; color: rgb(255, 0, 0);"><strong style="">写好</strong></span><span style="color: rgb(255, 0, 0); font-size: 18px;"><strong style="">字</strong><strong style="">=</strong></span><span style="font-size: 18px; color: rgb(227, 108, 9);"><strong style="">受老师同学关注<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>受老师同学表杨<strong style="margin: 0px; padding: 0px; max-width: 100%; line-height: 24px; box-sizing: border-box !important; word-wrap: break-word !important;"> <span style="font-size: 18px; color: rgb(255, 0, 0);">+ </span></strong>受老师同学认同<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子更爱学习<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子有好成绩<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子好士途<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>孩子好人生<span style="font-size: 18px; color: rgb(255, 0, 0);"> + </span>父母更安心！<span style="font-size: 18px; color: rgb(255, 0, 0);">值与不值，你说了算！</span></strong></span><span style="font-size: 20px;"><strong style=""></strong><strong style=""></strong></span></p>
+										   <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; line-height: 1.75em;"><span style="font-size: 18px;"><strong style=""><br /></strong></span></p>
+										   <p><img src="http://img04.taobaocdn.com/imgextra/i4/914260183/TB2RySzcXXXXXcHXXXXXXXXXXXX_!!914260183.png" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801063" data-type="jpeg" data-ratio="0.509375" data-w="320" /></p>
+										   <p class="font14 center" style="text-align: center;">正品保证｜全国包邮｜货到付款</p>
+										   
+										   <p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 20px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">加QQ订购享受教育咨讯</span></p>
+										   <p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 24px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;">QQ号：3238528575</span></p>
+										   <p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 14px; color: rgb(127, 127, 127); box-sizing: border-box !important; word-wrap: break-word !important;">（长按QQ号可复制）</span></p>
+										   <h2 class="tit" style="margin: 5px 0px; padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); background-position: 50% 50%; background-repeat: no-repeat no-repeat;">用过的人怎么说?</h2>
+										   <p><img src="http://img04.taobaocdn.com/imgextra/i4/914260183/TB2M_9zcXXXXXcXXXXXXXXXXXXX_!!914260183.jpg" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801064" data-type="gif" data-ratio="0.534375" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZ92UfuaVJGzo8SXBibfOzHO2gMMtkjYCN7Vyka8q5ORIaJInasuzRZCg/0" file_id="202980553" format="gif" /><img src="http://img01.taobaocdn.com/imgextra/i1/914260183/TB2ZLKAcXXXXXb2XXXXXXXXXXXX_!!914260183.jpg" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801065" data-type="gif" data-ratio="0.58125" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZaJA2ppibPabGTUjibvPZVOXzhhS6yYMYyw9X0rbBYobibJxLvxDoB6eibA/0" file_id="202980558" format="gif" /></p>
+										   <p><img src="http://img01.taobaocdn.com/imgextra/i1/914260183/TB2HOSzcXXXXXcIXXXXXXXXXXXX_!!914260183.jpg" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801066" data-type="gif" data-ratio="0.659375" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZV5hgViaxSP26V9RS6FYu8bsUeprlsKibWtbyfYPsWaa5ZY8ouhplOTrA/0" file_id="202980673" format="gif" /><img src="http://img02.taobaocdn.com/imgextra/i2/914260183/TB2EEWxcXXXXXaKXpXXXXXXXXXX_!!914260183.jpg" width="320" style="width: auto !important; visibility: visible !important; height: auto !important;" class="" id="c1422672801067" data-type="jpeg" data-ratio="0.4625" data-w="320" url="http://mmbiz.qpic.cn/mmbiz/V2VZtRJCX3BGpibSF03D7RlPTxwU56KibZ481xla4E6RhKmw81gagzpclLQPGcYgn7gsSmlcnUD6J5rfDucHazew/0" file_id="202980576" format="jpeg" data-s="300,640" /></p>
+										   <h2 class="tit" style="margin: 5px 0px; padding: 0px; list-style: none; height: 32px; line-height: 32px; font-size: 16px; text-align: center; background-image: url(http://img03.taobaocdn.com/imgextra/i3/829166269/TB2k1cObFXXXXc4XXXXXXXXXXXX-829166269.jpg); font-family: 宋体; white-space: normal; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">疑难解答？</h2>
+										   <p><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">全套一共有多少个字？</span><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;"></span></p>
+										   <p >全套练字板共一千多字，字虽不多但包含了汉字所有的常用结构，可以一通百通。并不是字多的字帖才是好字帖，普通的纸质字帖字是很多，但是效果依然不 明显。</p>
+										   <p><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; font-family: 宋体; font-size: 14px;">只用三周真的能把字练好吗？</span><br style="font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;" /><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);">再好的工具也得靠使用，只要您按正确的方法每天坚持练20-30分钟，三周后肯定会比现在又很大进步。</span><br style="font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;" /><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; font-family: 宋体; font-size: 14px;">你们的字体是印刷体吗？</span><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);"></span></p>
+										   <p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;">字体是国家标准版楷书、行楷，标准的好处在于谁都能练，适用于任何想练字的人群。先练标准，再培养自己的风格，大师的字并不适合每一个人哦。</p>
+										   <p class="th" style="margin-top: 0px; margin-bottom: 0px; padding: 5px 0px; list-style: none; font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;"><span class="tit3" style="margin: 0px; padding: 5px 15px 5px 2px; list-style: none; background-color: rgb(194, 0, 8); color: rgb(255, 255, 255); line-height: 2; background-position: initial initial; background-repeat: initial initial;">产品坏了怎么办？</span></p>
+										   <p><span style="font-family: 宋体; font-size: 14px; line-height: 21px;  background-color: rgb(255, 255, 255);">我们的产品不合格率只有千分之三，所以您无需担心。如果您收到的产品有任何质量问题，可以直接寄回给我们，免费为您更换新的。如果您在使用中出现非人为的 损坏，我们提供一年的免费换新服务。</span><br style="font-family: 宋体; font-size: 14px; line-height: 21px; white-space: normal;" /></p>
+										   <p class="font14 center" style="text-align: center;">正品保证｜全国包邮｜货到付款</p>
+										   
+										   <p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 24px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;"><span style="color: rgb(255, 0, 0); font-size: 20px; text-align: center;">加QQ订购享受教育咨讯</span></span></p>
+										   <p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 24px; color: rgb(255, 0, 0); box-sizing: border-box !important; word-wrap: break-word !important;"> QQ号：3238528575</span></p>
+										   <p class="font14 center" style="text-align: center;"><span style="margin: 0px; padding: 0px; max-width: 100%; font-size: 14px; color: rgb(127, 127, 127); box-sizing: border-box !important; word-wrap: break-word !important;">（长按QQ号可复制）</span></p>
+										   <p class="font14 center" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; text-align: center;"><br /></p>
+										  </div>
+					</div>
+					<!-- end主内容区域 -->
+				</div>
+				
+				<!-- begin倒计时 -->
+				<div style="BACKGROUND-COLOR: red" class="js">
+					<span id="span_dt_sj01">2015年3月5</span>
+					日限时秒杀仅需
+					<span style="COLOR: white; FONT-SIZE:18px">298</span>元<br>结束还有：<span id="span_dt_dt">12小时53分21秒</span>
+					<script>
+						function show_student_time(){
+						var LSTR_ndate=new Date(); 
+						var LSTR_Year=LSTR_ndate.getFullYear(); 
+						var LSTR_Month=LSTR_ndate.getMonth()+1; 
+						var LSTR_Date=LSTR_ndate.getDate(); 
+						var be_Date=LSTR_ndate.getDate()-1; 
+						var span_dt_sj01 = document.getElementById("span_dt_sj01")
+						var span_dt_dt = document.getElementById("span_dt_dt")
+						span_dt_sj01.innerHTML=LSTR_Year+'年'+LSTR_Month+'月'+LSTR_Date
+						 window.setTimeout("show_student_time()", 1000);
+						 BirthDay=new Date(LSTR_Year,LSTR_Month-1,LSTR_Date+1);//改成你的计时日期
+						 today=new Date();
+						 timeold=(BirthDay.getTime()-today.getTime());
+						 sectimeold=timeold/1000
+						 secondsold=Math.floor(sectimeold);
+						 msPerDay=24*60*60*1000 
+						 e_daysold=timeold/msPerDay
+						 daysold=Math.floor(e_daysold);
+						 e_hrsold=(e_daysold-daysold)*24;
+						 hrsold=Math.floor(e_hrsold);
+						 e_minsold=(e_hrsold-hrsold)*60;
+						 minsold=Math.floor((e_hrsold-hrsold)*60);
+						 seconds=Math.floor((e_minsold-minsold)*60);
+						 span_dt_dt.innerHTML=hrsold+"小时"+minsold+"分"+seconds+"秒" ;
+						 
+						}
+						show_student_time();
+					</script>
+				
+				
+				 </div>
+				 <!-- end倒计时 -->
+				 
+				 <!-- begin 订单 -->
+				 <div style="margin-top:60px;">
+					 <a name="dg" id="dg" >
+						<iframe src="./mhzt_files/110.jsp" marginheight="0" marginwidth="0" frameborder="0" height="530" scrolling="no" width="100%"></iframe>
+					</a>
+				</div>
+				<!-- end 订单 -->
+				
+				<!-- begin底部版权信息 -->
+				<div class="bodydiv" style="margin-top:40px;padding:15px;margin-bottom:50px;">   
+						<p>
+							竹的家隶属于会理县恒泰实业有限责任公司 &nbsp; 地址：会理县通安镇通安街188号&nbsp;&nbsp;
+							&nbsp;&nbsp;联系电话：400-83758588
+							<a href="${ctx }/about" style="color:#666;">关于我们</a>
+							<a href="${ctx }/contract" style="color:#666;">联系我们</a>
+						</p>
+						<p>
+							©&nbsp;<span>2010-2015</span>&nbsp;好字通&nbsp;版权所有&nbsp;<a
+								href="http://www.miibeian.gov.cn/" target="_blank" style="color:#666;"> 闽ICP备13005781号-1  </a>
+							&nbsp;
+						</p><p>Copyright(C)2012-2015 
+					</p>
+					 
+ 				</div>
+ 				<!-- end底部版权信息 -->
+ 				
+ 				
+ 				<!-- begin底部固定 -->
+ 				<div id="foot_ba" style="position: fixed;bottom:0px;">
+					<div class="line0 pcWidth-lin" id="nav" style="max-width: 740px;">
+						<div class="line-a1"><a href="#top">宝贝详情</a></div>
+						<div class="line-a2"><a href="#dg">立即购买</a></div>
+					</div>
+				</div>
+				<!-- end底部固定 -->
+			 
+		</div>
+		
+		
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.OrderMapper">
+	<resultMap type="com.weiweiqin.model.Order" id="orderResultMap">
+		<id property="id" column="id" />
+		<result property="userId" column="user_id" />
+		<result property="totalPrice" column="total_price" />
+		<result property="addDate" column="add_date" />
+	</resultMap>
+
+	<insert id="Order_insert" parameterType="com.weiweiqin.model.Order"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO order (user_id,total_price,add_date) values
+		          (#{userId},#{totalPrice},#{addDate})
+		        ]]> 
+	</insert>
+
+	<select id="Order_pageList" parameterType="map"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+		<![CDATA[ 
+		select a.* from order a order by a.add_date desc limit #{page.start},#{page.pageSize}
+	        ]]>
+	</select>
+	
+	<select id="Order_selectPk" parameterType="Integer"
+		resultType="com.weiweiqin.model.Order" resultMap="orderResultMap"> 
+		<![CDATA[ 
+		select a.* from order a where a.id = #{primaryKey}
+	        ]]>
+	</select>
+	
+
+	<select id="Order_totalCount" resultType="Integer"> 
+		<![CDATA[ 
+		select count(id)  from order
+	        ]]>
+	</select>
+
+	<update id="Order_update" parameterType="com.weiweiqin.model.Order"> 
+	<![CDATA[ 
+		update order set user_id = #{userId}, total_price = #{totalPrice} , add_date = #{addDate} where id = #{id}
+	        ]]>
+	</update> 
+	
+	<delete id="Order_delete"  parameterType="Integer">
+		delete from order  where id = #{primaryKey}
+	</delete>
+
+</mapper>
+

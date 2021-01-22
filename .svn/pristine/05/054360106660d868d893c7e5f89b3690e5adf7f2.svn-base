@@ -1,0 +1,52 @@
+package com.weiweiqin.task;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import com.weiweiqin.service.CommentService;
+import com.weiweiqin.service.GoodsService;
+
+@Component
+public class SysTask {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(SysTask.class);
+	
+	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
+	private GoodsService goodsService;
+	/**
+	 * 所有评论日期加一天
+	 * 每天早上10点执行
+	 */
+	@Scheduled(cron = "0 00 10 ? * *")
+	public void updateComment(){
+		logger.info("执行增加评论日期定时任务");
+		try {
+			commentService.addUpdateDate1();
+		} catch (Exception e) {
+			logger.error("执行增加评论日期定时任务失败...",e);
+		}
+	}
+	
+	/**
+	 * 今日团购过期日期加一天
+	 * 每天凌晨3点执行
+	 */
+	@Scheduled(cron = "0 00 03 ? * *")
+	public void updateHotExpiredDate(){
+		logger.info("执行过期日期定时任务");
+		try {
+			goodsService.updateHotExpiredDate();
+		} catch (Exception e) {
+			logger.error("执行过期日期定时任务失败...",e);
+		}
+		
+	}
+
+}

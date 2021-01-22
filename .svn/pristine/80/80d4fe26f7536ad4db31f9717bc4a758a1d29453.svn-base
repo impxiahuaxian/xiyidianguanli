@@ -1,0 +1,36 @@
+package com.weiweiqin.service;
+
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.Brands;
+import com.weiweiqin.vo.common.Page;
+
+public interface BrandsService {
+	
+	void  update(Brands brands);
+	
+	Brands getByName(String name);
+	
+	List<Brands> getAll();
+	
+	List<Brands> pageList(Page page,Map<String,Object> conditions);
+	
+	int totalCount(Map<String, Object> conditions);
+	
+	void save(Brands brands);
+	
+	void del(int id);
+	
+	 List<Brands> pageListForHome(Page page);
+	
+	int getTotalCountForHome();
+	
+	Brands get(int id);
+	
+	List<Brands> getAllAddOn();
+	
+	List<Brands> getByPicName(String pic);
+	
+}

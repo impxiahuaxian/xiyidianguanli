@@ -1,0 +1,10 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.UserDao;
+import com.weiweiqin.model.User;
+@Repository
+public class UserDaoImpl extends GenericMybatisDao<User, Integer>
+		implements UserDao {
+}

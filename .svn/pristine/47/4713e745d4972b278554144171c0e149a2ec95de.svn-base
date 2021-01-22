@@ -1,0 +1,20 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.SizeDao;
+import com.weiweiqin.model.Size;
+
+@Repository
+public class SizeDaoImpl extends GenericMybatisDao<Size, Integer>
+		implements SizeDao {
+
+	@SuppressWarnings("unchecked")
+	public List<Size> getByGoodsId(int goodsId) {
+		return (List<Size>)getSqlSession().selectList("Size_getByGoodsId",goodsId);
+	}
+
+
+}

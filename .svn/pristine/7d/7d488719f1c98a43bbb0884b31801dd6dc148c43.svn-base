@@ -1,0 +1,108 @@
+package com.weiweiqin.vo.common;
+
+import java.io.Serializable;
+
+/**
+ * 结果VO
+ * 
+ * @author weiweiqin
+ * 
+ */
+public class SecCategoryVO implements Serializable {
+
+	private static final long serialVersionUID = 2076324875575488461L;
+
+	private String name;
+
+	private int id;
+	
+	private int categoryId;
+	
+	/**
+	 * 大分类名称
+	 */
+	private String categoryName;
+	
+	private int added;
+
+	private String updateDate;
+	
+	private int orderKey;
+	
+	private String pic;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public int getAdded() {
+		return added;
+	}
+
+	public void setAdded(int added) {
+		this.added = added;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("updateDate=");
+		sb.append(updateDate);
+		sb.append(":id=");
+		sb.append(id);
+		sb.append(":name=");
+		sb.append(name);
+		return sb.toString();
+	}
+
+	public int getOrderKey() {
+		return orderKey;
+	}
+
+	public void setOrderKey(int orderKey) {
+		this.orderKey = orderKey;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+}

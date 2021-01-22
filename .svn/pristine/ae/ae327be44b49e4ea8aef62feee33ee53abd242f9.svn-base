@@ -1,0 +1,23 @@
+@charset "utf-8";
+/**
+  **************************************************************************************************
+  **********  WFPHP在线订单系统2014官方正式版  *****  官方正版 *** 版权所有 *** 盗版必究  **********
+  **********------------------------------------------------------------------------------**********
+  **********  官方网站：http://www.wf1805.cn/  *****  官方店铺：http://889889.taobao.com/ **********
+  **************************************************************************************************
+  */
+*{padding:0;margin:0;}body{font:14px Microsoft YaHei,\5FAE\8F6F\96C5\9ED1,SimSun,\5B8B\4F53,Arial,Verdana;color:#000;text-align:left;}a:link,a:visited{color:#66C2FF;text-decoration:none;}a:hover{color:#F00;text-decoration:underline;}input,select,textarea{font:100% Microsoft YaHei,\5FAE\8F6F\96C5\9ED1,SimSun,\5B8B\4F53,Arial,Verdana;}em{font-style:normal;color:#F00;margin-right:5px;}img{border:0 none;vertical-align:middle;}.red{color:#F00;}#wforder{margin:0 auto;}.wfwarp{width:auto;height:100%;}.wftitle{height:36px;line-height:36px;color:#FFF;font-size:18px;vertical-align:middle;margin-bottom:10px;padding-left:8px;}.wfwarp label.wfbdxx{float:left;display:inline;overflow:hidden;width:24%;_width:23%;text-align:right;padding-right:2%;}.wfwarp label.wfbdxxcp{float:left;display:block;width:95%;height:20px;line-height:20px;padding-left:5%;}.wfdxbox,.wfxlbox,.wftextbox,.wftext2box,.wftext3box{float:left;display:inline;overflow:hidden;width:74%;_width:73%;}.wfdxboxcp{float:left;display:block;width:90%;padding:0 5%;margin-top:8px;font-weight:bold;font-size:14px;line-height:1.7em;}.wfdxbox,.wftext2box,.wftext3box{line-height:1.5em;}.wfbdbox{float:left;width:100%;margin-bottom:10px;*margin-bottom:7px;}.wfbdbox2 {
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+*margin-bottom:7px;}
+.wfdxboxcp label{margin-left:6px;cursor:pointer;}.wfdxbox label{margin-left:6px;cursor:pointer;}.wftextbox input{width:90%;font-size:16px;color:#666;padding:3px 5px;_padding:2px 5px;background:#FCFCFC;}.wftextbox2 input {
+	width:30%;
+	font-size:16px;
+	color:#666;
+	padding:3px 5px;
+	_padding:2px 5px;
+	background:#FCFCFC;
+}
+.wftext3box #showprice{clear:both;display:inline;font-family:Arial,Verdana;font-size:14px;font-weight:bold;color:#F60;margin:0 5px;}.wfxlbox select.wfcpxl{font-size:16px;width:96%;height:28px;border:1px solid #a0a0a0;background:#FCFCFC;}.wfxlbox select.wfdqxl{width:30.15%;height:26px;margin-right:6px;border:1px solid #a0a0a0;}.wftext2box textarea{width:90%;height:40px;padding:4px 5px;background:#FFF;}.wftext3box input{width:35px;font:16px Arial;color:#666;font-weight:bold;text-align:center;vertical-align:middle;margin-right:8px;padding:4px 5px 3px;background:#FFF;}.wftext3box img#wfcode{width:70px;height:29px;cursor:pointer;}.wftext3box a{font-size:12px;margin-left:6px;}.wfsubbox{width:100%;float:left;text-align:center;padding-bottom:10px;}.wfsubbox input{width:200px;height:36px;line-height:36px;color:#FFF;font-size:18px;vertical-align:middle;cursor:pointer;border:0;}#wffahuo{width:92%;height:95px;font-size:12px;line-height:1.8em;padding:15px 4% 0;background:#EFEFEF;}#wffahuo span{color:#0C3;}
+/*///////////////////////////////////////// WFORDERCSSEND ////////////////////////////////////////*/

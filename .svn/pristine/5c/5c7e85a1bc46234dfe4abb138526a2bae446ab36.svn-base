@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiweiqin.model.GoodsCommentItemMapper">
+	<resultMap type="com.weiweiqin.model.GoodsCommentItem" id="goodsCommentItemResultMap">
+		<id property="id" column="id" />
+		<result property="picId" column="pic_id" />
+			<result property="goodsId" column="goods_id" />
+	</resultMap>
+
+	<insert id="GoodsCommentItem_insert" parameterType="com.weiweiqin.model.GoodsCommentItem"
+		useGeneratedKeys="true" keyProperty="id">
+	<![CDATA[ 
+		          INSERT INTO team_goods_comment_item (goods_id,comment_id) values
+		          (#{goodsId},#{commentId})
+		        ]]>
+	</insert>
+	
+	
+	
+		<select id="GoodsCommentItem_getByCommentId" parameterType="Integer"
+		resultType="com.weiweiqin.model.GoodsCommentItem" resultMap="goodsCommentItemResultMap"> 
+		<![CDATA[ 
+		select a.* from team_goods_comment_item a where a.comment_id = #{commentId}
+	        ]]>
+	</select>
+	
+		
+	<delete id="GoodsCommentItem_delete"  parameterType="Integer">
+		delete from team_goods_comment_item  where id = #{primaryKey}
+	</delete>
+</mapper>
+

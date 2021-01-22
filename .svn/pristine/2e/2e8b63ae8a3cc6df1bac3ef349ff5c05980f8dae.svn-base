@@ -1,0 +1,43 @@
+package com.weiweiqin.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.CategoryDao;
+import com.weiweiqin.model.Category;
+import com.weiweiqin.vo.common.Page;
+@Repository
+public class CategoryDaoImpl extends GenericMybatisDao<Category, Integer>
+		implements CategoryDao {
+
+	public Category getByName(String name) {
+		return  (Category)getSqlSession().selectOne("Category_getByName",name);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Category> getAll() {
+		return (List<Category>)getSqlSession().selectList("Category_getAll");
+	}
+	@SuppressWarnings("unchecked")
+	public List<Category> pageListForHome(Page page) {
+		Map<String,Object>	conditions = new HashMap<String, Object>();
+		conditions.put("page", page);
+		return (List<Category>)getSqlSession().selectList("Category_pageListForHome",conditions);
+
+	}
+	public int getTotalCountForHome() {
+		return (Integer) getSqlSession().selectOne("Category_totalCountForHome");
+	}
+	@SuppressWarnings("unchecked")
+	public List<Category> getAllAddOn() {
+		return (List<Category>)getSqlSession().selectList("Category_getAllAddOn");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Category> getByType(int type) {
+		return (List<Category>)getSqlSession().selectList("Category_getByType",type);
+	}
+	
+}

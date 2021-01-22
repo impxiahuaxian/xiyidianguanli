@@ -1,0 +1,36 @@
+package com.weiweiqin.service;
+
+
+import java.util.List;
+import java.util.Map;
+
+import com.weiweiqin.model.SecCategory;
+import com.weiweiqin.vo.common.Page;
+
+public interface SecCategoryService {
+	
+	void  update(SecCategory secCategory);
+	
+	SecCategory getByName(String name);
+	
+	List<SecCategory> getAll();
+	
+	List<SecCategory> pageList(Page page,Map<String,Object> conditions);
+	
+	int totalCount(Map<String, Object> conditions);
+	
+	void save(SecCategory secCategory);
+	
+	void del(int id);
+	
+	 List<SecCategory> pageListForHome(Page page);
+	
+	int getTotalCountForHome();
+	
+	SecCategory get(int id);
+	
+	List<SecCategory> getAllAddOn();
+	
+	List<SecCategory> getByBigCategoryId(int bigCategoryId);
+	
+}

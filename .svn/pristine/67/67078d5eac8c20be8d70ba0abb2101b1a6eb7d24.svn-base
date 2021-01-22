@@ -1,0 +1,70 @@
+
+
+dl, ul { margin: 0px; padding: 0px; float: left; width: 100%; }
+li { list-style-type: none; }
+dt, dd, i, b, em, dfn, p, img { margin: 0px; padding: 0px; }
+body, td, th { font-size: 12px; color: rgb(51, 51, 51); }
+body { background-image: url('./bj.jpg'); background-repeat: repeat-y; margin: 0px; background-color: rgb(242, 242, 242); background-position: center center; }
+a:link { color: rgb(51, 51, 51); text-decoration: none; }
+a:visited { text-decoration: none; color: rgb(51, 51, 51); }
+a:hover { text-decoration: none; color: rgb(204, 0, 0); }
+a:active { text-decoration: none; }
+.ckbody { clear: both; float: none; width: 999px; margin-right: auto; margin-left: auto; }
+.top { background-image: url('http://img04.taobaocdn.com/imgextra/i4/914260183/TB2ueCscXXXXXaeXXXXXXXXXXXX_!!914260183.jpg'); background-repeat: no-repeat; float: left; width: 100%; background-position: center center; height: 627px; }
+.top101 { float: left; width: 288px; height: 232px; display: inline; margin-top: 310px; margin-left: 10px; }
+.in101 { display: inline; float: left; width: 999px; }
+.in108 { display: inline; float: left; width: 999px; background-image: url('../images/in147.jpg'); background-repeat: no-repeat; height: 280px; }
+.in109 { float: right; height: 250px; width: 400px; margin-right: 100px; line-height: 25px; }
+.in109 p { float: left; width: 100%; line-height: 25px; padding-bottom: 6px; padding-top: 6px; font-size: 13px; }
+.in113 { display: inline; float: left; width: 999px; background-image: url('../images/in152.jpg'); background-repeat: no-repeat; }
+.foot { display: inline; float: left; width: 999px; background-image: url('../images/in155.jpg'); background-repeat: no-repeat; height: 97px; }
+.foot02 { line-height: 25px; color: rgb(255, 255, 255); text-align: center; float: left; width: 999px; margin-top: 30px; }
+
+* { padding: 0px; margin: 0px; }
+body { font: 12px "瀹嬩綋",Arial,Verdana; color: rgb(39, 39, 39); text-align: left; background-color: rgb(255, 255, 255); }
+a:link, a:visited { color: rgb(0, 0, 0); text-decoration: none; }
+a:hover { color: rgb(255, 0, 0); text-decoration: underline; }
+ul, li { list-style: none outside none; display: block; }
+input, button, select { font: 100% arial,helvetica,clean,sans-serif; }
+img, a img { border: 0px none; }
+em { font-style: normal; color: rgb(255, 0, 0); margin-right: 6px; }
+.kda { width: 260px; }
+.kdb { width: 260px; }
+#wforder { width: 500px; height: 480px; overflow: hidden; padding: 0px; border: 0px solid rgb(0, 204, 204); float: right; margin-right: 60px; }
+.bdbox li { width: 520px; height: 30px; line-height: 20px; padding: 4px 0px 0px; border-bottom: 0px solid rgb(26, 26, 26); display: table-row; }
+.bdbox li input.dxk { display: block; float: left; width: 15px; height: 15px; color: rgb(255, 0, 0); padding: 1px 1px 0px 0px; cursor: pointer; background-color: rgb(230, 230, 230); }
+.bdbox li label { display: block; float: left; height: 18px; line-height: 18px; background-color: rgb(255, 255, 255); margin: 0px 20px 0px 6px; cursor: pointer; }
+.bdbox li span.bdl { float: left; width: 80px; line-height: 24px; text-align: right; }
+.bdbox li span.bdr { float: right; width: 400px; padding-left: 7px; border-left: 1px solid rgb(255, 255, 255); margin-left: 7px; }
+.bdbox li.product { height: 30px; }
+.bdbox li.pay { height: 70px; }
+.bdbox li.guest { height: 64px; }
+.bdbox li.code { height: 30px; border: 0px none; }
+.bdbox li span.bdr .payaa { height: 25px; padding-top: 3px; }
+.bdbox li span.bdr .paybb { height: 25px; color: rgb(189, 0, 0); padding: 8px 6px 0px; border: 1px dotted rgb(204, 204, 204); background-color: rgb(249, 249, 249); }
+.bdbox li span.bdr input.txt { height: 22px; line-height: 22px; vertical-align: middle; font-size: 12px; color: rgb(0, 0, 0); padding: 0px 6px; outline: 0px none; border: 1px solid rgb(200, 200, 200); background: url('../images/putbg.jpg') no-repeat scroll 0% 0% transparent; }
+.bdbox li span.bdr textarea.guest { height: 40px; font-size: 12px; color: rgb(0, 102, 0); padding: 6px; border: 1px solid rgb(200, 200, 200); }
+.bdbox li input.send { width: 85px; height: 28px; padding: 2px 0px 0px; color: rgb(204, 0, 0); vertical-align: middle; cursor: pointer; border: 1px solid rgb(187, 187, 187); }
+.bdbox li span.bdl01 { float: left; width: 80px; line-height: 24px; text-align: right; }
+.bdbox li span.bdr01 { float: right; width: 400px; padding-left: 7px; border-left: 1px solid rgb(255, 255, 255); margin-left: 7px; }
+#wforder form .bdbox ul li .bdr01 .txt.kda { width: 30px; }
+
+
+#doyoo_monitor * { margin: 0px; padding: 0px; }
+#doyoo_monitor { position: absolute; display: none; z-index: 18000; height: 233px; }
+#doyoo_monitor div { font-size: 12px; overflow: hidden; background-image: none; background-color: transparent; font-family: Tahoma,Verdana,Arial,Helvetica,"Bitstream Vera Sans",sans-serif; word-break: break-all; line-height: 20px; text-align: left; }
+#doyoo_monitor div#doyoo_mon_head { height: 30px; line-height: 30px; color: rgb(255, 255, 255); font-weight: bold; margin-left: 15px; margin-right: 40px; }
+#doyoo_mon_main { height: 130px; background-repeat: repeat-x; text-indent: 20px; margin: 7px 100px 0px 10px; color: rgb(0, 0, 0); }
+#doyoo_mon_foot { width: 100%; height: 30px; position: absolute; left: 0px; bottom: 15px; }
+.doyoo_mon_btn { width: 95px; height: 30px; display: block; cursor: pointer; z-index: 18001; float: left; background-repeat: no-repeat; background-position: center center; }
+#doyoo_mon_accept { margin-left: 20px; }
+#doyoo_mon_phone { margin-left: 10px; }
+#doyoo_mon_refuse { margin-left: 10px; }
+#doyoo_mon_closer { position: absolute; top: 5px; right: 14px; width: 15px; height: 15px; cursor: pointer; }
+#doyoo_panel a { text-decoration: none; }
+#doyoo_panel { z-index: 8000; margin: 0px; padding: 0px; overflow: hidden; cursor: pointer; }
+#doyoo_panel div { overflow: hidden; font-size: 12px; float: none; background: none repeat scroll 0% 0% transparent; font-family: Tahoma,Verdana,Arial,Helvetica,"Bitstream Vera Sans",sans-serif; word-break: break-all; text-align: left; margin: 0px; padding: 0px; line-height: 14px; position: static; z-index: 8000; }
+.doyoo_pan_icon { cursor: pointer; background-repeat: no-repeat; }
+#doyoo_panel div.doyoo_pan_icon_inner { position: relative; left: 0px; top: 0px; height: 100%; background-repeat: no-repeat; }
+#doyoo_share { position: absolute; z-index: -100; left: -100000px; top: 0px; }
+#talk99_message { width: 213px; height: 241px; color: rgb(132, 132, 132); position: absolute; display: none; font-size: 12px; z-index: 2147483647; font-family: arial; }

@@ -1,0 +1,109 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<%@ include file="./common/header.jsp"%>
+</head>
+<body>
+
+	<%@ include file="./common/top.jsp"%>
+	
+	<div class="container">
+		
+		<a  href="./addSecCategory.jsp" target="main_frame" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>新增二级分类</a>
+		
+		<div style="margin-top:20px;margin-bottom:20px;">
+			<table id="secCategory_table">
+			</table>
+		</div>
+	</div>
+
+	<script>
+		$(function(){
+			var grid = new jWei.Datagrid({
+				renderTo : $("#secCategory_table"),
+				legendTitle:"分类列表",
+				url : "../secCategory/pageList.do",
+				colModels : [ 
+				
+				{
+					name : "updateDate",
+					displayName : "最后更新时间",
+				}, 
+				{
+					name : "name",
+					displayName : "名称",
+				},
+				
+				{
+					name : "categoryName",
+					displayName : "大分类名称",
+				},
+				
+				{
+					name : "",
+					displayName : "操作",
+					handler:function(v,data,td,tr){
+						var html = '<a class="edit-btn" href="./editSecCategory.jsp?id='+data.id+'" title="编辑"  style="margin-right:3px;"><span class="glyphicon glyphicon-edit"></span></a>' 
+							+'<a class="del-btn" href="#" title="删除" data-id="'+data.id+'"><span class="glyphicon glyphicon-trash"></span></a>'
+							+'<input type="text" style="margin-left:14px;width:40px;" value="'+data.orderKey+'"/><a href="#" data-id="'+data.id+'" class="orderKey">保存排序</a>';
+						td.html(html);
+					}
+				}]
+			});
+			
+			$("#secCategory_table").on("click",".del-btn",function(){
+				if(!confirm("确定要删除该分类！")){
+					return;				          				
+				}
+				var delObj = $(this);
+				jQuery.ajax({
+  					type : 'Get',
+  					contentType : 'application/json',
+  					url : '../secCategory/del.do',
+  					data : {
+  						id : delObj.data("id")
+  					},
+  					dataType : 'json',
+  					success : function(data) {
+  						if (data.result) {
+  							window.top.jWei.Tips.success("删除数据成功");
+  							grid.reload();
+  						}else{
+  							window.top.jWei.Tips.success(data.errorMsg);
+  						}
+  					},
+  					error:function(data){
+  						;
+  					}
+				});
+				
+			});
+			
+			$("#secCategory_table").on("click",".orderKey",function(){
+				var orderKey = $(this).parent().find(":text").val();
+				var id = $(this).data("id");
+				jQuery.ajax( {
+					type : 'POST',
+					url : '../secCategory/orderKey.do',
+					dataType : 'json',
+					data : {
+						id:id,
+						orderKey:orderKey
+					},
+					success : function(obj) {
+						if(obj.result){
+							window.top.jWei.Tips.success("操作成功！");
+							window.location.href = "./secCategoryList.jsp#secCategoryManager";
+						}else{
+							window.top.jWei.Tips.error(obj.errorMsg);
+						}
+					}
+				});
+				
+			});
+		});
+	</script>
+
+</body>
+</html>

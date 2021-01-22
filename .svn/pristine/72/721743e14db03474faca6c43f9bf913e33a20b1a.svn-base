@@ -1,0 +1,13 @@
+package com.weiweiqin.dao;
+
+import java.util.List;
+
+import com.weiweiqin.model.Color;
+
+public interface ColorDao extends GenericDao<Color,Integer>{
+	List<Color> getByGoodsId(int goodsId);
+	
+	List<Color> getByPicName(String picName);
+	
+	Color getByNameAndGoodsId(String name,int goodsId);
+}

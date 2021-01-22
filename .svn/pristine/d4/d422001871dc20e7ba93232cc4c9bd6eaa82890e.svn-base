@@ -1,0 +1,12 @@
+package com.weiweiqin.dao.impl;
+
+import org.springframework.stereotype.Repository;
+
+import com.weiweiqin.dao.GoodsPicItemDao;
+import com.weiweiqin.model.GoodsPicItem;
+@Repository
+public class GoodsPicItemDaoImpl extends GenericMybatisDao<GoodsPicItem, Integer>
+		implements GoodsPicItemDao {
+
+
+}

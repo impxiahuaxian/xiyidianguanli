@@ -1,0 +1,433 @@
+package com.weiweiqin.controller.home;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.weiweiqin.constants.Constants;
+import com.weiweiqin.model.Customer;
+import com.weiweiqin.model.CustomerAddr;
+import com.weiweiqin.service.CustomerService;
+import com.weiweiqin.utils.Md5Util;
+import com.weiweiqin.vo.common.CustomerTabVO;
+import com.weiweiqin.vo.common.Page;
+import com.weiweiqin.vo.common.Result;
+
+@Controller
+@RequestMapping("/customer")
+public class CustomerController {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(CustomerController.class);
+
+	@Autowired
+	private CustomerService customerService;
+
+	@RequestMapping(value = "/add.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String add(Customer customer, HttpServletRequest request,HttpSession session) {
+		logger.info("Enter method add...,customer=" + customer);
+		Result result = new Result();
+		try {
+			String contextPath = request.getContextPath();
+			String serverName = request.getServerName();
+			int serverPort = request.getServerPort();
+			String href = request.getScheme() + "://" + serverName + ":"
+					+ serverPort + contextPath + "/customer/activeAccount.do";
+			customerService.save(customer, href);
+			//加入session
+			session.setAttribute("customer", customer);
+		} catch (Exception e) {
+			logger.error("注册失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常，请稍后再试！");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+
+	@RequestMapping(value = "/edit.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String edit(Customer customer, HttpServletRequest request,HttpSession session) {
+		Result result = new Result();
+		try {
+			Customer cusData = customerService.get(customer.getId());
+			cusData.setEmail(customer.getEmail());
+			cusData.setMobile(customer.getMobile());
+			cusData.setNickname(customer.getNickname());
+			customerService.update(cusData);
+		} catch (Exception e) {
+			logger.error("修改用户信息失败...",e);
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	 
+
+	@RequestMapping(value = "/get.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String get(int id) {
+		Result result = new Result();
+		try {
+			Customer customer = customerService.get(id);
+			result.setObj(customer);
+		} catch (Exception e) {
+			logger.error("数据库异常...", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常。。。");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/editPassword.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String editPassword(String newPassword,HttpSession session) {
+		Result result = new Result();
+		try {
+			if(null != session.getAttribute("customer")){
+				Customer customer = (Customer)session.getAttribute("customer");
+				String md5 = Md5Util.md5(newPassword);
+				customer.setPassword(md5);
+				customerService.update(customer);
+			}
+			
+		} catch (Exception e) {
+			logger.error("修改密码失败...",e);
+			result.setResult(false);
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+
+	@RequestMapping(value = "/getCustomerAddrs.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String getCustomerAddrs(int customerId) {
+		logger.info("Enter method getCustomerAddrs...,customerId=" + customerId);
+		Result result = new Result();
+		try {
+			List<CustomerAddr> customerAddrs = customerService.getCustomerAddrs(customerId);
+			result.setObj(customerAddrs);
+		} catch (Exception e) {
+			logger.error("获取客户地址失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常，请稍后再试！");
+			return result.toJson();
+		}
+		
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	
+	@RequestMapping(value = "/addAddr.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String addAddr(CustomerAddr customerAddr,HttpSession session) {
+		logger.info("Enter method addAddr...,customerAddr=" + customerAddr);
+		Result result = new Result();
+		try {
+			String province = customerAddr.getProvince().split("\\|")[1];
+			String city = customerAddr.getCity().split("\\|")[1];
+			String area = customerAddr.getArea().split("\\|")[1];
+			String provinceCode = customerAddr.getProvince().split("\\|")[0];
+			String cityCode = customerAddr.getCity().split("\\|")[0];
+			String areaCode = customerAddr.getArea().split("\\|")[0];
+			customerAddr.setProvince(province);
+			customerAddr.setCity(city);
+			customerAddr.setArea(area);
+			customerAddr.setProvinceCode(provinceCode);
+			customerAddr.setCityCode(cityCode);
+			customerAddr.setAreaCode(areaCode);
+			//用户未登录，将地址保存到session中
+			if(null == customerAddr.getCustomerId()){
+				session.setAttribute("customerAddr", customerAddr);
+			}else{
+				
+				if(null != customerAddr.getId()){
+					customerService.updateCustomerAddr(customerAddr);
+				}else{
+					List<CustomerAddr> customerAddrs = customerService.getCustomerAddrs(customerAddr.getCustomerId());
+					//如果该用户已经存在地址，则将地址设置为非默认
+					if(null != customerAddrs && !customerAddrs.isEmpty()){
+						customerAddr.setDefaultAddr(1);
+					}
+					customerService.addCustomerAddr(customerAddr);
+				}
+				
+			}
+		} catch (Exception e) {
+			logger.error("添加地址失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常，请稍后再试！");
+			return result.toJson();
+		}
+		result.setObj(customerAddr);
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/delAddr.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String delAddr(int id,HttpSession session) {
+		logger.info("Enter method delAddr...,id=" + id);
+		Result result = new Result();
+		try {
+			if(null != session.getAttribute("customer")){
+				Customer customer = (Customer)session.getAttribute("customer");
+				customerService.delCustomerAddr(id,customer.getId());
+			}
+			
+		} catch (Exception e) {
+			logger.error("删除地址失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常，请稍后再试！");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	/**
+	 * 设置为默认地址
+	 * @param id 地址主键id
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/setDefaultAddr.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String setDefaultAddr(int id,HttpSession session) {
+		logger.info("Enter method delAddr...,id=" + id);
+		Result result = new Result();
+		try {
+			if(null != session.getAttribute("customer")){
+				Customer customer = (Customer)session.getAttribute("customer");
+				customerService.setDefaultAddr(id,customer.getId());
+			}
+			
+		} catch (Exception e) {
+			logger.error("设置默认地址失败...", e);
+			result.setResult(false);
+			result.setErrorMsg("服务器异常，请稍后再试！");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	
+	/**
+	 * 激活账户信息
+	 * @param activeCode
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/activeAccount.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String activeAccount(String activeCode, HttpServletRequest request) {
+		logger.info("Enter method activeAccount...,activeCode=" + activeCode);
+		try {
+			customerService.activeAccount(activeCode);
+		} catch (Exception e) {
+			logger.error("激活失败", e);
+			request.setAttribute("result", false);
+			return "activeResult";
+		}
+		request.setAttribute("result", true);
+		return "activeResult";
+	}
+
+	@RequestMapping(value = "/validate.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String validate(String username, String password, HttpSession session) {
+		logger.info("Enter method validate...,username=" + username);
+		Result result = new Result();
+		try {
+			Customer customer = customerService.getByUsername(username);
+			if (null == customer) {
+				result.setErrorMsg("用户名或密码不正确！");
+				result.setResult(false);
+				return result.toJson();
+			} else {
+				if (!password.equals(customer.getPassword())) {
+					result.setErrorMsg("用户名或密码不正确！");
+					result.setResult(false);
+					return result.toJson();
+				} else if (Constants.Customer.MARK_INACTIVE == customer
+						.getMark()) {
+					result.setErrorMsg("账户未激活！");
+					result.setResult(false);
+					return result.toJson();
+				} else {
+					session.setAttribute("customer", customer);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("数据库异常", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+	
+	@RequestMapping(value = "/validatePassword.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String validatePassword(String password, HttpSession session) {
+		logger.info("Enter method validatePassword...password="+password);
+		Result result = new Result();
+		try {
+			if(null != session.getAttribute("customer")){
+				Customer customer = (Customer)session.getAttribute("customer");
+				String md5 = Md5Util.md5(password);
+				if(md5.equals(customer.getPassword())){
+					result.setResult(true);
+					return result.toJson();
+				}else{
+					result.setResult(false);
+					result.setErrorMsg("原密码不正确！");
+					return result.toJson();
+				}
+			}else{
+				result.setResult(false);
+				result.setErrorMsg("你还未登录！");
+				return result.toJson();
+			}
+			
+		} catch (Exception e) {
+			logger.error("数据库异常", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常");
+			return result.toJson();
+		}
+	}
+
+	@RequestMapping(value = "/validateUsername.do", method = {
+			RequestMethod.POST, RequestMethod.GET })
+	@ResponseBody
+	public String validateUsername(String username) {
+		logger.info("Enter method login...,username=" + username);
+		Result result = new Result();
+		try {
+			Customer customer = customerService.getByUsername(username);
+
+			if (null != customer) {
+				result.setErrorMsg("该用户名已经存在");
+				result.setResult(false);
+				return result.toJson();
+			}
+
+		} catch (Exception e) {
+			logger.error("数据库异常", e);
+			result.setResult(false);
+			result.setErrorMsg("数据库异常");
+			return result.toJson();
+		}
+		result.setResult(true);
+		return result.toJson();
+	}
+
+	@RequestMapping(value = "/logout.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String logout(HttpSession session) {
+		logger.info("Enter method logout...");
+		session.removeAttribute("customer");
+		return "success";
+	}
+
+	@RequestMapping(value = "/customerManager", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String customerManager() {
+		return "customerManager";
+	}
+	
+	@RequestMapping(value = "/customerAccount", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String customerAccount() {
+		return "customer/customerAccount";
+	}
+	
+	@RequestMapping(value = "/customerAddr", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String customerAddr() {
+		return "customer/customerAddr";
+	}
+	
+	@RequestMapping(value = "/customerPassword", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String customerPassword() {
+		return "customer/customerPassword";
+	}
+	
+	@RequestMapping(value = "/pageList.do", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	@ResponseBody
+	public String pageList(String email,String mobile,int currPage){
+		Result result = new Result();
+		Page page = new Page();
+		page.setCurrPage(currPage);
+		Map<String,Object> conditions = new HashMap<String, Object>();
+		if(!StringUtils.isEmpty(email)){
+			conditions.put("email", email);
+		}
+		
+		if(!StringUtils.isEmpty(mobile)){
+			conditions.put("mobile", mobile);
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		List<Customer> customerList = customerService.pageList(page, conditions);
+		
+		List<CustomerTabVO> voList = new ArrayList<CustomerTabVO>();
+		if(null != customerList && !customerList.isEmpty()){
+			for (Customer customer : customerList) {
+				CustomerTabVO vo = new CustomerTabVO();
+				vo.setCustomer(customer);
+				String format = sdf.format(customer.getRegDate());
+				vo.setRegDate(format);
+				voList.add(vo);
+			}
+		}
+		int totalCount = customerService.totalCount(conditions);
+		page.setTotalCount(totalCount);
+		Map<String,Object> mp = new HashMap<String,Object>();
+		mp.put("totalCount",page.getTotalCount());
+		mp.put("list", voList);
+		result.setObj(mp);
+		result.setResult(true);
+		return result.toJson();
+	}
+}

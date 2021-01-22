@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+ xmlns:context="http://www.springframework.org/schema/context"  
+ xmlns:p="http://www.springframework.org/schema/p"  
+ xmlns:mvc="http://www.springframework.org/schema/mvc"  
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd  
+      http://www.springframework.org/schema/context
+      classpath:/org/springframework/context/config/spring-context-3.0.xsd
+      http://www.springframework.org/schema/mvc
+      classpath:/org/springframework/web/servlet/config/spring-mvc-3.0.xsd"> 
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
+		
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>104857600</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+		<property name="resolveLazily" value="true" />
+	</bean>
+		
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/admin/" mapping="/admin/**" />
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/styles/" mapping="/styles/**" />
+	<mvc:resources location="/" mapping="/**" />
+	
+	<!-- spring mvc乱码问题 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean id="utf8StringHttpMessageConverter" class="com.weiweiqin.utils.UTF8StringHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 注册mvc页面访问路径 -->
+	<mvc:annotation-driven />
+
+	<!-- 通过注解注入bean 采用注解注入bean需要use-default-filters="false"否则注解事务会失效-->
+	<context:component-scan base-package="com.weiweiqin.*" use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+</beans>  

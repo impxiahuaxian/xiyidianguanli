@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0031)http://wap.zhuziyan.com/djs.htm -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title></title>
+
+<style type="text/css">BODY {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+.js {
+	TEXT-ALIGN: center; LINE-HEIGHT:24px; BACKGROUND-COLOR: #ff0000; MARGIN: 0px; WIDTH:320px; FONT-FAMILY: Arial, Helvetica, sans-serif; FLOAT: left; HEIGHT:48px; COLOR: #ffff00; FONT-SIZE:14px; VERTICAL-ALIGN: middle; FONT-WEIGHT: bold
+}
+</style>
+
+<meta name="GENERATOR" content="MSHTML 8.00.7600.16968"></head>
+<body marginwidth="0" marginheight="0">
+<div style="BACKGROUND-COLOR: red" class="js"><span id="span_dt_sj01">2015年3月5</span>日限时秒杀仅需<span style="COLOR: white; FONT-SIZE:18px">298</span>元<br>结束还有：<span id="span_dt_dt">12小时53分21秒</span>
+<script language="javascript">
+<!--
+function show_student_time(){
+
+
+var LSTR_ndate=new Date(); 
+var LSTR_Year=LSTR_ndate.getFullYear(); 
+var LSTR_Month=LSTR_ndate.getMonth()+1; 
+var LSTR_Date=LSTR_ndate.getDate(); 
+var be_Date=LSTR_ndate.getDate()-1; 
+var span_dt_sj01 = document.getElementById("span_dt_sj01")
+var span_dt_dt = document.getElementById("span_dt_dt")
+
+span_dt_sj01.innerHTML=LSTR_Year+'年'+LSTR_Month+'月'+LSTR_Date
+
+ window.setTimeout("show_student_time()", 1000);
+ BirthDay=new Date(LSTR_Year,LSTR_Month-1,LSTR_Date+1);//改成你的计时日期
+ today=new Date();
+ timeold=(BirthDay.getTime()-today.getTime());
+ sectimeold=timeold/1000
+ secondsold=Math.floor(sectimeold);
+ msPerDay=24*60*60*1000 
+ e_daysold=timeold/msPerDay
+ daysold=Math.floor(e_daysold);
+ e_hrsold=(e_daysold-daysold)*24;
+ hrsold=Math.floor(e_hrsold);
+ e_minsold=(e_hrsold-hrsold)*60;
+ minsold=Math.floor((e_hrsold-hrsold)*60);
+ seconds=Math.floor((e_minsold-minsold)*60);
+ span_dt_dt.innerHTML=hrsold+"小时"+minsold+"分"+seconds+"秒" ;
+ 
+}
+show_student_time();
+//-->
+</script>
+
+
+ </div>
+
+
+</body></html>

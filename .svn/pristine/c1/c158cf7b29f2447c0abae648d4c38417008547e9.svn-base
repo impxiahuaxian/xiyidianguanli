@@ -1,0 +1,136 @@
+package com.weiweiqin.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Pic implements Serializable {
+
+	private static final long serialVersionUID = -5124015840148732157L;
+
+	private int id;
+
+	private String name;
+	
+   /**
+    * 未使用
+    */
+	private int size;
+
+	private Date uploadDate = new Date();
+	
+	private int width;
+	
+	private int height;
+	
+	private int compressHeight;
+	
+	private int compressWidth;
+	
+	private int orderKey;
+	
+	/**
+	 * 图片秒速
+	 */
+	private String picDesc = "";
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public Date getUploadDate() {
+		return uploadDate;
+	}
+
+	public void setUploadDate(Date uploadDate) {
+		this.uploadDate = uploadDate;
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("id=");
+		sb.append(id);
+		sb.append(":name=");
+		sb.append(name);
+		sb.append(":uploadDate=");
+		sb.append(uploadDate);
+		sb.append(":height=");
+		sb.append(height);
+		sb.append(":width=");
+		sb.append(width);
+		sb.append(":compressHeight=");
+		sb.append(compressHeight);
+		sb.append(":compressWidth=");
+		sb.append(compressWidth);
+		sb.append(":orderKey=");
+		sb.append(orderKey);
+		return sb.toString();
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getCompressHeight() {
+		return compressHeight;
+	}
+
+	public void setCompressHeight(int compressHeight) {
+		this.compressHeight = compressHeight;
+	}
+
+	public int getCompressWidth() {
+		return compressWidth;
+	}
+
+	public void setCompressWidth(int compressWidth) {
+		this.compressWidth = compressWidth;
+	}
+
+	public int getOrderKey() {
+		return orderKey;
+	}
+
+	public void setOrderKey(int orderKey) {
+		this.orderKey = orderKey;
+	}
+
+	public String getPicDesc() {
+		return picDesc;
+	}
+
+	public void setPicDesc(String picDesc) {
+		this.picDesc = picDesc;
+	}
+}

@@ -1,0 +1,211 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@include file="./common/header.jsp" %>
+<head>
+	<style type="text/css">
+		
+		#comment_form_id td{
+			padding-left: 25px;
+		}
+		
+		.content-tr td{
+			border-bottom: 1px solid #CCC;
+			padding-bottom:10px;
+		}
+		
+		.username-tr{
+			height: 60px;
+		}
+	</style>
+	
+	
+</head>
+<body>
+<%@ include file="./common/top.jsp"%>
+	
+	<div id="mainContainer" class="container">
+		
+		<a href="#"  id="add_new_id" class="btn btn-primary" >新增</a>
+		
+		<a href="#"  id="export_new_id" class="btn btn-primary" >导入评论</a>
+		
+		
+		<form id="comment_form_id" name="comment_form" style="margin-top: 15px">
+			<input type="checkbox" style="margin-left:25px;" name="isRandomDate" id="isRandomDate" value="isRandomDate"/>随机生成时间
+			<span id="date_id" style="display: none;">
+				<input name="startDate" id="startDate" style="width:150px;margin-left:20px;" placeholder="起始时间" type="text" class=" required" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="选择时间"/>-
+				<input name="endDate" id="endDate" style="width:150px;" type="text" placeholder="截止时间" class=" required" onClick="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="选择时间"/>
+			</span>
+			<table>
+			
+				<tr class="username-tr">
+					<td width="120px" > <label class="control-label" >用户名称</label></td>
+					<td>
+						<input name="commentVOList[0].comment.username" id="username"  style="width: 100px;" type="text" class=" required" />
+					</td>
+					
+					<td width="120px" > <label class="control-label" >评论时间</label></td>
+					<td>
+						<input name="commentVOList[0].updateDate" id="updateDate" style="width:150px;" type="text" class=" required time" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="选择时间"/>
+					</td>
+					
+					<td width="120px" > <label class="control-label" >星级(1-5)</label></td>
+					<td>
+						<input name="commentVOList[0].comment.grade" id="grade" style="width:50px" type="text" class=" required validate-number max-value-5 min-value-1" value="5"/>
+						
+						<a href="#" style="margin-left: 8px;" id="del_id">删除</a>
+					</td>
+				</tr>
+			
+				<tr class="content-tr">
+					<td width="80px" > <label class="control-label" >内容</label></td>
+					<td colspan="8">
+						<textarea name="commentVOList[0].comment.content"  class="required" id="content" style="height:50px;width: 600px; "></textarea>
+					</td>
+				</tr>
+				
+				<tr id="tr_model_1" style="display: none;">
+					<td width="80px" > <label class="control-label" >用户名称</label></td>
+					<td>
+						<input name="" id="username"  style="width: 100px;" type="text" class=" required" />
+					</td>
+					
+					<td width="80px" > <label class="control-label" >评论时间</label></td>
+					<td>
+						<input name="" id="updateDate" style="width:150px;" type="text" class=" required  time" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" placeholder="选择时间"/>
+					</td>
+					
+					<td width="80px" > <label class="control-label" >星级(1-5)</label></td>
+					<td>
+						<input name="" id="grade" style="width:50px" type="text" class=" required validate-number max-value-5 min-value-1" value="5"/>
+						
+						<a href="#" style="margin-left: 8px;" id="del_id">删除</a>
+					</td>
+					
+				</tr>
+			
+				<tr id="tr_model_2" style="display: none;">
+					<td width="80px" > <label class="control-label" >内容</label></td>
+					<td colspan="8">
+						<textarea name="" id="content" style="height:50px;width: 600px; "></textarea>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>&nbsp;
+						<input type="hidden" name="goodsId" id="goodsId"/>
+					</td>
+					<td align="left"><input type="button" id="add_comment_btn_id" value="创建" class="btn btn-primary"
+						style="margin-top: 15px" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<script>
+		
+		$(function(){
+			var goodsId =$.request.queryString["goodsId"];
+			$("#goodsId").val(goodsId);
+			var number = window.number = 1;
+			$("#add_new_id").click(function(){
+				var model1 = '<tr class="username-tr">'+$("#tr_model_1").html()+'</tr>';
+				var model2 = '<tr class="content-tr">'+$("#tr_model_2").html()+'</tr>';
+				var newTr1 = $("#tr_model_1").before(model1).prev();
+				var newTr2 = $("#tr_model_1").before(model2).prev();
+				var d = newTr1.find("[id='username']").attr("name");
+				newTr1.find("[id='username']").prop("name","commentVOList["+number+"].comment.username");
+				newTr1.find("[id='grade']").prop("name","commentVOList["+number+"].comment.grade");
+				newTr1.find("[id='updateDate']").prop("name","commentVOList["+number+"].updateDate");
+				newTr2.find("[id='content']").prop("name","commentVOList["+number+"].comment.content");
+				number++;
+				return false;
+			});
+			
+			var valid = new jValidation.Validation('comment_form_id',{immediate:true,onSubmit:false});
+			$('#add_comment_btn_id').click(function(){
+					var result = valid.validate();
+					if(!result){
+						return;
+					}
+					var formData = $('#comment_form_id').serialize();
+					jQuery.ajax( {
+						type : 'POST',
+						url : '../comment/add.do',
+						dataType : 'json',
+						data : formData,
+						success : function(obj) {
+							if(obj.result){
+								alert("操作成功");
+								location.href = "./commentList.jsp?id="+goodsId;
+							}else{
+								alert(obj.errorMsg);
+							}
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+				});
+			//删除按钮委托事件
+			$("#comment_form_id").on("click","#del_id",function(){
+				var tr1 = $(this).parent().parent();
+				var tr2 =$(this).parent().parent().next();
+				tr1.remove();
+				tr2.remove();
+				return false;
+			});
+			
+			//是否随机生成时间绑定时间
+			$("#isRandomDate").click(function(){
+				var chk = $(this).prop("checked");
+				if(chk){
+					$("#date_id").show();
+					$(".time").each(function(){
+						$(this).removeClass("required");
+					});
+				}else{
+					$("#date_id").hide();
+					$(".time").each(function(){
+						$(this).addClass("required");
+					});
+				}
+			});
+			
+			//导入评论列表
+			$("#export_new_id").click(function(){
+				window.popup = jWei.popUp({title:"评论列表",iframeSrc:"./commentListForExport.jsp",width:"850px",height:"1000px",ok:function(){
+					 $("iframe")[0].contentWindow.$("tbody :input:checked").each(function(){
+						var content = $(this).data("content");
+						var date = $(this).data("date");
+						var grade = $(this).data("grade");
+						var username = $(this).data("username");
+						var model1 = '<tr class="username-tr">'+$("#tr_model_1").html()+'</tr>';
+						var model2 = '<tr class="content-tr">'+$("#tr_model_2").html()+'</tr>';
+						var newTr1 = $("#tr_model_1").before(model1).prev();
+						var newTr2 = $("#tr_model_1").before(model2).prev();
+						var d = newTr1.find("[id='username']").attr("name");
+						newTr1.find("[id='username']").prop("name","commentVOList["+number+"].comment.username").val(username);
+						newTr1.find("[id='grade']").prop("name","commentVOList["+number+"].comment.grade").val(grade);
+						newTr1.find("[id='updateDate']").prop("name","commentVOList["+number+"].updateDate").val(date);
+						newTr2.find("[id='content']").prop("name","commentVOList["+number+"].comment.content").val(content);
+						
+						newTr1.find("[id='del_id']").click(function(){
+							var tr1 = $(this).parent().parent();
+							var tr2 =$(this).parent().parent().next();
+							tr1.remove();
+							tr2.remove();
+							return false;
+						});
+						number++;
+					});
+				 
+				}});
+				return false;
+			});
+		});
+		
+		
+	</script>
+</body>
+</html>
